@@ -3,25 +3,10 @@ import { GlobalStyle } from './globalStyles'
 import { darkTheme, lightTheme } from './themes'
 import { createContext, useContext, useState } from 'react'
 
-// Styled Theme Provider
-
 const themes = {
   dark: darkTheme,
   light: lightTheme,
 }
-
-const AppStyledThemeProvider = ({ children }) => {
-  const { themeType } = useAppThemeContext()
-
-  return (
-    <ThemeProvider theme={themes[themeType]}>
-      {children}
-      <GlobalStyle />
-    </ThemeProvider>
-  )
-}
-
-// Change Theme Provider
 
 const AppThemeContext = createContext({
   themeType: 'light',
@@ -33,7 +18,10 @@ export const AppThemeProvider = ({ children }) => {
 
   return (
     <AppThemeContext.Provider value={{ themeType, setThemeType }}>
-      <AppStyledThemeProvider>{children}</AppStyledThemeProvider>
+      <ThemeProvider theme={themes[themeType]}>
+        {children}
+        <GlobalStyle />
+      </ThemeProvider>
     </AppThemeContext.Provider>
   )
 }
