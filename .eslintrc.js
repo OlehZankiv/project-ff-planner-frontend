@@ -27,4 +27,12 @@ module.exports = {
     'no-empty-pattern': 'off',
     'react/prop-types': 'off',
   },
+  overrides: [
+    {
+      files: ['src/localization/strings/*'],
+      rules: {
+        quotes: 'off',
+      },
+    },
+  ],
 }

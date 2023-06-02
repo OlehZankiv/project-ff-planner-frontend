@@ -5,5 +5,15 @@
   "singleQuote": true,
   "trailingComma": "all",
   "jsxSingleQuote": true,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "src/localization/strings/*",
+      "options": {
+        "printWidth": 1000000000,
+        "singleQuote": false,
+        "quoteProps": "preserve"
+      }
+    }
+  ]
 }
