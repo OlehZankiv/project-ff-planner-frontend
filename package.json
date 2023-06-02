@@ -27,9 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
+    "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
+    "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
