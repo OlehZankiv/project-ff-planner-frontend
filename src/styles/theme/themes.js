@@ -1,28 +1,30 @@
-const themeCreator = ({ colors, sizes }) => ({
+const themeCreator = ({ colors, shadows }) => ({
   colors,
-  sizes,
+  shadows,
 })
 
-const mainSizes = {
-  xs: 4,
-  sm: 6,
-  md: 8,
-  lg: 16,
-  xl: 32,
+const shadows = {
+  modalShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
 }
 
 export const lightTheme = themeCreator({
   colors: {
     background: '#ffffff',
     text: '#111111',
+
+    modalBackground: '#ffffff',
+    modalOverlay: '#13151A',
   },
-  sizes: mainSizes,
+  shadows,
 })
 
 export const darkTheme = themeCreator({
   colors: {
     background: '#13151A',
     text: '#ffffff',
+
+    modalBackground: '#171820',
+    modalOverlay: '#3f3f3f',
   },
-  sizes: mainSizes,
+  shadows,
 })
