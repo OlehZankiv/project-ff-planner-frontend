@@ -19,8 +19,8 @@ export const AppThemeProvider = ({ children }) => {
   return (
     <AppThemeContext.Provider value={{ themeType, setThemeType }}>
       <ThemeProvider theme={themes[themeType]}>
-        {children}
         <GlobalStyle />
+        {children}
       </ThemeProvider>
     </AppThemeContext.Provider>
   )

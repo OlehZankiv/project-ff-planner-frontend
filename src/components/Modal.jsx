@@ -28,7 +28,7 @@ export const Modal = ({ visible, onClose, onEnterPress, children }) => {
 
   return createPortal(
     <>
-      <OpacityButton hoverOpacity={0.9} activeOpacity={0.8} onClick={onClose}>
+      <OpacityButton hoverOpacity={0.975} activeOpacity={0.9} onClick={onClose}>
         <Overlay visible={visible} />
       </OpacityButton>
       <Wrapper visible={visible}>
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     top: 50%;
     left: 50%;
     visibility: ${visible ? 'visible' : 'hidden'};
-    transform: translateX(-50%) scale(${!visible ? 0 : 1});
+    transform: translate(-50%, -50%) scale(${!visible ? 0 : 1});
     transition: transform 0.2s;
     padding: 28px 40px;
     background-color: ${colors.modalBackground};
