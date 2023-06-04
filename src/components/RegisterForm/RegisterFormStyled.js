@@ -27,7 +27,7 @@ export const FormStyled = styled(Form)`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
   padding: 40px 24px 40px 24px;
   border-radius: 8px;
   background-color: #ffffff;
@@ -84,6 +84,16 @@ export const NameOfFieldStyled = styled.div`
   font-size: 12px;
   line-height: 15px;
   color: #111111;
+
+  ${getTabletStyles(css`
+    font-size: 14px;
+    line-height: 17px;
+  `)}
+
+  ${getDesktopStyles(css`
+    font-size: 14px;
+    line-height: 17px;
+  `)}
 `
 
 export const LabelStyled = styled.label`

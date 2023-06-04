@@ -9,11 +9,10 @@ import {
   NameOfFieldStyled,
   Title,
   LabelStyled,
-} from './RegisterFormStyled'
+} from '../RegisterForm/RegisterFormStyled'
 import * as yup from 'yup'
 
 const schema = yup.object().shape({
-  name: yup.string().required('name is a required field'),
   email: yup.string().email('email must be a valid email').required('email is a required field'),
   password: yup
     .string()
@@ -22,12 +21,11 @@ const schema = yup.object().shape({
 })
 
 const initialValues = {
-  name: '',
   email: '',
   password: '',
 }
 
-export const RegisterForm = () => {
+export const LogInForm = () => {
   const { t } = useTranslation()
 
   const handleSubmit = (values, { resetForm }) => {
@@ -37,15 +35,7 @@ export const RegisterForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema}>
       <FormStyled autoComplete='off'>
-        <Title>{t('Sign up')}</Title>
-        <LabelStyled>
-          <NameOfFieldStyled>{t('Name')}</NameOfFieldStyled>
-          <Input type='text' name='name' placeholder='Enter your name' />
-          <ErrorMessage
-            name='name'
-            render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
-          />
-        </LabelStyled>
+        <Title>{t('Log in')}</Title>
         <LabelStyled>
           <NameOfFieldStyled>{t('Email')}</NameOfFieldStyled>
           <Input type='email' name='email' placeholder='Enter email' />
@@ -62,8 +52,8 @@ export const RegisterForm = () => {
             render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
           />
         </LabelStyled>
-        <LoginAndRegisterButton text={t('Sign Up')} />
-        <AuthNavigate text={t('Log In')} route='/login' />
+        <LoginAndRegisterButton text={t('Log In')} />
+        <AuthNavigate text={t('Sign Up')} route='/register' />
       </FormStyled>
     </Formik>
   )
