@@ -7,17 +7,33 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
+import { Modal } from '../../components'
+import { useState } from 'react'
 
 const LoginPage = ({}) => {
+  const [visible, setVisible] = useState(false)
+
   const value = useBreakpointValue({
     desktopValue: 'Welcome to Desktop',
     tabletValue: 'Welcome to Tablet',
     mobileValue: 'Welcome to Mobile',
   })
 
-  console.log(value)
+  return (
+    <Wrapper>
+      {value}
 
-  return <Wrapper>{value}</Wrapper>
+      <Modal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        onEnterPress={() => setVisible(false)}
+      >
+        <p>Create a task</p>
+      </Modal>
+
+      <button onClick={() => setVisible(true)}>Open</button>
+    </Wrapper>
+  )
 }
 
 export default LoginPage
