@@ -15,17 +15,14 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'spaced-comment': 'error',
-    quotes: ['error', 'single'],
     'no-duplicate-imports': 'error',
     'no-empty-pattern': 'off',
     'react/prop-types': 'off',
+    quotes: 'off',
   },
   overrides: [
     {
       files: ['src/localization/strings/*'],
-      rules: {
-        quotes: 'off',
-      },
     },
   ],
 }
