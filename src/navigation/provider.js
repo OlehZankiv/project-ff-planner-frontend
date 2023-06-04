@@ -4,6 +4,7 @@ import { AuthLayout, Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 
 const LoginPage = lazy(() => import('../pages/login/LoginPage'))
+const MainPage = lazy(() => import('../pages/MainPage/MainPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
@@ -11,6 +12,15 @@ export const AppRouterProvider = () => (
       <Route path={ROUTES.HOME} element={<MainLayout />}>
         <Route index element={<div>Home Page</div>} />
         {/* TODO: Add additional pages here */}
+
+        <Route
+          path={ROUTES.MAINPAGE}
+          element={
+            <Suspense fallback={<Loader />}>
+              <MainPage />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path={ROUTES.LOGIN} element={<AuthLayout />}>
         <Route
