@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import gooseimg from '../../assets/images/goose_2.png'
-import ImageCalendar1 from '../../assets/images/calendarDark.jpg'
-import ImageCalendar2 from '../../assets/images/calendarLight.jpg'
+import ImageCalendar1 from '../../assets/images/calendarLight.jpg'
+import ImageCalendar2 from '../../assets/images/calendarDark.jpg'
 import ImageCalendar3 from '../../assets/images/calendarMain.jpg'
 import ImageNavigationDark from '../../assets/images/navigationDark.jpg'
 import ImageNavigationLite from '../../assets/images/navigationLight.jpg'
 import ImageDay from '../../assets/images/day.jpg'
+import { LoginIcon } from '../../assets/icons/LogInIcon';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -23,7 +24,7 @@ const MainPage = () => {
         <LinkBox>
           <LoginLink to='/login'>
             <LoginTxt>Log in</LoginTxt>
-            {/* <Icon name="loginIcon" size="13.5px" /> */}
+            <LoginIcon name="loginIcon" size="13.5px" stroke='#3e85f3'/>
           </LoginLink>
           <SignupLink to='/register'>Sign up</SignupLink>
         </LinkBox>
@@ -108,7 +109,7 @@ const LogoImg = styled.img(() => ({
   margin: '0 auto',
   width: '142px',
   height: '142px',
-//   [theme.media.up('768px')]: {
+//   @media (min-width: 768px)]: {
 //     width: '150px',
 //     height: '149px',
 //   },
