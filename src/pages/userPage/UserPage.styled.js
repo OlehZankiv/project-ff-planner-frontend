@@ -12,9 +12,7 @@ export const UserWrapper = styled.div`
   border-radius: 16px;
   ${getBreakpointsStyles({
     tablet: css``,
-    desktop: css`
-      background-color: blue;
-    `,
+    desktop: css``,
   })}
 `
 export const ImageWrapper = styled.div`
@@ -39,9 +37,7 @@ export const ImageAvatar = styled.img`
       width: 124px;
       height: 124px;
     `,
-    desktop: css`
-      background-color: blue;
-    `,
+    desktop: css``,
   })}
 `
 export const AddSvg = styled.svg`
@@ -99,11 +95,27 @@ export const UserForm = styled.form`
     tablet: css`
       width: 374px;
     `,
-    desktop: css``,
+    desktop: css`
+      width: 768px;
+    `,
   })}
 `
 export const DivForm = styled.div`
   margin-bottom: 10px;
+  ${getBreakpointsStyles({
+    desktop: css`
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 50px;
+    `,
+  })}
+`
+export const InputWrapper = styled.div`
+  ${getBreakpointsStyles({
+    desktop: css`
+      width: 354px;
+    `,
+  })}
 `
 export const Input = styled.input`
   width: 100%;
@@ -124,7 +136,9 @@ export const Input = styled.input`
       font-size: 16px;
       line-height: 1.13;
     `,
-    desktop: css``,
+    desktop: css`
+      width: 354px;
+    `,
   })}
 `
 export const InputLabel = styled.label`
@@ -168,6 +182,8 @@ export const UserButton = styled.button`
     tablet: css`
       width: 262px;
     `,
-    desktop: css``,
+    desktop: css`
+      margin-bottom: 60px;
+    `,
   })}
 `

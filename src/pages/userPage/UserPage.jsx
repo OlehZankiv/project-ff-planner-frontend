@@ -7,6 +7,7 @@ import {
   InputLabel,
   UserForm,
   DivForm,
+  InputWrapper,
   Input,
   UserButton,
 } from './UserPage.styled'
@@ -15,6 +16,7 @@ import styled from 'styled-components'
 import { AddIcon } from '../../assets/icons/AddIcon'
 const UserPage = ({}) => {
   // const UserName = useBreakpointValue(userNameStyles)
+  const currentDate = new Date().toISOString().slice(0, 10)
 
   return (
     <Wrapper>
@@ -27,24 +29,40 @@ const UserPage = ({}) => {
         <UserText>User</UserText>
         <UserForm>
           <DivForm>
-            <InputLabel>User Name</InputLabel>
-            <Input type='text' name='username' required id='username'></Input>
-            <InputLabel>Birthday</InputLabel>
-            <Input type='text' name='userbirthday'></Input>
-            <InputLabel>Email</InputLabel>
-            <Input type='email' name='usermail' required></Input>
-            <InputLabel>Phone</InputLabel>
-            <Input
-              type='tel'
-              name='usertel'
-              title='+380 (96) 111-11-11'
-              required
-              minlength='3'
-            ></Input>
-            <InputLabel>Skype</InputLabel>
-            <Input type='text' name='userskype'></Input>
-            <UserButton type='submit'>Save Changes</UserButton>
+            <InputWrapper>
+              <InputLabel>User Name</InputLabel>
+              <Input type='text' name='username' required id='username'></Input>
+            </InputWrapper>
+            <InputWrapper>
+              <InputLabel>Birthday</InputLabel>
+              <Input
+                type='date'
+                id='start'
+                name='userbirthday'
+                value={currentDate}
+                pattern='\d{4}-\d{2}-\d{2}'
+              ></Input>
+            </InputWrapper>
+            <InputWrapper>
+              <InputLabel>Email</InputLabel>
+              <Input type='email' name='usermail' required></Input>
+            </InputWrapper>
+            <InputWrapper>
+              <InputLabel>Phone</InputLabel>
+              <Input
+                type='tel'
+                name='usertel'
+                title='+380 (96) 111-11-11'
+                required
+                minlength='3'
+              ></Input>
+            </InputWrapper>
+            <InputWrapper>
+              <InputLabel>Skype</InputLabel>
+              <Input type='text' name='userskype'></Input>
+            </InputWrapper>
           </DivForm>
+          <UserButton type='submit'>Save Changes</UserButton>
         </UserForm>
       </UserWrapper>
     </Wrapper>
