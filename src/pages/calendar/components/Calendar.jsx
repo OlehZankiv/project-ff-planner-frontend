@@ -1,21 +1,28 @@
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import styled from 'styled-components'
 
 export const Calendar = ({}) => {
   return (
-    <section>
-      <FullCalendar
-        headerToolbar={{
-          start: 'title,prev,next', // will normally be on the left. if RTL, will be on the right
-          center: '',
-          end: 'dayGridMonth,dayGridDay', // will normally be on the right. if RTL, will be on the left
-        }}
-        plugins={[dayGridPlugin]}
-        initialView='dayGridMonth'
-      />
-    </section>
+    <CalendarWrapper>
+      <FullCalendar headerToolbar={null} plugins={[dayGridPlugin]} initialView='dayGridMonth' />
+    </CalendarWrapper>
   )
 }
+
+const CalendarWrapper = styled.section`
+  & thead {
+    display: none;
+  }
+
+  & .fc-daygrid-day {
+    background-color: red;
+  }
+
+  & .fc-daygrid-day.fc-day-today {
+    background-color: black;
+  }
+`
 
 // import React from 'react'
 // import { formatDate } from '@fullcalendar/core'
