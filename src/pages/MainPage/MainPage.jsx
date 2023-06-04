@@ -175,7 +175,8 @@ export const LoginTxt = styled.span(() => ({
   fontWeight: '600',
   fontSize: '14px',
   lineHeight: '18px',
-  letterSpacing: '-0.02em',
+    letterSpacing: '-0.02em',
+    color: '#3E85F3',
 }))
 
 export const SignupLink = styled(NavLink)(() => ({
@@ -250,7 +251,7 @@ export const Number = styled.p(() => ({
   fontSize: '80px',
   lineHeight: '100%',
   letterSpacing: '-4px',
-  color: '#ffffff',
+  color: '#3E85F3',
 //   [theme.media.up('768px')]: {
 //     fontSize: '104px',
 //   },
@@ -260,7 +261,7 @@ export const Category = styled.h2(() => ({
   display: 'inline-block',
   padding: '8px 18px',
   marginBottom: '8px',
-  color: '#ffffff',
+  color: '#3E85F3',
   background: '#dcebf7',
   borderRadius: '44px',
   fontStyle: 'normal',
@@ -309,7 +310,7 @@ export const ImageBox = styled.div(() => ({
   width: '100%',
   height: '457px',
   overflow: 'hidden',
-  background: '#3e85f3',
+  background: '#E3F3FF',
   borderRadius: '40px',
 //   [theme.media.up('768px')]: {
 //     height: '700px',
@@ -435,7 +436,7 @@ export const ImageEllipse = styled.div(() => ({
   position: 'absolute',
   width: '256px',
   height: '256px',
-  borderRadius: '50%',
+    borderRadius: '50%',
   backgroundImage: `radial-gradient(
         circle at center,
         rgba(62, 133, 243, 0) 40%,
