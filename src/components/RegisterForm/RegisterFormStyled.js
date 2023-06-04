@@ -29,21 +29,15 @@ export const FormStyled = styled(Form)`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 40px 24px 40px 24px;
-  /* width: 335px;
-  height: 469px; */
   border-radius: 8px;
   background-color: #ffffff;
 
   ${getTabletStyles(css`
     padding: 40px;
-    /* width: 480px;
-    height: 424px; */
   `)}
 
   ${getDesktopStyles(css`
     padding: 40px;
-    /* width: 480px;
-    height: 424px; */
   `)}
 `
 

@@ -1,4 +1,6 @@
 import { Formik, ErrorMessage } from 'formik'
+import { AuthNavigate } from '../AuthNavigate/AuthNavigate'
+import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegisterButton'
 import {
   ErrorMessageStyled,
   FormStyled,
@@ -54,7 +56,8 @@ export const RegisterForm = () => {
             render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
           />
         </LabelStyled>
-        <button type='submit'>Sign Up</button>
+        <LoginAndRegisterButton text='Sign Up' />
+        <AuthNavigate text='Log In' route='/login'/>
       </FormStyled>
     </Formik>
   )
