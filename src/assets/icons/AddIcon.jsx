@@ -1,9 +1,7 @@
-export const AddIcon = ({}) => (
-  <svg width='14' height='14' style={svgStyle}>
-    <use href='./addIcon.svg#icon-image'></use>
-  </svg>
-)
+import { AddSvg } from '../../pages/userPage/UserPage.styled'
 
-const svgStyle = {
-  translate: '-30px 22px',
-}
+export const AddIcon = ({}) => (
+  <AddSvg>
+    <use href='./addIcon.svg#icon-image'></use>
+  </AddSvg>
+)

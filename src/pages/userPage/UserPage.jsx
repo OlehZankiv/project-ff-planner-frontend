@@ -23,7 +23,7 @@ const UserPage = ({}) => {
           <ImageAvatar src='https://img.spacergif.org/v1/spacer.gif'></ImageAvatar>
           <AddIcon></AddIcon>
         </ImageWrapper>
-        <NameText>Natalia Dou</NameText>
+        <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
         <UserForm>
           <DivForm>

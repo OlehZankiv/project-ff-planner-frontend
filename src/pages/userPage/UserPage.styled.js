@@ -11,26 +11,15 @@ export const UserWrapper = styled.div`
   justify-content: center;
   border-radius: 16px;
   ${getBreakpointsStyles({
+    tablet: css``,
     desktop: css`
       background-color: blue;
-    `,
-    tablet: css`
-      background-color: green;
     `,
   })}
 `
 export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-
-  ${getBreakpointsStyles({
-    desktop: css`
-      background-color: blue;
-    `,
-    tablet: css`
-      background-color: green;
-    `,
-  })}
 `
 
 export const ImageAvatar = styled.img`
@@ -42,6 +31,31 @@ export const ImageAvatar = styled.img`
   background-color: gray;
   border: 2px solid #3e85f3;
   margin-bottom: 14px;
+
+  ${getBreakpointsStyles({
+    tablet: css`
+      margin-top: 40px;
+      margin-bottom: 14px;
+      width: 124px;
+      height: 124px;
+    `,
+    desktop: css`
+      background-color: blue;
+    `,
+  })}
+`
+export const AddSvg = styled.svg`
+  width: 14px;
+  height: 14px;
+  translate: -30px 22px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      width: 24px;
+      height: 24px;
+      translate: -50px 144px;
+    `,
+    desktop: css``,
+  })}
 `
 export const NameText = styled.p`
   font-family: 'Inter';
@@ -52,6 +66,13 @@ export const NameText = styled.p`
   color: #343434;
   text-align: center;
   margin-bottom: 4px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      font-size: 18px;
+      line-height: 1;
+    `,
+    desktop: css``,
+  })}
 `
 export const UserText = styled.p`
   font-family: 'Inter';
@@ -62,33 +83,24 @@ export const UserText = styled.p`
   color: #343434;
   text-align: center;
   margin-bottom: 40px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      font-size: 14px;
+      line-height: 1.29;
+    `,
+    desktop: css``,
+  })}
 `
-export const InputText = styled.p`
-  /* width: 74px;
-  height: 18px; */
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.29;
-  color: #343434;
-  text-align: center;
-  margin-top: 14px;
-`
-export const InputLabel = styled.label`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.17;
-  color: #343434;
-  text-align: center;
-  margin-left: 5px;
-`
 export const UserForm = styled.form`
   width: calc(100% - 36px);
   margin: 0 auto;
+  ${getBreakpointsStyles({
+    tablet: css`
+      width: 374px;
+    `,
+    desktop: css``,
+  })}
 `
 export const DivForm = styled.div`
   margin-bottom: 10px;
@@ -107,6 +119,30 @@ export const Input = styled.input`
   line-height: 1, 29;
   color: #343434;
   margin-top: 8px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      font-size: 16px;
+      line-height: 1.13;
+    `,
+    desktop: css``,
+  })}
+`
+export const InputLabel = styled.label`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  color: #343434;
+  text-align: center;
+  margin-left: 5px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      font-size: 14px;
+      line-height: 1.29;
+    `,
+    desktop: css``,
+  })}
 `
 export const UserButton = styled.button`
   width: 195px;
@@ -128,4 +164,10 @@ export const UserButton = styled.button`
   color: #fff;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  ${getBreakpointsStyles({
+    tablet: css`
+      width: 262px;
+    `,
+    desktop: css``,
+  })}
 `
