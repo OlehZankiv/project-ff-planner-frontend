@@ -7,7 +7,7 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
-import { Modal, Text } from '../../components'
+import { AppLogo, Modal, Text } from '../../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../../hooks/query/reviews/useReviews'
@@ -29,12 +29,12 @@ const LoginPage = ({}) => {
   return (
     <Wrapper>
       {value}
-
       <Modal
         visible={visible}
         onClose={() => setVisible(false)}
         onEnterPress={() => setVisible(false)}
       >
+        <AppLogo orientation='horizontal' />
         <Text type='p'>
           {t(
             "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.",
