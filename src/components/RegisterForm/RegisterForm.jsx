@@ -2,6 +2,7 @@ import { Formik, ErrorMessage } from 'formik'
 import { AuthNavigate } from '../AuthNavigate/AuthNavigate'
 import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegisterButton'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '../../navigation/routes'
 import {
   ErrorMessageStyled,
   FormStyled,
@@ -63,7 +64,7 @@ export const RegisterForm = () => {
           />
         </LabelStyled>
         <LoginAndRegisterButton text={t('Sign Up')} />
-        <AuthNavigate text={t('Log In')} route='/login' />
+        <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
       </FormStyled>
     </Formik>
   )

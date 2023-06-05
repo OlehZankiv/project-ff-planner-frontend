@@ -69,11 +69,9 @@
 //   `)}
 // `
 
-// TODO: Implement Login Page
 import { LogInForm } from '../../components/LogInForm/LogInForm'
 import { Wrapper, ImageOfGooseInRocket } from '../register/RegisterPageStyled'
-import gooseTrackInRocketImage from '../../assets/images/gooseTrackRocket.png';
-import gooseTrackInRocketImage2x from '../../assets/images/gooseTrackRocket@2x.png'
+import { gooseTrackRocket, gooseTrackRocket2x } from '../../assets/images'
 import { useDimensions } from '../../hooks'
 import { sizes } from '../../styles/breakpoints'
 
@@ -85,8 +83,8 @@ const LoginPage = ({ }) => {
     <Wrapper>
       <ImageOfGooseInRocket
         style={{ width: `calc(${leftImageWidth} * (${width} / ${sizes.desktop}))` }}
-        srcSet={`${gooseTrackInRocketImage} 1x, ${gooseTrackInRocketImage2x} 2x`}
-        src={gooseTrackInRocketImage}
+        srcSet={`${gooseTrackRocket} 1x, ${gooseTrackRocket2x} 2x`}
+        src={gooseTrackRocket}
         alt='image goose track in rocket'
       />
       <LogInForm />

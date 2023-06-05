@@ -1,11 +1,11 @@
 import { ButtonItem } from './ButtonItem.styled'
-import {ReactComponent as Icon} from '../../assets/icons/log-in-icon.svg'
+import { LoginIcon } from '../../assets/icons'
 
 export const LoginAndRegisterButton = ({ text }) => {
   return (
     <ButtonItem type='submit'>
       {text}
-      <Icon />
+      <LoginIcon />
     </ButtonItem>
   )
 }

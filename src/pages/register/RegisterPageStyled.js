@@ -2,10 +2,12 @@ import styled, { css } from 'styled-components'
 import { getDesktopStyles } from '../../styles/breakpoints'
 
 export const Wrapper = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background-color: #dcebf7;
+  ${({ theme: { colors } }) => css`
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: ${colors.secondaryBackgroundColor};
+  `}
 `
 
 export const ImageOfGoose = styled.img`

@@ -1,8 +1,7 @@
 // TODO: Implement Login Page
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm'
 import { Wrapper, ImageOfGoose } from './RegisterPageStyled'
-import gooseTrackImage from '../../assets/images/gooseTrackImage.png';
-import gooseTrackImage2x from '../../assets/images/gooseTrackImage@2x.png'
+import { gooseTrackImage, gooseTrackImage2x } from '../../assets/images'
 import { useDimensions } from '../../hooks'
 import { sizes } from '../../styles/breakpoints'
 

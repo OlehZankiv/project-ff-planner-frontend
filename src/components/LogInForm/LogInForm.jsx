@@ -2,6 +2,7 @@ import { Formik, ErrorMessage } from 'formik'
 import { AuthNavigate } from '../AuthNavigate/AuthNavigate'
 import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegisterButton'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '../../navigation/routes'
 import {
   ErrorMessageStyled,
   FormStyled,
@@ -38,7 +39,7 @@ export const LogInForm = () => {
         <Title>{t('Log in')}</Title>
         <LabelStyled>
           <NameOfFieldStyled>{t('Email')}</NameOfFieldStyled>
-          <Input type='email' name='email' placeholder='Enter email' />
+          <Input type='email' name='email' placeholder={t('Enter email')} />
           <ErrorMessage
             name='email'
             render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
@@ -46,14 +47,14 @@ export const LogInForm = () => {
         </LabelStyled>
         <LabelStyled>
           <NameOfFieldStyled>{t('Password')}</NameOfFieldStyled>
-          <Input type='password' name='password' placeholder='Enter password' />
+          <Input type='password' name='password' placeholder={t('Enter password')} />
           <ErrorMessage
             name='password'
             render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
           />
         </LabelStyled>
         <LoginAndRegisterButton text={t('Log In')} />
-        <AuthNavigate text={t('Sign Up')} route='/register' />
+        <AuthNavigate text={t('Sign Up')} route={ROUTES.REGISTER} />
       </FormStyled>
     </Formik>
   )
