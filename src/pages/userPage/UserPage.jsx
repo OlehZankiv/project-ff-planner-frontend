@@ -1,31 +1,45 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { DisplayFormikState } from '../../components/DisplayFormikState'
+// import { DisplayFormikState } from '../../components/DisplayFormikState'
 import {
-  //   UserWrapper,
-  //   ImageAvatar,
-  //   ImageWrapper,
-  //   NameText,
-  //   UserText,
+  UserWrapper,
+  ImageAvatar,
+  ImageWrapper,
+  NameText,
+  UserText,
   InputLabel,
   UserForm,
   DivForm,
   InputWrapper,
   Input,
-  //   UserButton,
+  UserButton,
 } from './UserPage.styled'
-// import { useBreakpointValue } from '../../styles/breakpoints'
+
 import styled from 'styled-components'
-// import { AddIcon } from '../../assets/icons/AddIcon'
+import { AddIcon } from '../../assets/icons/AddIcon'
 import InputStatus from '../../components/InputStatus'
 import { getInputClassName } from './helpers'
 const UserPage = () => {
-  // const UserName = useBreakpointValue(userNameStyles)
-  // const currentDate = new Date().toISOString().slice(0, 10)
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+  const birthdayRegex = /^\d{2}-\d{2}-\d{4}$/
+  const currentDate = new Date().toISOString().slice(0, 10)
+  const phoneRegex = /^38 \(\d{3}\) \d{3} \d{2} \d{2}$/
+  const skypeRegex = /^[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
 
-  {
-    /* return (
+  const userProfileFormValidationSchema = Yup.object().shape({
+    email: Yup.string()
+      .matches(emailRegex, 'Invalid email format. Example: test@test.com')
+      .required('Required'),
+    username: Yup.string().min(3).max(30).required('Required'),
+    birthday: Yup.string().matches(birthdayRegex, 'Invalid date format. Example: 01.01.2023 '),
+    phone: Yup.string()
+      .matches(phoneRegex, 'Invalid phone format. Example: 38 (097) 256 34 77')
+      .required('Required'),
+    skype: Yup.string().matches(skypeRegex, 'Invalid skype format. Example: my_username123'),
+  })
+
+  return (
     <Wrapper>
       <UserWrapper>
         <ImageWrapper>
@@ -34,143 +48,98 @@ const UserPage = () => {
         </ImageWrapper>
         <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
+        <Formik
+          initialValues={{ email: '' }}
+          onSubmit={async (values) => {
+            await new Promise((resolve) => setTimeout(resolve, 500))
+            alert(JSON.stringify(values, null, 2))
+          }}
+          validationSchema={userProfileFormValidationSchema}
+        >
+          {(props) => {
+            const { touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props
 
-        <UserForm>
-          <DivForm>
-            <InputWrapper>
-              <InputLabel>User Name</InputLabel>
-              <Input type='text' name='username' required id='username'></Input>
-            </InputWrapper>
-            <InputWrapper>
-              <InputLabel>Birthday</InputLabel>
-              <Input
-                type='date'
-                id='start'
-                name='userbirthday'
-                value={currentDate}
-                pattern='\d{4}-\d{2}-\d{2}'
-              ></Input>
-            </InputWrapper>
-            <InputWrapper>
-              <InputLabel>Email</InputLabel>
-              <Input type='email' name='usermail' required></Input>
-            </InputWrapper>
-            <InputWrapper>
-              <InputLabel>Phone</InputLabel>
-              <Input
-                type='tel'
-                name='usertel'
-                title='+380 (96) 111-11-11'
-                required
-                minlength='3'
-              ></Input>
-            </InputWrapper>
-            <InputWrapper>
-              <InputLabel>Skype</InputLabel>
-              <Input type='text' name='userskype'></Input>
-            </InputWrapper>
-          </DivForm>
-          <UserButton type='submit'>Save Changes</UserButton>
-        </UserForm>
+            return (
+              <UserForm onSubmit={handleSubmit}>
+                <DivForm>
+                  <InputWrapper>
+                    <InputLabel htmlFor='username'>User Name</InputLabel>
+                    <Input
+                      id='username'
+                      name='username'
+                      type='text'
+                      placeholder='Enter your name'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getInputClassName(errors.username, touched.username)}
+                    ></Input>
+                    <InputStatus error={errors.username} touched={touched.username} />
+                  </InputWrapper>
+
+                  <InputWrapper>
+                    <InputLabel htmlFor='birthday'>Birthday</InputLabel>
+                    <Input
+                      type='date'
+                      id='start'
+                      name='userbirthday'
+                      placeholder='Enter your birthday'
+                      value={currentDate}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getInputClassName(errors.birthday, touched.birthday)}
+                    />
+                    <InputStatus error={errors.birthday} touched={touched.birthday} />
+                  </InputWrapper>
+                  <InputWrapper>
+                    <InputLabel htmlFor='email'>Email</InputLabel>
+                    <Input
+                      id='email'
+                      name='email'
+                      type='text'
+                      placeholder='Enter your email'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getInputClassName(errors.email, touched.email)}
+                    />
+                    <InputStatus error={errors.email} touched={touched.email} />
+                  </InputWrapper>
+                  <InputWrapper>
+                    <InputLabel htmlFor='phone'>Phone</InputLabel>
+                    <Input
+                      id='phone'
+                      name='usertel'
+                      type='tel'
+                      placeholder='Enter your phone number'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getInputClassName(errors.phone, touched.phone)}
+                    />
+                    <InputStatus error={errors.phone} touched={touched.phone} />
+                  </InputWrapper>
+                  <InputWrapper>
+                    <InputLabel htmlFor='skype'>Skype</InputLabel>
+                    <Input
+                      id='skype'
+                      name='skype'
+                      type='text'
+                      placeholder='Enter your skype'
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={getInputClassName(errors.skype, touched.skype)}
+                    />
+                    <InputStatus error={errors.skype} touched={touched.skype} />
+                  </InputWrapper>
+                </DivForm>
+
+                <UserButton type='submit' disabled={isSubmitting}>
+                  Save Changes
+                </UserButton>
+                {/* <DisplayFormikState {...props} /> */}
+              </UserForm>
+            )
+          }}
+        </Formik>
       </UserWrapper>
-    </Wrapper>
-  )
-  </Formik> */
-  }
-
-  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-
-  const userProfileFormValidationSchema = Yup.object().shape({
-    email: Yup.string().matches(emailRegex, 'Invalid email format').required('Required'),
-    username: Yup.string().min(3).max(30).required('Required'),
-  })
-
-  return (
-    <Wrapper>
-      <Formik
-        initialValues={{ email: '' }}
-        onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 500))
-          alert(JSON.stringify(values, null, 2))
-        }}
-        validationSchema={userProfileFormValidationSchema}
-      >
-        {(props) => {
-          const {
-            // values,
-            touched,
-            errors,
-            dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            handleReset,
-          } = props
-
-          // const getInputClassName = (error, touched) => {
-          //   if (!error && !touched) {
-          //     return ''
-          //   }
-
-          //   if (!error && touched) {
-          //     return 'success'
-          //   }
-
-          //   if (error && touched) {
-          //     return 'error'
-          //   }
-          // }
-
-          return (
-            <UserForm onSubmit={handleSubmit}>
-              <DivForm>
-                <InputWrapper>
-                  <InputLabel htmlFor='username'>User Name</InputLabel>
-                  <Input
-                    id='username'
-                    name='username'
-                    type='text'
-                    placeholder='Enter your name'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={getInputClassName(errors.username, touched.username)}
-                  ></Input>
-                  <InputStatus error={errors.username} touched={touched.username} />
-                </InputWrapper>
-
-                <InputWrapper>
-                  <InputLabel htmlFor='email'>Email</InputLabel>
-                  <Input
-                    id='email'
-                    name='email'
-                    type='text'
-                    placeholder='Enter your email'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={getInputClassName(errors.email, touched.email)}
-                  />
-                  <InputStatus error={errors.email} touched={touched.email} />
-                </InputWrapper>
-              </DivForm>
-
-              <button
-                type='button'
-                className='outline'
-                onClick={handleReset}
-                disabled={!dirty || isSubmitting}
-              >
-                Reset
-              </button>
-              <button type='submit' disabled={isSubmitting}>
-                Submit
-              </button>
-
-              <DisplayFormikState {...props} />
-            </UserForm>
-          )
-        }}
-      </Formik>
     </Wrapper>
   )
 }

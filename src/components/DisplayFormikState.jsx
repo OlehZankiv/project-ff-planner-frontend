@@ -7,7 +7,7 @@ export const DisplayFormikState = (props) => (
     <h3 style={{ fontFamily: 'monospace' }} />
     <pre
       style={{
-        background: '#f6f8fa',
+        background: '#cc6262',
         fontSize: '.65rem',
         padding: '.5rem',
       }}

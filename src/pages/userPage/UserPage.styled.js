@@ -120,7 +120,7 @@ export const InputWrapper = styled.div`
 export const Input = styled.input`
   width: 100%;
   height: 42px;
-  border: 2px solid rgba(17, 17, 17, 0.1);
+  border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 8px;
   padding-left: 14px;
   margin-bottom: 18px;
@@ -133,8 +133,7 @@ export const Input = styled.input`
   margin-top: 8px;
   &:focus {
     outline: none;
-    border-color: blue;
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+    border-color: black;
   }
   &.error {
     border-color: red;
