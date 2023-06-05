@@ -1,24 +1,31 @@
+import React from 'react'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { DisplayFormikState } from './helpers'
 import {
-  UserWrapper,
-  ImageAvatar,
-  ImageWrapper,
-  NameText,
-  UserText,
+  //   UserWrapper,
+  //   ImageAvatar,
+  //   ImageWrapper,
+  //   NameText,
+  //   UserText,
   InputLabel,
   UserForm,
   DivForm,
   InputWrapper,
   Input,
-  UserButton,
+  //   UserButton,
 } from './UserPage.styled'
 // import { useBreakpointValue } from '../../styles/breakpoints'
 import styled from 'styled-components'
-import { AddIcon } from '../../assets/icons/AddIcon'
-const UserPage = ({}) => {
-  // const UserName = useBreakpointValue(userNameStyles)
-  const currentDate = new Date().toISOString().slice(0, 10)
+// import { AddIcon } from '../../assets/icons/AddIcon'
+import { InputStatus, GetInputClassName } from '../../components/InputStatus'
 
-  return (
+const UserPage = () => {
+  // const UserName = useBreakpointValue(userNameStyles)
+  // const currentDate = new Date().toISOString().slice(0, 10)
+
+  {
+    /* return (
     <Wrapper>
       <UserWrapper>
         <ImageWrapper>
@@ -27,6 +34,7 @@ const UserPage = ({}) => {
         </ImageWrapper>
         <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
+
         <UserForm>
           <DivForm>
             <InputWrapper>
@@ -65,6 +73,104 @@ const UserPage = ({}) => {
           <UserButton type='submit'>Save Changes</UserButton>
         </UserForm>
       </UserWrapper>
+    </Wrapper>
+  )
+  </Formik> */
+  }
+
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+
+  const userProfileFormValidationSchema = Yup.object().shape({
+    email: Yup.string().matches(emailRegex, 'Invalid email format').required('Required'),
+    username: Yup.string().min(3).max(30).required('Required'),
+  })
+
+  return (
+    <Wrapper>
+      <Formik
+        initialValues={{ email: '' }}
+        onSubmit={async (values) => {
+          await new Promise((resolve) => setTimeout(resolve, 500))
+          alert(JSON.stringify(values, null, 2))
+        }}
+        validationSchema={userProfileFormValidationSchema}
+      >
+        {(props) => {
+          const {
+            values,
+            touched,
+            errors,
+            dirty,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            handleReset,
+          } = props
+
+          // const getInputClassName = (error, touched) => {
+          //   if (!error && !touched) {
+          //     return ''
+          //   }
+
+          //   if (!error && touched) {
+          //     return 'success'
+          //   }
+
+          //   if (error && touched) {
+          //     return 'error'
+          //   }
+          // }
+
+          return (
+            <UserForm onSubmit={handleSubmit}>
+              <DivForm>
+                <InputWrapper>
+                  <InputLabel>User Name</InputLabel>
+                  <Input
+                    type='text'
+                    name='username'
+                    id='username'
+                    value={values.username}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={GetInputClassName(errors.username, touched.username)}
+                  ></Input>
+                  <InputStatus error={errors.username} touched={touched.username} />
+                </InputWrapper>
+
+                <InputWrapper>
+                  <InputLabel htmlFor='email'>Email</InputLabel>
+                  <Input
+                    id='email'
+                    placeholder='Enter your email'
+                    type='text'
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={GetInputClassName(errors.email, touched.email)}
+                  />
+                  <InputStatus error={errors.email} touched={touched.email} />
+                </InputWrapper>
+              </DivForm>
+
+              <button
+                type='button'
+                className='outline'
+                onClick={handleReset}
+                disabled={!dirty || isSubmitting}
+              >
+                Reset
+              </button>
+              <button type='submit' disabled={isSubmitting}>
+                Submit
+              </button>
+
+              <DisplayFormikState {...props} />
+            </UserForm>
+          )
+        }}
+      </Formik>
     </Wrapper>
   )
 }
