@@ -117,9 +117,11 @@ export const MainLayout = () => {
             </HeaderWrap>
           </Container>
         </Header>
-        <Suspense fallback={<div>Loading subpage...</div>}>
-          <Outlet />
-        </Suspense>
+        <Outletwrap>
+          <Suspense fallback={<div>Loading subpage...</div>}>
+            <Outlet />
+          </Suspense>
+        </Outletwrap>
       </ContentWrap>
     </MainWrap>
   )
@@ -212,4 +214,16 @@ const DesctopTitleWrap = styled.div`
     justify-content: center;
     align-items: center;
   `)}
+`
+
+const Outletwrap = styled.div`
+  padding: 64px 20px 40px 20px;
+  ${getBreakpointsStyles({
+    tablet: css`
+      padding: 64px 32px 32px 32px;
+    `,
+    desktop: css`
+      padding: 32px;
+    `,
+  })}
 `
