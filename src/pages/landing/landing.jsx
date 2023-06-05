@@ -343,7 +343,8 @@ export const ImageBox = styled.div`
       tablet: css`
     height: 700px;
     border-radius: 100px;`,
-  desktop: css`
+    desktop: css`
+ height: 700px;
     width: 50%;`
   })}
 `
@@ -459,7 +460,7 @@ export const Images = styled.img`
   &.day {
     width: 518px;
     height: 332px;
-    left: 59px;
+    left: 66px;
     top: 102px;
     padding: 11px;
     border-radius: 8px;
@@ -470,7 +471,9 @@ export const Images = styled.img`
       height: 568px;
       left: 84px;
       top: 84px;
-      padding: 18px;`
+      padding: 18px;`,
+      desktop: css`
+      left: 84px;`
     })}
 }
 `
