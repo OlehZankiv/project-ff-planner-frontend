@@ -1,14 +1,12 @@
-// TODO: Implement correct mapper in the future
-
-export const toUser = ({ id, name, avatarURL, email }) => ({
-  id: id ?? '',
+export const toUser = ({ _id, name, avatarURL, email }) => ({
+  id: _id ?? '',
   email: email ?? '',
   name: name ?? '',
   avatarURL: avatarURL ?? '',
 })
 
 export const toUserDTO = ({ id, name, email, avatarURL }) => ({
-  id,
+  _id: id,
   name,
   email,
   avatarURL,
