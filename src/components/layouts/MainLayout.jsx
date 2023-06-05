@@ -91,7 +91,9 @@ export const MainLayout = () => {
                 </Text>
               </DesctopTitleWrap>
               <TabWrap>
-                {selectedTab === 'calendar' && <PrimaryColorBtn>{t('Feedback')}</PrimaryColorBtn>}
+                {selectedTab === 'calendar' && (
+                  <PrimaryColorBtn theme={themeType}>{t('Feedback')}</PrimaryColorBtn>
+                )}
                 <InfoWrap>
                   <ButtonWrap onClick={handleThemeChange}>
                     {themeType === 'light' ? (

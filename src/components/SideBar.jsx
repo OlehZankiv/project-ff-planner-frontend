@@ -104,7 +104,7 @@ export const SideBar = ({
             </TabsWrap>
           </div>
         </div>
-        <PrimaryColorBtn isDefaultShadow={true}>
+        <PrimaryColorBtn isDefaultShadow={true} theme={theme}>
           {t('Log out')}
           <LogOutIcon size={iconLogOutSize} />
         </PrimaryColorBtn>

@@ -1,17 +1,27 @@
 import styled, { css } from 'styled-components'
-import { getBreakpointsStyles } from '../styles/breakpoints'
-import { lightTheme } from '../styles/theme/themes'
 
-export const PrimaryColorBtn = ({ children, isDefaultShadow = false }) => {
-  return <PrimaryBtn isDefaultShadow={isDefaultShadow}>{children}</PrimaryBtn>
+import { getBreakpointsStyles } from '../styles/breakpoints'
+import { lightTheme, darkTheme } from '../styles/theme/themes'
+
+export const PrimaryColorBtn = ({ children, isDefaultShadow = false, theme }) => {
+  return (
+    <PrimaryBtn isDefaultShadow={isDefaultShadow} theme={theme}>
+      {children}
+    </PrimaryBtn>
+  )
 }
 
 const PrimaryBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${lightTheme.colors.primary};
-  ${(prop) => prop.isDefaultShadow && `box-shadow: ${lightTheme.shadows.btnShadow};`}
+  background-color: ${(prop) =>
+    prop.theme === 'light' ? lightTheme.colors.primary : darkTheme.colors.primary};
+  ${(prop) =>
+    prop.isDefaultShadow &&
+    `box-shadow: ${
+      prop.theme === 'light' ? lightTheme.shadows.btnShadow : darkTheme.shadows.btnShadow
+    };`}
   border-radius: 16px;
   border: none;
   padding: 8px 20px;
@@ -24,8 +34,13 @@ const PrimaryBtn = styled.button`
 
   &:hover,
   &:focus {
-    background: ${lightTheme.colors.primaryBtnHover};
+    background: ${(prop) =>
+      prop.theme === 'light'
+        ? lightTheme.colors.primaryBtnHover
+        : darkTheme.colors.primaryBtnHover};
     box-shadow: ${lightTheme.shadows.btnShadow};
+    box-shadow: ${(prop) =>
+      prop.theme === 'light' ? lightTheme.shadows.btnShadow : darkTheme.shadows.btnShadow};
   }
 
   ${getBreakpointsStyles({
