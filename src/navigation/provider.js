@@ -4,7 +4,7 @@ import { AuthLayout, Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 
 const LoginPage = lazy(() => import('../pages/login/LoginPage'))
-const MainPage = lazy(() => import('../pages/MainPage/MainPage'))
+const Landing = lazy(() => import('../pages/landing/landing'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
@@ -17,7 +17,7 @@ export const AppRouterProvider = () => (
           path={ROUTES.MAINPAGE}
           element={
             <Suspense fallback={<Loader />}>
-              <MainPage />
+              <Landing />
             </Suspense>
           }
         />
