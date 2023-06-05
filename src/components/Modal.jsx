@@ -5,7 +5,7 @@ import { OpacityButton } from './OpacityButton'
 import { useEffect } from 'react'
 import { getMobileStyles } from '../styles/breakpoints'
 
-export const Modal = ({ visible, onClose, onEnterPress, children }) => {
+export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
   const { colors } = useTheme()
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const Modal = ({ visible, onClose, onEnterPress, children }) => {
       <OpacityButton hoverOpacity={0.975} activeOpacity={0.9} onClick={onClose}>
         <Overlay visible={visible} />
       </OpacityButton>
-      <Wrapper visible={visible}>
+      <Wrapper style={style} visible={visible}>
         <CloseButtonWrapper onClick={onClose}>
           <CloseIcon color={colors.text} />
         </CloseButtonWrapper>
