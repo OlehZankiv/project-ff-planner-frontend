@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InputStatus = ({ error, touched }) => {
+const InputStatus = ({ error, touched }) => {
   return (
     <>
       {error && touched && <div className='input-feedback'>{error}</div>}
@@ -10,16 +10,4 @@ export const InputStatus = ({ error, touched }) => {
   )
 }
 
-export const GetInputClassName = (error, touched) => {
-  if (!error && !touched) {
-    return ''
-  }
-
-  if (!error && touched) {
-    return 'success'
-  }
-
-  if (error && touched) {
-    return 'error'
-  }
-}
+export default InputStatus

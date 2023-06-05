@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { DisplayFormikState } from './helpers'
+import { DisplayFormikState } from '../../components/DisplayFormikState'
 import {
   //   UserWrapper,
   //   ImageAvatar,
@@ -18,8 +18,8 @@ import {
 // import { useBreakpointValue } from '../../styles/breakpoints'
 import styled from 'styled-components'
 // import { AddIcon } from '../../assets/icons/AddIcon'
-import { InputStatus, GetInputClassName } from '../../components/InputStatus'
-
+import InputStatus from '../../components/InputStatus'
+import { getInputClassName } from './helpers'
 const UserPage = () => {
   // const UserName = useBreakpointValue(userNameStyles)
   // const currentDate = new Date().toISOString().slice(0, 10)
@@ -97,7 +97,7 @@ const UserPage = () => {
       >
         {(props) => {
           const {
-            values,
+            // values,
             touched,
             errors,
             dirty,
@@ -126,15 +126,15 @@ const UserPage = () => {
             <UserForm onSubmit={handleSubmit}>
               <DivForm>
                 <InputWrapper>
-                  <InputLabel>User Name</InputLabel>
+                  <InputLabel htmlFor='username'>User Name</InputLabel>
                   <Input
-                    type='text'
-                    name='username'
                     id='username'
-                    value={values.username}
+                    name='username'
+                    type='text'
+                    placeholder='Enter your name'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={GetInputClassName(errors.username, touched.username)}
+                    className={getInputClassName(errors.username, touched.username)}
                   ></Input>
                   <InputStatus error={errors.username} touched={touched.username} />
                 </InputWrapper>
@@ -143,12 +143,12 @@ const UserPage = () => {
                   <InputLabel htmlFor='email'>Email</InputLabel>
                   <Input
                     id='email'
-                    placeholder='Enter your email'
+                    name='email'
                     type='text'
-                    value={values.email}
+                    placeholder='Enter your email'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={GetInputClassName(errors.email, touched.email)}
+                    className={getInputClassName(errors.email, touched.email)}
                   />
                   <InputStatus error={errors.email} touched={touched.email} />
                 </InputWrapper>
