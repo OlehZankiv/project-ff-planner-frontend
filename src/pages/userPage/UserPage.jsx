@@ -22,7 +22,7 @@ import InputStatus from '../../components/InputStatus'
 import { getInputClassName } from './helpers'
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-  const birthdayRegex = /^\d{2}-\d{2}-\d{4}$/
+  const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/
   const currentDate = new Date().toISOString().slice(0, 10)
   const phoneRegex = /^38 \(\d{3}\) \d{3} \d{2} \d{2}$/
   const skypeRegex = /^[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
@@ -49,7 +49,7 @@ const UserPage = () => {
         <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
         <Formik
-          initialValues={{ email: '' }}
+          initialValues={{ email: '', birthday: currentDate }}
           onSubmit={async (values) => {
             await new Promise((resolve) => setTimeout(resolve, 500))
             alert(JSON.stringify(values, null, 2))
@@ -57,7 +57,15 @@ const UserPage = () => {
           validationSchema={userProfileFormValidationSchema}
         >
           {(props) => {
-            const { touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props
+            const {
+              touched,
+              errors,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+            } = props
 
             return (
               <UserForm onSubmit={handleSubmit}>
@@ -80,10 +88,10 @@ const UserPage = () => {
                     <InputLabel htmlFor='birthday'>Birthday</InputLabel>
                     <Input
                       type='date'
-                      id='start'
-                      name='userbirthday'
+                      id='birthday'
+                      name='birthday'
                       placeholder='Enter your birthday'
-                      value={currentDate}
+                      value={values.birthday}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={getInputClassName(errors.birthday, touched.birthday)}
@@ -107,7 +115,7 @@ const UserPage = () => {
                     <InputLabel htmlFor='phone'>Phone</InputLabel>
                     <Input
                       id='phone'
-                      name='usertel'
+                      name='phone'
                       type='tel'
                       placeholder='Enter your phone number'
                       onChange={handleChange}

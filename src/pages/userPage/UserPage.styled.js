@@ -141,6 +141,18 @@ export const Input = styled.input`
   &.success {
     border-color: green;
   }
+  &::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url('https://w7.pngwing.com/pngs/139/151/png-transparent-computer-icons-calendar-agenda-calendar-icon-miscellaneous-blue-text-thumbnail.png')
+      no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-width: thin;
+  }
 
   ${getBreakpointsStyles({
     tablet: css`

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { AddIcon } from '../assets/icons/AddIcon'
 const InputStatus = ({ error, touched }) => {
   return (
     <>
@@ -16,7 +16,7 @@ const InputStatus = ({ error, touched }) => {
           {error}
         </div>
       )}
-      {error && touched && <div className='input-feedback'>X</div>}
+      {error && touched && <AddIcon></AddIcon>}
       {!error && touched && <div className='input-feedback'>V</div>}
     </>
   )
