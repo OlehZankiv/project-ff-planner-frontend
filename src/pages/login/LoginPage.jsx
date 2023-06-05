@@ -10,8 +10,12 @@ import {
 import { Modal, Text } from '../../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useReviews } from '../../hooks/query/reviews/useReviews'
 
 const LoginPage = ({}) => {
+  const { isLoading, reviews } = useReviews()
+  console.log(isLoading, reviews)
+
   const { t } = useTranslation()
 
   const [visible, setVisible] = useState(true)
