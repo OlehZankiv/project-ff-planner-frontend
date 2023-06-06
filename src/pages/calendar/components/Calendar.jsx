@@ -1,69 +1,122 @@
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import styled from 'styled-components'
+import { useAppThemeContext } from '../../../styles/theme/provider'
+import { useDimensions } from '../../../hooks'
+import styled, { css } from 'styled-components'
+import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 
-export const Calendar = ({ selectedDate, setSelectedDate }) => { // добавить пропс setSelectedDate
-  console.log(selectedDate)
-  
+export const Calendar = ({ selectedDate, setSelectedDate }) => {
+  const { setThemeType } = useAppThemeContext()
+  const { height, width } = useDimensions()
+  setThemeType('dark')
+
   return (
     <CalendarWrapper>
       <FullCalendar
-        headerToolbar={null}
+        dayHeaders={false}
+        dateClick={(info) => setSelectedDate(info.date)}
         plugins={[dayGridPlugin, interactionPlugin]}
+        headerToolbar={null}
         initialView='dayGridMonth'
+        dayCellContent={(props) => (
+          <DayCell
+            className={
+              props.date.toDateString() === selectedDate.toDateString() ? 'selected' : undefined
+            }
+          >
+            {props.dayNumberText}
+          </DayCell>
+        )}
+        events={[
+          {
+            id: 'awdwdw',
+            title: 'All-day event',
+            start: selectedDate,
+          },
+        ]}
         showNonCurrentDates={false}
         fixedWeekCount={false}
+        aspectRatio={width / height}
         firstDay={1}
-        dateClick={(info) => setSelectedDate(info.date)}
       />
     </CalendarWrapper>
   )
 }
 
-const CalendarWrapper = styled.section`
-  & thead {
-    display: none;
-  }
-  & table {
-    max-width: 100%;
-    max-height: 625px;
-    background: #ffffff;
+const DayCell = styled.div`
+  ${({ theme: { colors } }) => css`
+    width: 26px;
+    height: 26px;
+    margin: 14px 14px 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
-  }
-  & .fc-theme-standard td {
-    border: 1px solid rgba(220, 227, 229, 0.8);
-  }
-  & .fc-daygrid-day {
-cursor: pointer;
-  }
-  & .fc-day-today.fc-daygrid-day {
-    background-color: #fff;
-    & .fc-daygrid-day-number {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 26px;
-      height: 26px;
-      background: #3e85f3;
+    color: ${colors.secondaryButtonText};
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px;
+
+    &.selected {
+      background-color: ${colors.primary};
+      color: ${colors.white};
+    }
+
+    ${getMobileStyles(css`
+      margin: 8px 4px 0 0;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      line-height: 14px;
+    `)}
+  `}
+`
+
+const CalendarWrapper = styled.section`
+  ${({ theme: { colors } }) => css`
+    padding: 32px;
+
+    table {
       border-radius: 8px;
-      color: #ffffff;
+      border: 1px solid ${colors.calendarBorder} !important;
+      overflow: hidden;
+    }
+
+    td.fc-day {
+      :hover {
+        opacity: 0.85;
+      }
+
+      :active {
+        opacity: 0.7;
+      }
     }
   }
-  & .fc-daygrid-day-number {
-    margin-top: 14px;
-    margin-right: 14px;
-    padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 26px;
-      height: 26px;
-    font-weight: 700;
-    font-size: 16px;
-    color: #343434;
+
+  tr.fc-scrollgrid-section > td {
+    border: none !important;
   }
-  & .fc-day-disabled {
-    background-color: #fff;
-  }
+
+  td.fc-day-today,
+  td.fc-daygrid-day {
+    background-color: ${colors.content} !important;
+    border: 1px solid ${colors.calendarBorder};
+    cursor: pointer;
+
+    .fc-daygrid-day-frame {
+      ${getBreakpointsStyles({
+        desktop: css`
+          min-height: 125px;
+        `,
+        tablet: css`
+          min-height: 144px;
+        `,
+        mobile: css`
+          min-height: 94px;
+        `,
+      })}
+    }
+  `}
 `

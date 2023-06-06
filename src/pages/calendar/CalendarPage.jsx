@@ -4,6 +4,7 @@ import { Calendar } from './components/Calendar'
 
 const CalendarPage = ({}) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
+
   return (
     <div>
       <CalendarWeek />

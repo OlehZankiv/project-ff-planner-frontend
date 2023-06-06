@@ -21,6 +21,7 @@ export const lightTheme = themeCreator({
     success: '#3CBC81',
     content: '#ffffff',
 
+    calendarBorder: '#E3E9EA',
     inputBorderDefault: '#DBDBDB',
     calendarBorderDefault: '1px solid rgba(220, 227, 229, 0.8)',
     placeholderColor: '#DCE3E5',
@@ -48,6 +49,7 @@ export const darkTheme = themeCreator({
     success: '#3CBC81',
     content: '#21222C',
 
+    calendarBorder: '#42434C',
     placeholderColor: '#86888a',
     inputBorderDefault: '#9d9d9d',
     calendarBorderDefault: '1px solid rgba(255, 255, 255, 0.15)',
