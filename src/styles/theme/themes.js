@@ -22,6 +22,7 @@ export const lightTheme = themeCreator({
     content: '#ffffff',
 
     inputBorderDefault: '#DBDBDB',
+    calendarBorderDefault: '1px solid rgba(220, 227, 229, 0.8)',
     placeholderColor: '#DCE3E5',
     inputLabel: '#111111',
     secondaryButtonHover: '#d5deec',
@@ -49,6 +50,7 @@ export const darkTheme = themeCreator({
 
     placeholderColor: '#86888a',
     inputBorderDefault: '#9d9d9d',
+    calendarBorderDefault: '1px solid rgba(255, 255, 255, 0.15)',
     inputLabel: '#62636A',
     secondaryButtonHover: '#21232c',
     secondaryButtonActive: '#16181e',
