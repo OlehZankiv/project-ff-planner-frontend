@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
-import { login } from '../../../api'
+import { register } from '../../../api'
 import { queryKeys } from '../queryKeys'
 
-export const useLogin = () => {
+export const useRegister = () => {
   const { mutate, isLoading } = useMutation({
-    mutationKey: [queryKeys.login],
-    mutationFn: login,
+    mutationKey: [queryKeys.register],
+    mutationFn: register,
     onError: () => {
       // Add error function if it will be needed
     },
@@ -15,7 +15,7 @@ export const useLogin = () => {
   })
 
   return {
-    login: ({ password, name }) => mutate({ password, name }),
+    register: ({ password, name, email }) => mutate({ password, name, email }),
     isLoading,
   }
 }
