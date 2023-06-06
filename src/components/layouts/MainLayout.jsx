@@ -60,6 +60,8 @@ export const MainLayout = () => {
             isBurgerMenuOpen={isBurgerMenuOpen}
             setIsBurgerMenuOpen={setIsBurgerMenuOpen}
             theme={themeType}
+            selectedTab={selectedTab}
+            setSelectedTab={setSelectedTab}
           />
         }
       />

@@ -207,7 +207,6 @@ const TabText = styled.p`
   font-size: 14px;
   line-height: 1.39;
   color: ${(props) => (props.theme === 'light' ? ' rgba(52, 52, 52, 0.5)' : '#fff')};
-  /* color: #3e85f3; */
   text-decoration: none;
   ${getBreakpointsStyles({
     tablet: css`
