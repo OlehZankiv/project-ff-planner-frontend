@@ -8,23 +8,22 @@ import {
   useBreakpointValue,
 } from '../../styles/breakpoints'
 import { AppLogo, Button, Input, Modal, Text } from '../../components'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../../hooks/query/reviews/useReviews'
 import { LoginIcon } from '../../assets/icons'
 import { Formik } from 'formik'
 import { useAppThemeContext } from '../../styles/theme/provider'
-import { useLogin } from '../../hooks/query'
 
 const LoginPage = ({}) => {
   // const { register } = useRegister()
   // useEffect(() => {
-  //   register({ email: 'firegames5643@gmail.com', name: 'Oleh', password: 'zaets228$' })
+  //   register({ email: 'your_email@gmail.com', name: 'Oleh', password: 'password' })
   // }, [])
-  const { login } = useLogin()
-  useEffect(() => {
-    login({ email: 'firegames5643@gmail.com', password: 'zaets228$' })
-  }, [])
+  // const { login } = useLogin()
+  // useEffect(() => {
+  //   login({ email: 'your_email@gmail.com', password: 'password' })
+  // }, [])
 
   const { isLoading, reviews } = useReviews()
   console.log(isLoading, reviews)

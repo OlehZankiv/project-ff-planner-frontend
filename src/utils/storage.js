@@ -13,7 +13,7 @@ export const getStorageItem = (key, defaultValue = '') => {
 
 export const setStorageItem = (key, value) => {
   try {
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, JSON.stringify(value))
   } catch (e) {
     console.error(e)
   }
