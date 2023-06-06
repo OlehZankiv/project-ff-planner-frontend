@@ -8,18 +8,17 @@ import {
   ImageWrapper,
   NameText,
   UserText,
-  InputLabel,
   UserForm,
   DivForm,
   InputWrapper,
-  Input,
   UserButton,
 } from './UserPage.styled'
-
+import { Input } from '../../components/fields/Input'
 import styled from 'styled-components'
 import { AddIcon } from '../../assets/icons/AddIcon'
 import InputStatus from '../../components/InputStatus'
 import { getInputClassName } from './helpers'
+
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
   const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/
@@ -71,11 +70,14 @@ const UserPage = () => {
               <UserForm onSubmit={handleSubmit}>
                 <DivForm>
                   <InputWrapper>
-                    <InputLabel htmlFor='username'>User Name</InputLabel>
                     <Input
                       id='username'
                       name='username'
                       type='text'
+                      title={'User name'}
+                      rightIcon={null}
+                      isError={errors.username && touched.username}
+                      successMessage={'This is Correct name'}
                       placeholder='Enter your name'
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -85,12 +87,12 @@ const UserPage = () => {
                   </InputWrapper>
 
                   <InputWrapper>
-                    <InputLabel htmlFor='birthday'>Birthday</InputLabel>
                     <Input
                       type='date'
                       id='birthday'
                       name='birthday'
                       placeholder='Enter your birthday'
+                      title={'Birthday'}
                       value={values.birthday}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -99,12 +101,15 @@ const UserPage = () => {
                     <InputStatus error={errors.birthday} touched={touched.birthday} />
                   </InputWrapper>
                   <InputWrapper>
-                    <InputLabel htmlFor='email'>Email</InputLabel>
                     <Input
                       id='email'
                       name='email'
                       type='text'
                       placeholder='Enter your email'
+                      title={'Email'}
+                      rightIcon={null}
+                      isError={errors.email && touched.email}
+                      successMessage={'This is Correct email'}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={getInputClassName(errors.email, touched.email)}
@@ -112,12 +117,15 @@ const UserPage = () => {
                     <InputStatus error={errors.email} touched={touched.email} />
                   </InputWrapper>
                   <InputWrapper>
-                    <InputLabel htmlFor='phone'>Phone</InputLabel>
                     <Input
                       id='phone'
                       name='phone'
                       type='tel'
                       placeholder='Enter your phone number'
+                      title={'Phone'}
+                      rightIcon={null}
+                      isError={errors.phone && touched.phone}
+                      successMessage={'This is Correct phone'}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={getInputClassName(errors.phone, touched.phone)}
@@ -125,12 +133,15 @@ const UserPage = () => {
                     <InputStatus error={errors.phone} touched={touched.phone} />
                   </InputWrapper>
                   <InputWrapper>
-                    <InputLabel htmlFor='skype'>Skype</InputLabel>
                     <Input
                       id='skype'
                       name='skype'
                       type='text'
                       placeholder='Enter your skype'
+                      title={'Skype'}
+                      rightIcon={null}
+                      isError={errors.skype && touched.skype}
+                      successMessage={'This is Correct phone'}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={getInputClassName(errors.skype, touched.skype)}
