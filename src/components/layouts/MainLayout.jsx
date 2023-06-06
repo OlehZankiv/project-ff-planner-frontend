@@ -14,6 +14,7 @@ import {
 import { PrimaryColorBtn } from '../PrimaryColorBtn'
 import { Text } from '../Text'
 import { OpacityButton } from '../OpacityButton'
+import { Loader } from '../Loader'
 
 export const MainLayout = () => {
   const { t } = useTranslation()
@@ -56,13 +57,10 @@ export const MainLayout = () => {
             <HeaderWrap>
               <BurgerWrap>
                 <ButtonWrap onClick={() => setIsBurgerMenuOpen(true)}>
-                  <BurgerMenuIcon
-                    size={iconSize}
-                    color={themeType === 'light' ? ' rgba(52, 52, 52, 1)' : '#fff'}
-                  />{' '}
+                  <BurgerMenuIcon size={iconSize} color={theme.colors.burgerIcon} />{' '}
                 </ButtonWrap>
               </BurgerWrap>
-              <DesctopTitleWrap>
+              <DesktopTitleWrap>
                 <Text
                   type='h1'
                   fontSize={32}
@@ -75,7 +73,7 @@ export const MainLayout = () => {
                 >
                   {selectedTab === 'calendar' ? t('Calendar') : t('User Profile')}
                 </Text>
-              </DesctopTitleWrap>
+              </DesktopTitleWrap>
               <TabWrap>
                 {selectedTab === 'calendar' && (
                   <PrimaryColorBtn theme={themeType}>{t('Feedback')}</PrimaryColorBtn>
@@ -91,7 +89,7 @@ export const MainLayout = () => {
                     </ButtonWrap>
                   </OpacityButton>
                   <Text
-                    type={'p'}
+                    type='p'
                     color={theme.colors.userNameText}
                     fontWeight={700}
                     lineHeight={1.29}
@@ -99,14 +97,14 @@ export const MainLayout = () => {
                   >
                     {userName}
                   </Text>
-                  <AvatarWrap>{firstLetersMaker(userName)}</AvatarWrap>
+                  <AvatarWrap theme={theme}>{firstLetersMaker(userName)}</AvatarWrap>
                 </InfoWrap>
               </TabWrap>
             </HeaderWrap>
           </Container>
         </Header>
         <Outletwrap>
-          <Suspense fallback={<div>Loading subpage...</div>}>
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </Outletwrap>
@@ -180,7 +178,7 @@ const AvatarWrap = styled.div`
   align-items: center;
   width: 32px;
   height: 32px;
-  border: 1.8px solid #3e85f3;
+  border: 1.8px solid ${({ theme }) => theme.colors.primary};
   border-radius: 50%;
 
   ${getBreakpointsStyles({
@@ -195,7 +193,7 @@ const AvatarWrap = styled.div`
   })}
 `
 
-const DesctopTitleWrap = styled.div`
+const DesktopTitleWrap = styled.div`
   display: none;
   ${getDesktopStyles(css`
     display: flex;

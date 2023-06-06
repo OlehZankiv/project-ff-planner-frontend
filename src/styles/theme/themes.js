@@ -30,6 +30,7 @@ export const lightTheme = themeCreator({
     tabButtotActive: '#E3F3FF',
     tabText: ' rgba(52, 52, 52, 0.5)',
     tabTextSelected: '#3e85f3',
+    burgerIcon: ' rgba(52, 52, 52, 1)',
 
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
@@ -52,6 +53,7 @@ export const darkTheme = themeCreator({
     tabButtotActive: '#3e85f3',
     tabText: '#ffffff',
     tabTextSelected: '#ffffff',
+    burgerIcon: '#ffffff',
 
     modalBackground: '#171820',
     modalOverlay: '#3f3f3f',
