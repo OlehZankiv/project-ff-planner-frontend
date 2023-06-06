@@ -1,50 +1,35 @@
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+// import {
+//   useNavigate,
+// } from 'react-router-dom'
 import { useRef } from 'react'
 
-import {
-  getBreakpointsStyles,
-  getDesktopStyles,
-  useBreakpointValue,
-  ScreenWrapper,
-} from '../styles/breakpoints'
+import { getBreakpointsStyles, getDesktopStyles, useBreakpointValue } from '../styles/breakpoints'
 import { CloseIcon, UserCheckIcon, CalendarCheckOutIcon, LogOutIcon } from '../assets/icons'
 import { AppLogo } from './AppLogo'
+import { OpacityButton } from './OpacityButton'
 import { PrimaryColorBtn } from './PrimaryColorBtn'
+import { Text } from './Text'
 
-export const SideBar = ({
-  isBurgerMenuOpen,
-  setIsBurgerMenuOpen,
-  theme,
-  selectedTab,
-  setSelectedTab,
-}) => {
+export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, setSelectedTab }) => {
+  // const navigate = useNavigate()
+  const theme = useTheme()
   const owerlayRef = useRef()
   const { t } = useTranslation()
   const iconCheckSize = useBreakpointValue({ mobileValue: 20, tabletValue: 24, desktopValue: 24 })
   const iconLogOutSize = useBreakpointValue({ mobileValue: 18, tabletValue: 20, desktopValue: 20 })
   const iconClozeSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
 
-  const IconCheckColor = (isSelected) => {
-    if (isSelected) {
-      return theme === 'light' ? '#3e85f3' : '#fff'
-    }
-    return theme === 'light' ? ' rgba(52, 52, 52, 0.5)' : '#fff'
-  }
-
-  const handleCloseBurgerMenu = () => {
-    setIsBurgerMenuOpen(false)
-  }
-
   const handleOwerlayClick = (e) => {
     if (e.target === owerlayRef.current) {
-      handleCloseBurgerMenu()
+      setIsBurgerMenuOpen(false)
     }
   }
 
   const handleChangeTab = (type) => {
     setSelectedTab(type)
+    // navigate(`/${type}`)
   }
 
   return (
@@ -58,22 +43,11 @@ export const SideBar = ({
         <div style={{ width: '100%' }}>
           <TopBox>
             <AppLogo orientation='horezontal' />
-            <ButtonWrap onClick={handleCloseBurgerMenu}>
-              <ScreenWrapper
-                mobile={
-                  <CloseIcon
-                    size={iconClozeSize}
-                    color={theme === 'light' ? ' rgba(52, 52, 52, 1)' : '#fff'}
-                  />
-                }
-                tablet={
-                  <CloseIcon
-                    size={iconClozeSize}
-                    color={theme === 'light' ? ' rgba(52, 52, 52, 1)' : '#fff'}
-                  />
-                }
-              />
-            </ButtonWrap>
+            <OpacityButton>
+              <CloseIconWrap onClick={() => setIsBurgerMenuOpen(false)}>
+                <CloseIcon size={iconClozeSize} color={theme.colors.defaultIcon} />
+              </CloseIconWrap>
+            </OpacityButton>
           </TopBox>
           <div style={{ width: '100%' }}>
             <SidebarTitle theme={theme}>{t('User Panel')}</SidebarTitle>
@@ -81,30 +55,43 @@ export const SideBar = ({
               <NavButton
                 selected={selectedTab === 'profile'}
                 theme={theme}
-                // to={'my_profile'}
                 onClick={() => handleChangeTab('profile')}
               >
                 <UserCheckIcon
                   size={iconCheckSize}
-                  color={IconCheckColor(selectedTab === 'profile')}
+                  color={
+                    selectedTab === 'profile' ? theme.colors.selectedIcon : theme.colors.defaultIcon
+                  }
                 />
-                <TabText theme={theme} selected={selectedTab === 'profile'}>
+                <Text
+                  type='p'
+                  fontWeight={600}
+                  color={`${selectedTab === 'profile' ? 'tabTextSelected' : 'tabText'}`}
+                >
                   {t('My Account')}
-                </TabText>
+                </Text>
               </NavButton>
               <NavButton
                 theme={theme}
                 selected={selectedTab === 'calendar'}
-                // to={'calendar'}
                 onClick={() => handleChangeTab('calendar')}
               >
                 <CalendarCheckOutIcon
                   size={iconCheckSize}
-                  color={IconCheckColor(selectedTab === 'calendar')}
+                  color={
+                    selectedTab === 'calendar'
+                      ? theme.colors.selectedIcon
+                      : theme.colors.defaultIcon
+                  }
                 />
-                <TabText theme={theme} selected={selectedTab === 'calendar'}>
+                <Text
+                  type='p'
+                  fontWeight={600}
+                  color={`${selectedTab === 'calendar' ? 'tabTextSelected' : 'tabText'}`}
+                >
+                  {' '}
                   {t('Calendar')}
-                </TabText>
+                </Text>
               </NavButton>
             </TabsWrap>
           </div>
@@ -119,55 +106,57 @@ export const SideBar = ({
 }
 
 const SidebarOverlay = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  ${(props) =>
-    props.isBurgerMenuOpen &&
+  ${({ isBurgerMenuOpen, theme }) => css`
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    ${isBurgerMenuOpen &&
     `opacity: 1;
     visibility: visible;
     pointer-events: all;`}
-  transition: opacity 250ms linear,
-        visibility 250ms linear;
-  background-color: ${(props) =>
-    props.theme === 'light' ? 'rgba(231, 236, 252, 0.671)' : '#28282a79'};
-  ${getDesktopStyles(
-    css`
-      position: static;
-      width: 25%;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all;
-    `,
-  )}
+    transition: opacity ${theme.animation.duration} ${theme.animation.cubicBezier},
+        visibility ${theme.animation.duration} ${theme.animation.cubicBezier};
+    background-color: ${theme.colors.overlay};
+    ${getDesktopStyles(
+      css`
+        position: static;
+        width: 25%;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      `,
+    )};
+  `}
 `
 
 const SidebarWrap = styled.div`
-  transform: translateX(-100%);
-  ${(props) => props.isBurgerMenuOpen && 'transform: translateX(0);'}
-  transition: transform 250ms linear;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-  min-height: 100vh;
-  background-color: ${(props) => (props.theme === 'light' ? '#fff' : '#13151A')};
-  width: 70%;
-  padding: 20px 24px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 50%;
-    `,
-    desktop: css`
-      width: 100%;
-      transform: translateX(0);
-    `,
-  })}
+  ${({ isBurgerMenuOpen, theme }) => css`
+    transform: translateX(-100%);
+    ${isBurgerMenuOpen && 'transform: translateX(0);'}
+    transition: transform ${theme.animation.duration} ${theme.animation.cubicBezier};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    min-height: 100vh;
+    background-color: ${theme.colors.background};
+    width: 70%;
+    padding: 20px 24px;
+    ${getBreakpointsStyles({
+      tablet: css`
+        width: 50%;
+      `,
+      desktop: css`
+        width: 100%;
+        transform: translateX(0);
+      `,
+    })}
+  `}
 `
 
 const TopBox = styled.div`
@@ -192,8 +181,7 @@ const SidebarTitle = styled.h1`
   font-weight: 600;
   font-size: 12px;
   line-height: 1.39;
-  color: ${(props) =>
-    props.theme === 'light' ? ' rgba(52, 52, 52, 0.5)' : 'rgba(250, 250, 250, 0.3)'};
+  color: ${({ theme }) => theme.colors.sidebarTitle};
   margin-bottom: 24px;
   ${getBreakpointsStyles({
     tablet: css`
@@ -206,36 +194,26 @@ const SidebarTitle = styled.h1`
   })}
 `
 
-const ButtonWrap = styled.button`
+const CloseIconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   border: none;
+  ${getDesktopStyles(
+    css`
+      display: none;
+    `,
+  )}
 `
 
-const NavButton = styled(NavLink)`
+const NavButton = styled.button`
   display: flex;
   padding: 20px 16px;
-  background: ' transparent';
+  background: transparent;
   border-radius: 8px;
-  ${(props) => props.selected && `background: ${props.theme === 'light' ? '#E3F3FF' : '#3e85f3'}`}
-`
-
-const TabText = styled.p`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.39;
-  color: ${(props) => (props.theme === 'light' ? ' rgba(52, 52, 52, 0.5)' : '#fff')};
-  text-decoration: none;
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 16px;
-    `,
-  })}
-  ${(props) => props.selected && `color: ${props.theme === 'light' ? '#3e85f3' : '#fff'}`}
+  border: none;
+  ${({ selected, theme }) => selected && `background: ${theme.colors.tabButtotActive}`}
 `
 
 const TabsWrap = styled.div`
