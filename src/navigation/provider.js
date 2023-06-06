@@ -5,12 +5,21 @@ import { lazy, Suspense } from 'react'
 
 const LoginPage = lazy(() => import('../pages/auth/login/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/register/RegisterPage'))
+const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
     <Routes>
       <Route path={ROUTES.HOME} element={<MainLayout />}>
         <Route index element={<div>Home Page</div>} />
+        <Route
+          path={ROUTES.CALENDAR}
+          element={
+            <Suspense fallback={<Loader />}>
+              <CalendarPage />
+            </Suspense>
+          }
+        />
         {/* TODO: Add additional pages here */}
       </Route>
       <Route
