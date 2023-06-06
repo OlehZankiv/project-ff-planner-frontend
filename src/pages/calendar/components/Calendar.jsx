@@ -21,7 +21,9 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         initialView='dayGridMonth'
         dayCellContent={(props) => (
           <DayCell
-            className={props.date.getTime() === selectedDate.getTime() ? 'selected' : undefined}
+            className={
+              props.date.toDateString() === selectedDate.toDateString() ? 'selected' : undefined
+            }
           >
             {props.dayNumberText}
           </DayCell>

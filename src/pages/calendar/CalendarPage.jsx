@@ -3,6 +3,7 @@ import { Calendar } from './components/Calendar'
 
 const CalendarPage = ({}) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
+
   return (
     <div>
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
