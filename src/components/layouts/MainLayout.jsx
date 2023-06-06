@@ -1,25 +1,26 @@
 import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import styled, { css } from 'styled-components'
-
+import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
+
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
 import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
 import {
   useBreakpointValue,
-  // ScreenWrapper,
   getBreakpointsStyles,
   getDesktopStyles,
 } from '../../styles/breakpoints'
 import { PrimaryColorBtn } from '../PrimaryColorBtn'
 import { Text } from '../Text'
+import { OpacityButton } from '../OpacityButton'
 
 export const MainLayout = () => {
   const { t } = useTranslation()
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState('calendar')
   const { themeType, setThemeType } = useAppThemeContext()
+  const theme = useTheme()
   const iconSize = useBreakpointValue({ mobileValue: 24, tabletValue: 32, desktopValue: 32 })
   const nameFontSize = useBreakpointValue({
     mobileValue: 14,
@@ -34,21 +35,18 @@ export const MainLayout = () => {
   }
 
   const firstLetersMaker = (str) => {
-    const words = str.split(' ')
-    const capitalizedWords = words
-      .map((word) => {
-        return word.split('')[0].toUpperCase()
-      })
+    return str
+      .split(' ')
+      .map((word) => word[0].toUpperCase())
       .join('')
-    return capitalizedWords
+      .slice(0, 2)
   }
 
   return (
-    <MainWrap theme={themeType}>
+    <MainWrap theme={theme}>
       <SideBar
         isBurgerMenuOpen={isBurgerMenuOpen}
         setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-        theme={themeType}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
       />
@@ -66,17 +64,16 @@ export const MainLayout = () => {
               </BurgerWrap>
               <DesctopTitleWrap>
                 <Text
-                  type={'h1'}
+                  type='h1'
                   fontSize={32}
                   fontWeight={700}
                   lineHeight={1}
-                  color={themeType === 'light' ? '#111111' : '#fff'}
+                  color={theme.colors.text}
                   style={{
-                    textShadow:
-                      '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
+                    textShadow: theme.shadows.hedingShadow,
                   }}
                 >
-                  {selectedTab === 'calendar' ? 'Calendar' : 'User Profile'}
+                  {selectedTab === 'calendar' ? t('Calendar') : t('User Profile')}
                 </Text>
               </DesctopTitleWrap>
               <TabWrap>
@@ -84,16 +81,18 @@ export const MainLayout = () => {
                   <PrimaryColorBtn theme={themeType}>{t('Feedback')}</PrimaryColorBtn>
                 )}
                 <InfoWrap>
-                  <ButtonWrap onClick={handleThemeChange}>
-                    {themeType === 'light' ? (
-                      <MoonIcon size={iconSize} />
-                    ) : (
-                      <SunIcon size={iconSize} />
-                    )}
-                  </ButtonWrap>
+                  <OpacityButton>
+                    <ButtonWrap onClick={handleThemeChange}>
+                      {themeType === 'light' ? (
+                        <MoonIcon size={iconSize} />
+                      ) : (
+                        <SunIcon size={iconSize} />
+                      )}
+                    </ButtonWrap>
+                  </OpacityButton>
                   <Text
                     type={'p'}
-                    color={themeType === 'light' ? ' #34343' : '#fff'}
+                    color={theme.colors.userNameText}
                     fontWeight={700}
                     lineHeight={1.29}
                     fontSize={nameFontSize}
@@ -119,8 +118,7 @@ export const MainLayout = () => {
 const MainWrap = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: ${(props) =>
-    props.theme === 'light' ? 'rgba(247, 246, 249, 1)' : 'rgba(23, 24, 32, 1)'};
+  background-color: ${({ theme }) => theme.colors.mainBacground};
   display: flex;
 `
 
@@ -147,6 +145,7 @@ const HeaderWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 const TabWrap = styled.div`
