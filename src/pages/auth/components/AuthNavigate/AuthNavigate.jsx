@@ -1,8 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import styled, {css} from 'styled-components'
-import { getBreakpointsStyles} from '../../styles/breakpoints'
+import styled, { css } from 'styled-components'
+import { getBreakpointsStyles } from '../../../../styles/breakpoints'
 
-export const NavigateButtonStyled = styled(NavLink)`
+export const AuthNavigate = ({ text, route }) => {
+  return <NavigateButtonStyled to={route}>{text}</NavigateButtonStyled>
+}
+
+const NavigateButtonStyled = styled(NavLink)`
   ${({ theme: { colors } }) =>
     css`
       color: ${colors.primary};

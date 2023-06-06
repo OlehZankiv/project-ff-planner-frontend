@@ -69,28 +69,19 @@
 //   `)}
 // `
 
-import { LogInForm } from '../../components/LogInForm/LogInForm'
-import { Wrapper, ImageOfGooseInRocket } from '../register/RegisterPageStyled'
-import { gooseTrackRocket, gooseTrackRocket2x } from '../../assets/images'
-import { useDimensions } from '../../hooks'
-import { sizes } from '../../styles/breakpoints'
+import { LogInForm } from '../components/LogInForm/LogInForm'
+import { Wrapper } from '../register/Wrapper.styled'
+import { gooseTrackRocket, gooseTrackRocket2x } from '../../../assets/images'
+import { GooseImage } from '../../auth/components/GooseImage'
 
-const LoginPage = ({ }) => {
-  const { width } = useDimensions()
-  const leftImageWidth = width >= sizes.desktop ? '20vw' : '25vw'
-
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values)
-    resetForm()
-  }
-
+const LoginPage = ({}) => {
   return (
     <Wrapper>
-      <ImageOfGooseInRocket
-        style={{ width: `calc(${leftImageWidth} * (${width} / ${sizes.desktop}))` }}
-        srcSet={`${gooseTrackRocket} 1x, ${gooseTrackRocket2x} 2x`}
-        src={gooseTrackRocket}
-        alt='image goose track in rocket'
+      <GooseImage
+        image1x={gooseTrackRocket}
+        image2x={gooseTrackRocket2x}
+        text='image of goose in a rocket'
+        right='0'
       />
       <LogInForm />
     </Wrapper>
@@ -98,4 +89,3 @@ const LoginPage = ({ }) => {
 }
 
 export default LoginPage
-

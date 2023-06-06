@@ -2,24 +2,26 @@ import { Formik, ErrorMessage } from 'formik'
 import { AuthNavigate } from '../AuthNavigate/AuthNavigate'
 import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegisterButton'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '../../navigation/routes'
-import { loginFormSchema } from '../../utils/schemas'
+import { ROUTES } from '../../../../navigation/routes'
+import { registerFormSchema } from '../../../../utils/schemas'
+// import { Button } from '../../components/buttons/Button'
+// import { LoginIcon } from '../../assets/icons'
 import {
   ErrorMessageStyled,
   FormStyled,
-  Input,
+  InputField,
   NameOfFieldStyled,
   Title,
   LabelStyled,
-} from '../RegisterForm/RegisterFormStyled'
-
+} from './RegisterForm.styled'
 
 const initialValues = {
+  name: '',
   email: '',
   password: '',
 }
 
-export const LogInForm = () => {
+export const RegisterForm = () => {
   const { t } = useTranslation()
 
   const handleSubmit = (values, { resetForm }) => {
@@ -30,13 +32,21 @@ export const LogInForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={loginFormSchema}
+      validationSchema={registerFormSchema}
     >
       <FormStyled autoComplete='off'>
-        <Title>{t('Log in')}</Title>
+        <Title>{t('Sign up')}</Title>
+        <LabelStyled>
+          <NameOfFieldStyled>{t('Name')}</NameOfFieldStyled>
+          <InputField type='text' name='name' placeholder={t('Enter your name')} />
+          <ErrorMessage
+            name='name'
+            render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
+          />
+        </LabelStyled>
         <LabelStyled>
           <NameOfFieldStyled>{t('Email')}</NameOfFieldStyled>
-          <Input type='email' name='email' placeholder={t('Enter email')} />
+          <InputField type='email' name='email' placeholder={t('Enter email')} />
           <ErrorMessage
             name='email'
             render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
@@ -44,14 +54,15 @@ export const LogInForm = () => {
         </LabelStyled>
         <LabelStyled>
           <NameOfFieldStyled>{t('Password')}</NameOfFieldStyled>
-          <Input type='password' name='password' placeholder={t('Enter password')} />
+          <InputField type='password' name='password' placeholder={t('Enter password')} />
           <ErrorMessage
             name='password'
             render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
           />
         </LabelStyled>
-        <LoginAndRegisterButton text={t('Log In')} />
-        <AuthNavigate text={t('Sign Up')} route={ROUTES.REGISTER} />
+        <LoginAndRegisterButton text={t('Sign Up')} />
+        {/* <Button fullWidth rightIcon={<LoginIcon />} title={t('Sign Up')} /> */}
+        <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
       </FormStyled>
     </Formik>
   )

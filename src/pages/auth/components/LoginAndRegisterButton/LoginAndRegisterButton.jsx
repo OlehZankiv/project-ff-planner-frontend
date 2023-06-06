@@ -1,9 +1,18 @@
 import styled, { css } from 'styled-components'
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+import { getBreakpointsStyles } from '../../../../styles/breakpoints'
+import { LoginIcon } from '../../../../assets/icons'
 
+export const LoginAndRegisterButton = ({ text }) => {
+  return (
+    <ButtonItem type='submit'>
+      {text}
+      <LoginIcon />
+    </ButtonItem>
+  )
+}
 
 export const ButtonItem = styled.button`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors, shadows } }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +20,7 @@ export const ButtonItem = styled.button`
     margin-top: 8px;
     max-width: 287px;
     height: 46px;
-    box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.48);
+    box-shadow: ${shadows.buttonShadow};
     border-radius: 16px;
     background-color: ${colors.primary};
     border: 1px solid ${colors.primary};
