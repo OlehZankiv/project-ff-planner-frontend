@@ -8,7 +8,7 @@ import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
 import {
   useBreakpointValue,
-  ScreenWrapper,
+  // ScreenWrapper,
   getBreakpointsStyles,
   getDesktopStyles,
 } from '../../styles/breakpoints'
@@ -45,25 +45,12 @@ export const MainLayout = () => {
 
   return (
     <MainWrap theme={themeType}>
-      {isBurgerMenuOpen && (
-        <SideBar
-          isBurgerMenuOpen={isBurgerMenuOpen}
-          setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-          theme={themeType}
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
-        />
-      )}
-      <ScreenWrapper
-        desktop={
-          <SideBar
-            isBurgerMenuOpen={isBurgerMenuOpen}
-            setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-            theme={themeType}
-            selectedTab={selectedTab}
-            setSelectedTab={setSelectedTab}
-          />
-        }
+      <SideBar
+        isBurgerMenuOpen={isBurgerMenuOpen}
+        setIsBurgerMenuOpen={setIsBurgerMenuOpen}
+        theme={themeType}
+        selectedTab={selectedTab}
+        setSelectedTab={setSelectedTab}
       />
       <ContentWrap>
         <Header>

@@ -48,7 +48,12 @@ export const SideBar = ({
   }
 
   return (
-    <SidebarOverlay theme={theme} onClick={handleOwerlayClick} ref={owerlayRef}>
+    <SidebarOverlay
+      theme={theme}
+      onClick={handleOwerlayClick}
+      ref={owerlayRef}
+      isBurgerMenuOpen={isBurgerMenuOpen}
+    >
       <SidebarWrap isBurgerMenuOpen={isBurgerMenuOpen} theme={theme}>
         <div style={{ width: '100%' }}>
           <TopBox>
@@ -119,17 +124,33 @@ const SidebarOverlay = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  ${(props) =>
+    props.isBurgerMenuOpen &&
+    `opacity: 1;
+    visibility: visible;
+    pointer-events: all;`}
+  transition: opacity 250ms linear,
+        visibility 250ms linear;
   background-color: ${(props) =>
     props.theme === 'light' ? 'rgba(231, 236, 252, 0.671)' : '#28282a79'};
   ${getDesktopStyles(
     css`
       position: static;
       width: 25%;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
     `,
   )}
 `
 
 const SidebarWrap = styled.div`
+  transform: translateX(-100%);
+  ${(props) => props.isBurgerMenuOpen && 'transform: translateX(0);'}
+  transition: transform 250ms linear;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -144,6 +165,7 @@ const SidebarWrap = styled.div`
     `,
     desktop: css`
       width: 100%;
+      transform: translateX(0);
     `,
   })}
 `
