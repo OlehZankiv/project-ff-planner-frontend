@@ -7,16 +7,20 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
-import { AppLogo, Button, Modal, Text } from '../../components'
+import { AppLogo, Button, Input, Modal, Text } from '../../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../../hooks/query/reviews/useReviews'
 import { LoginIcon } from '../../assets/icons'
+import { Formik } from 'formik'
+import { useAppThemeContext } from '../../styles/theme/provider'
 
 const LoginPage = ({}) => {
   const { isLoading, reviews } = useReviews()
   console.log(isLoading, reviews)
 
+  const { setThemeType } = useAppThemeContext()
+  setThemeType('dark')
   const { t } = useTranslation()
 
   const [visible, setVisible] = useState(true)
@@ -27,6 +31,11 @@ const LoginPage = ({}) => {
     mobileValue: 'Welcome to Mobile',
   })
 
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values)
+    resetForm()
+  }
+
   return (
     <Wrapper>
       {value}
@@ -35,6 +44,18 @@ const LoginPage = ({}) => {
         onClose={() => setVisible(false)}
         onEnterPress={() => setVisible(false)}
       >
+        <Formik initialValues={{ email: 'awdwdwd' }} onSubmit={handleSubmit}>
+          <form>
+            <Input
+              type='email'
+              title='EMAIL'
+              errorMessage='Error'
+              successMessage='Success'
+              name='email'
+              placeholder='nadiia@gmail.com'
+            />
+          </form>
+        </Formik>
         <Button
           fullWidth
           type='primary'
