@@ -1,5 +1,6 @@
 export const STORAGE_KEYS = {
   TOKEN: 'TOKEN',
+  LOGGER: 'LOGGER',
 }
 
 export const getStorageItem = (key, defaultValue = '') => {

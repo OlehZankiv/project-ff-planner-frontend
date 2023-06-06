@@ -16,7 +16,9 @@ export const useLogout = () => {
     onSuccess: () => {
       setToken(null)
       setLogger(null)
+
       removeStorageItem(STORAGE_KEYS.TOKEN)
+      removeStorageItem(STORAGE_KEYS.LOGGER)
     },
   })
 
