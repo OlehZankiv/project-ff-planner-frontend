@@ -76,7 +76,7 @@ const DayCell = styled.div`
 
 const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
-    padding: 32px;
+    padding: 15px 32px 32px 32px;
 
     table {
       border-radius: 8px;

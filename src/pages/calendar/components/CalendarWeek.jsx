@@ -2,8 +2,12 @@ import styled, { css } from "styled-components";
 import {
     useBreakpointValue,
 } from '../../../styles/breakpoints';
+import { useAppThemeContext } from '../../../styles/theme/provider'
 
 export const CalendarWeek = () => {
+    const { setThemeType } = useAppThemeContext()
+    setThemeType('dark')
+    
       const mon = useBreakpointValue({
     desktopValue: 'mon',
     tabletValue: 'mon',
@@ -69,21 +73,23 @@ export const CalendarWeek = () => {
 }
 
 const WeekWrapper = styled.div`
-${({ theme: { colors } }) => css`
 max-width: 100%;
     max-height: 46px;
-    background: ${colors.background};
-    border: ${colors.calendarBorderDefault};
-    border-radius: 8px;
-    `}
+    padding: 0 32px;
 `;
 
 const WeekList = styled.ul`
-    display: flex;
+${({ theme: { colors } }) => css`
+display: flex;
     justify-content: space-around;
         padding: 0;
     margin: 0;
     list-style: none;
+        border: ${colors.calendarBorderDefault};
+            border-radius: 8px;
+                background: ${colors.content}; !important
+    `}
+    
 `
 
 const WeekItem = styled.li`
