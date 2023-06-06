@@ -79,6 +79,11 @@ const LoginPage = ({ }) => {
   const { width } = useDimensions()
   const leftImageWidth = width >= sizes.desktop ? '20vw' : '25vw'
 
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values)
+    resetForm()
+  }
+
   return (
     <Wrapper>
       <ImageOfGooseInRocket
