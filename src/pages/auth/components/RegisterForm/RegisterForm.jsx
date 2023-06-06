@@ -4,8 +4,8 @@ import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegist
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../../navigation/routes'
 import { registerFormSchema } from '../../../../utils/schemas'
-// import { Button } from '../../components/buttons/Button'
-// import { LoginIcon } from '../../assets/icons'
+import { Button } from '../../../../components/buttons/Button'
+import { LoginIcon } from '../../../../assets/icons'
 import {
   ErrorMessageStyled,
   FormStyled,
@@ -61,7 +61,7 @@ export const RegisterForm = () => {
           />
         </LabelStyled>
         <LoginAndRegisterButton text={t('Sign Up')} />
-        {/* <Button fullWidth rightIcon={<LoginIcon />} title={t('Sign Up')} /> */}
+        <Button fullWidth rightIcon={<LoginIcon />} title={t('Sign Up')} />
         <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
       </FormStyled>
     </Formik>

@@ -32,7 +32,7 @@ export const LogInForm = () => {
       onSubmit={handleSubmit}
       validationSchema={loginFormSchema}
     >
-      {({ errors, touched }) => (
+      {({ errors}) => (
         <FormStyled autoComplete='off'>
           <Title>{t('Log in')}</Title>
           <LabelStyled>
@@ -44,7 +44,7 @@ export const LogInForm = () => {
               placeholder={t('Enter your email')}
               errorMessage={errors.email}
               successMessage='That`s correct'
-              isError={errors.email && touched.email}
+              isError={errors.email}
             />
             {/* <InputField type='email' name='email' placeholder={t('Enter email')} /> */}
             {/* <ErrorMessage
