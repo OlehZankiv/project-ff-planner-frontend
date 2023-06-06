@@ -7,7 +7,7 @@ const H1 = styled.h1`
 
     font-size: ${fontSize ?? 104}px;
     font-weight: ${fontWeight ?? 700};
-    line-height: ${lineHeight ?? 104};
+    line-height: ${lineHeight ?? 104}px;
 
     ${getMobileStyles(css`
       font-size: ${fontSize ?? 80}px;
