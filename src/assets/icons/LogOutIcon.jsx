@@ -1,4 +1,4 @@
-export const LogOutIcon = ({ size }) => (
+export const LogOutIcon = ({ size = 18 }) => (
   <svg
     width={size}
     height={size}

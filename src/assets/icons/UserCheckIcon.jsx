@@ -1,4 +1,4 @@
-export const UserCheckIcon = ({ size, color = '#84828A' }) => (
+export const UserCheckIcon = ({ size = 20, color }) => (
   <svg
     width={size}
     height={size}

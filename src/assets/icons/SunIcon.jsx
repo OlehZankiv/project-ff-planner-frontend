@@ -1,4 +1,4 @@
-export const SunIcon = ({ size }) => (
+export const SunIcon = ({ size = 24 }) => (
   <svg
     width={size}
     height={size}

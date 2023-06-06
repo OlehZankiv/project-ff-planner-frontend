@@ -1,4 +1,4 @@
-export const BurgerMenuIcon = ({ size, color }) => (
+export const BurgerMenuIcon = ({ size = 24, color }) => (
   <svg
     width={size}
     height={size}

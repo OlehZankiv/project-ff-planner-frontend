@@ -1,4 +1,4 @@
-export const CalendarCheckOutIcon = ({ size, color = '#84828A' }) => (
+export const CalendarCheckOutIcon = ({ size = 20, color }) => (
   <svg
     width={size}
     height={size}
