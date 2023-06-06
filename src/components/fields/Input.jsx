@@ -3,7 +3,7 @@ import { Field } from 'formik'
 import { Text } from '../Text'
 import { useEffect, useState } from 'react'
 import { ErrorIcon, SuccessIcon } from '../../assets/icons'
-
+import { getBreakpointsStyles } from '../../styles/breakpoints'
 export const Input = ({
   name,
   type,
@@ -105,8 +105,8 @@ export const InputStyled = styled(Field)`
     background-color: transparent;
 
     font-weight: 600;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 1.29;
 
     &:focus {
       outline: none;
@@ -115,9 +115,31 @@ export const InputStyled = styled(Field)`
 
     &::placeholder {
       font-weight: 400;
-      font-size: 16px;
-      line-height: 18px;
+      font-size: 14px;
+      line-height: 1.29;
       color: ${colors.placeholderColor};
     }
+    &::-webkit-calendar-picker-indicator {
+      color: rgba(0, 0, 0, 0);
+      opacity: 1;
+      display: block;
+      background: url('./chevron-down.svg') no-repeat;
+      fill: gray;
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-width: thin;
+    }
+    ${getBreakpointsStyles({
+      tablet: css`
+        font-size: 16px;
+        line-height: 1.13;
+      `,
+      desktop: css`
+        font-size: 16px;
+        line-height: 1.13;
+      `,
+    })}
   `}
 `

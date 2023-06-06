@@ -44,6 +44,7 @@ export const AddSvg = styled.svg`
   width: 14px;
   height: 14px;
   translate: -30px 22px;
+
   ${getBreakpointsStyles({
     tablet: css`
       width: 24px;
@@ -128,7 +129,7 @@ export const Input = styled.input`
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  line-height: 1, 29;
+  line-height: 1.29;
   color: #343434;
   margin-top: 8px;
   &:focus {
@@ -145,8 +146,8 @@ export const Input = styled.input`
     color: rgba(0, 0, 0, 0);
     opacity: 1;
     display: block;
-    background: url('https://w7.pngwing.com/pngs/139/151/png-transparent-computer-icons-calendar-agenda-calendar-icon-miscellaneous-blue-text-thumbnail.png')
-      no-repeat;
+    background: url('./chevron-down.svg') no-repeat;
+    background-color: red;
     background-size: contain;
     width: 20px;
     height: 20px;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+// import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 // import { DisplayFormikState } from '../../components/DisplayFormikState'
 import {
   UserWrapper,
@@ -93,11 +94,13 @@ const UserPage = () => {
                       name='birthday'
                       placeholder='Enter your birthday'
                       title={'Birthday'}
+                      // rightIcon={<CalendarIcon></CalendarIcon>}
                       value={values.birthday}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={getInputClassName(errors.birthday, touched.birthday)}
                     />
+
                     <InputStatus error={errors.birthday} touched={touched.birthday} />
                   </InputWrapper>
                   <InputWrapper>
