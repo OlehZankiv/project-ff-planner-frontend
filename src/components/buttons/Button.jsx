@@ -8,9 +8,11 @@ export const Button = ({
   fullWidth,
   title,
   onClick,
+  leftIcon,
   rightIcon,
 }) => (
   <Wrapper onClick={onClick} isDefaultShadow={isDefaultShadow} fullWidth={fullWidth} type={type}>
+    {leftIcon}
     <Text
       type='h4'
       lineHeight={24}
