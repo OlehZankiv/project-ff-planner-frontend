@@ -1,20 +1,28 @@
 import { useMutation } from '@tanstack/react-query'
-import { login as loginRequest } from '../../../api'
+import { login } from '../../../api'
 import { queryKeys } from '../queryKeys'
+import { useAuthContext } from '../../../contexts/auth'
+import { toUser } from '../mappers'
 
-// TODO: Implement login functionality
-export const useLogin = (onSuccess) => {
+export const useLogin = () => {
+  const { setLogger, setToken } = useAuthContext()
+
   const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.login],
-    mutationFn: loginRequest,
+    mutationFn: login,
     onError: () => {
       // Add error function if it will be needed
     },
-    onSuccess,
+    onSuccess: (res) => {
+      const { token, user } = res.data
+
+      setToken(token)
+      setLogger(toUser(user))
+    },
   })
 
   return {
-    login: ({ email, password }) => mutate({ email, password }),
+    login: ({ password, email }) => mutate({ password, email }),
     isLoading,
   }
 }

@@ -1,12 +1,12 @@
-export const toUser = ({ _id, name, avatarURL, email }) => ({
-  id: _id ?? '',
+export const toUser = ({ id, name, avatarURL, email }) => ({
+  id: id ?? '',
   email: email ?? '',
   name: name ?? '',
   avatarURL: avatarURL ?? '',
 })
 
 export const toUserDTO = ({ id, name, email, avatarURL }) => ({
-  _id: id,
+  id,
   name,
   email,
   avatarURL,

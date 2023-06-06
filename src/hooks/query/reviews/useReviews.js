@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { queryKeys } from '../queryKeys'
-import { toReview } from '../mappers/toReview'
+import { toReview } from '../mappers'
 import { getReviews } from '../../../api/reviews'
 
 export const useReviews = (type = 'all') => {
