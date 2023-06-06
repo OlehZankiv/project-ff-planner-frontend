@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { CloseIcon } from '../assets/icons'
-import { OpacityButton } from './OpacityButton'
+import { OpacityButton } from './buttons/OpacityButton'
 import { useEffect } from 'react'
 import { getMobileStyles } from '../styles/breakpoints'
 

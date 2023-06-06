@@ -7,10 +7,11 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
-import { AppLogo, Modal, Text } from '../../components'
+import { AppLogo, Button, Modal, Text } from '../../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../../hooks/query/reviews/useReviews'
+import { LoginIcon } from '../../assets/icons'
 
 const LoginPage = ({}) => {
   const { isLoading, reviews } = useReviews()
@@ -34,6 +35,13 @@ const LoginPage = ({}) => {
         onClose={() => setVisible(false)}
         onEnterPress={() => setVisible(false)}
       >
+        <Button
+          fullWidth
+          type='primary'
+          onClick={() => {}}
+          rightIcon={<LoginIcon />}
+          title={t('Sign Up')}
+        />
         <AppLogo orientation='horizontal' />
         <Text type='p'>
           {t(
