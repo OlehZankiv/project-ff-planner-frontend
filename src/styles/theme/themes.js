@@ -10,10 +10,10 @@ const shadows = {
 export const lightTheme = themeCreator({
   colors: {
     background: '#ffffff',
-    secondaryBackgroundColor: '#dcebf7',
+    secondaryBackground: '#dcebf7',
     text: '#111111',
-    primaryColor: '#3e85f3',
-    hoverPrimaryColor: '#2b78ef',
+    primary: '#3e85f3',
+    hoverPrimary: '#2b78ef',
 
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',

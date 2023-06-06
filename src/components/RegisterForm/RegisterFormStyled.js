@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Field, Form } from 'formik'
-import { getDesktopStyles, getTabletStyles } from '../../styles/breakpoints'
+import { getBreakpointsStyles } from '../../styles/breakpoints'
 
 export const Title = styled.h1`
   ${({ theme: { colors } }) => css`
@@ -8,18 +8,19 @@ export const Title = styled.h1`
     font-weight: 600;
     font-size: 18px;
     line-height: 24px;
-    color: ${colors.primaryColor};
+    color: ${colors.primary};
     text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
 
-    ${getTabletStyles(css`
-      margin-bottom: 40px;
-      font-size: 24px;
-    `)}
-
-    ${getDesktopStyles(css`
-      margin-bottom: 40px;
-      font-size: 24px;
-    `)}
+    ${getBreakpointsStyles({
+      desktop: css`
+        margin-bottom: 40px;
+        font-size: 24px;
+      `,
+      tablet: css`
+        margin-bottom: 40px;
+        font-size: 24px;
+      `,
+    })}
   `}
 `
 
@@ -35,13 +36,14 @@ export const FormStyled = styled(Form)`
     border-radius: 8px;
     background-color: ${colors.background};
 
-    ${getTabletStyles(css`
-      padding: 40px;
-    `)}
-
-    ${getDesktopStyles(css`
-      padding: 40px;
-    `)}
+    ${getBreakpointsStyles({
+      desktop: css`
+        padding: 40px;
+      `,
+      tablet: css`
+        padding: 40px;
+      `,
+    })}
   `}
 `
 
@@ -58,21 +60,22 @@ export const Input = styled(Field)`
     line-height: 18px;
     color: ${colors.background};
 
-    ${getTabletStyles(css`
-      margin-bottom: 18px;
-      padding: 18px;
-      width: 400px;
-      height: 54px;
-      font-size: 16px;
-    `)}
-
-    ${getDesktopStyles(css`
-      margin-bottom: 18px;
-      padding: 18px;
-      width: 400px;
-      height: 54px;
-      font-size: 16px;
-    `)}
+    ${getBreakpointsStyles({
+      desktop: css`
+        margin-bottom: 18px;
+        padding: 18px;
+        width: 400px;
+        height: 54px;
+        font-size: 16px;
+      `,
+      tablet: css`
+        margin-bottom: 18px;
+        padding: 18px;
+        width: 400px;
+        height: 54px;
+        font-size: 16px;
+      `,
+    })}
   `}
 `
 export const ErrorMessageStyled = styled.div`
@@ -92,15 +95,16 @@ export const NameOfFieldStyled = styled.div`
     line-height: 15px;
     color: ${colors.background};
 
-    ${getTabletStyles(css`
-      font-size: 14px;
-      line-height: 17px;
-    `)}
-
-    ${getDesktopStyles(css`
-      font-size: 14px;
-      line-height: 17px;
-    `)}
+    ${getBreakpointsStyles({
+      desktop: css`
+        font-size: 14px;
+        line-height: 17px;
+      `,
+      tablet: css`
+        font-size: 14px;
+        line-height: 17px;
+      `,
+    })}
   `}
 `
 

@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import styled, {css} from 'styled-components'
-import { getDesktopStyles, getTabletStyles } from '../../styles/breakpoints'
+import { getBreakpointsStyles} from '../../styles/breakpoints'
 
 export const NavigateButtonStyled = styled(NavLink)`
   ${({ theme: { colors } }) =>
     css`
-      color: ${colors.primaryColor};
+      color: ${colors.primary};
       position: absolute;
       bottom: -34px;
       left: 50%;
@@ -16,19 +16,20 @@ export const NavigateButtonStyled = styled(NavLink)`
       line-height: 14px;
 
       &: hover {
-        color: ${colors.hoverPrimaryColor};
+        color: ${colors.hoverPrimary};
       }
 
-      ${getTabletStyles(css`
-        bottom: -48px;
-        font-size: 18px;
-        line-height: 24px;
-      `)}
-
-      ${getDesktopStyles(css`
-        bottom: -48px;
-        font-size: 18px;
-        line-height: 24px;
-      `)}
+      ${getBreakpointsStyles({
+        desktop: css`
+          bottom: -48px;
+          font-size: 18px;
+          line-height: 24px;
+        `,
+        tablet: css`
+          bottom: -48px;
+          font-size: 18px;
+          line-height: 24px;
+        `,
+      })}
     `}
 `

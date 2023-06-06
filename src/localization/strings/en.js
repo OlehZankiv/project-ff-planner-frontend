@@ -10,4 +10,7 @@ export const en = {
   "email is a required field": "email is a required field",
   "name is a required field": "name is a required field",
   "email must be a valid email": "email must be a valid email",
+  "Enter your name": "Enter your name",
+  "Enter email": "Enter email",
+  "Enter password": "Enter password",
 }

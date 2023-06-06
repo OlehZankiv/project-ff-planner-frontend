@@ -3,6 +3,7 @@ import { AuthNavigate } from '../AuthNavigate/AuthNavigate'
 import { LoginAndRegisterButton } from '../LoginAndRegisterButton/LoginAndRegisterButton'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../navigation/routes'
+import { registerFormSchema } from '../../utils/schemas'
 import {
   ErrorMessageStyled,
   FormStyled,
@@ -11,16 +12,6 @@ import {
   Title,
   LabelStyled,
 } from './RegisterFormStyled'
-import * as yup from 'yup'
-
-const schema = yup.object().shape({
-  name: yup.string().required('name is a required field'),
-  email: yup.string().email('email must be a valid email').required('email is a required field'),
-  password: yup
-    .string()
-    .min(4, 'password must be at least 4 characters')
-    .required('password is a required field'),
-})
 
 const initialValues = {
   name: '',
@@ -36,31 +27,35 @@ export const RegisterForm = () => {
     resetForm()
   }
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={registerFormSchema}
+    >
       <FormStyled autoComplete='off'>
         <Title>{t('Sign up')}</Title>
         <LabelStyled>
           <NameOfFieldStyled>{t('Name')}</NameOfFieldStyled>
-          <Input type='text' name='name' placeholder='Enter your name' />
+          <Input type='text' name='name' placeholder={t('Enter your name')} />
           <ErrorMessage
             name='name'
-            render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
+            render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
           />
         </LabelStyled>
         <LabelStyled>
           <NameOfFieldStyled>{t('Email')}</NameOfFieldStyled>
-          <Input type='email' name='email' placeholder='Enter email' />
+          <Input type='email' name='email' placeholder={t('Enter email')} />
           <ErrorMessage
             name='email'
-            render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
+            render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
           />
         </LabelStyled>
         <LabelStyled>
           <NameOfFieldStyled>{t('Password')}</NameOfFieldStyled>
-          <Input type='password' name='password' placeholder='Enter password' />
+          <Input type='password' name='password' placeholder={t('Enter password')} />
           <ErrorMessage
             name='password'
-            render={(msg) => <ErrorMessageStyled>{t(`${msg}`)}</ErrorMessageStyled>}
+            render={(msg) => <ErrorMessageStyled>{t(msg)}</ErrorMessageStyled>}
           />
         </LabelStyled>
         <LoginAndRegisterButton text={t('Sign Up')} />
