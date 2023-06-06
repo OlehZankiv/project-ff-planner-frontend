@@ -4,7 +4,7 @@ import { AuthLayout, Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 
 const LoginPage = lazy(() => import('../pages/login/LoginPage'))
-const Landing = lazy(() => import('../pages/landing/landing'))
+const Landing = lazy(() => import('../pages/landing/Landing'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>

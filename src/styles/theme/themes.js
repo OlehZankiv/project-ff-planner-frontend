@@ -12,6 +12,7 @@ export const lightTheme = themeCreator({
     background: '#ffffff',
     text: '#111111',
 
+
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
   },

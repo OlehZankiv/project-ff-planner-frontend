@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +14,8 @@ import { getBreakpointsStyles } from '../../styles/breakpoints';
 
 
 const Landing = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const {colors} = useTheme()
   return (
     <Container>
       <Hero>
@@ -26,7 +27,7 @@ const Landing = () => {
         <LinkBox>
           <LoginLink to='/login'>
             <LoginTxt>Log in</LoginTxt>
-            <LoginIcon name="loginIcon" size="13.5px" stroke='#3e85f3'/>
+            <LoginIcon size="13.5px" stroke='#3e85f3'/>
           </LoginLink>
           <SignupLink to='/register'>Sign up</SignupLink>
         </LinkBox>
