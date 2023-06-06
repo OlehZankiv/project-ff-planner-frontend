@@ -5,7 +5,7 @@ import { getStorageItem, STORAGE_KEYS } from '../utils/storage'
 export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'multipart/form-data',
+    'Content-Type': 'application/json',
   },
 })
 

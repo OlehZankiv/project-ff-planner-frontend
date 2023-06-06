@@ -9,7 +9,8 @@ export const useRegister = () => {
     onError: () => {
       // Add error function if it will be needed
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log(res.data.user)
       // Add error function if it will be needed
     },
   })
