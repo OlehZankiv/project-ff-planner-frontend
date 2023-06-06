@@ -102,7 +102,7 @@ export const InputStyled = styled(Field)`
     color: ${colors.text};
     border-width: 1px;
     border-style: solid;
-    background-color: ${colors.content};
+    background-color: transparent;
 
     font-weight: 600;
     font-size: 16px;
