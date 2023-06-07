@@ -7,11 +7,29 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
-import { Modal, Text} from '../../components' 
+import { AppLogo, Button, Input, Modal, Text } from '../../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useReviews } from '../../hooks/query/reviews/useReviews'
+import { LoginIcon } from '../../assets/icons'
+import { Formik } from 'formik'
+import { useAppThemeContext } from '../../styles/theme/provider'
 
 const LoginPage = ({}) => {
+  // const { register } = useRegister()
+  // useEffect(() => {
+  //   register({ email: 'your_email@gmail.com', name: 'Oleh', password: 'password' })
+  // }, [])
+  // const { login } = useLogin()
+  // useEffect(() => {
+  //   login({ email: 'your_email@gmail.com', password: 'password' })
+  // }, [])
+
+  const { isLoading, reviews } = useReviews()
+  console.log(isLoading, reviews)
+
+  const { setThemeType } = useAppThemeContext()
+  setThemeType('dark')
   const { t } = useTranslation()
 
   const [visible, setVisible] = useState(true)
@@ -22,18 +40,42 @@ const LoginPage = ({}) => {
     mobileValue: 'Welcome to Mobile',
   })
 
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values)
+    resetForm()
+  }
+
   return (
     <Wrapper>
       {value}
-
       <Modal
         visible={visible}
         onClose={() => setVisible(false)}
         onEnterPress={() => setVisible(false)}
       >
+        <Formik initialValues={{ email: 'awdwdwd' }} onSubmit={handleSubmit}>
+          <form>
+            <Input
+              type='email'
+              title='EMAIL'
+              errorMessage='Error'
+              successMessage='Success'
+              name='email'
+              placeholder='nadiia@gmail.com'
+            />
+          </form>
+        </Formik>
+        <Button
+          fullWidth
+          type='primary'
+          onClick={() => {}}
+          rightIcon={<LoginIcon />}
+          title={t('Sign Up')}
+        />
+        <AppLogo orientation='horizontal' />
         <Text type='p'>
           {t(
-            'GooseTracks Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.',
+            "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.",
           )}
         </Text>
       </Modal>
