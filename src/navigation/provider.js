@@ -1,7 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ROUTES } from './routes'
 import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
+import { useAuthContext } from '../contexts/auth'
 
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
@@ -12,11 +13,14 @@ export const AppRouterProvider = () => (
     <Routes>
       <Route path={ROUTES.HOME} element={<MainLayout />}>
         <Route index element={<div>Home Page</div>} />
+
         <Route
           path={ROUTES.CALENDAR}
           element={
             <Suspense fallback={<Loader />}>
-              <CalendarPage />
+              <ProtectedRoute>
+                <CalendarPage />
+              </ProtectedRoute>
             </Suspense>
           }
         />
@@ -45,3 +49,14 @@ export const AppRouterProvider = () => (
     </Routes>
   </BrowserRouter>
 )
+
+const ProtectedRoute = ({ children }) => {
+  const { logger } = useAuthContext()
+  const location = useLocation()
+
+  if (!logger) {
+    return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
+  }
+
+  return children
+}
