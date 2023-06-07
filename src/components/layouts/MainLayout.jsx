@@ -80,9 +80,9 @@ export const MainLayout = () => {
                   <OpacityButton>
                     <ButtonWrap onClick={handleThemeChange}>
                       {themeType === 'light' ? (
-                        <MoonIcon size={iconSize} />
+                        <MoonIcon size={iconSize} color={theme.colors.primary} />
                       ) : (
-                        <SunIcon size={iconSize} />
+                        <SunIcon size={iconSize} color={theme.colors.primary} />
                       )}
                     </ButtonWrap>
                   </OpacityButton>
