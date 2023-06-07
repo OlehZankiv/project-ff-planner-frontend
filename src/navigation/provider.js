@@ -22,6 +22,7 @@ export const AppRouterProvider = () => (
         />
         {/* TODO: Add additional pages here */}
       </Route>
+
       <Route
         path={ROUTES.LOGIN}
         element={
@@ -38,7 +39,6 @@ export const AppRouterProvider = () => (
           </Suspense>
         }
       />
-      {/* TODO: Add additional pages here */}
 
       {/* TODO: Add 404 Page */}
       <Route path='*' element={<div>404 Page</div>} />

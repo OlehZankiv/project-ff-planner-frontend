@@ -1,15 +1,13 @@
 import { RegisterForm } from './components/RegisterForm'
-import { gooseTrackImage, gooseTrackImage2x } from '../../assets/images'
+import { gooseRegister } from '../../assets/images'
 import { GooseImage } from './components/GooseImage'
-import { Wrapper } from './Wrapper.styled'
+import { AuthWrapper } from './shared.styled'
 
-const RegisterPage = ({}) => {
-  return (
-    <Wrapper>
-      <GooseImage image1x={gooseTrackImage} image2x={gooseTrackImage2x} text='image of goose' />
-      <RegisterForm />
-    </Wrapper>
-  )
-}
+const RegisterPage = () => (
+  <AuthWrapper>
+    <GooseImage image={gooseRegister} alt='image of goose' right={0} />
+    <RegisterForm />
+  </AuthWrapper>
+)
 
 export default RegisterPage

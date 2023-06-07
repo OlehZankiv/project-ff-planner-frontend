@@ -3,12 +3,10 @@ import { AuthNavigate } from './AuthNavigate'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { loginFormSchema } from '../../../utils/schemas'
-import { Input } from '../../../components/fields/Input'
-import { FormStyled } from './RegisterForm.styled'
-import { Text } from '../../../components'
+import { Button, Input, Text } from '../../../components'
 import { css } from 'styled-components'
-import { Button } from '../../../components/buttons/Button'
 import { LoginIcon } from '../../../assets/icons'
+import { AuthFormStyled } from '../shared.styled'
 
 const initialValues = {
   email: '',
@@ -29,7 +27,7 @@ export const LogInForm = () => {
       validationSchema={loginFormSchema}
     >
       {({ errors, touched }) => (
-        <FormStyled autoComplete='off'>
+        <AuthFormStyled autoComplete='off'>
           <Text
             style={{ marginBottom: '32px' }}
             type={'h5'}
@@ -70,7 +68,7 @@ export const LogInForm = () => {
             variant='primary'
           />
           <AuthNavigate text={t('Sign Up')} route={ROUTES.REGISTER} />
-        </FormStyled>
+        </AuthFormStyled>
       )}
     </Formik>
   )

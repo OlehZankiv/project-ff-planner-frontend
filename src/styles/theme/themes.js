@@ -18,7 +18,6 @@ export const lightTheme = themeCreator({
     primary: '#3e85f3',
     hoverPrimary: '#2b78ef',
     textRed: '#da1414',
-    border: 'rgba(220, 227, 229, 0.6)',
     error: '#E74A3B',
     success: '#3CBC81',
     white: '#ffffff',
@@ -41,6 +40,7 @@ export const lightTheme = themeCreator({
 export const darkTheme = themeCreator({
   colors: {
     background: '#13151A',
+    secondaryBackground: '#dcebf7',
     text: '#ffffff',
     primary: '#3e85f3',
     white: '#ffffff',

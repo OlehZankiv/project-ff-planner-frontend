@@ -3,12 +3,11 @@ import { AuthNavigate } from './AuthNavigate'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
-import { Button } from '../../../components/buttons/Button'
+import { Button, Input } from '../../../components/'
 import { LoginIcon } from '../../../assets/icons'
-import { FormStyled } from './RegisterForm.styled'
-import { Input } from '../../../components/fields/Input'
 import { Text } from '../../../components'
 import { css } from 'styled-components'
+import { AuthFormStyled } from '../shared.styled'
 
 const initialValues = {
   name: '',
@@ -23,6 +22,7 @@ export const RegisterForm = () => {
     console.log(values)
     resetForm()
   }
+
   return (
     <Formik
       initialValues={initialValues}
@@ -30,13 +30,13 @@ export const RegisterForm = () => {
       validationSchema={registerFormSchema}
     >
       {({ errors, touched }) => (
-        <FormStyled autoComplete='off'>
+        <AuthFormStyled autoComplete='off'>
           <Text
             style={{ marginBottom: '32px' }}
-            type={'h5'}
-            color={'primary'}
-            fontWeight={'600'}
-            lineHeight={'24'}
+            type='h5'
+            color='primary'
+            fontWeight='600'
+            lineHeight={24}
             tabletStyles={css`
               margin-bottom: 40px;
               font-size: 24px;
@@ -80,7 +80,7 @@ export const RegisterForm = () => {
             variant='primary'
           />
           <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
-        </FormStyled>
+        </AuthFormStyled>
       )}
     </Formik>
   )

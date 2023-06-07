@@ -1,20 +1,13 @@
 import { LogInForm } from './components/LogInForm'
-import { Wrapper } from './Wrapper.styled'
-import { gooseTrackRocket, gooseTrackRocket2x } from '../../assets/images'
+import { AuthWrapper } from './shared.styled'
+import { gooseLogin } from '../../assets/images'
 import { GooseImage } from './components/GooseImage'
 
-const LoginPage = ({}) => {
-  return (
-    <Wrapper>
-      <GooseImage
-        image1x={gooseTrackRocket}
-        image2x={gooseTrackRocket2x}
-        text='image of goose in a rocket'
-        right='0'
-      />
-      <LogInForm />
-    </Wrapper>
-  )
-}
+const LoginPage = () => (
+  <AuthWrapper>
+    <GooseImage image={gooseLogin} alt='image of goose in a rocket' left={0} />
+    <LogInForm />
+  </AuthWrapper>
+)
 
 export default LoginPage

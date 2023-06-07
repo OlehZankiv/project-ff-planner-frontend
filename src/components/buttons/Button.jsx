@@ -26,6 +26,10 @@ export const Button = ({
       type='h4'
       lineHeight={24}
       fontSize={18}
+      mobileStyles={css`
+        font-size: 14px;
+        line-height: 18px;
+      `}
       color={variant === 'primary' ? 'white' : 'secondaryButtonText'}
     >
       {title}
