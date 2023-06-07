@@ -11,6 +11,7 @@ export const useLogin = () => {
     mutationKey: [queryKeys.login],
     mutationFn: login,
     onError: () => {
+
       // Add error function if it will be needed
     },
     onSuccess: (res) => {
