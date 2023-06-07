@@ -1,75 +1,71 @@
 import styled, { css } from 'styled-components'
 import { useBreakpointValue, getBreakpointsStyles } from '../../../styles/breakpoints'
-import { useAppThemeContext } from '../../../styles/theme/provider'
 
 export const CalendarWeek = () => {
-  const { setThemeType } = useAppThemeContext()
-  setThemeType('dark')
-
-  // const mon = useBreakpointValue({
-  //   desktopValue: 'mon',
-  //   tabletValue: 'mon',
-  //   mobileValue: 'm',
-  // })
-  // const tue = useBreakpointValue({
-  //   desktopValue: 'tue',
-  //   tabletValue: 'tue',
-  //   mobileValue: 't',
-  // })
-  // const wed = useBreakpointValue({
-  //   desktopValue: 'wed',
-  //   tabletValue: 'wed',
-  //   mobileValue: 'w',
-  // })
-  // const thu = useBreakpointValue({
-  //   desktopValue: 'thu',
-  //   tabletValue: 'thu',
-  //   mobileValue: 't',
-  // })
-  // const fri = useBreakpointValue({
-  //   desktopValue: 'fri',
-  //   tabletValue: 'fri',
-  //   mobileValue: 'f',
-  // })
-  // const sut = useBreakpointValue({
-  //   desktopValue: 'sut',
-  //   tabletValue: 'sut',
-  //   mobileValue: 's',
-  // })
-  // const sun = useBreakpointValue({
-  //   desktopValue: 'sun',
-  //   tabletValue: 'sun',
-  //   mobileValue: 's',
-  // })
+  const mon = useBreakpointValue({
+    desktopValue: 'mon',
+    tabletValue: 'mon',
+    mobileValue: 'm',
+  })
+  const tue = useBreakpointValue({
+    desktopValue: 'tue',
+    tabletValue: 'tue',
+    mobileValue: 't',
+  })
+  const wed = useBreakpointValue({
+    desktopValue: 'wed',
+    tabletValue: 'wed',
+    mobileValue: 'w',
+  })
+  const thu = useBreakpointValue({
+    desktopValue: 'thu',
+    tabletValue: 'thu',
+    mobileValue: 't',
+  })
+  const fri = useBreakpointValue({
+    desktopValue: 'fri',
+    tabletValue: 'fri',
+    mobileValue: 'f',
+  })
+  const sat = useBreakpointValue({
+    desktopValue: 'sat',
+    tabletValue: 'sat',
+    mobileValue: 's',
+  })
+  const sun = useBreakpointValue({
+    desktopValue: 'sun',
+    tabletValue: 'sun',
+    mobileValue: 's',
+  })
 
   const days = [
     {
       id: '1',
-      value: useBreakpointValue({ desktopValue: 'mon', tabletValue: 'mon', mobileValue: 'm' }),
+      value: mon,
     },
     {
       id: '2',
-      value: useBreakpointValue({ desktopValue: 'tue', tabletValue: 'tue', mobileValue: 't' }),
+      value: tue,
     },
     {
       id: '3',
-      value: useBreakpointValue({ desktopValue: 'wed', tabletValue: 'wed', mobileValue: 'w' }),
+      value: wed,
     },
     {
       id: '4',
-      value: useBreakpointValue({ desktopValue: 'thu', tabletValue: 'thu', mobileValue: 't' }),
+      value: thu,
     },
     {
       id: '5',
-      value: useBreakpointValue({ desktopValue: 'fri', tabletValue: 'fri', mobileValue: 'f' }),
+      value: fri,
     },
     {
       id: '6',
-      value: useBreakpointValue({ desktopValue: 'sut', tabletValue: 'sut', mobileValue: 's' }),
+      value: sat,
     },
     {
       id: '7',
-      value: useBreakpointValue({ desktopValue: 'sun', tabletValue: 'sun', mobileValue: 's' }),
+      value: sun,
     },
   ]
 
@@ -83,39 +79,11 @@ export const CalendarWeek = () => {
         ))}
       </WeekList>
     </WeekWrapper>
-    
-    // <WeekWrapper>
-    //   <WeekList>
-    //     <WeekItem>
-    //       <WeekDay>{mon}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{tue}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{wed}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{thu}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{fri}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{sut}</WeekDay>
-    //     </WeekItem>
-    //     <WeekItem>
-    //       <WeekDay>{sun}</WeekDay>
-    //     </WeekItem>
-    //   </WeekList>
-    // </WeekWrapper>
   )
 }
 
 const WeekWrapper = styled.div`
-  max-width: 100%;
-  /* max-height: 46px; */
-  /* padding: 0px 32px; */
+  width: 100%;
   ${getBreakpointsStyles({
     desktop: css`
       min-height: 46px;
@@ -139,10 +107,10 @@ const WeekList = styled.ul`
     padding: 0;
     margin: 0;
     list-style: none;
-    border: ${colors.calendarBorderDefault};
+    border: 1px solid ${colors.calendarBorder};
     border-radius: 8px;
-    background: ${colors.content}; !important
-    `}
+    background: ${colors.content};
+  `}
 `
 
 const WeekItem = styled.li`
