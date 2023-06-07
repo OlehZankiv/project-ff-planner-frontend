@@ -76,7 +76,18 @@ const DayCell = styled.div`
 
 const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
-    padding: 15px 32px 32px 32px;
+    /* padding: 15px 32px 32px 32px; */ /* попередні зміни */
+        ${getBreakpointsStyles({
+          desktop: css`
+            padding: 15px 32px 32px;
+          `,
+          tablet: css`
+            padding: 18px 32px 42px;
+          `,
+          mobile: css`
+            padding: 14px 20px 52px;
+          `,
+        })}
 
     table {
       border-radius: 8px;

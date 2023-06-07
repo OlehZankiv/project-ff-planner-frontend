@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CalendarWeek } from "./components/CalendarWeek"
+import { CalendarWeek } from './components/CalendarWeek'
 import { Calendar } from './components/Calendar'
 
 const CalendarPage = ({}) => {
