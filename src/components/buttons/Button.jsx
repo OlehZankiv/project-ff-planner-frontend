@@ -4,20 +4,27 @@ import { Text } from '../Text'
 
 export const Button = ({
   isDefaultShadow = false,
-  type = 'primary',
+  type,
+  variant = 'primary',
   fullWidth,
   title,
   onClick,
   leftIcon,
   rightIcon,
 }) => (
-  <Wrapper onClick={onClick} isDefaultShadow={isDefaultShadow} fullWidth={fullWidth} type={type}>
+  <Wrapper
+    onClick={onClick}
+    isDefaultShadow={isDefaultShadow}
+    fullWidth={fullWidth}
+    variant={variant}
+    type={type}
+  >
     {leftIcon}
     <Text
       type='h4'
       lineHeight={24}
       fontSize={18}
-      color={type === 'primary' ? 'white' : 'secondaryButtonText'}
+      color={variant === 'primary' ? 'white' : 'secondaryButtonText'}
     >
       {title}
     </Text>
@@ -26,15 +33,15 @@ export const Button = ({
 )
 
 const Wrapper = styled.button`
-  ${({ theme: { colors, shadows }, isDefaultShadow, fullWidth, type }) => css`
+  ${({ theme: { colors, shadows }, isDefaultShadow, variant, fullWidth }) => css`
     width: ${fullWidth ? '100%' : 'auto'};
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${type === 'primary' ? colors.primary : colors.secondary};
+    background-color: ${variant === 'primary' ? colors.primary : colors.secondary};
     box-shadow: ${isDefaultShadow
-      ? type === 'primary'
+      ? variant === 'primary'
         ? shadows.buttonShadow
         : shadows.secondButtonShadow
       : 'unset'};
@@ -47,14 +54,14 @@ const Wrapper = styled.button`
 
     &:hover,
     &:focus {
-      background-color: ${type === 'primary'
+      background-color: ${variant === 'primary'
         ? colors.primaryButtonHover
         : colors.secondaryButtonHover};
-      box-shadow: ${type === 'primary' ? shadows.buttonShadow : shadows.secondButtonShadow};
+      box-shadow: ${variant === 'primary' ? shadows.buttonShadow : shadows.secondButtonShadow};
     }
 
     &:active {
-      background-color: ${type === 'primary'
+      background-color: ${variant === 'primary'
         ? colors.primaryButtonActive
         : colors.secondaryButtonActive};
     }
