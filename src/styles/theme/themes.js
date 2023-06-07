@@ -11,7 +11,7 @@ const animation = {
 
 const shadows = {
   modalShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
-  btnShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
+  buttonShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
   hedingShadow: '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
   secondButtonShadow: '4px 2px 16px rgba(97, 97, 97, 0.1)',
 }

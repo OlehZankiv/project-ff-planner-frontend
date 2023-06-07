@@ -100,7 +100,7 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
           </div>
         </div>
         <Button
-          isDefaultShadow={true}
+          isDefaultShadow
           title={t('Log out')}
           onClick={handleLogOut}
           rightIcon={<LogOutIcon size={iconLogOutSize} />}
