@@ -57,7 +57,7 @@ export const MainLayout = () => {
             <HeaderWrap>
               <BurgerWrap>
                 <ButtonWrap onClick={() => setIsBurgerMenuOpen(true)}>
-                  <BurgerMenuIcon size={iconSize} color={theme.colors.burgerIcon} />{' '}
+                  <BurgerMenuIcon size={iconSize} color={theme.colors.icon} />{' '}
                 </ButtonWrap>
               </BurgerWrap>
               <DesktopTitleWrap>

@@ -1,9 +1,8 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-// import {
-//   useNavigate,
-// } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
+import { ROUTES } from '../navigation/routes'
 
 import {
   getBreakpointsStyles,
@@ -22,11 +21,13 @@ const tabs = [
     type: 'profile',
     text: 'My Account',
     Icon: UserCheckIcon,
+    route: '/profile',
   },
   {
     type: 'calendar',
     text: 'Calendar',
     Icon: CalendarCheckOutIcon,
+    route: ROUTES.CALENDAR,
   },
 ]
 
@@ -45,9 +46,10 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
     }
   }
 
-  const handleChangeTab = (type) => {
+  const handleChangeTab = (type, route) => {
     setSelectedTab(type)
-    // navigate(`/${type}`)
+    console.log(route)
+    // navigate(`${route}`)
   }
 
   const handleLogOut = () => {}
@@ -65,7 +67,7 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
             <AppLogo orientation='horezontal' />
             <OpacityButton>
               <CloseIconWrap onClick={() => setIsBurgerMenuOpen(false)}>
-                <CloseIcon size={iconClozeSize} color={theme.colors.defaultIcon} />
+                <CloseIcon size={iconClozeSize} color={theme.colors.icon} />
               </CloseIconWrap>
             </OpacityButton>
           </TopBox>
@@ -74,27 +76,30 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
               {t('User Panel')}
             </Text>
             <TabsWrap>
-              {tabs.map(({ type, Icon, text }) => (
-                <NavButton
-                  key={type}
-                  selected={selectedTab === type}
-                  theme={theme}
-                  onClick={() => handleChangeTab(type)}
-                >
-                  <Icon
-                    size={iconCheckSize}
-                    color={
-                      selectedTab === type ? theme.colors.selectedIcon : theme.colors.defaultIcon
-                    }
-                  />
-                  <Text
-                    type='p'
-                    fontWeight={600}
-                    color={`${selectedTab === type ? 'tabTextSelected' : 'tabText'}`}
+              {tabs.map(({ type, Icon, text, route }) => (
+                <OpacityButton key={type} style={{ width: '100%' }}>
+                  <NavButton
+                    selected={selectedTab === type}
+                    theme={theme}
+                    onClick={() => handleChangeTab(type, route)}
                   >
-                    {t(text)}
-                  </Text>
-                </NavButton>
+                    <Icon
+                      size={iconCheckSize}
+                      color={
+                        selectedTab === type
+                          ? theme.colors.tabContentSelected
+                          : theme.colors.tabContent
+                      }
+                    />
+                    <Text
+                      type='p'
+                      fontWeight={600}
+                      color={`${selectedTab === type ? 'tabContentSelected' : 'tabContent'}`}
+                    >
+                      {t(text)}
+                    </Text>
+                  </NavButton>
+                </OpacityButton>
               ))}
             </TabsWrap>
           </div>
@@ -128,7 +133,7 @@ const SidebarOverlay = styled.div`
     `}
     transition: opacity ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier},
         visibility ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier};
-    background-color: ${theme.colors.overlay};
+    background-color: ${theme.colors.sideBarOverlay};
     ${getDesktopStyles(
       css`
         position: static;
@@ -196,12 +201,16 @@ const CloseIconWrap = styled.div`
 `
 
 const NavButton = styled.button`
-  display: flex;
-  padding: 20px 16px;
-  background: transparent;
-  border-radius: 8px;
-  border: none;
-  ${({ selected, theme }) => selected && `background: ${theme.colors.tabButtonActive}`}
+  ${({ selected, theme }) => css`
+    display: flex;
+    padding: 20px 16px;
+    background: transparent;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    ${selected && `background: ${theme.colors.tabButtonActive};`}
+    transition: background ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier};
+  `}
 `
 
 const TabsWrap = styled.div`
