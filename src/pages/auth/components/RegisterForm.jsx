@@ -32,14 +32,16 @@ export const RegisterForm = () => {
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
           <Text
-            style={{ marginBottom: '32px' }}
+            style={{ marginBottom: '40px' }}
             type='h5'
             color='primary'
             fontWeight='600'
+            fontSize={24}
             lineHeight={24}
-            tabletStyles={css`
-              margin-bottom: 40px;
-              font-size: 24px;
+            mobileStyles={css`
+              margin-bottom: 32px;
+              font-size: 18px;
+              line-height: 24px;
             `}
           >
             {t('Sign up')}
