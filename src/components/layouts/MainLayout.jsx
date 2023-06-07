@@ -11,10 +11,10 @@ import {
   getBreakpointsStyles,
   getDesktopStyles,
 } from '../../styles/breakpoints'
-import { PrimaryColorBtn } from '../PrimaryColorBtn'
 import { Text } from '../Text'
-import { OpacityButton } from '../OpacityButton'
+import { OpacityButton } from '../buttons/OpacityButton'
 import { Loader } from '../Loader'
+import { Button } from '../buttons/Button'
 
 export const MainLayout = () => {
   const { t } = useTranslation()
@@ -75,9 +75,7 @@ export const MainLayout = () => {
                 </Text>
               </DesktopTitleWrap>
               <TabWrap>
-                {selectedTab === 'calendar' && (
-                  <PrimaryColorBtn theme={themeType}>{t('Feedback')}</PrimaryColorBtn>
-                )}
+                {selectedTab === 'calendar' && <Button title={t('Feedback')} onClick={() => {}} />}
                 <InfoWrap>
                   <OpacityButton>
                     <ButtonWrap onClick={handleThemeChange}>
@@ -97,7 +95,17 @@ export const MainLayout = () => {
                   >
                     {userName}
                   </Text>
-                  <AvatarWrap theme={theme}>{firstLetersMaker(userName)}</AvatarWrap>
+                  <AvatarWrap theme={theme}>
+                    <Text
+                      type='p'
+                      color={theme.colors.userNameText}
+                      fontWeight={700}
+                      lineHeight={1.29}
+                      fontSize={nameFontSize}
+                    >
+                      {firstLetersMaker(userName)}
+                    </Text>
+                  </AvatarWrap>
                 </InfoWrap>
               </TabWrap>
             </HeaderWrap>
