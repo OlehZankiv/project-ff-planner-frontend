@@ -108,7 +108,7 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
           isDefaultShadow
           title={t('Log out')}
           onClick={handleLogOut}
-          rightIcon={<LogOutIcon size={iconLogOutSize} />}
+          rightIcon={<LogOutIcon size={iconLogOutSize} color={theme.colors.white} />}
         />
       </SidebarWrap>
     </SidebarOverlay>
