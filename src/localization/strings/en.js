@@ -7,5 +7,6 @@ export const en = {
   "Feedback": "Feedback",
   "User Profile": "User Profile",
   "Let go of the past and focus on the present!": "Let go of the past and focus on the present!",
+  "Cancel": "Cancel",
   "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.": "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.",
 }

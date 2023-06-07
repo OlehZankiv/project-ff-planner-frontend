@@ -1,9 +1,7 @@
 import { api } from './api'
 
-// TODO: Update it when BE will provide endpoints
+export const login = (params) => api.post('users/login', params)
 
-export const login = ({ email, password }) => api.post('login', { email, password })
+export const register = (params) => api.post('users/register', params)
 
-export const logout = () => api.post('logout')
-
-export const register = () => api.post('register')
+export const logout = () => api.post('users/logout')

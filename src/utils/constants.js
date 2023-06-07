@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://www.database.com/'
+export const BASE_URL = 'https://ff-planner.onrender.com/api/'
