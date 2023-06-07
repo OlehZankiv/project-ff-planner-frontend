@@ -94,16 +94,18 @@ export const MainLayout = () => {
                   >
                     {userName}
                   </Text>
-                  <AvatarWrap theme={theme}>
-                    <Text
-                      type='p'
-                      color={theme.colors.userNameText}
-                      fontWeight={700}
-                      fontSize={nameFontSize}
-                    >
-                      {firstLetersMaker(userName)}
-                    </Text>
-                  </AvatarWrap>
+                  <OpacityButton>
+                    <AvatarWrap theme={theme} onClick={() => setSelectedTab('profile')}>
+                      <Text
+                        type='p'
+                        color={theme.colors.userNameText}
+                        fontWeight={700}
+                        fontSize={nameFontSize}
+                      >
+                        {firstLetersMaker(userName)}
+                      </Text>
+                    </AvatarWrap>
+                  </OpacityButton>
                 </InfoWrap>
               </TabWrap>
             </HeaderWrap>
