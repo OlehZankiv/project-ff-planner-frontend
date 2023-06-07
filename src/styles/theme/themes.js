@@ -54,6 +54,7 @@ export const lightTheme = themeCreator({
     modalOverlay: '#13151A',
   },
   shadows,
+  animation,
 })
 
 export const darkTheme = themeCreator({
@@ -94,4 +95,5 @@ export const darkTheme = themeCreator({
     modalOverlay: '#3f3f3f',
   },
   shadows,
+  animation,
 })
