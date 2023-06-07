@@ -5,7 +5,7 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../styles/breakpoints.js'
-import { Modal } from '../components'
+import { Modal, Textarea } from '../components'
 import { useState } from 'react'
 // import { useTranslation } from 'react-i18next'
 import { StarIcon } from '../assets/icons'
@@ -67,10 +67,7 @@ const FeedbackModal = ({}) => {
                 )
               })}
             </div>
-            <label htmlFor='feedback' style={styles.label}>
-              Review
-            </label>
-            <textarea type='text' id='feedback' style={styles.textarea} placeholder='Enter text' />
+            <Textarea label={'Review'} placeholder={'Enter text'}/>
             <button type='submit' onClick={feedbackSubmit} style={styles.button}>
               Save
             </button>
