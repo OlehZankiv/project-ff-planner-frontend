@@ -114,9 +114,11 @@ const SidebarOverlay = styled.div`
     pointer-events: none;
     visibility: hidden;
     ${isBurgerMenuOpen &&
-    `opacity: 1;
-    visibility: visible;
-    pointer-events: all;`}
+    css`
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    `}
     transition: opacity ${theme.animation.duration} ${theme.animation.cubicBezier},
         visibility ${theme.animation.duration} ${theme.animation.cubicBezier};
     background-color: ${theme.colors.overlay};
