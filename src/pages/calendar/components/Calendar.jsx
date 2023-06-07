@@ -1,15 +1,12 @@
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { useAppThemeContext } from '../../../styles/theme/provider'
 import { useDimensions } from '../../../hooks'
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
-  const { setThemeType } = useAppThemeContext()
   const { height, width } = useDimensions()
-  setThemeType('dark')
 
   return (
     <CalendarWrapper>
