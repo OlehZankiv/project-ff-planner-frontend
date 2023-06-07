@@ -37,7 +37,10 @@ export const ImageAvatar = styled.img`
       width: 124px;
       height: 124px;
     `,
-    desktop: css``,
+    desktop: css`
+      width: 124px;
+      height: 124px;
+    `,
   })}
 `
 export const BackgroundSvg = styled.a`
@@ -55,7 +58,11 @@ export const BackgroundSvg = styled.a`
       height: 24px;
       translate: -50px 144px;
     `,
-    desktop: css``,
+    desktop: css`
+      width: 24px;
+      height: 24px;
+      translate: -50px 68px;
+    `,
   })}
 `
 export const AddSvg = styled.svg`
@@ -67,7 +74,10 @@ export const AddSvg = styled.svg`
       width: 24px;
       height: 24px;
     `,
-    desktop: css``,
+    desktop: css`
+      width: 24px;
+      height: 24px;
+    `,
   })}
 `
 export const NameText = styled.p`
