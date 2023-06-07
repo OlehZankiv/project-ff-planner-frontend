@@ -1,0 +1,10 @@
+export { default as imageFirst } from './imageFirst.png'
+export { default as imageFirst_2X } from './imageFirst_2X.png'
+export { default as imageFirst_3X } from './imageFirst_3X.png'
+export { default as imageSecond } from './imageSecond.png'
+export { default as imageSecond_2X } from './imageSecond_2X.png'
+export { default as imageSecond_3X } from './imageSecond_3X.png'
+export { default as imageThird } from './imageThird.png'
+export { default as imageThird_2X } from './imageThird_2X.png'
+export { default as imageThird_3X } from './imageThird_3X.png'
+

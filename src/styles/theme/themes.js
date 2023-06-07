@@ -31,6 +31,7 @@ export const lightTheme = themeCreator({
     secondaryButtonText: '#343434',
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
+    linkHover: '#7aaff3',
   },
   shadows,
 })
@@ -57,6 +58,7 @@ export const darkTheme = themeCreator({
     secondaryButtonText: '#FFFFFF',
     modalBackground: '#171820',
     modalOverlay: '#3f3f3f',
+    linkHover: '#7aaff3',
   },
   shadows,
 })

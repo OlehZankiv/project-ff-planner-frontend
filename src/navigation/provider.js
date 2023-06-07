@@ -14,7 +14,7 @@ export const AppRouterProvider = () => (
         {/* TODO: Add additional pages here */}
 
         <Route
-          path={ROUTES.MAINPAGE}
+          path={ROUTES.LANDING}
           element={
             <Suspense fallback={<Loader />}>
               <Landing />
