@@ -40,16 +40,32 @@ export const ImageAvatar = styled.img`
     desktop: css``,
   })}
 `
-export const AddSvg = styled.svg`
+export const BackgroundSvg = styled.a`
+  background-color: #3e85f3;
   width: 14px;
   height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   translate: -30px 22px;
-
   ${getBreakpointsStyles({
     tablet: css`
       width: 24px;
       height: 24px;
       translate: -50px 144px;
+    `,
+    desktop: css``,
+  })}
+`
+export const AddSvg = styled.svg`
+  width: 14px;
+  height: 14px;
+
+  ${getBreakpointsStyles({
+    tablet: css`
+      width: 24px;
+      height: 24px;
     `,
     desktop: css``,
   })}
@@ -118,70 +134,7 @@ export const InputWrapper = styled.div`
     `,
   })}
 `
-export const Input = styled.input`
-  width: 100%;
-  height: 42px;
-  border: 1px solid rgba(17, 17, 17, 0.1);
-  border-radius: 8px;
-  padding-left: 14px;
-  margin-bottom: 18px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.29;
-  color: #343434;
-  margin-top: 8px;
-  &:focus {
-    outline: none;
-    border-color: black;
-  }
-  &.error {
-    border-color: red;
-  }
-  &.success {
-    border-color: green;
-  }
-  &::-webkit-calendar-picker-indicator {
-    color: rgba(0, 0, 0, 0);
-    opacity: 1;
-    display: block;
-    background: url('./chevron-down.svg') no-repeat;
-    background-color: red;
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border-width: thin;
-  }
 
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 16px;
-      line-height: 1.13;
-    `,
-    desktop: css`
-      width: 354px;
-    `,
-  })}
-`
-export const InputLabel = styled.label`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.17;
-  color: #343434;
-  text-align: center;
-  margin-left: 5px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 14px;
-      line-height: 1.29;
-    `,
-    desktop: css``,
-  })}
-`
 export const UserButton = styled.button`
   width: 195px;
   height: 46px;

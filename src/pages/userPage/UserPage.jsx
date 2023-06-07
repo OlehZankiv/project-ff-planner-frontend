@@ -13,12 +13,12 @@ import {
   DivForm,
   InputWrapper,
   UserButton,
+  BackgroundSvg,
 } from './UserPage.styled'
 import { Input } from '../../components/fields/Input'
 import styled from 'styled-components'
 import { AddIcon } from '../../assets/icons/AddIcon'
 import InputStatus from '../../components/InputStatus'
-import { getInputClassName } from './helpers'
 
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -44,7 +44,9 @@ const UserPage = () => {
       <UserWrapper>
         <ImageWrapper>
           <ImageAvatar src='https://img.spacergif.org/v1/spacer.gif'></ImageAvatar>
-          <AddIcon></AddIcon>
+          <BackgroundSvg>
+            <AddIcon></AddIcon>
+          </BackgroundSvg>
         </ImageWrapper>
         <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
@@ -82,7 +84,6 @@ const UserPage = () => {
                       placeholder='Enter your name'
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={getInputClassName(errors.username, touched.username)}
                     ></Input>
                     <InputStatus error={errors.username} touched={touched.username} />
                   </InputWrapper>
@@ -98,7 +99,6 @@ const UserPage = () => {
                       value={values.birthday}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={getInputClassName(errors.birthday, touched.birthday)}
                     />
 
                     <InputStatus error={errors.birthday} touched={touched.birthday} />
@@ -115,7 +115,6 @@ const UserPage = () => {
                       successMessage={'This is Correct email'}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={getInputClassName(errors.email, touched.email)}
                     />
                     <InputStatus error={errors.email} touched={touched.email} />
                   </InputWrapper>
@@ -131,7 +130,6 @@ const UserPage = () => {
                       successMessage={'This is Correct phone'}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={getInputClassName(errors.phone, touched.phone)}
                     />
                     <InputStatus error={errors.phone} touched={touched.phone} />
                   </InputWrapper>
@@ -147,7 +145,6 @@ const UserPage = () => {
                       successMessage={'This is Correct phone'}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={getInputClassName(errors.skype, touched.skype)}
                     />
                     <InputStatus error={errors.skype} touched={touched.skype} />
                   </InputWrapper>
