@@ -7,7 +7,7 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../../styles/breakpoints'
-import { Modal, Text } from '../../components'
+import { Modal, Text} from '../../components' 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -33,7 +33,7 @@ const LoginPage = ({}) => {
       >
         <Text type='p'>
           {t(
-            "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.",
+            'GooseTracks Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.',
           )}
         </Text>
       </Modal>

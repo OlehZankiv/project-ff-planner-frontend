@@ -11,6 +11,8 @@ export const lightTheme = themeCreator({
   colors: {
     background: '#ffffff',
     text: '#111111',
+    white: '#FFFFFF',
+    blue: '#3E85F3',
 
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
