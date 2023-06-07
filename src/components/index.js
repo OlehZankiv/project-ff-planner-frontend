@@ -1,7 +1,6 @@
 export * from './layouts/'
 export { Loader } from './Loader'
 export { Modal } from './Modal'
-export { OpacityButton } from './OpacityButton'
 export { Text } from './Text'
 export { AppLogo } from './AppLogo'
 export { generateSrcConfig, Image } from './Image'
