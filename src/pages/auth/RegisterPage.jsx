@@ -1,6 +1,6 @@
-import { RegisterForm } from '../components/RegisterForm/RegisterForm'
-import { gooseTrackImage, gooseTrackImage2x } from '../../../assets/images'
-import { GooseImage } from '../../auth/components/GooseImage'
+import { RegisterForm } from './components/RegisterForm'
+import { gooseTrackImage, gooseTrackImage2x } from '../../assets/images'
+import { GooseImage } from './components/GooseImage'
 import { Wrapper } from './Wrapper.styled'
 
 const RegisterPage = ({}) => {

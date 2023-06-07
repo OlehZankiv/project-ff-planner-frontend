@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Field, Form } from 'formik'
-import { getBreakpointsStyles } from '../../../../styles/breakpoints'
+import { getBreakpointsStyles } from '../../../styles/breakpoints'
 
 export const Title = styled.h1`
   ${({ theme: { colors, shadows } }) => css`
@@ -29,6 +29,7 @@ export const FormStyled = styled(Form)`
     display: flex;
     flex-direction: column;
     position: absolute;
+    width: 335px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%);
@@ -39,9 +40,11 @@ export const FormStyled = styled(Form)`
     ${getBreakpointsStyles({
       desktop: css`
         padding: 40px;
+        width: 480px;
       `,
       tablet: css`
         padding: 40px;
+        width: 480px;
       `,
     })}
   `}

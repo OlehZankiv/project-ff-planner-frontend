@@ -14,4 +14,7 @@ export const en = {
   "Enter your name": "Enter your name",
   "Enter email": "Enter email",
   "Enter password": "Enter password",
+  "This is a CORRECT email": "This is a CORRECT email",
+  "This is a CORRECT password": "This is a CORRECT password",
+  "Well done": "Well done",
 }

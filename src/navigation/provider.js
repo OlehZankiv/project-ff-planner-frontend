@@ -3,8 +3,8 @@ import { ROUTES } from './routes'
 import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 
-const LoginPage = lazy(() => import('../pages/auth/login/LoginPage'))
-const RegisterPage = lazy(() => import('../pages/auth/register/RegisterPage'))
+const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
+const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
 
 export const AppRouterProvider = () => (

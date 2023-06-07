@@ -19,6 +19,9 @@ export const lightTheme = themeCreator({
     hoverPrimary: '#2b78ef',
     textRed: '#da1414',
     border: 'rgba(220, 227, 229, 0.6)',
+    error: '#E74A3B',
+    success: '#3CBC81',
+    white: '#ffffff',
 
     calendarBorder: '#E3E9EA',
     inputBorderDefault: '#DBDBDB',
