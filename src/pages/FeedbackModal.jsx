@@ -8,13 +8,12 @@ import {
 import { Modal } from '../components'
 import { useState } from 'react'
 // import { useTranslation } from 'react-i18next'
-import { FaStar } from 'react-icons/fa'
-// import { PencilIcon } from '../assets/icons'
+import { StarIcon } from '../assets/icons'
 
-const colors = {
-  orange: 'FFAC33',
-  grey: 'CEC9C1',
-}
+// const colors = {
+//   orange: 'FFAC33',
+//   grey: 'CEC9C1',
+// }
 
 const FeedbackModal = ({}) => {
   //    const { t } = useTranslation()
@@ -31,15 +30,6 @@ const FeedbackModal = ({}) => {
 
   const stars = Array(5).fill(0)
 
-  const handleRatingClick = (value) => {
-    setRatingValue(value)
-  }
-  const handleRatingMouseOver = (value) => {
-    setRatingHoverValue(value)
-  }
-  const handleRatingMouseLeave = () => {
-    setRatingHoverValue(undefined)
-  }
   const feedbackSubmit = () => {
     console.log('save button clicked')
   }
@@ -65,14 +55,14 @@ const FeedbackModal = ({}) => {
             <div id='rating' style={styles.rating}>
               {stars.map((_, index) => {
                 return (
-                  <FaStar
-                    key={index}
-                    size={24}
-                    style={{ cursor: 'pointer', padding: '1px' }}
-                    color={(ratingValue || ratingHoverValue) > index ? colors.orange : colors.grey}
-                    onClick={() => handleRatingClick(index + 1)}
-                    onMouseOver={() => handleRatingMouseOver(index + 1)}
-                    onMouseLeave={handleRatingMouseLeave}
+                  <StarIcon
+                    key={index}       
+                    size={24}             
+                    style={{ cursor: 'pointer', marginRight: '2px' }}
+                    color={(ratingValue || ratingHoverValue) > index ? '#FFAC33' : '#CEC9C1'}
+                    onClick={() => setRatingValue(() => index + 1)}
+                    onMouseOver={() => setRatingHoverValue(() => index + 1)}
+                    onMouseLeave={() => setRatingHoverValue(() => undefined)}
                   />
                 )
               })}
@@ -95,7 +85,7 @@ const FeedbackModal = ({}) => {
                   <p style={styles.p}>Nadiia Doe</p>
                   <div style={styles.feedback_rating}>
                     {stars.map((_, index) => {
-                      return <FaStar key={index} size={14} style={{ marginRight: 10 }} />
+                      return <StarIcon key={index} size={14} style={{ marginRight: 10 }} color={'#CEC9C1'}/>
                     })}
                   </div>
                   <div>{tempFeedback1}</div>
@@ -109,7 +99,7 @@ const FeedbackModal = ({}) => {
                   <p style={styles.p}>Nadiia Doe</p>
                   <div style={styles.feedback_rating}>
                     {stars.map((_, index) => {
-                      return <FaStar key={index} size={14} style={{ marginRight: 10 }} />
+                      return <StarIcon key={index} size={14} style={{ marginRight: 10 }} color={'#CEC9C1'} />
                     })}
                   </div>
                   <div>{tempFeedback2}</div>
