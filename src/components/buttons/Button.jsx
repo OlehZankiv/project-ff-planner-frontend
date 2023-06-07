@@ -11,8 +11,10 @@ export const Button = ({
   onClick,
   leftIcon,
   rightIcon,
+  style,
 }) => (
   <Wrapper
+    style={style}
     onClick={onClick}
     isDefaultShadow={isDefaultShadow}
     fullWidth={fullWidth}

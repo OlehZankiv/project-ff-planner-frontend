@@ -13,6 +13,7 @@ export const Input = ({
   successMessage,
   rightIcon,
   isError,
+  style,
 }) => {
   const { colors } = useTheme()
 
@@ -42,7 +43,7 @@ export const Input = ({
     )
 
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       {!!title && (
         <Text type='h4' fontWeight={400} color={inputColor}>
           {title}
