@@ -119,8 +119,8 @@ const SidebarOverlay = styled.div`
       visibility: visible;
       pointer-events: all;
     `}
-    transition: opacity ${theme.animation.duration} ${theme.animation.cubicBezier},
-        visibility ${theme.animation.duration} ${theme.animation.cubicBezier};
+    transition: opacity ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier},
+        visibility ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier};
     background-color: ${theme.colors.overlay};
     ${getDesktopStyles(
       css`
@@ -138,7 +138,7 @@ const SidebarWrap = styled.div`
   ${({ isBurgerMenuOpen, theme }) => css`
     transform: translateX(-100%);
     ${isBurgerMenuOpen && 'transform: translateX(0);'}
-    transition: transform ${theme.animation.duration} ${theme.animation.cubicBezier};
+    transition: transform ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier};
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -5,8 +5,8 @@ const themeCreator = ({ colors, shadows }) => ({
 })
 
 const animation = {
-  duration: '250ms',
-  cubicBezier: 'linear',
+  sideBarDuration: '250ms',
+  sideBarCubicBezier: 'linear',
 }
 
 const shadows = {
