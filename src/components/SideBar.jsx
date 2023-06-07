@@ -5,7 +5,12 @@ import { useTranslation } from 'react-i18next'
 // } from 'react-router-dom'
 import { useRef } from 'react'
 
-import { getBreakpointsStyles, getDesktopStyles, useBreakpointValue } from '../styles/breakpoints'
+import {
+  getBreakpointsStyles,
+  getDesktopStyles,
+  getTabletStyles,
+  useBreakpointValue,
+} from '../styles/breakpoints'
 import { CloseIcon, UserCheckIcon, CalendarCheckOutIcon, LogOutIcon } from '../assets/icons'
 import { AppLogo } from './AppLogo'
 import { OpacityButton } from './buttons/OpacityButton'
@@ -65,7 +70,9 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
             </OpacityButton>
           </TopBox>
           <div style={{ width: '100%' }}>
-            <SidebarTitle theme={theme}>{t('User Panel')}</SidebarTitle>
+            <Text type='p' fontWeight={600} color={'sidebarTitle'}>
+              {t('User Panel')}
+            </Text>
             <TabsWrap>
               {tabs.map(({ type, Icon, text }) => (
                 <NavButton
@@ -175,25 +182,6 @@ const TopBox = styled.div`
   })}
 `
 
-const SidebarTitle = styled.h1`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 1.39;
-  color: ${({ theme }) => theme.colors.sidebarTitle};
-  margin-bottom: 24px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 14px;
-      margin-bottom: 32px;
-    `,
-    desktop: css`
-      font-size: 14px;
-    `,
-  })}
-`
-
 const CloseIconWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -213,11 +201,17 @@ const NavButton = styled.button`
   background: transparent;
   border-radius: 8px;
   border: none;
-  ${({ selected, theme }) => selected && `background: ${theme.colors.tabButtotActive}`}
+  ${({ selected, theme }) => selected && `background: ${theme.colors.tabButtonActive}`}
 `
 
 const TabsWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
+  margin-top: 24px;
+  ${getTabletStyles({
+    tablet: css`
+      margin-top: 32px;
+    `,
+  })}
 `

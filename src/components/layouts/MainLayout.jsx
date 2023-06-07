@@ -90,7 +90,6 @@ export const MainLayout = () => {
                     type='p'
                     color={theme.colors.userNameText}
                     fontWeight={700}
-                    lineHeight={1.29}
                     fontSize={nameFontSize}
                   >
                     {userName}
@@ -100,7 +99,6 @@ export const MainLayout = () => {
                       type='p'
                       color={theme.colors.userNameText}
                       fontWeight={700}
-                      lineHeight={1.29}
                       fontSize={nameFontSize}
                     >
                       {firstLetersMaker(userName)}
@@ -124,7 +122,7 @@ export const MainLayout = () => {
 const MainWrap = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.mainBacground};
+  background-color: ${({ theme }) => theme.colors.mainBackground};
   display: flex;
 `
 

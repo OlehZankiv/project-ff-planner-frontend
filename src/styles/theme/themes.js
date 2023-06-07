@@ -17,7 +17,7 @@ const shadows = {
 
 export const lightTheme = themeCreator({
   colors: {
-    mainBacground: 'rgba(247, 246, 249, 1)',
+    mainBackground: 'rgba(247, 246, 249, 1)',
     background: '#ffffff',
     text: '#111111',
     userNameText: '#34343',
@@ -27,7 +27,7 @@ export const lightTheme = themeCreator({
     selectedIcon: '#3e85f3',
     overlay: 'rgba(231, 236, 252, 0.671)',
     sidebarTitle: ' rgba(52, 52, 52, 0.5)',
-    tabButtotActive: '#E3F3FF',
+    tabButtonActive: '#E3F3FF',
     tabText: ' rgba(52, 52, 52, 0.5)',
     tabTextSelected: '#3e85f3',
     burgerIcon: ' rgba(52, 52, 52, 1)',
@@ -40,7 +40,7 @@ export const lightTheme = themeCreator({
 
 export const darkTheme = themeCreator({
   colors: {
-    mainBacground: 'rgba(23, 24, 32, 1)',
+    mainBackground: 'rgba(23, 24, 32, 1)',
     background: '#13151A',
     text: '#ffffff',
     userNameText: '#ffffff',
@@ -50,7 +50,7 @@ export const darkTheme = themeCreator({
     selectedIcon: '#ffffff',
     overlay: '#28282a79',
     sidebarTitle: 'rgba(250, 250, 250, 0.3)',
-    tabButtotActive: '#3e85f3',
+    tabButtonActive: '#3e85f3',
     tabText: '#ffffff',
     tabTextSelected: '#ffffff',
     burgerIcon: '#ffffff',
