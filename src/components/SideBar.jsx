@@ -8,9 +8,22 @@ import { useRef } from 'react'
 import { getBreakpointsStyles, getDesktopStyles, useBreakpointValue } from '../styles/breakpoints'
 import { CloseIcon, UserCheckIcon, CalendarCheckOutIcon, LogOutIcon } from '../assets/icons'
 import { AppLogo } from './AppLogo'
-import { OpacityButton } from './OpacityButton'
-import { PrimaryColorBtn } from './PrimaryColorBtn'
+import { OpacityButton } from './buttons/OpacityButton'
+import { Button } from './buttons/Button'
 import { Text } from './Text'
+
+const tabs = [
+  {
+    type: 'profile',
+    text: 'My Account',
+    Icon: UserCheckIcon,
+  },
+  {
+    type: 'calendar',
+    text: 'Calendar',
+    Icon: CalendarCheckOutIcon,
+  },
+]
 
 export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, setSelectedTab }) => {
   // const navigate = useNavigate()
@@ -32,6 +45,8 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
     // navigate(`/${type}`)
   }
 
+  const handleLogOut = () => {}
+
   return (
     <SidebarOverlay
       theme={theme}
@@ -52,54 +67,37 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
           <div style={{ width: '100%' }}>
             <SidebarTitle theme={theme}>{t('User Panel')}</SidebarTitle>
             <TabsWrap>
-              <NavButton
-                selected={selectedTab === 'profile'}
-                theme={theme}
-                onClick={() => handleChangeTab('profile')}
-              >
-                <UserCheckIcon
-                  size={iconCheckSize}
-                  color={
-                    selectedTab === 'profile' ? theme.colors.selectedIcon : theme.colors.defaultIcon
-                  }
-                />
-                <Text
-                  type='p'
-                  fontWeight={600}
-                  color={`${selectedTab === 'profile' ? 'tabTextSelected' : 'tabText'}`}
+              {tabs.map(({ type, Icon, text }) => (
+                <NavButton
+                  key={type}
+                  selected={selectedTab === type}
+                  theme={theme}
+                  onClick={() => handleChangeTab(type)}
                 >
-                  {t('My Account')}
-                </Text>
-              </NavButton>
-              <NavButton
-                theme={theme}
-                selected={selectedTab === 'calendar'}
-                onClick={() => handleChangeTab('calendar')}
-              >
-                <CalendarCheckOutIcon
-                  size={iconCheckSize}
-                  color={
-                    selectedTab === 'calendar'
-                      ? theme.colors.selectedIcon
-                      : theme.colors.defaultIcon
-                  }
-                />
-                <Text
-                  type='p'
-                  fontWeight={600}
-                  color={`${selectedTab === 'calendar' ? 'tabTextSelected' : 'tabText'}`}
-                >
-                  {' '}
-                  {t('Calendar')}
-                </Text>
-              </NavButton>
+                  <Icon
+                    size={iconCheckSize}
+                    color={
+                      selectedTab === type ? theme.colors.selectedIcon : theme.colors.defaultIcon
+                    }
+                  />
+                  <Text
+                    type='p'
+                    fontWeight={600}
+                    color={`${selectedTab === type ? 'tabTextSelected' : 'tabText'}`}
+                  >
+                    {t(text)}
+                  </Text>
+                </NavButton>
+              ))}
             </TabsWrap>
           </div>
         </div>
-        <PrimaryColorBtn isDefaultShadow={true} theme={theme}>
-          {t('Log out')}
-          <LogOutIcon size={iconLogOutSize} />
-        </PrimaryColorBtn>
+        <Button
+          isDefaultShadow={true}
+          title={t('Log out')}
+          onClick={handleLogOut}
+          rightIcon={<LogOutIcon size={iconLogOutSize} />}
+        />
       </SidebarWrap>
     </SidebarOverlay>
   )
