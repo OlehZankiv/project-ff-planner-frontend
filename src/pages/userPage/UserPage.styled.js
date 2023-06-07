@@ -15,71 +15,7 @@ export const UserWrapper = styled.div`
     desktop: css``,
   })}
 `
-export const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`
 
-export const ImageAvatar = styled.img`
-  border-radius: 50%;
-  margin-top: -40px;
-  margin-bottom: -60px;
-  width: 72px;
-  height: 72px;
-  background-color: gray;
-  border: 2px solid #3e85f3;
-  margin-bottom: 14px;
-
-  ${getBreakpointsStyles({
-    tablet: css`
-      margin-top: 40px;
-      margin-bottom: 14px;
-      width: 124px;
-      height: 124px;
-    `,
-    desktop: css`
-      width: 124px;
-      height: 124px;
-    `,
-  })}
-`
-export const BackgroundSvg = styled.a`
-  background-color: #3e85f3;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  translate: -30px 22px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 24px;
-      height: 24px;
-      translate: -50px 144px;
-    `,
-    desktop: css`
-      width: 24px;
-      height: 24px;
-      translate: -50px 68px;
-    `,
-  })}
-`
-export const AddSvg = styled.svg`
-  width: 14px;
-  height: 14px;
-
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 24px;
-      height: 24px;
-    `,
-    desktop: css`
-      width: 24px;
-      height: 24px;
-    `,
-  })}
-`
 export const NameText = styled.p`
   font-family: 'Inter';
   font-style: normal;

@@ -2,22 +2,18 @@ import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 // import { CalendarIcon } from '../../assets/icons/CalendarIcon'
-// import { DisplayFormikState } from '../../components/DisplayFormikState'
+import styled from 'styled-components'
 import {
   UserWrapper,
-  ImageAvatar,
-  ImageWrapper,
   NameText,
   UserText,
   UserForm,
   DivForm,
   InputWrapper,
   UserButton,
-  BackgroundSvg,
 } from './UserPage.styled'
 import { Input } from '../../components/fields/Input'
-import styled from 'styled-components'
-import { AddIcon } from '../../assets/icons/AddIcon'
+import Avatar from '../../components/avatar/Avatar'
 import InputStatus from '../../components/InputStatus'
 
 const UserPage = () => {
@@ -42,12 +38,12 @@ const UserPage = () => {
   return (
     <Wrapper>
       <UserWrapper>
-        <ImageWrapper>
-          <ImageAvatar src='https://img.spacergif.org/v1/spacer.gif'></ImageAvatar>
-          <BackgroundSvg>
-            <AddIcon></AddIcon>
-          </BackgroundSvg>
-        </ImageWrapper>
+        <Avatar
+          size='avatar'
+          image={'https://img.spacergif.org/v1/spacer.gif'}
+          plus={true}
+          styles={styles}
+        ></Avatar>
         <NameText>Fine Goose</NameText>
         <UserText>User</UserText>
         <Formik
@@ -176,6 +172,21 @@ export default UserPage
 //     background-color: #1a2250;
 //   `,
 // }
+
+const styles = {
+  desktop: `
+    margin-top: 40px;
+
+  `,
+  tablet: `          
+    margin-top: -40px;
+    margin-bottom: 14px;
+  `,
+  mobile: `
+    margin-top: -40px;
+    margin-bottom: 14px;
+  `,
+}
 
 const Wrapper = styled.div`
   width: 100%;
