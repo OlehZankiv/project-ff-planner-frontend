@@ -5,7 +5,7 @@ import {
   GooseLogoText,
   GooseLogoText_2X,
   GooseLogoText_3X,
-} from '../assets/images'
+} from '../assets/images/logo'
 import { generateSrcConfig, Image } from './Image'
 import styled, { css } from 'styled-components'
 import { useAppThemeContext } from '../styles/theme/provider'

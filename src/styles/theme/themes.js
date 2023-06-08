@@ -14,6 +14,7 @@ const shadows = {
   buttonShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
   hedingShadow: '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
   secondButtonShadow: '4px 2px 16px rgba(97, 97, 97, 0.1)',
+  titleShadow: '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
 }
 
 export const lightTheme = themeCreator({
@@ -30,6 +31,8 @@ export const lightTheme = themeCreator({
 
     mainBackground: '#F7F6F9',
     background: '#ffffff',
+    secondaryBackground: '#dcebf7',
+
 
     userNameText: '#34343',
     sideBarOverlay: '#e7ecfc79',
@@ -71,6 +74,7 @@ export const darkTheme = themeCreator({
 
     mainBackground: '#171820',
     background: '#13151A',
+    secondaryBackground: '#dcebf7',
 
     userNameText: '#ffffff',
     sideBarOverlay: '#28282a79',
