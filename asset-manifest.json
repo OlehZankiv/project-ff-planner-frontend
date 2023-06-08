@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.js": "/OlehZankiv/project-ff-planner-frontend/static/js/main.373d0768.js",
-    "static/js/76.3e443de5.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js",
-    "static/js/862.b0ab0389.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js",
-    "static/js/594.31d1013c.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js",
-    "static/js/787.60ae100c.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/787.60ae100c.chunk.js",
-    "static/js/7.55a2dab5.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/7.55a2dab5.chunk.js",
-    "static/js/343.458d2201.chunk.js": "/OlehZankiv/project-ff-planner-frontend/static/js/343.458d2201.chunk.js",
-    "static/media/Goose_logo_text@3x.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_logo_text@3x.e05e3fd7ad792493e2a8.png",
-    "static/media/Goose_logo_text@2x.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_logo_text@2x.63bae627b432185a72a2.png",
-    "static/media/Goose_register.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_register.22c1edb55975157b6a88.png",
-    "static/media/Goose_login.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_login.ac89dd1d26e562f92f44.png",
-    "static/media/Goose_logo_text.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_logo_text.9e687219f75f6d30a4bb.png",
-    "static/media/Goose_logo@3x.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_logo@3x.d73dbd28bcd3a3c78851.png",
-    "static/media/Goose_logo@2x.png": "/OlehZankiv/project-ff-planner-frontend/static/media/Goose_logo@2x.0ee3f1d502d3cf760160.png",
-    "index.html": "/OlehZankiv/project-ff-planner-frontend/index.html",
-    "main.373d0768.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/main.373d0768.js.map",
-    "76.3e443de5.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js.map",
-    "862.b0ab0389.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js.map",
-    "594.31d1013c.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js.map",
-    "787.60ae100c.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/787.60ae100c.chunk.js.map",
-    "7.55a2dab5.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/7.55a2dab5.chunk.js.map",
-    "343.458d2201.chunk.js.map": "/OlehZankiv/project-ff-planner-frontend/static/js/343.458d2201.chunk.js.map"
+    "main.js": "/project-ff-planner-frontend/static/js/main.232e0eec.js",
+    "static/js/76.3e443de5.chunk.js": "/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js",
+    "static/js/862.b0ab0389.chunk.js": "/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js",
+    "static/js/594.31d1013c.chunk.js": "/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js",
+    "static/js/787.60ae100c.chunk.js": "/project-ff-planner-frontend/static/js/787.60ae100c.chunk.js",
+    "static/js/7.55a2dab5.chunk.js": "/project-ff-planner-frontend/static/js/7.55a2dab5.chunk.js",
+    "static/js/343.458d2201.chunk.js": "/project-ff-planner-frontend/static/js/343.458d2201.chunk.js",
+    "static/media/Goose_logo_text@3x.png": "/project-ff-planner-frontend/static/media/Goose_logo_text@3x.e05e3fd7ad792493e2a8.png",
+    "static/media/Goose_logo_text@2x.png": "/project-ff-planner-frontend/static/media/Goose_logo_text@2x.63bae627b432185a72a2.png",
+    "static/media/Goose_register.png": "/project-ff-planner-frontend/static/media/Goose_register.22c1edb55975157b6a88.png",
+    "static/media/Goose_login.png": "/project-ff-planner-frontend/static/media/Goose_login.ac89dd1d26e562f92f44.png",
+    "static/media/Goose_logo_text.png": "/project-ff-planner-frontend/static/media/Goose_logo_text.9e687219f75f6d30a4bb.png",
+    "static/media/Goose_logo@3x.png": "/project-ff-planner-frontend/static/media/Goose_logo@3x.d73dbd28bcd3a3c78851.png",
+    "static/media/Goose_logo@2x.png": "/project-ff-planner-frontend/static/media/Goose_logo@2x.0ee3f1d502d3cf760160.png",
+    "index.html": "/project-ff-planner-frontend/index.html",
+    "main.232e0eec.js.map": "/project-ff-planner-frontend/static/js/main.232e0eec.js.map",
+    "76.3e443de5.chunk.js.map": "/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js.map",
+    "862.b0ab0389.chunk.js.map": "/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js.map",
+    "594.31d1013c.chunk.js.map": "/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js.map",
+    "787.60ae100c.chunk.js.map": "/project-ff-planner-frontend/static/js/787.60ae100c.chunk.js.map",
+    "7.55a2dab5.chunk.js.map": "/project-ff-planner-frontend/static/js/7.55a2dab5.chunk.js.map",
+    "343.458d2201.chunk.js.map": "/project-ff-planner-frontend/static/js/343.458d2201.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.373d0768.js"
+    "static/js/main.232e0eec.js"
   ]
 }
