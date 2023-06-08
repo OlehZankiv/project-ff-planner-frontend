@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -20,6 +20,7 @@ export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
+  const navigate = useNavigate()
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -99,7 +100,13 @@ export const MainLayout = () => {
                     {userName}
                   </Text>
                   <OpacityButton>
-                    <AvatarWrap onClick={() => setSelectedTab('profile')}>
+                    <AvatarWrap
+                      onClick={() => {
+                        navigate('/profile')
+
+                        setSelectedTab('profile')
+                      }}
+                    >
                       <Text
                         type='p'
                         color={colors.userNameText}
@@ -206,6 +213,7 @@ const DesktopTitleWrap = styled.div`
 
 const OutletWrapper = styled.div`
   padding: 64px 20px 40px 20px;
+  z-index: 0;
   ${getBreakpointsStyles({
     tablet: css`
       padding: 64px 32px 32px 32px;

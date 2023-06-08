@@ -62,7 +62,7 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
       ref={overlayRef}
       isBurgerMenuOpen={isBurgerMenuOpen}
     >
-      <SidebarWrap isBurgerMenuOpen={isBurgerMenuOpen}>
+      <SidebarWrapper isBurgerMenuOpen={isBurgerMenuOpen}>
         <div style={{ width: '100%' }}>
           <TopBox>
             <AppLogo orientation='horizontal' />
@@ -106,13 +106,14 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
           onClick={logout}
           rightIcon={<LogOutIcon size={iconLogOutSize} color={colors.white} />}
         />
-      </SidebarWrap>
+      </SidebarWrapper>
     </SidebarOverlay>
   )
 }
 
 const SidebarOverlay = styled.div`
   ${({ isBurgerMenuOpen, theme }) => css`
+    z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
@@ -142,7 +143,7 @@ const SidebarOverlay = styled.div`
   `}
 `
 
-const SidebarWrap = styled.div`
+const SidebarWrapper = styled.div`
   ${({ isBurgerMenuOpen, theme }) => css`
     transform: translateX(-100%);
     ${isBurgerMenuOpen && 'transform: translateX(0);'}
