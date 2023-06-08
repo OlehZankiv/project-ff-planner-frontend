@@ -1,37 +1,38 @@
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import {
   getBreakpointsStyles,
   getDesktopStyles,
   getTabletStyles,
-  useBreakpointValue,
 } from '../styles/breakpoints.js'
-import { Modal, Textarea } from '../components'
+import { Modal, Button } from '../components'
+// import { Textarea, Ratings } from '../components'
 import { useState } from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { StarIcon } from '../assets/icons'
 
-// const colors = {
-//   orange: 'FFAC33',
-//   grey: 'CEC9C1',
-// }
 
 const FeedbackModal = ({}) => {
-  //    const { t } = useTranslation()
+  const { t } = useTranslation()
+  const {colors} = useTheme()
 
   const [visible, setVisible] = useState(true)
   const [ratingValue, setRatingValue] = useState(0)
   const [ratingHoverValue, setRatingHoverValue] = useState(undefined)
-
-  const value = useBreakpointValue({
-    desktopValue: 'Welcome to Desktop',
-    tabletValue: 'Welcome to Tablet',
-    mobileValue: 'Welcome to Mobile',
-  })
+  const [reviewText, setReviewText] = useState(undefined)
 
   const stars = Array(5).fill(0)
 
-  const feedbackSubmit = () => {
-    console.log('save button clicked')
+  const handleChange = ( event ) => {
+
+    console.log('event', event.target.value)
+    setReviewText(event.target.value)
+  }
+
+  const feedbackSubmit = (event) => {
+    event.preventDefault()
+
+    const review = {rating: ratingValue, review: reviewText}
+    console.log ('form data:', review)
   }
 
   const tempFeedback1 =
@@ -40,8 +41,6 @@ const FeedbackModal = ({}) => {
 
   return (
     <Wrapper>
-      {value}
-
       <Modal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -59,7 +58,7 @@ const FeedbackModal = ({}) => {
                     key={index}       
                     size={24}             
                     style={{ cursor: 'pointer', marginRight: '2px' }}
-                    color={(ratingValue || ratingHoverValue) > index ? '#FFAC33' : '#CEC9C1'}
+                    color={(ratingValue || ratingHoverValue) > index ? colors.starActive : colors.starDefault}
                     onClick={() => setRatingValue(() => index + 1)}
                     onMouseOver={() => setRatingHoverValue(() => index + 1)}
                     onMouseLeave={() => setRatingHoverValue(() => undefined)}
@@ -67,14 +66,22 @@ const FeedbackModal = ({}) => {
                 )
               })}
             </div>
-            <Textarea label={'Review'} placeholder={'Enter text'}/>
-            <button type='submit' onClick={feedbackSubmit} style={styles.button}>
-              Save
-            </button>
+            <label htmlFor='feedback' style={styles.label}>
+              Review
+            </label>
+            <textarea type='text' id='feedback' style={styles.textarea} placeholder='Enter text' onChange={handleChange}/>
+            {/* <Ratings/>
+            <Textarea label={'Review'} placeholder={'Enter text'}/> */}
+            <Button 
+                type={'submit'}
+                fullWidth
+                title={t('Save')}
+                onClick={feedbackSubmit}
+            />
           </form>
-          <div>
-            <ul style={styles.feedback_list}>
-              <li style={styles.feedback_list_item}>
+          <FeedbackList>
+            <ul>
+              <li>
                 <div style={styles.feedback_avatar}>
                   <img src='./avatar.jpg' width='40' height='40' />
                 </div>
@@ -88,7 +95,7 @@ const FeedbackModal = ({}) => {
                   <div>{tempFeedback1}</div>
                 </div>
               </li>
-              <li style={styles.feedback_list_item}>
+              <li>
                 <div style={styles.feedback_avatar}>
                   <img src='./avatar.jpg' width='40' height='40' />
                 </div>
@@ -103,7 +110,7 @@ const FeedbackModal = ({}) => {
                 </div>
               </li>
             </ul>
-          </div>
+          </FeedbackList>
         </div>
       </Modal>
 
@@ -160,38 +167,8 @@ const styles = {
     backgroundColor: '#F6F6F6',
     borderRadius: '8px',
     border: '0px',
-    padding: '14px 18px 14px 18px',
+    padding: '14px 18px',
     marginBottom: '18px',
-  },
-
-  button: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '10px',
-    isolation: 'isolate',
-    height: '48px',
-    width: '100%',
-    backgroundColor: '#3E85F3',
-    color: '#FFFFFF',
-    borderRadius: '8px',
-    border: '0px',
-  },
-
-  feedback_list: {
-    width: '404px',
-    listStyle: 'none',
-    padding: '16px',
-    backgroundColor: '#E3F3FF',
-    borderRadius: '8px',
-    maxHeight: '292px',
-  },
-
-  feedback_list_item: {
-    display: 'flex',
-    flexDirection: 'raw',
-    marginBottom: '20px',
   },
 
   feedback_avatar: {
@@ -214,3 +191,19 @@ const styles = {
     marginBottom: '12px',
   },
 }
+
+const FeedbackList = styled.ul`
+  width: 404px;
+  list-style: none;
+  padding: 16px;
+  background-color: #E3F3FF;
+  border-radius: 8px;
+  max-height: 292px;
+
+  li {
+    display: flex;
+    flex-direction: raw;
+    margin-bottom: 20px;
+  }
+
+`
