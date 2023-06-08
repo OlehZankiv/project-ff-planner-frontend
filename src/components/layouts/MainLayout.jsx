@@ -17,6 +17,7 @@ import { Button } from '../buttons/Button'
 import FeedbackModal from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
+import { firstLettersMaker } from '../../utils/text'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
@@ -28,7 +29,7 @@ export const MainLayout = () => {
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [selectedRoute, setSelectedRoute] = useState(ROUTES.CALENDAR)
+  const [selectedRoute, setSelectedRoute] = useState()
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -40,13 +41,6 @@ export const MainLayout = () => {
   })
 
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
-
-  const firstLettersMaker = (str) =>
-    str
-      .split(' ')
-      .map((word) => word[0].toUpperCase())
-      .join('')
-      .slice(0, 2)
 
   const routeTitles = {
     [ROUTES.PROFILE]: t('User Profile'),
@@ -104,19 +98,14 @@ export const MainLayout = () => {
                       <SunIcon size={iconSize} color={colors.primary} />
                     )}
                   </OpacityButton>
-                  <Text
-                    type='p'
-                    color={colors.userNameText}
-                    fontWeight={700}
-                    fontSize={nameFontSize}
-                  >
+                  <Text type='p' color={'userNameText'} fontWeight={700} fontSize={nameFontSize}>
                     {userName}
                   </Text>
                   <OpacityButton>
                     <AvatarWrap onClick={() => setSelectedRoute(ROUTES.PROFILE)}>
                       <Text
                         type='p'
-                        color={colors.userNameText}
+                        color={'userNameText'}
                         fontWeight={700}
                         fontSize={nameFontSize}
                       >

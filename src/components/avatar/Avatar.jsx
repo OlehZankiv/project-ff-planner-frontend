@@ -1,11 +1,13 @@
 import styled, { css, useTheme } from 'styled-components'
-
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+import { useAuthContext } from '../../contexts/auth'
+import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { AddIcon } from '../../assets/icons/AddIcon'
+import { firstLettersMaker } from '../../utils/text'
+import { Text } from '../Text'
 
-const Avatar = ({ image, size, plus, styles = {} }) => {
+const Avatar = ({ type, plus, styles = {}, onPlusHandler }) => {
   const sizeMap = {
-    avatar: {
+    profile: {
       mobile: 72,
       tablet: 124,
       desktop: 124,
@@ -21,21 +23,42 @@ const Avatar = ({ image, size, plus, styles = {} }) => {
       desktop: 40,
     },
   }
-
-  const currentSize = sizeMap[size]
-
+  const nameFontSize = useBreakpointValue({
+    mobileValue: 14,
+    tabletValue: 18,
+    desktopValue: 18,
+  })
+  const currentSize = sizeMap[type]
+  const { logger } = useAuthContext()
   const { colors } = useTheme()
+
+  if (!logger) return null
+
+  const userName = logger.name
   return (
-    <ImageWrapper>
-      <ImageAvatar
+    <ImageWrapper data-component='avatar'>
+      <AvatarWrapper
         mobileSize={currentSize.mobile}
         tabletSize={currentSize.tablet}
         desktopSize={currentSize.desktop}
         styles={styles}
-        src={image}
-      ></ImageAvatar>
+      >
+        {logger.avatarURL ? (
+          <img src={logger.avatarURL} />
+        ) : (
+          <Text
+            type='p'
+            color='userNameText'
+            fontWeight={1000}
+            fontSize={nameFontSize}
+            style={{ textAlign: 'center' }}
+          >
+            {firstLettersMaker(userName)}
+          </Text>
+        )}
+      </AvatarWrapper>
       {plus ? (
-        <BackgroundSvg>
+        <BackgroundSvg onClick={onPlusHandler}>
           <AddIcon color={colors.white}></AddIcon>
         </BackgroundSvg>
       ) : null}
@@ -47,12 +70,13 @@ export const ImageWrapper = styled.div`
   justify-content: center;
 `
 
-export const ImageAvatar = styled.img`
+export const AvatarWrapper = styled.div`
   ${({ theme: { colors }, desktopSize, mobileSize, tabletSize, styles }) => css`
     border-radius: 50%;
+    display: flex;
+    align-items: center;
     width: ${mobileSize}px;
     height: ${mobileSize}px;
-    background-color: gray;
     border: 2px solid ${colors.primary};
     ${styles.mobile}
 

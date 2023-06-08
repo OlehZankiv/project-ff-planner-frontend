@@ -27,7 +27,7 @@ export const lightTheme = themeCreator({
     error: '#E74A3B',
     success: '#3CBC81',
     content: '#ffffff',
-    icon: ' #343434',
+    icon: '#343434',
     text: '#111111',
 
     // Background
@@ -37,7 +37,7 @@ export const lightTheme = themeCreator({
 
     // Others
     feedbackModalLabels: '#5D5D5D',
-    userNameText: '#34343',
+    userNameText: '#343434',
     sideBarOverlay: '#e7ecfc79',
     sidebarTitle: ' #999999',
     tabButtonActive: '#E3F3FF',
