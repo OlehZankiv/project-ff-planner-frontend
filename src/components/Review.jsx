@@ -3,9 +3,8 @@ import { getMobileStyles, ScreenWrapper } from '../styles/breakpoints'
 import { Text } from './Text'
 import { RatingStarUserIcon } from '../assets/icons'
 
-export const Review = ({ style, rating, comment, owner: { name, avatarURL } }) => {
+export const Review = ({ style, rating, comment, owner: { name } }) => {
   const { colors } = useTheme()
-  console.log(rating, avatarURL)
 
   const commentJSX = (
     <Text type='p' style={{ marginTop: 24 }}>

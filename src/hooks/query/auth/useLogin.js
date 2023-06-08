@@ -10,7 +10,7 @@ export const useLogin = () => {
   const { setLogger, setToken } = useAuthContext()
   const navigate = useNavigate()
   const location = useLocation()
-  console.log('awdwdwdwd', location.state)
+
   const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.login],
     mutationFn: login,
