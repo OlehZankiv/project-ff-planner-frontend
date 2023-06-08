@@ -14,6 +14,7 @@ export const en = {
   "My Account": "My Account",
   "Name": "Name",
   "Password": "Password",
+  "Rating": "Rating",
   "Review": "Review",
   "Save": "Save",
   "Sign Up": "Sign Up",

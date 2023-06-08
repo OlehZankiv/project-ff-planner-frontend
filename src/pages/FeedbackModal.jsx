@@ -1,20 +1,14 @@
-import styled, { css, useTheme } from 'styled-components'
-import { getBreakpointsStyles, getDesktopStyles, getTabletStyles } from '../styles/breakpoints.js'
-import { Modal, Button, Textarea, Ratings } from '../components'
-// import { Textarea, Ratings } from '../components'
-import { useState } from 'react'
+import styled, { css } from 'styled-components'
+import { Button, Modal, Ratings, Textarea } from '../components'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StarIcon } from '../assets/icons'
+import { RatingStarIcon } from '../assets/icons'
 
-const FeedbackModal = ({}) => {
+const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
-  const { colors } = useTheme()
-  console.log(colors)
-
-  const [visible, setVisible] = useState(true)
   const [ratingValue, setRatingValue] = useState(0)
-  const [reviewText, setReviewText] = useState(undefined)
+  const [reviewText, setReviewText] = useState('')
 
   const stars = Array(5).fill(0)
 
@@ -25,106 +19,87 @@ const FeedbackModal = ({}) => {
     console.log('form data:', review)
   }
 
-  const tempFeedback1 =
-    'GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended.'
-  const tempFeedback2 = 'This is test feedback 2'
+  useEffect(() => {
+    if (!visible) {
+      setRatingValue(0)
+      setReviewText('')
+    }
+  }, [visible])
 
   return (
-    <Wrapper>
-      <Modal
-        visible={visible}
-        onClose={() => setVisible(false)}
-        onEnterPress={() => setVisible(false)}
-      >
-        <div>
-          <form style={styles.feedback_form}>
-            <Ratings onInputValueChange={(value) => setRatingValue(value)} />
-            <Textarea
-              label={t('Review')}
-              placeholder={t('Enter text')}
-              onChange={(event) => setReviewText(event.target.value)}
-            />
-            <Button type={'submit'} fullWidth title={t('Save')} onClick={feedbackSubmit} />
-          </form>
-          <FeedbackList>
-            <ul>
-              <li>
-                <div style={styles.feedback_avatar}>
-                  <img src='./avatar.jpg' width='40' height='40' />
-                </div>
-                <div>
-                  <p style={styles.p}>Nadiia Doe</p>
-                  <div style={styles.feedback_rating}>
-                    {stars.map((_, index) => {
-                      return (
-                        <StarIcon
-                          key={index}
-                          size={14}
-                          style={{ marginRight: 10 }}
-                          color={'#CEC9C1'}
-                        />
-                      )
-                    })}
-                  </div>
-                  <div>{tempFeedback1}</div>
-                </div>
-              </li>
-              <li>
-                <div style={styles.feedback_avatar}>
-                  <img src='./avatar.jpg' width='40' height='40' />
-                </div>
-                <div>
-                  <p style={styles.p}>Nadiia Doe</p>
-                  <div style={styles.feedback_rating}>
-                    {stars.map((_, index) => {
-                      return (
-                        <StarIcon
-                          key={index}
-                          size={14}
-                          style={{ marginRight: 10 }}
-                          color={'#CEC9C1'}
-                        />
-                      )
-                    })}
-                  </div>
-                  <div>{tempFeedback2}</div>
-                </div>
-              </li>
-            </ul>
-          </FeedbackList>
-        </div>
-      </Modal>
+    <Modal
+      visible={visible}
+      onClose={() => setVisible(false)}
+      onEnterPress={() => setVisible(false)}
+    >
+      <Ratings value={ratingValue} onInputValueChange={setRatingValue} />
+      <Textarea
+        value={reviewText}
+        style={{ marginTop: 24 }}
+        label={t('Review')}
+        placeholder={t('Enter text')}
+        onChange={(event) => setReviewText(event.target.value)}
+      />
+      <Button
+        fullWidth
+        style={{ marginTop: 18, borderRadius: 8 }}
+        type='submit'
+        title={t('Save')}
+        onClick={feedbackSubmit}
+      />
 
-      <button onClick={() => setVisible(true)}>Feedback</button>
-    </Wrapper>
+      <FeedbackList>
+        <div>
+          <div style={styles.feedback_avatar}>
+            <img src='./avatar.jpg' width='40' height='40' />
+          </div>
+          <div>
+            <p style={styles.p}>Nadiia Doe</p>
+            <div style={styles.feedback_rating}>
+              {stars.map((_, index) => {
+                return (
+                  <RatingStarIcon
+                    key={index}
+                    size={14}
+                    style={{ marginRight: 10 }}
+                    color={'#CEC9C1'}
+                  />
+                )
+              })}
+            </div>
+            <div>
+              GooseTrack is impressive, the calendar view and filter options make it easy to stay
+              organized and focused. Highly recommended.
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style={styles.feedback_avatar}>
+            <img src='./avatar.jpg' width='40' height='40' />
+          </div>
+          <div>
+            <p style={styles.p}>Nadiia Doe</p>
+            <div style={styles.feedback_rating}>
+              {stars.map((_, index) => {
+                return (
+                  <RatingStarIcon
+                    key={index}
+                    size={14}
+                    style={{ marginRight: 10 }}
+                    color={'#CEC9C1'}
+                  />
+                )
+              })}
+            </div>
+            <div>This is test feedback 2</div>
+          </div>
+        </div>
+      </FeedbackList>
+    </Modal>
   )
 }
 
 export default FeedbackModal
-
-const Wrapper = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: red;
-  color: white;
-
-  ${getBreakpointsStyles({
-    desktop: css`
-      background-color: blue;
-    `,
-    tablet: css`
-      background-color: green;
-    `,
-  })}
-
-  // The same as getBreakpointsStyles
-  ${getDesktopStyles(css`
-    background-color: blue;
-  `)}
-  ${getTabletStyles(css`
-    background-color: green;
-  `)}
-`
 
 const styles = {
   feedback_form: {
@@ -164,17 +139,14 @@ const styles = {
   },
 }
 
-const FeedbackList = styled.ul`
-  max-width: 404px;
-  list-style: none;
-  padding: 16px;
-  background-color: #e3f3ff;
-  border-radius: 8px;
-  max-height: 292px;
-
-  li {
-    display: flex;
-    flex-direction: raw;
-    margin-bottom: 20px;
-  }
+const FeedbackList = styled.div`
+  ${({ theme: { colors } }) => css`
+    width: 100%;
+    margin-top: 32px;
+    padding: 16px;
+    background-color: ${colors.feedbackListBackground};
+    border-radius: 8px;
+    max-height: 292px;
+    overflow-y: auto;
+  `}
 `

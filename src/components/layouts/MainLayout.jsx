@@ -14,12 +14,14 @@ import {
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
+import FeedbackModal from '../../pages/FeedbackModal'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
 
+  const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState('calendar')
 
@@ -71,7 +73,15 @@ export const MainLayout = () => {
                 </Text>
               </DesktopTitleWrap>
               <TabWrap>
-                {selectedTab === 'calendar' && <Button title={t('Feedback')} onClick={() => {}} />}
+                {selectedTab === 'calendar' && (
+                  <>
+                    <Button title={t('Feedback')} onClick={() => setFeedbackModalVisible(true)} />
+                    <FeedbackModal
+                      visible={isFeedbackModalVisible}
+                      setVisible={setFeedbackModalVisible}
+                    />
+                  </>
+                )}
                 <InfoWrap>
                   <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (

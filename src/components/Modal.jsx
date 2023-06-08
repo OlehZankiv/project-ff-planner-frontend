@@ -3,7 +3,7 @@ import styled, { css, useTheme } from 'styled-components'
 import { CloseIcon } from '../assets/icons'
 import { OpacityButton } from './buttons/OpacityButton'
 import { useEffect } from 'react'
-import { getMobileStyles } from '../styles/breakpoints'
+import { getBreakpointsStyles } from '../styles/breakpoints'
 
 export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
   const { colors } = useTheme()
@@ -50,17 +50,25 @@ const Wrapper = styled.div`
     visibility: ${visible ? 'visible' : 'hidden'};
     transform: translate(-50%, -50%) scale(${!visible ? 0 : 1});
     transition: transform 0.2s;
-    padding: 28px 40px;
     background-color: ${colors.modalBackground};
     box-shadow: ${shadows.modalShadow};
     border-radius: 8px;
-    min-width: 396px;
-    max-width: calc(100% - 32px);
-    ${getMobileStyles(
-      css`
-        min-width: calc(100vw - 32px);
+
+    ${getBreakpointsStyles({
+      desktop: css`
+        padding: 32px;
+        width: 30%;
+        min-width: 400px;
       `,
-    )}
+      tablet: css`
+        padding: 32px;
+        width: 80vw;
+      `,
+      mobile: css`
+        padding: 28px 28px;
+        width: calc(100% - 40px);
+      `,
+    })}
   `}
 `
 

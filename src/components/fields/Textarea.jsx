@@ -1,29 +1,51 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Text } from '../Text'
+import { getMobileStyles } from '../../styles/breakpoints'
 
-export const Textarea = ({ label, placeholder, onChange }) => {
-//   const { colors } = useTheme()
-// ToDo: replace colors with theme colors #343434 / #FAFAFA
+export const Textarea = ({ value, style, label, placeholder, onChange }) => (
+  <Wrapper style={style}>
+    <label htmlFor='textarea'>
+      <Text type='p' fontSize={12} lineHeight={14} color='feedbackModalLabels'>
+        {label}
+      </Text>
+    </label>
+    <InputArea
+      type='text'
+      id='textarea'
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+    />
+  </Wrapper>
+)
 
+const Wrapper = styled.div``
 
-  
-  return (
-    <>
-      <Label htmlFor='textarea'><Text type='p' fontSize={12} lineHeight={14} color='#343434'>{label}</Text></Label>
-      <Wrapper type='text' id='textarea' placeholder={placeholder} onChange={onChange} />
-    </>
-  )
-}
+const InputArea = styled.textarea`
+  ${({ theme: { colors } }) => css`
+    background-color: ${colors.modalsInputBackground};
+    border: 1px solid ${colors.modalsInputBorder};
+    min-height: 128px;
+    max-height: 164px;
+    border-radius: 8px;
+    width: 100%;
+    padding: 14px 18px;
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    resize: none;
+    outline: none;
 
-const Wrapper = styled.textarea`
-  height: 127px;
-  background-color: #f6f6f6;
-  border-radius: 8px;
-  border: 0px;
-  padding: 14px 18px;
-  margin-bottom: 18px;
-  resize: none;
-`
-const Label = styled.label`
-  margin-bottom: 8px;
+    color: ${colors.text};
+    ${getMobileStyles(css`
+      font-size: 14px;
+    `)}
+
+    &::placeholder {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  `}
 `
