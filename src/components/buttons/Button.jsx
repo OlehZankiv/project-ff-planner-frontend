@@ -12,6 +12,7 @@ export const Button = ({
   leftIcon,
   rightIcon,
   style,
+  buttonTextProps,
 }) => (
   <Wrapper
     style={style}
@@ -23,9 +24,8 @@ export const Button = ({
   >
     {leftIcon}
     <Text
+      {...buttonTextProps}
       type='h4'
-      lineHeight={24}
-      fontSize={18}
       mobileStyles={css`
         font-size: 14px;
         line-height: 18px;

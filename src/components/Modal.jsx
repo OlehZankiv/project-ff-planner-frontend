@@ -3,7 +3,7 @@ import styled, { css, useTheme } from 'styled-components'
 import { CloseIcon } from '../assets/icons'
 import { OpacityButton } from './buttons/OpacityButton'
 import { useEffect } from 'react'
-import { getMobileStyles } from '../styles/breakpoints'
+import { getBreakpointsStyles } from '../styles/breakpoints'
 
 export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
   const { colors } = useTheme()
@@ -31,36 +31,47 @@ export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
       <OpacityButton hoverOpacity={0.975} activeOpacity={0.9} onClick={onClose}>
         <Overlay visible={visible} />
       </OpacityButton>
-      <Wrapper style={style} visible={visible}>
+      <ModalWindow style={style} visible={visible}>
         <CloseButtonWrapper onClick={onClose}>
           <CloseIcon color={colors.text} />
         </CloseButtonWrapper>
         {children}
-      </Wrapper>
+      </ModalWindow>
     </>,
     document.querySelector('#modal-root'),
   )
 }
 
-const Wrapper = styled.div`
+const ModalWindow = styled.div`
   ${({ theme: { colors, shadows }, visible }) => css`
     position: fixed;
     top: 50%;
     left: 50%;
+    height: fit-content;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
     visibility: ${visible ? 'visible' : 'hidden'};
-    transform: translate(-50%, -50%) scale(${!visible ? 0 : 1});
+    transform: translate(-50%, -50%) scale(${visible ? 1 : 0});
     transition: transform 0.2s;
-    padding: 28px 40px;
     background-color: ${colors.modalBackground};
     box-shadow: ${shadows.modalShadow};
     border-radius: 8px;
-    min-width: 396px;
-    max-width: calc(100% - 32px);
-    ${getMobileStyles(
-      css`
-        min-width: calc(100vw - 32px);
+
+    ${getBreakpointsStyles({
+      desktop: css`
+        padding: 32px;
+        width: 30%;
+        min-width: 400px;
       `,
-    )}
+      tablet: css`
+        padding: 32px;
+        width: 80vw;
+      `,
+      mobile: css`
+        padding: 28px 28px;
+        width: calc(100% - 40px);
+      `,
+    })}
   `}
 `
 
@@ -72,7 +83,7 @@ const CloseButtonWrapper = styled(OpacityButton)`
 
 const Overlay = styled.div`
   ${({ theme: { colors }, visible }) => css`
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 100vw;
