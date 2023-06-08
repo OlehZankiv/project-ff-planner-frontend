@@ -27,23 +27,34 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         )}
         events={[
           {
-            id: 'awdwdw',
+            id: '1',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
+
           {
-            id: 'awdwdw2',
+            id: '2',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
+
           {
-            id: 'awdwdw3',
+            id: '3',
+            title: 'All-day event',
+            start: selectedDate,
+            backgroundColor: '#FCF0D4',
+            textColor: '#F3B249',
+            display: 'block',
+          },
+
+          {
+            id: '4',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
@@ -136,7 +147,7 @@ const CalendarWrapper = styled.section`
       flex-direction: column;
       row-gap: 4px;
       padding: 8px;
-      max-height: calc(34px * 5.5); // 5.5 events per day
+      max-height: calc(34px * 3.5);
       overflow-y: auto;
 
       .fc-event {
