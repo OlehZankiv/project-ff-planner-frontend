@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../utils/storage'
 
 const AuthContext = createContext({
@@ -8,37 +8,16 @@ const AuthContext = createContext({
 })
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null)
-  const [logger, setLogger] = useState(null)
+  const [token, setToken] = useState(getStorageItem(STORAGE_KEYS.TOKEN, null))
+  const [logger, setLogger] = useState(getStorageItem(STORAGE_KEYS.LOGGER, null, false))
 
-  const tokenMounted = useRef(false)
   useEffect(() => {
-    if (!tokenMounted.current) {
-      tokenMounted.current = true
-      return
-    }
-
     setStorageItem(STORAGE_KEYS.TOKEN, token)
   }, [token])
 
-  const loggerMounted = useRef(false)
-
   useEffect(() => {
-    if (!loggerMounted.current) {
-      loggerMounted.current = true
-      return
-    }
-
     setStorageItem(STORAGE_KEYS.LOGGER, logger)
   }, [logger])
-
-  useEffect(() => {
-    setToken(getStorageItem(STORAGE_KEYS.TOKEN, null))
-  }, [])
-
-  useEffect(() => {
-    setToken(getStorageItem(STORAGE_KEYS.LOGGER, null))
-  }, [])
 
   return (
     <AuthContext.Provider
