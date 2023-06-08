@@ -1,29 +1,25 @@
-import styled, { css, useTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 import { ROUTES } from '../../navigation/routes'
 
-import { GooseLogo, GooseLogoText, imageFirst, imageSecond, imageThird } from '../../assets/images'
+import { Calendar_examples, Calendar_examples_2x, Calendar_examples_3x, Sidebars, Sidebars_2x, Sidebars_3x, Days_layout, Days_layout_2x, Days_layout_3x } from '../../assets/images/pictures';
+import { AppLogo } from '../../components/AppLogo';
+import {Image, generateSrcConfig} from '../../components/Image'
 import { LoginIcon } from '../../assets/icons/LogInIcon';
 import { getBreakpointsStyles } from '../../styles/breakpoints';
 import { Button } from '../../components/buttons/Button';
 
-
 const Landing = () => {
   const { t } = useTranslation();
-  const {colors} = useTheme();
+  
   return (
     <Container>
       <Hero>
-        <LogoWrap>
-        <LogoImg src={GooseLogo} />
-        <LogoTextImg
-          src={GooseLogoText}
-          />
-          </LogoWrap>
+        <AppLogo/>
         <LinkBox>          
-          <Button type='primary' onClick={() => {ROUTES.LOGIN}} rightIcon={<LoginIcon color={colors.primary} />} title={t('Log in')}  />
-          <SignupLink to='/register'>{t('Sign Up')}</SignupLink>
+          <Button type='submit' variant='primary' rightIcon={<LoginIcon />} title={t('Log in')} style={{ color: '${theme.colors.background}' }} />
+          <SignupLink to={ROUTES.REGISTER}>{t('Sign Up')}</SignupLink>
         </LinkBox>
       </Hero>
 
@@ -37,9 +33,14 @@ const Landing = () => {
               {t("GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout.")}
             </Text>
           </ContentBox>
-          <ImageBox>
-            <Img src={imageFirst} alt='calendar view' />
-          </ImageBox>
+         
+            <Image
+        srcSetConfiguration={generateSrcConfig({
+          desktop: { src: Calendar_examples_3x, width: 1800, widthOnScreen: 50 },
+          tablet: { src: Calendar_examples_2x, width: 1400, widthOnScreen: 90 },
+          mobile: { src: Calendar_examples, width: 335, widthOnScreen: 90 },
+        })} alt='calendar examples' />
+          
         </ContentItem>
         <ContentItem>
           <ContentBox>
@@ -49,9 +50,14 @@ const Landing = () => {
               {t("GooseTrack offers easy access to your account settings, calendar, and filters. The My Account section allows you to manage your profile information and preferences, while the calendar provides a quick and convenient way to view your upcoming events and tasks.")}
             </Text>
           </ContentBox>
-          <ImageBox>
-            <Img src={imageSecond} alt='sidebars' />
-          </ImageBox>
+          
+            <Image
+        srcSetConfiguration={generateSrcConfig({
+          desktop: { src: Sidebars_3x, width: 1800, widthOnScreen: 50 },
+          tablet: { src: Sidebars_2x, width: 1400, widthOnScreen: 90 },
+          mobile: { src: Sidebars, width: 335, widthOnScreen: 90 },
+        })} alt='sidebars' />
+          
         </ContentItem>
         <ContentItem>
           <ContentBox>
@@ -62,9 +68,14 @@ const Landing = () => {
               {t("GooseTrack is an all-in-one productivity tool that helps you stay on top of your tasks, events, and deadlines. Say goodbye to scattered to-do lists and hello to streamlined productivity with GooseTrack.")}
             </Text>
           </ContentBox>
-          <ImageBox>
-            <Img src={imageThird} alt='days' />
-          </ImageBox>
+          
+            <Image
+        srcSetConfiguration={generateSrcConfig({
+          desktop: { src: Days_layout_3x, width: 1800, widthOnScreen: 50 },
+          tablet: { src: Days_layout_2x, width: 1400, widthOnScreen: 90 },
+          mobile: { src: Days_layout, width: 335, widthOnScreen: 90 },
+        })} alt='days layout' />
+          
         </ContentItem>
       </ContentList>
     </Container>
@@ -103,34 +114,6 @@ text-align: center;
     })
 `
 
-const LogoWrap = styled.div`
-display: flex;
-flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-
-const LogoImg = styled.img`
-    margin: 0 auto;
-    width: 142px;
-  height: 142px;
-${getBreakpointsStyles({
-    tablet: css`
-        width: 150px;
-        height: 149px;` })}
-`
-
-const LogoTextImg = styled.img`
-margin: 0 auto;
-    margin-bottom: 32px;
-    
-
-    ${getBreakpointsStyles({
-            tablet: css`
-    margin-bottom: 40px;
-    `})}`
-
-
 export const LinkBox = styled.div`
  display: flex;
     flex-direction: column;
@@ -157,7 +140,7 @@ ${({ theme }) => css`
   text-decoration-line: underline;
   text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-  color: ${theme.colors.content};
+  color: ${theme.colors.white};
   transition: all 0.25s ease-in-out;
   
   &:hover {
@@ -220,18 +203,18 @@ export const ContentItem = styled.li`
 `
 
 export const ContentBox = styled.div`
-  max-width: 275px;
+  
 
    ${getBreakpointsStyles({
       desktop: css`
-    margin: 0 77px;`
+    margin: 0 77px;
+    `
   })}
 `
 
 export const Number = styled.p`
 ${({ theme }) => css`
   margin-bottom: 14px;
-  font-style: normal;
   font-weight: 700;
   font-size: 80px;
   line-height: 100%;
@@ -251,7 +234,6 @@ ${({ theme }) => css`
   color: ${theme.colors.primary};
   background: #dcebf7;
   border-radius: 44px;
-  font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
@@ -295,24 +277,24 @@ export const Text = styled.p`
   })}
 `
 
-export const ImageBox = styled.div`
-  position: relative;
-  width: 100%;
-  height: 457px;
-  overflow: hidden;
-  background: #E3F3FF;
-  border-radius: 100px;
-  ${getBreakpointsStyles({
-      tablet: css`
-    height: 700px;
-    border-radius: 100px;`,
-    desktop: css`
- height: 700px;
-    width: 50%;`
-  })}
-`
+// export const ImageBox = styled.div`
+//   position: relative;
+//   width: 100%;
+//   height: 457px;
+//   overflow: hidden;
+//   background: #E3F3FF;
+//   border-radius: 100px;
+//   ${getBreakpointsStyles({
+//       tablet: css`
+//     height: 700px;
+//     border-radius: 100px;`,
+//     desktop: css`
+//  height: 700px;
+//     width: 50%;`
+//   })}
+// `
 
-export const Img = styled.img`
-width: 100%;
-height: 100%;
-`
+// export const Image = styled.img`
+// width: 100%;
+// height: 100%;
+// `

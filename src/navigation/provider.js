@@ -6,25 +6,21 @@ import { lazy, Suspense } from 'react'
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
-const Landing = lazy(() => import('../pages/landing/Landing'))
+const LandingPage = lazy(() => import('../pages/landing/Landing'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
     <Routes>
-      <Route path={ROUTES.HOME} element={<MainLayout />}>
-        <Route index element={<div>Home Page</div>} />
-        {/* TODO: Add additional pages here */}
-
-        <Route
+      <Route
           path={ROUTES.LANDING}
           element={
             <Suspense fallback={<Loader />}>
-              <Landing />
+              <LandingPage />
             </Suspense>
           }
         />
-      </Route>
-      <Route path={ROUTES.LOGIN} element={<AuthLayout />}>
+      <Route path={ROUTES.HOME} element={<MainLayout />}>
+        <Route index element={<div>Home Page</div>} />
         <Route
           path={ROUTES.CALENDAR}
           element={
