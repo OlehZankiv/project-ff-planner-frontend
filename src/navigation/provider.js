@@ -13,6 +13,7 @@ export const AppRouterProvider = () => (
     <Routes>
       <Route path={ROUTES.HOME} element={<MainLayout />}>
         <Route index element={<div>Home Page</div>} />
+        <Route path={'/profile'} element={<div>PROFILE</div>} />
 
         <Route
           path={ROUTES.CALENDAR}
