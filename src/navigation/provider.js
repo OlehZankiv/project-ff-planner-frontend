@@ -1,41 +1,64 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ROUTES } from './routes'
-import { AuthLayout, Loader, MainLayout } from '../components'
+import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 import UserPage from '../pages/userPage/UserPage'
+import { useAuthContext } from '../contexts/auth'
+import { BASE_GITHUB_PAGES_URL } from '../utils/constants'
 
-const LoginPage = lazy(() => import('../pages/login/LoginPage'))
+const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
+const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
 
 export const AppRouterProvider = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path={ROUTES.HOME} element={<MainLayout />}>
-        <Route index element={<div>Home Page</div>} />
+  <BrowserRouter basename={BASE_GITHUB_PAGES_URL}>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<MainLayout />}>
+          <Route index element={<div>Home Page</div>} />
+          <Route
+            path={ROUTES.PROFILE}
+            element={
+              <ProtectedRoute>
+                <UserPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.CALENDAR}
+            element={
+              <ProtectedRoute>
+                <CalendarPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* TODO: Add additional pages here */}
+        </Route>
+
+        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route
-          path={ROUTES.CALENDAR}
+          path={ROUTES.REGISTER}
           element={
             <Suspense fallback={<Loader />}>
-              <CalendarPage />
+              <RegisterPage />
             </Suspense>
           }
         />
-        {/* TODO: Add additional pages here */}
-      </Route>
-      <Route path={ROUTES.LOGIN} element={<AuthLayout />}>
-        <Route
-          index
-          element={
-            <Suspense fallback={<Loader />}>
-              <LoginPage />
-            </Suspense>
-          }
-        />
-        {/* TODO: Add additional pages here */}
-      </Route>
-      <Route path={ROUTES.PROFILE} element={<UserPage />} />
-      {/* TODO: Add 404 Page */}
-      <Route path='*' element={<div>404 Page</div>} />
-    </Routes>
+
+        {/* TODO: Add 404 Page */}
+        <Route path='*' element={<div>404 Page</div>} />
+      </Routes>
+    </Suspense>
   </BrowserRouter>
 )
+
+const ProtectedRoute = ({ children }) => {
+  const { logger } = useAuthContext()
+  const location = useLocation()
+
+  if (!logger) {
+    return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
+  }
+
+  return children
+}

@@ -5,7 +5,7 @@ import {
   GooseLogoText,
   GooseLogoText_2X,
   GooseLogoText_3X,
-} from '../assets/images'
+} from '../assets/images/logo'
 import { generateSrcConfig, Image } from './Image'
 import styled, { css } from 'styled-components'
 import { useAppThemeContext } from '../styles/theme/provider'
@@ -14,7 +14,7 @@ export const AppLogo = ({ orientation = 'vertical' }) => {
   const { themeType } = useAppThemeContext()
 
   const isVertical = orientation === 'vertical'
-  const isLightTheme = themeType === 'light'
+  const isDarkTheme = themeType === 'dark'
 
   return (
     <Wrapper isVertical={isVertical}>
@@ -29,7 +29,7 @@ export const AppLogo = ({ orientation = 'vertical' }) => {
       <Image
         style={{
           filter:
-            isVertical || isLightTheme
+            isVertical || isDarkTheme
               ? 'unset'
               : 'invert(42%) sepia(34%) saturate(3517%) hue-rotate(203deg) brightness(103%) contrast(91%)',
         }}

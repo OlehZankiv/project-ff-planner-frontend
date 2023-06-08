@@ -7,10 +7,10 @@ const queryClient = new QueryClient()
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AppThemeProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <AppThemeProvider>
         <AppRouterProvider />
-      </AuthContextProvider>
-    </AppThemeProvider>
+      </AppThemeProvider>
+    </AuthContextProvider>
   </QueryClientProvider>
 )

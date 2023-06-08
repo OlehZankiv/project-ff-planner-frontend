@@ -11,8 +11,11 @@ export const Button = ({
   onClick,
   leftIcon,
   rightIcon,
+  style,
+  buttonTextProps,
 }) => (
   <Wrapper
+    style={style}
     onClick={onClick}
     isDefaultShadow={isDefaultShadow}
     fullWidth={fullWidth}
@@ -21,9 +24,12 @@ export const Button = ({
   >
     {leftIcon}
     <Text
+      {...buttonTextProps}
       type='h4'
-      lineHeight={24}
-      fontSize={18}
+      mobileStyles={css`
+        font-size: 14px;
+        line-height: 18px;
+      `}
       color={variant === 'primary' ? 'white' : 'secondaryButtonText'}
     >
       {title}

@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../utils/storage'
+import { useUser } from '../hooks/query'
 
 const AuthContext = createContext({
   logger: null,
@@ -8,37 +9,22 @@ const AuthContext = createContext({
 })
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null)
-  const [logger, setLogger] = useState(null)
+  const [token, setToken] = useState(getStorageItem(STORAGE_KEYS.TOKEN, null))
+  const [logger, setLogger] = useState(getStorageItem(STORAGE_KEYS.LOGGER, null, false))
 
-  const tokenMounted = useRef(false)
+  const { user: dbUser } = useUser(logger?.id)
+
   useEffect(() => {
-    if (!tokenMounted.current) {
-      tokenMounted.current = true
-      return
-    }
+    if (JSON.stringify(dbUser) !== JSON.stringify(logger)) setLogger(dbUser)
+  }, [dbUser, logger])
 
+  useEffect(() => {
     setStorageItem(STORAGE_KEYS.TOKEN, token)
   }, [token])
 
-  const loggerMounted = useRef(false)
-
   useEffect(() => {
-    if (!loggerMounted.current) {
-      loggerMounted.current = true
-      return
-    }
-
     setStorageItem(STORAGE_KEYS.LOGGER, logger)
   }, [logger])
-
-  useEffect(() => {
-    setToken(getStorageItem(STORAGE_KEYS.TOKEN, null))
-  }, [])
-
-  useEffect(() => {
-    setToken(getStorageItem(STORAGE_KEYS.LOGGER, null))
-  }, [])
 
   return (
     <AuthContext.Provider

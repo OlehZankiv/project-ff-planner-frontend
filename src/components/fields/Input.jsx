@@ -3,7 +3,9 @@ import { Field } from 'formik'
 import { Text } from '../Text'
 import { useEffect, useState } from 'react'
 import { ErrorIcon, SuccessIcon } from '../../assets/icons'
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+
+import { getBreakpointsStyles, getMobileStyles } from '../../styles/breakpoints'
+
 export const Input = ({
   name,
   type,
@@ -13,6 +15,7 @@ export const Input = ({
   successMessage,
   rightIcon,
   isError,
+  style,
 }) => {
   const { colors } = useTheme()
 
@@ -42,9 +45,15 @@ export const Input = ({
     )
 
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       {!!title && (
-        <Text type='h4' fontWeight={400} color={inputColor}>
+        <Text
+          type='h4'
+          color={inputColor}
+          mobileStyles={css`
+            font-size: 12px;
+          `}
+        >
           {title}
         </Text>
       )}
@@ -105,8 +114,12 @@ export const InputStyled = styled(Field)`
     background-color: transparent;
 
     font-weight: 600;
-    font-size: 14px;
-    line-height: 1.29;
+
+    font-size: 16px;
+    line-height: 18px;
+    ${getMobileStyles(css`
+      font-size: 14px;
+    `)}
 
     &:focus {
       outline: none;
