@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CalendarWeek } from './components/CalendarWeek'
 import { Calendar } from './components/Calendar'
 
 const CalendarPage = ({}) => {
@@ -6,6 +7,7 @@ const CalendarPage = ({}) => {
 
   return (
     <div>
+      <CalendarWeek selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
     </div>
   )
