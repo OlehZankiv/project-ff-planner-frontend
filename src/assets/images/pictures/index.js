@@ -7,4 +7,3 @@ export { default as Sidebars_3x } from './Sidebars@3x.png'
 export { default as Days_layout } from './Days_layout.png'
 export { default as Days_layout_2x } from './Days_layout@2x.png'
 export { default as Days_layout_3x } from './Days_layout@3x.png'
-
