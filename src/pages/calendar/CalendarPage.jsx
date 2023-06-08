@@ -7,7 +7,7 @@ const CalendarPage = ({}) => {
 
   return (
     <div>
-      <CalendarWeek />
+      <CalendarWeek selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
     </div>
   )
