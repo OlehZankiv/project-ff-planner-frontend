@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { CalendarWeek } from './components/CalendarWeek'
 import { Calendar } from './components/Calendar'
-import CalendarToolbar from '../calendar/components/calendarToolbar/CalendarToolbar'
+import CalendarToolbar from './components/calendarToolbar/CalendarToolbar'
 
 const CalendarPage = ({}) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -8,6 +9,7 @@ const CalendarPage = ({}) => {
   return (
     <div>
       <CalendarToolbar></CalendarToolbar>
+      <CalendarWeek selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
     </div>
   )

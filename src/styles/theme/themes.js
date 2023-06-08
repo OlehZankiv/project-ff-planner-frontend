@@ -27,7 +27,7 @@ export const lightTheme = themeCreator({
     error: '#E74A3B',
     success: '#3CBC81',
     content: '#ffffff',
-    icon: ' #343434',
+    icon: '#343434',
     text: '#111111',
 
     // Background
@@ -38,11 +38,11 @@ export const lightTheme = themeCreator({
 
     // Others
     feedbackModalLabels: '#5D5D5D',
-    userNameText: '#34343',
+    userNameText: '#343434',
     sideBarOverlay: '#e7ecfc79',
-    sidebarTitle: ' #999999',
+    sidebarTitle: '#999999',
     tabButtonActive: '#E3F3FF',
-    tabContent: ' #999999',
+    tabContent: '#999999',
     tabContentSelected: '#3e85f3',
     calendarBorder: '#E3E9EA',
     inputBorderDefault: '#DBDBDB',
@@ -61,6 +61,7 @@ export const lightTheme = themeCreator({
     modalsInputBackground: '#F7F7F7',
     modalsInputBorder: 'transparent',
     feedbackListBackground: '#e3f3ff',
+    calendarWeekDayText: '#21222C',
   },
   shadows,
   animation,
@@ -110,6 +111,7 @@ export const darkTheme = themeCreator({
     modalsInputBackground: 'transparent',
     modalsInputBorder: '#3A3B41',
     feedbackListBackground: '#21222C',
+    calendarWeekDayText: '#62636A',
   },
   shadows,
   animation,

@@ -30,5 +30,15 @@ export const en = {
   "password is a required field": "password is a required field",
   "password must be at least 4 characters": "password must be at least 4 characters",
   "Month": "Month",
-  "Day": "Day"
+  "Day": "Day",
+
+  // Week days
+  "Monday": "Monday",
+  "Tuesday": "Tuesday",
+  "Wednesday": "Wednesday",
+  "Thursday": "Thursday",
+  "Friday": "Friday",
+  "Saturday": "Saturday",
+  "Sunday": "Sunday",
 }
+
