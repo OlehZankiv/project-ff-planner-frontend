@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import styled, { css, useTheme } from 'styled-components'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 import { ROUTES } from '../../navigation/routes'
 
@@ -10,15 +10,18 @@ import { LoginIcon } from '../../assets/icons/LogInIcon';
 import { getBreakpointsStyles, getMobileStyles } from '../../styles/breakpoints';
 import { Button } from '../../components/buttons/Button';
 
+
 const Landing = () => {
   const { t } = useTranslation();
-  
+  const { colors } = useTheme();
+  const Navigate = useNavigate();
+
   return (
     <Container>
       <Hero>
         <AppLogo/>
         <LinkBox>          
-          <Button type='submit' variant='secondary' rightIcon={<LoginIcon />} title={t('Log in')} />
+          <Button type='submit' variant='secondary' rightIcon={<LoginIcon color={colors.primary} />} title={t('Log in')} onClick={() => Navigate(ROUTES.LOGIN)} />
           <SignupLink to={ROUTES.REGISTER}>{t('Sign Up')}</SignupLink>
         </LinkBox>
       </Hero>
@@ -123,6 +126,9 @@ margin-top: 32px;
     `})
   },
 `
+
+
+
 
 export const SignupLink = styled(NavLink)`
 ${({ theme }) => css`
