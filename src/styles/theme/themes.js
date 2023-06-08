@@ -36,6 +36,7 @@ export const lightTheme = themeCreator({
     secondaryBackground: '#dcebf7',
 
     // Others
+    feedbackModalLabels: '#5D5D5D',
     userNameText: '#34343',
     sideBarOverlay: '#e7ecfc79',
     sidebarTitle: ' #999999',
@@ -53,6 +54,11 @@ export const lightTheme = themeCreator({
     secondaryButtonText: '#343434',
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
+    starDefault: '#CEC9C1',
+    starActive: '#FFAC33',
+    modalsInputBackground: '#F7F7F7',
+    modalsInputBorder: 'transparent',
+    feedbackListBackground: '#e3f3ff',
   },
   shadows,
   animation,
@@ -77,6 +83,7 @@ export const darkTheme = themeCreator({
     secondaryBackground: '#dcebf7',
 
     // Others
+    feedbackModalLabels: '#5B5C61',
     userNameText: '#ffffff',
     sideBarOverlay: '#28282a79',
     sidebarTitle: '#585A5D',
@@ -94,6 +101,11 @@ export const darkTheme = themeCreator({
     secondaryButtonText: '#FFFFFF',
     modalBackground: '#171820',
     modalOverlay: '#3f3f3f',
+    starDefault: '#353647',
+    starActive: '#FFAC33',
+    modalsInputBackground: 'transparent',
+    modalsInputBorder: '#3A3B41',
+    feedbackListBackground: '#21222C',
   },
   shadows,
   animation,
