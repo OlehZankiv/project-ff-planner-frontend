@@ -30,6 +30,25 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
             id: 'awdwdw',
             title: 'All-day event',
             start: selectedDate,
+            backgroundColor: '#FCF0D4',
+            textColor: '#F3B249',
+            display: 'block',
+          },
+          {
+            id: 'awdwdw2',
+            title: 'All-day event',
+            start: selectedDate,
+            backgroundColor: '#FCF0D4',
+            textColor: '#F3B249',
+            display: 'block',
+          },
+          {
+            id: 'awdwdw3',
+            title: 'All-day event',
+            start: selectedDate,
+            backgroundColor: '#FCF0D4',
+            textColor: '#F3B249',
+            display: 'block',
           },
         ]}
         showNonCurrentDates={false}
@@ -58,7 +77,7 @@ const DayCell = styled.div`
 
     &.selected {
       background-color: ${colors.primary};
-      color: ${colors.white};
+      color: ${colors.white} !important ;
     }
 
     ${getMobileStyles(css`
@@ -100,19 +119,17 @@ const CalendarWrapper = styled.section`
         opacity: 0.7;
       }
     }
-  }
 
-  tr.fc-scrollgrid-section > td {
-    border: none !important;
-  }
+    td.fc-day-today .fc-daygrid-day-number div {
+      color: ${colors.primary};
+    }
 
-  td.fc-day-today,
-  td.fc-daygrid-day {
-    background-color: ${colors.content} !important;
-    border: 1px solid ${colors.calendarBorder};
-    cursor: pointer;
+    td.fc-day-today,
+    td.fc-daygrid-day {
+      background-color: ${colors.content} !important;
+      border: 1px solid ${colors.calendarBorder};
+      cursor: pointer;
 
-    .fc-daygrid-day-frame {
       ${getBreakpointsStyles({
         desktop: css`
           min-height: 125px;
@@ -124,6 +141,33 @@ const CalendarWrapper = styled.section`
           min-height: 94px;
         `,
       })}
+    }
+
+    .fc-daygrid-day-events {
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+      padding: 8px;
+      max-height: calc(34px * 5.5); // 5.5 events per day
+      overflow-y: auto;
+
+      .fc-event {
+        margin: 0;
+        border: none;
+        border-radius: 8px;
+        padding: 4px 10px;
+
+        .fc-event-time {
+          display: none;
+        }
+
+        .fc-event-title {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 18px;
+          text-overflow: ellipsis;
+        }
+      }
     }
   `}
 `
