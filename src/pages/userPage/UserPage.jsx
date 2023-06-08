@@ -53,7 +53,13 @@ const UserPage = () => {
   return (
     <UserWrapper>
       <Avatar type='profile' plus={true} styles={styles} onPlusHandler={onPlusHandler}></Avatar>
-      <Text type='p' color='userNameText' fontWeight={1000} fontSize={nameFontSize}>
+      <Text
+        type='p'
+        color='userNameText'
+        fontWeight={1000}
+        fontSize={nameFontSize}
+        style={{ textAlign: 'center' }}
+      >
         {userName}
       </Text>
       <UserText>User</UserText>
@@ -196,7 +202,7 @@ export const UserWrapper = styled.div`
     width: calc(100% - 20px);
     min-height: 474px;
     /* margin-top: 151px; */
-    background-color: ${colors.mainBackground};
+    background-color: ${colors.content};
     color: white;
     justify-content: center;
     border-radius: 16px;

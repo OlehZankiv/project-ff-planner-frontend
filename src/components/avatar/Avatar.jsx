@@ -75,6 +75,7 @@ export const AvatarWrapper = styled.div`
     border-radius: 50%;
     display: flex;
     align-items: center;
+    justify-content: center;
     width: ${mobileSize}px;
     height: ${mobileSize}px;
     border: 2px solid ${colors.primary};
