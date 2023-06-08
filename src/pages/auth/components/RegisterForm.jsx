@@ -9,6 +9,7 @@ import { Text } from '../../../components'
 import { css } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
+import { Spinner } from './Spinner'
 
 const initialValues = {
   name: '',
@@ -82,8 +83,8 @@ export const RegisterForm = () => {
             style={{ marginTop: '8px' }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon />}
-            title={t('Sign Up')}
+            rightIcon={isLoading ? <Spinner /> : <LoginIcon />}
+            title={isLoading ? t('Loading') : t('Sign up')}
             variant='primary'
           />
           <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />

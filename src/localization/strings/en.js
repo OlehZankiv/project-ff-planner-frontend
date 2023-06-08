@@ -11,6 +11,7 @@ export const en = {
   "Let go of the past and focus on the present!": "Let go of the past and focus on the present!",
   "Log In": "Log In",
   "Log out": "Log out",
+  "Loading": "Loading",
   "My Account": "My Account",
   "Name": "Name",
   "Password": "Password",

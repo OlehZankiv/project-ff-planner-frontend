@@ -8,6 +8,8 @@ import { css } from 'styled-components'
 import { LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
 import { useLogin } from '../../../hooks/query'
+import { Spinner } from '../components/Spinner'
+
 
 const initialValues = {
   email: '',
@@ -71,8 +73,8 @@ export const LogInForm = () => {
             style={{ marginTop: '8px' }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon />}
-            title={t('Log In')}
+            rightIcon={isLoading ? <Spinner /> : <LoginIcon />}
+            title={isLoading ? t('Loading') : t('Log In')}
             variant='primary'
           />
           <AuthNavigate text={t('Sign Up')} route={ROUTES.REGISTER} />
