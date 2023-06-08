@@ -11,6 +11,20 @@ export const GlobalStyle = createGlobalStyle`
       font-family: 'Inter', sans-serif;
     }
 
+    *::-webkit-scrollbar-track {
+      background: ${colors.scrollbarTrackBackground};
+      border-radius: 12px;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: rgba(52, 52, 52, 0.2);
+      border-radius: 12px;
+    }
+
     body {
       margin: 0;
       padding: 0;

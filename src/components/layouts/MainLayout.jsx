@@ -14,7 +14,7 @@ import {
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
-import FeedbackModal from '../../pages/FeedbackModal'
+import { FeedbackModal } from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
 
