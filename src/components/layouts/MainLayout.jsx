@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -16,6 +16,7 @@ import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
 import FeedbackModal from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
+import { useAuthContext } from '../../contexts/auth'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
@@ -23,9 +24,13 @@ export const MainLayout = () => {
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
 
+  const { logger } = useAuthContext()
+
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [selectedRoute, setSelectedRoute] = useState(ROUTES.CALENDAR)
+
+  const location = useLocation()
+  const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -35,8 +40,6 @@ export const MainLayout = () => {
     tabletValue: 18,
     desktopValue: 18,
   })
-
-  const userName = 'Yuliia'
 
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
@@ -51,6 +54,8 @@ export const MainLayout = () => {
     [ROUTES.PROFILE]: t('User Profile'),
     [ROUTES.CALENDAR]: t('Calendar'),
   }
+
+  const userName = logger?.name || t('Default')
 
   return (
     <MainWrap>
@@ -214,14 +219,10 @@ const DesktopTitleWrap = styled.div`
 `
 
 const OutletWrapper = styled.div`
-  padding: 64px 20px 40px 20px;
   z-index: 0;
-  ${getBreakpointsStyles({
-    tablet: css`
-      padding: 64px 32px 32px 32px;
-    `,
-    desktop: css`
-      padding: 32px;
-    `,
-  })}
+  margin-top: 64px;
+
+  ${getDesktopStyles(css`
+    margin-top: 32px;
+  `)}
 `
