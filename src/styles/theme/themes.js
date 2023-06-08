@@ -12,13 +12,14 @@ const animation = {
 const shadows = {
   modalShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
   buttonShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
-  hedingShadow: '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
+  headingShadow: '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
   secondButtonShadow: '4px 2px 16px rgba(97, 97, 97, 0.1)',
   titleShadow: '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
 }
 
 export const lightTheme = themeCreator({
   colors: {
+    // Main
     white: '#ffffff',
     black: '#000000',
     primary: '#3e85f3',
@@ -29,30 +30,27 @@ export const lightTheme = themeCreator({
     icon: ' #343434',
     text: '#111111',
 
+    // Background
     mainBackground: '#F7F6F9',
     background: '#ffffff',
     secondaryBackground: '#dcebf7',
 
-
+    // Others
     userNameText: '#34343',
     sideBarOverlay: '#e7ecfc79',
     sidebarTitle: ' #999999',
     tabButtonActive: '#E3F3FF',
     tabContent: ' #999999',
     tabContentSelected: '#3e85f3',
-
     calendarBorder: '#E3E9EA',
-
     inputBorderDefault: '#DBDBDB',
     placeholderColor: '#DCE3E5',
     inputLabel: '#111111',
-
     primaryButtonActive: '#2971e1',
     primaryButtonHover: '#2b78ef',
     secondaryButtonHover: '#d5deec',
     secondaryButtonActive: '#c6cfda',
     secondaryButtonText: '#343434',
-
     modalBackground: '#ffffff',
     modalOverlay: '#13151A',
   },
@@ -62,6 +60,7 @@ export const lightTheme = themeCreator({
 
 export const darkTheme = themeCreator({
   colors: {
+    // Main
     white: '#ffffff',
     black: '#000000',
     primary: '#3e85f3',
@@ -72,29 +71,27 @@ export const darkTheme = themeCreator({
     icon: '#ffffff',
     text: '#ffffff',
 
+    // Background
     mainBackground: '#171820',
     background: '#13151A',
     secondaryBackground: '#dcebf7',
 
+    // Others
     userNameText: '#ffffff',
     sideBarOverlay: '#28282a79',
     sidebarTitle: '#585A5D',
     tabButtonActive: '#3e85f3',
     tabContent: '#ffffff',
     tabContentSelected: '#ffffff',
-
     calendarBorder: '#42434C',
-
     placeholderColor: '#86888a',
     inputBorderDefault: '#9d9d9d',
     inputLabel: '#62636A',
-
     primaryButtonActive: '#2971e1',
     primaryButtonHover: '#2b78ef',
     secondaryButtonHover: '#21232c',
     secondaryButtonActive: '#16181e',
     secondaryButtonText: '#FFFFFF',
-
     modalBackground: '#171820',
     modalOverlay: '#3f3f3f',
   },

@@ -1,6 +1,5 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-// import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 import { ROUTES } from '../navigation/routes'
 
@@ -10,11 +9,13 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../styles/breakpoints'
-import { CloseIcon, UserCheckIcon, CalendarCheckOutIcon, LogOutIcon } from '../assets/icons'
+import { CalendarCheckOutIcon, CloseIcon, LogOutIcon, UserCheckIcon } from '../assets/icons'
 import { AppLogo } from './AppLogo'
 import { OpacityButton } from './buttons/OpacityButton'
 import { Button } from './buttons/Button'
 import { Text } from './Text'
+import { useNavigate } from 'react-router-dom'
+import { useLogout } from '../hooks/query'
 
 const tabs = [
   {
@@ -32,47 +33,47 @@ const tabs = [
 ]
 
 export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, setSelectedTab }) => {
-  // const navigate = useNavigate()
-  const theme = useTheme()
-  const owerlayRef = useRef()
+  const { logout } = useLogout()
+
+  const navigate = useNavigate()
+  const { colors } = useTheme()
   const { t } = useTranslation()
+
+  const overlayRef = useRef()
+
   const iconCheckSize = useBreakpointValue({ mobileValue: 20, tabletValue: 24, desktopValue: 24 })
   const iconLogOutSize = useBreakpointValue({ mobileValue: 18, tabletValue: 20, desktopValue: 20 })
-  const iconClozeSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
+  const iconCloseSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
 
-  const handleOwerlayClick = (e) => {
-    if (e.target === owerlayRef.current) {
+  const handleOverlayClick = (e) => {
+    if (e.target === overlayRef.current) {
       setIsBurgerMenuOpen(false)
     }
   }
 
   const handleChangeTab = (type, route) => {
     setSelectedTab(type)
-    console.log(route)
-    // navigate(`${route}`)
+    navigate(route)
   }
-
-  const handleLogOut = () => {}
 
   return (
     <SidebarOverlay
-      theme={theme}
-      onClick={handleOwerlayClick}
-      ref={owerlayRef}
+      onClick={handleOverlayClick}
+      ref={overlayRef}
       isBurgerMenuOpen={isBurgerMenuOpen}
     >
-      <SidebarWrap isBurgerMenuOpen={isBurgerMenuOpen} theme={theme}>
+      <SidebarWrap isBurgerMenuOpen={isBurgerMenuOpen}>
         <div style={{ width: '100%' }}>
           <TopBox>
-            <AppLogo orientation='horezontal' />
+            <AppLogo orientation='horizontal' />
             <OpacityButton>
               <CloseIconWrap onClick={() => setIsBurgerMenuOpen(false)}>
-                <CloseIcon size={iconClozeSize} color={theme.colors.icon} />
+                <CloseIcon size={iconCloseSize} color={colors.icon} />
               </CloseIconWrap>
             </OpacityButton>
           </TopBox>
           <div style={{ width: '100%' }}>
-            <Text type='p' fontWeight={600} color={'sidebarTitle'}>
+            <Text type='p' fontWeight={600} color='sidebarTitle'>
               {t('User Panel')}
             </Text>
             <TabsWrap>
@@ -80,21 +81,16 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
                 <OpacityButton key={type} style={{ width: '100%' }}>
                   <NavButton
                     selected={selectedTab === type}
-                    theme={theme}
                     onClick={() => handleChangeTab(type, route)}
                   >
                     <Icon
                       size={iconCheckSize}
-                      color={
-                        selectedTab === type
-                          ? theme.colors.tabContentSelected
-                          : theme.colors.tabContent
-                      }
+                      color={selectedTab === type ? colors.tabContentSelected : colors.tabContent}
                     />
                     <Text
                       type='p'
                       fontWeight={600}
-                      color={`${selectedTab === type ? 'tabContentSelected' : 'tabContent'}`}
+                      color={selectedTab === type ? 'tabContentSelected' : 'tabContent'}
                     >
                       {t(text)}
                     </Text>
@@ -107,8 +103,8 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
         <Button
           isDefaultShadow
           title={t('Log out')}
-          onClick={handleLogOut}
-          rightIcon={<LogOutIcon size={iconLogOutSize} color={theme.colors.white} />}
+          onClick={logout}
+          rightIcon={<LogOutIcon size={iconLogOutSize} color={colors.white} />}
         />
       </SidebarWrap>
     </SidebarOverlay>

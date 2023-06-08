@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -7,21 +7,22 @@ import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
 import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
 import {
-  useBreakpointValue,
   getBreakpointsStyles,
   getDesktopStyles,
+  useBreakpointValue,
 } from '../../styles/breakpoints'
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
-import { Loader } from '../Loader'
 import { Button } from '../buttons/Button'
 
 export const MainLayout = () => {
+  const { colors, shadows } = useTheme()
   const { t } = useTranslation()
+  const { themeType, setThemeType } = useAppThemeContext()
+
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState('calendar')
-  const { themeType, setThemeType } = useAppThemeContext()
-  const theme = useTheme()
+
   const iconSize = useBreakpointValue({ mobileValue: 24, tabletValue: 32, desktopValue: 32 })
   const nameFontSize = useBreakpointValue({
     mobileValue: 14,
@@ -31,20 +32,17 @@ export const MainLayout = () => {
 
   const userName = 'Yuliia'
 
-  const handleThemeChange = () => {
-    setThemeType(themeType === 'light' ? 'dark' : 'light')
-  }
+  const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
-  const firstLetersMaker = (str) => {
-    return str
+  const firstLettersMaker = (str) =>
+    str
       .split(' ')
       .map((word) => word[0].toUpperCase())
       .join('')
       .slice(0, 2)
-  }
 
   return (
-    <MainWrap theme={theme}>
+    <MainWrap>
       <SideBar
         isBurgerMenuOpen={isBurgerMenuOpen}
         setIsBurgerMenuOpen={setIsBurgerMenuOpen}
@@ -57,7 +55,7 @@ export const MainLayout = () => {
             <HeaderWrap>
               <BurgerWrap>
                 <ButtonWrap onClick={() => setIsBurgerMenuOpen(true)}>
-                  <BurgerMenuIcon size={iconSize} color={theme.colors.icon} />{' '}
+                  <BurgerMenuIcon size={iconSize} color={colors.icon} />
                 </ButtonWrap>
               </BurgerWrap>
               <DesktopTitleWrap>
@@ -66,10 +64,8 @@ export const MainLayout = () => {
                   fontSize={32}
                   fontWeight={700}
                   lineHeight={1}
-                  color={theme.colors.text}
-                  style={{
-                    textShadow: theme.shadows.hedingShadow,
-                  }}
+                  color={colors.text}
+                  style={{ textShadow: shadows.headingShadow }}
                 >
                   {selectedTab === 'calendar' ? t('Calendar') : t('User Profile')}
                 </Text>
@@ -80,29 +76,29 @@ export const MainLayout = () => {
                   <OpacityButton>
                     <ButtonWrap onClick={handleThemeChange}>
                       {themeType === 'light' ? (
-                        <MoonIcon size={iconSize} color={theme.colors.primary} />
+                        <MoonIcon size={iconSize} color={colors.primary} />
                       ) : (
-                        <SunIcon size={iconSize} color={theme.colors.primary} />
+                        <SunIcon size={iconSize} color={colors.primary} />
                       )}
                     </ButtonWrap>
                   </OpacityButton>
                   <Text
                     type='p'
-                    color={theme.colors.userNameText}
+                    color={colors.userNameText}
                     fontWeight={700}
                     fontSize={nameFontSize}
                   >
                     {userName}
                   </Text>
                   <OpacityButton>
-                    <AvatarWrap theme={theme} onClick={() => setSelectedTab('profile')}>
+                    <AvatarWrap onClick={() => setSelectedTab('profile')}>
                       <Text
                         type='p'
-                        color={theme.colors.userNameText}
+                        color={colors.userNameText}
                         fontWeight={700}
                         fontSize={nameFontSize}
                       >
-                        {firstLetersMaker(userName)}
+                        {firstLettersMaker(userName)}
                       </Text>
                     </AvatarWrap>
                   </OpacityButton>
@@ -111,11 +107,9 @@ export const MainLayout = () => {
             </HeaderWrap>
           </Container>
         </Header>
-        <Outletwrap>
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </Outletwrap>
+        <OutletWrapper>
+          <Outlet />
+        </OutletWrapper>
       </ContentWrap>
     </MainWrap>
   )
@@ -210,7 +204,7 @@ const DesktopTitleWrap = styled.div`
   `)}
 `
 
-const Outletwrap = styled.div`
+const OutletWrapper = styled.div`
   padding: 64px 20px 40px 20px;
   ${getBreakpointsStyles({
     tablet: css`
