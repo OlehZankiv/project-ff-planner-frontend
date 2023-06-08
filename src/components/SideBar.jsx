@@ -14,28 +14,29 @@ import { AppLogo } from './AppLogo'
 import { OpacityButton } from './buttons/OpacityButton'
 import { Button } from './buttons/Button'
 import { Text } from './Text'
-import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../hooks/query'
 
 const tabs = [
   {
-    type: 'profile',
     text: 'My Account',
     Icon: UserCheckIcon,
-    route: '/profile',
+    route: ROUTES.PROFILE,
   },
   {
-    type: 'calendar',
     text: 'Calendar',
     Icon: CalendarCheckOutIcon,
     route: ROUTES.CALENDAR,
   },
 ]
 
-export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, setSelectedTab }) => {
+export const SideBar = ({
+  isBurgerMenuOpen,
+  setIsBurgerMenuOpen,
+  selectedRoute,
+  setSelectedRoute,
+}) => {
   const { logout } = useLogout()
 
-  const navigate = useNavigate()
   const { colors } = useTheme()
   const { t } = useTranslation()
 
@@ -51,18 +52,13 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
     }
   }
 
-  const handleChangeTab = (type, route) => {
-    setSelectedTab(type)
-    navigate(route)
-  }
-
   return (
     <SidebarOverlay
       onClick={handleOverlayClick}
       ref={overlayRef}
       isBurgerMenuOpen={isBurgerMenuOpen}
     >
-      <SidebarWrap isBurgerMenuOpen={isBurgerMenuOpen}>
+      <SidebarWrapper isBurgerMenuOpen={isBurgerMenuOpen}>
         <div style={{ width: '100%' }}>
           <TopBox>
             <AppLogo orientation='horizontal' />
@@ -77,20 +73,20 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
               {t('User Panel')}
             </Text>
             <TabsWrap>
-              {tabs.map(({ type, Icon, text, route }) => (
+              {tabs.map(({ Icon, text, route }) => (
                 <NavButton
-                  key={type}
-                  selected={selectedTab === type}
-                  onClick={() => handleChangeTab(type, route)}
+                  key={route}
+                  selected={selectedRoute === route}
+                  onClick={() => setSelectedRoute(route)}
                 >
                   <Icon
                     size={iconCheckSize}
-                    color={selectedTab === type ? colors.tabContentSelected : colors.tabContent}
+                    color={selectedRoute === route ? colors.tabContentSelected : colors.tabContent}
                   />
                   <Text
                     type='p'
                     fontWeight={600}
-                    color={selectedTab === type ? 'tabContentSelected' : 'tabContent'}
+                    color={selectedRoute === route ? 'tabContentSelected' : 'tabContent'}
                   >
                     {t(text)}
                   </Text>
@@ -102,16 +98,18 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
         <Button
           isDefaultShadow
           title={t('Log out')}
+          buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
           onClick={logout}
           rightIcon={<LogOutIcon size={iconLogOutSize} color={colors.white} />}
         />
-      </SidebarWrap>
+      </SidebarWrapper>
     </SidebarOverlay>
   )
 }
 
 const SidebarOverlay = styled.div`
   ${({ isBurgerMenuOpen, theme }) => css`
+    z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
@@ -141,7 +139,7 @@ const SidebarOverlay = styled.div`
   `}
 `
 
-const SidebarWrap = styled.div`
+const SidebarWrapper = styled.div`
   ${({ isBurgerMenuOpen, theme }) => css`
     transform: translateX(-100%);
     ${isBurgerMenuOpen && 'transform: translateX(0);'}
