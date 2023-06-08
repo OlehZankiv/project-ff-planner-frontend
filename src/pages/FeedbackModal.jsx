@@ -17,10 +17,6 @@ const FeedbackModal = ({}) => {
 
   const stars = Array(5).fill(0)
 
-  const handleChange = (event) => {
-    setReviewText(event.target.value)
-  }
-
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
@@ -63,7 +59,7 @@ const FeedbackModal = ({}) => {
                 )
               })}
             </div>
-            <Textarea label={'Review'} placeholder={'Enter text'} onChange={handleChange} />
+            <Textarea label={t('Review')} placeholder={t('Enter text')} onChange={(event) => setReviewText(event.target.value)} />
             <Button type={'submit'} fullWidth title={t('Save')} onClick={feedbackSubmit} />
           </form>
           <FeedbackList>
@@ -148,7 +144,7 @@ const Wrapper = styled.div`
 
 const styles = {
   feedback_form: {
-    width: '404px',
+    maxWidth: '404px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'left',
@@ -185,7 +181,7 @@ const styles = {
 }
 
 const FeedbackList = styled.ul`
-  width: 404px;
+  max-width: 404px;
   list-style: none;
   padding: 16px;
   background-color: #e3f3ff;
