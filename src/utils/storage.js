@@ -3,9 +3,11 @@ export const STORAGE_KEYS = {
   LOGGER: 'LOGGER',
 }
 
-export const getStorageItem = (key, defaultValue = '') => {
+export const getStorageItem = (key, defaultValue = '', isString = true) => {
   try {
-    return JSON.parse(localStorage.getItem(key)) ?? defaultValue
+    return isString
+      ? localStorage.getItem(key)
+      : JSON.parse(localStorage.getItem(key)) ?? defaultValue
   } catch (_) {
     return defaultValue
   }
@@ -13,7 +15,7 @@ export const getStorageItem = (key, defaultValue = '') => {
 
 export const setStorageItem = (key, value) => {
   try {
-    localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value))
   } catch (e) {
     console.error(e)
   }

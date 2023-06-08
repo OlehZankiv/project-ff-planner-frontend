@@ -7,19 +7,20 @@ const shadows = {
   modalShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
   buttonShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
   secondButtonShadow: '4px 2px 16px rgba(97, 97, 97, 0.1)',
+  titleShadow: '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
 }
 
 export const lightTheme = themeCreator({
   colors: {
     background: '#ffffff',
+    secondaryBackground: '#dcebf7',
     text: '#111111',
     primary: '#3e85f3',
-    white: '#ffffff',
-    black: '#000000',
-    secondary: '#E5EDFA',
+    hoverPrimary: '#2b78ef',
+    textRed: '#da1414',
     error: '#E74A3B',
     success: '#3CBC81',
-    content: '#ffffff',
+    white: '#ffffff',
 
     calendarBorder: '#E3E9EA',
     inputBorderDefault: '#DBDBDB',
@@ -41,6 +42,7 @@ export const lightTheme = themeCreator({
 export const darkTheme = themeCreator({
   colors: {
     background: '#13151A',
+    secondaryBackground: '#dcebf7',
     text: '#ffffff',
     primary: '#3e85f3',
     white: '#ffffff',
