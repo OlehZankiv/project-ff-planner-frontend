@@ -1,19 +1,14 @@
 import styled, { css, useTheme } from 'styled-components'
-import {
-  getBreakpointsStyles,
-  getDesktopStyles,
-  getTabletStyles,
-} from '../styles/breakpoints.js'
-import { Modal, Button } from '../components'
+import { getBreakpointsStyles, getDesktopStyles, getTabletStyles } from '../styles/breakpoints.js'
+import { Modal, Button, Textarea } from '../components'
 // import { Textarea, Ratings } from '../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StarIcon } from '../assets/icons'
 
-
 const FeedbackModal = ({}) => {
   const { t } = useTranslation()
-  const {colors} = useTheme()
+  const { colors } = useTheme()
 
   const [visible, setVisible] = useState(true)
   const [ratingValue, setRatingValue] = useState(0)
@@ -22,17 +17,15 @@ const FeedbackModal = ({}) => {
 
   const stars = Array(5).fill(0)
 
-  const handleChange = ( event ) => {
-
-    console.log('event', event.target.value)
+  const handleChange = (event) => {
     setReviewText(event.target.value)
   }
 
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
-    const review = {rating: ratingValue, review: reviewText}
-    console.log ('form data:', review)
+    const review = { rating: ratingValue, review: reviewText }
+    console.log('form data:', review)
   }
 
   const tempFeedback1 =
@@ -55,10 +48,14 @@ const FeedbackModal = ({}) => {
               {stars.map((_, index) => {
                 return (
                   <StarIcon
-                    key={index}       
-                    size={24}             
+                    key={index}
+                    size={24}
                     style={{ cursor: 'pointer', marginRight: '2px' }}
-                    color={(ratingValue || ratingHoverValue) > index ? colors.starActive : colors.starDefault}
+                    color={
+                      (ratingValue || ratingHoverValue) > index
+                        ? colors.starActive
+                        : colors.starDefault
+                    }
                     onClick={() => setRatingValue(() => index + 1)}
                     onMouseOver={() => setRatingHoverValue(() => index + 1)}
                     onMouseLeave={() => setRatingHoverValue(() => undefined)}
@@ -66,18 +63,8 @@ const FeedbackModal = ({}) => {
                 )
               })}
             </div>
-            <label htmlFor='feedback' style={styles.label}>
-              Review
-            </label>
-            <textarea type='text' id='feedback' style={styles.textarea} placeholder='Enter text' onChange={handleChange}/>
-            {/* <Ratings/>
-            <Textarea label={'Review'} placeholder={'Enter text'}/> */}
-            <Button 
-                type={'submit'}
-                fullWidth
-                title={t('Save')}
-                onClick={feedbackSubmit}
-            />
+            <Textarea label={'Review'} placeholder={'Enter text'} onChange={handleChange} />
+            <Button type={'submit'} fullWidth title={t('Save')} onClick={feedbackSubmit} />
           </form>
           <FeedbackList>
             <ul>
@@ -89,7 +76,14 @@ const FeedbackModal = ({}) => {
                   <p style={styles.p}>Nadiia Doe</p>
                   <div style={styles.feedback_rating}>
                     {stars.map((_, index) => {
-                      return <StarIcon key={index} size={14} style={{ marginRight: 10 }} color={'#CEC9C1'}/>
+                      return (
+                        <StarIcon
+                          key={index}
+                          size={14}
+                          style={{ marginRight: 10 }}
+                          color={'#CEC9C1'}
+                        />
+                      )
                     })}
                   </div>
                   <div>{tempFeedback1}</div>
@@ -103,7 +97,14 @@ const FeedbackModal = ({}) => {
                   <p style={styles.p}>Nadiia Doe</p>
                   <div style={styles.feedback_rating}>
                     {stars.map((_, index) => {
-                      return <StarIcon key={index} size={14} style={{ marginRight: 10 }} color={'#CEC9C1'} />
+                      return (
+                        <StarIcon
+                          key={index}
+                          size={14}
+                          style={{ marginRight: 10 }}
+                          color={'#CEC9C1'}
+                        />
+                      )
                     })}
                   </div>
                   <div>{tempFeedback2}</div>
@@ -162,15 +163,6 @@ const styles = {
     marginBottom: '24px',
   },
 
-  textarea: {
-    height: '127px',
-    backgroundColor: '#F6F6F6',
-    borderRadius: '8px',
-    border: '0px',
-    padding: '14px 18px',
-    marginBottom: '18px',
-  },
-
   feedback_avatar: {
     width: '40px',
     alignItems: 'top',
@@ -196,7 +188,7 @@ const FeedbackList = styled.ul`
   width: 404px;
   list-style: none;
   padding: 16px;
-  background-color: #E3F3FF;
+  background-color: #e3f3ff;
   border-radius: 8px;
   max-height: 292px;
 
@@ -205,5 +197,4 @@ const FeedbackList = styled.ul`
     flex-direction: raw;
     margin-bottom: 20px;
   }
-
 `
