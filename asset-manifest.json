@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/project-ff-planner-frontend/static/js/main.232e0eec.js",
+    "main.js": "/project-ff-planner-frontend/static/js/main.d920dff9.js",
     "static/js/76.3e443de5.chunk.js": "/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js",
     "static/js/862.b0ab0389.chunk.js": "/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js",
     "static/js/594.31d1013c.chunk.js": "/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js",
@@ -15,7 +15,7 @@
     "static/media/Goose_logo@3x.png": "/project-ff-planner-frontend/static/media/Goose_logo@3x.d73dbd28bcd3a3c78851.png",
     "static/media/Goose_logo@2x.png": "/project-ff-planner-frontend/static/media/Goose_logo@2x.0ee3f1d502d3cf760160.png",
     "index.html": "/project-ff-planner-frontend/index.html",
-    "main.232e0eec.js.map": "/project-ff-planner-frontend/static/js/main.232e0eec.js.map",
+    "main.d920dff9.js.map": "/project-ff-planner-frontend/static/js/main.d920dff9.js.map",
     "76.3e443de5.chunk.js.map": "/project-ff-planner-frontend/static/js/76.3e443de5.chunk.js.map",
     "862.b0ab0389.chunk.js.map": "/project-ff-planner-frontend/static/js/862.b0ab0389.chunk.js.map",
     "594.31d1013c.chunk.js.map": "/project-ff-planner-frontend/static/js/594.31d1013c.chunk.js.map",
@@ -24,6 +24,6 @@
     "343.458d2201.chunk.js.map": "/project-ff-planner-frontend/static/js/343.458d2201.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.232e0eec.js"
+    "static/js/main.d920dff9.js"
   ]
 }
