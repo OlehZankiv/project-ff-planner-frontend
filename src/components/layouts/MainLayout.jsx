@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +15,7 @@ import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
 import FeedbackModal from '../../pages/FeedbackModal'
+import { ROUTES } from '../../navigation/routes'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
@@ -24,7 +25,9 @@ export const MainLayout = () => {
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [selectedTab, setSelectedTab] = useState('calendar')
+  const [selectedRoute, setSelectedRoute] = useState(ROUTES.CALENDAR)
+
+  useEffect(() => navigate(selectedRoute), [selectedRoute])
 
   const iconSize = useBreakpointValue({ mobileValue: 24, tabletValue: 32, desktopValue: 32 })
   const nameFontSize = useBreakpointValue({
@@ -44,13 +47,18 @@ export const MainLayout = () => {
       .join('')
       .slice(0, 2)
 
+  const routeTitles = {
+    [ROUTES.PROFILE]: t('User Profile'),
+    [ROUTES.CALENDAR]: t('Calendar'),
+  }
+
   return (
     <MainWrap>
       <SideBar
         isBurgerMenuOpen={isBurgerMenuOpen}
         setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-        selectedTab={selectedTab}
-        setSelectedTab={setSelectedTab}
+        selectedRoute={selectedRoute}
+        setSelectedRoute={setSelectedRoute}
       />
       <ContentWrap>
         <Header>
@@ -70,11 +78,11 @@ export const MainLayout = () => {
                   color={colors.text}
                   style={{ textShadow: shadows.headingShadow }}
                 >
-                  {selectedTab === 'calendar' ? t('Calendar') : t('User Profile')}
+                  {routeTitles[selectedRoute]}
                 </Text>
               </DesktopTitleWrap>
               <TabWrap>
-                {selectedTab === 'calendar' && (
+                {selectedRoute === ROUTES.CALENDAR && (
                   <>
                     <Button title={t('Feedback')} onClick={() => setFeedbackModalVisible(true)} />
                     <FeedbackModal
@@ -100,13 +108,7 @@ export const MainLayout = () => {
                     {userName}
                   </Text>
                   <OpacityButton>
-                    <AvatarWrap
-                      onClick={() => {
-                        navigate('/profile')
-
-                        setSelectedTab('profile')
-                      }}
-                    >
+                    <AvatarWrap onClick={() => setSelectedRoute(ROUTES.PROFILE)}>
                       <Text
                         type='p'
                         color={colors.userNameText}

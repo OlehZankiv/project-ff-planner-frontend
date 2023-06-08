@@ -31,37 +31,27 @@ export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
       <OpacityButton hoverOpacity={0.975} activeOpacity={0.9} onClick={onClose}>
         <Overlay visible={visible} />
       </OpacityButton>
-      <Wrapper>
-        <ModalWindow style={style} visible={visible}>
-          <CloseButtonWrapper onClick={onClose}>
-            <CloseIcon color={colors.text} />
-          </CloseButtonWrapper>
-          {children}
-        </ModalWindow>
-      </Wrapper>
+      <ModalWindow style={style} visible={visible}>
+        <CloseButtonWrapper onClick={onClose}>
+          <CloseIcon color={colors.text} />
+        </CloseButtonWrapper>
+        {children}
+      </ModalWindow>
     </>,
     document.querySelector('#modal-root'),
   )
 }
 
-const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  pointer-events: none;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
 const ModalWindow = styled.div`
   ${({ theme: { colors, shadows }, visible }) => css`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: fit-content;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     visibility: ${visible ? 'visible' : 'hidden'};
-    transform: scale(${visible ? 1 : 0});
+    transform: translate(-50%, -50%) scale(${visible ? 1 : 0});
     transition: transform 0.2s;
     background-color: ${colors.modalBackground};
     box-shadow: ${shadows.modalShadow};
