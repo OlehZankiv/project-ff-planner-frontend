@@ -1,6 +1,6 @@
 import styled, { css, useTheme } from 'styled-components'
 import { getBreakpointsStyles, getDesktopStyles, getTabletStyles } from '../styles/breakpoints.js'
-import { Modal, Button, Textarea } from '../components'
+import { Modal, Button, Textarea, Ratings } from '../components'
 // import { Textarea, Ratings } from '../components'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,11 +8,12 @@ import { StarIcon } from '../assets/icons'
 
 const FeedbackModal = ({}) => {
   const { t } = useTranslation()
+
   const { colors } = useTheme()
+  console.log(colors)
 
   const [visible, setVisible] = useState(true)
   const [ratingValue, setRatingValue] = useState(0)
-  const [ratingHoverValue, setRatingHoverValue] = useState(undefined)
   const [reviewText, setReviewText] = useState(undefined)
 
   const stars = Array(5).fill(0)
@@ -37,29 +38,12 @@ const FeedbackModal = ({}) => {
       >
         <div>
           <form style={styles.feedback_form}>
-            <label htmlFor='rating' style={styles.label}>
-              Rating
-            </label>
-            <div id='rating' style={styles.rating}>
-              {stars.map((_, index) => {
-                return (
-                  <StarIcon
-                    key={index}
-                    size={24}
-                    style={{ cursor: 'pointer', marginRight: '2px' }}
-                    color={
-                      (ratingValue || ratingHoverValue) > index
-                        ? colors.starActive
-                        : colors.starDefault
-                    }
-                    onClick={() => setRatingValue(() => index + 1)}
-                    onMouseOver={() => setRatingHoverValue(() => index + 1)}
-                    onMouseLeave={() => setRatingHoverValue(() => undefined)}
-                  />
-                )
-              })}
-            </div>
-            <Textarea label={t('Review')} placeholder={t('Enter text')} onChange={(event) => setReviewText(event.target.value)} />
+            <Ratings onInputValueChange={(value) => setRatingValue(value)} />
+            <Textarea
+              label={t('Review')}
+              placeholder={t('Enter text')}
+              onChange={(event) => setReviewText(event.target.value)}
+            />
             <Button type={'submit'} fullWidth title={t('Save')} onClick={feedbackSubmit} />
           </form>
           <FeedbackList>

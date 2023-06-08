@@ -1,5 +1,7 @@
-export const StarIcon = ({ color, size, onClick, onMouseOver, onMouseLeave, style }) => (
-  <svg
+import styled from 'styled-components'
+
+export const StarIcon = ({ color, size, onClick, onMouseOver, onMouseLeave }) => (
+  <Icon
     width={size}
     height={size}
     viewBox='0 0 22 22'
@@ -13,8 +15,12 @@ export const StarIcon = ({ color, size, onClick, onMouseOver, onMouseLeave, styl
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
-      style={style}
       strokeWidth='1.2'
     />
-  </svg>
+  </Icon>
 )
+
+const Icon = styled.svg`
+  cursor: pointer;
+  margin-right: 2px;
+`
