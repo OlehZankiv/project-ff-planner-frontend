@@ -103,10 +103,19 @@ const DayCell = styled.div`
 
 const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
-    table {
-      border-radius: 8px;
+    .fc.fc-media-screen {
       border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
+    }
+
+    table {
+      border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
       overflow: hidden;
+    }
+
+    .fc-scrollgrid {
+      border-collapse: collapse;
     }
 
     td.fc-day {

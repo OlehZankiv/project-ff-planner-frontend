@@ -16,12 +16,15 @@ import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
 import FeedbackModal from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
+import { useAuthContext } from '../../contexts/auth'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
+
+  const { logger } = useAuthContext()
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -36,8 +39,6 @@ export const MainLayout = () => {
     desktopValue: 18,
   })
 
-  const userName = 'Yuliia'
-
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
   const firstLettersMaker = (str) =>
@@ -51,6 +52,10 @@ export const MainLayout = () => {
     [ROUTES.PROFILE]: t('User Profile'),
     [ROUTES.CALENDAR]: t('Calendar'),
   }
+
+  if (!logger) return null
+
+  const userName = logger.name
 
   return (
     <MainWrap>
