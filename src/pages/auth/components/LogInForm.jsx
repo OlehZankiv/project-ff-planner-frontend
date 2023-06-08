@@ -7,6 +7,7 @@ import { Button, Input, Text } from '../../../components'
 import { css } from 'styled-components'
 import { LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
+import { useLogin } from '../../../hooks/query'
 
 const initialValues = {
   email: '',
@@ -15,11 +16,16 @@ const initialValues = {
 
 export const LogInForm = () => {
   const { t } = useTranslation()
+  const { login, isLoading } = useLogin()
+
+  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
+  console.log(isLoading)
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values)
+    login(values)
     resetForm()
   }
+
   return (
     <Formik
       initialValues={initialValues}

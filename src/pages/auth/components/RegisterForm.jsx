@@ -8,6 +8,7 @@ import { LoginIcon } from '../../../assets/icons'
 import { Text } from '../../../components'
 import { css } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
+import { useRegister } from '../../../hooks/query'
 
 const initialValues = {
   name: '',
@@ -17,9 +18,13 @@ const initialValues = {
 
 export const RegisterForm = () => {
   const { t } = useTranslation()
+  const { register, isLoading } = useRegister()
+
+  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
+  console.log(isLoading)
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values)
+    register(values)
     resetForm()
   }
 
