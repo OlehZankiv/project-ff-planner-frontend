@@ -54,9 +54,9 @@ export const MainLayout = () => {
           <Container>
             <HeaderWrap>
               <BurgerWrap>
-                <ButtonWrap onClick={() => setIsBurgerMenuOpen(true)}>
+                <OpacityButton onClick={() => setIsBurgerMenuOpen(true)}>
                   <BurgerMenuIcon size={iconSize} color={colors.icon} />
-                </ButtonWrap>
+                </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
                 <Text
@@ -73,14 +73,12 @@ export const MainLayout = () => {
               <TabWrap>
                 {selectedTab === 'calendar' && <Button title={t('Feedback')} onClick={() => {}} />}
                 <InfoWrap>
-                  <OpacityButton>
-                    <ButtonWrap onClick={handleThemeChange}>
-                      {themeType === 'light' ? (
-                        <MoonIcon size={iconSize} color={colors.primary} />
-                      ) : (
-                        <SunIcon size={iconSize} color={colors.primary} />
-                      )}
-                    </ButtonWrap>
+                  <OpacityButton onClick={handleThemeChange}>
+                    {themeType === 'light' ? (
+                      <MoonIcon size={iconSize} color={colors.primary} />
+                    ) : (
+                      <SunIcon size={iconSize} color={colors.primary} />
+                    )}
                   </OpacityButton>
                   <Text
                     type='p'
@@ -158,14 +156,6 @@ const InfoWrap = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-`
-
-const ButtonWrap = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
 `
 
 const BurgerWrap = styled.div`

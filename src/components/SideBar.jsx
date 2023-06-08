@@ -78,24 +78,23 @@ export const SideBar = ({ isBurgerMenuOpen, setIsBurgerMenuOpen, selectedTab, se
             </Text>
             <TabsWrap>
               {tabs.map(({ type, Icon, text, route }) => (
-                <OpacityButton key={type} style={{ width: '100%' }}>
-                  <NavButton
-                    selected={selectedTab === type}
-                    onClick={() => handleChangeTab(type, route)}
+                <NavButton
+                  key={type}
+                  selected={selectedTab === type}
+                  onClick={() => handleChangeTab(type, route)}
+                >
+                  <Icon
+                    size={iconCheckSize}
+                    color={selectedTab === type ? colors.tabContentSelected : colors.tabContent}
+                  />
+                  <Text
+                    type='p'
+                    fontWeight={600}
+                    color={selectedTab === type ? 'tabContentSelected' : 'tabContent'}
                   >
-                    <Icon
-                      size={iconCheckSize}
-                      color={selectedTab === type ? colors.tabContentSelected : colors.tabContent}
-                    />
-                    <Text
-                      type='p'
-                      fontWeight={600}
-                      color={selectedTab === type ? 'tabContentSelected' : 'tabContent'}
-                    >
-                      {t(text)}
-                    </Text>
-                  </NavButton>
-                </OpacityButton>
+                    {t(text)}
+                  </Text>
+                </NavButton>
               ))}
             </TabsWrap>
           </div>
@@ -196,16 +195,13 @@ const CloseIconWrap = styled.div`
   )}
 `
 
-const NavButton = styled.button`
-  ${({ selected, theme }) => css`
+const NavButton = styled(OpacityButton)`
+  ${({ selected, theme: { colors, animation } }) => css`
     display: flex;
     padding: 20px 16px;
-    background: transparent;
     border-radius: 8px;
-    border: none;
-    width: 100%;
-    ${selected && `background: ${theme.colors.tabButtonActive};`}
-    transition: background ${theme.animation.sideBarDuration} ${theme.animation.sideBarCubicBezier};
+    background-color: ${selected ? colors.tabButtonActive : 'transparent'};
+    transition: background ${animation.sideBarDuration} ${animation.sideBarCubicBezier};
   `}
 `
 
