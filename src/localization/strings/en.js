@@ -1,6 +1,5 @@
 export const en = {
   "Sign Up": "Sign Up",
-  "Calendar": "Calendar",
   "Cancel": "Cancel",
   "Calendar": "Calendar",
   "Sidebar": "Sidebar",

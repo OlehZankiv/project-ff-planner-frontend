@@ -7,7 +7,7 @@ import { Calendar_examples, Calendar_examples_2x, Calendar_examples_3x, Sidebars
 import { AppLogo } from '../../components/AppLogo';
 import {Image, generateSrcConfig} from '../../components/Image'
 import { LoginIcon } from '../../assets/icons/LogInIcon';
-import { getBreakpointsStyles } from '../../styles/breakpoints';
+import { getBreakpointsStyles, getMobileStyles } from '../../styles/breakpoints';
 import { Button } from '../../components/buttons/Button';
 
 const Landing = () => {
@@ -18,7 +18,7 @@ const Landing = () => {
       <Hero>
         <AppLogo/>
         <LinkBox>          
-          <Button type='submit' variant='primary' rightIcon={<LoginIcon />} title={t('Log in')} style={{ color: '${theme.colors.background}' }} />
+          <Button type='submit' variant='secondary' rightIcon={<LoginIcon />} title={t('Log in')} />
           <SignupLink to={ROUTES.REGISTER}>{t('Sign Up')}</SignupLink>
         </LinkBox>
       </Hero>
@@ -90,39 +90,31 @@ const Container = styled.div`
 ${({theme}) => css`
 margin: 0 auto;
 background-color: ${theme.colors.background};
-max-width: 1600px;
 `}`
 
 
 const Hero = styled.div`
 ${({ theme }) => css`
-text-align: center;
-  min-height: 812px;
-  padding: 232px 0 88px;
+ height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: ${theme.colors.primary};
   color: ${theme.colors.content};`}
-  
-  
-    ${getBreakpointsStyles({
-        tablet: css`
-    min-height: 1024px;
-    padding: 320px 0;`,
-        desktop: css`
-        min-height: 770px;
-        padding: 187px 0,
-        `})
     })
 `
 
 export const LinkBox = styled.div`
+margin-top: 32px;
  display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 208px;
 
   ${getBreakpointsStyles({
-      desktop: css`
+    desktop: css`
+      margin-top: 40px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -134,6 +126,10 @@ export const LinkBox = styled.div`
 
 export const SignupLink = styled(NavLink)`
 ${({ theme }) => css`
+${getMobileStyles(css`
+bottom: 88px;
+position: absolute;`)}
+
   font-weight: 600;
   font-size: 12px;
   line-height: 14px;
@@ -161,6 +157,9 @@ ${({ theme }) => css`
  ${getBreakpointsStyles({
       tablet: css`
     font-size: 14px;
+    line-height: 18px;`,
+   desktop: css`
+    font-size: 14px;
     line-height: 18px;`
   })},
 `
@@ -181,6 +180,7 @@ export const ContentItem = styled.li`
     display: flex;
     flex-direction: column;
     padding-bottom: 64px;
+    flex-wrap: wrap;
 
   &:last-child {
     padding-bottom: 0;
@@ -191,23 +191,31 @@ export const ContentItem = styled.li`
   };
 
   ${getBreakpointsStyles({
+    tablet: css`
+    flex-wrap: wrap;
+    gap: 48px;`,
+
       desktop: css`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 228px;
+    flex-wrap: nowrap;
+    
 
+    `
+  })};
     &:nth-child(2n) {
       flex-direction: row-reverse;
-      align-items: center;`
-    })}
+      align-items: center;
 `
 
 export const ContentBox = styled.div`
   
-
    ${getBreakpointsStyles({
+     
       desktop: css`
-    margin: 0 77px;
+    width: 50%;
     `
   })}
 `
