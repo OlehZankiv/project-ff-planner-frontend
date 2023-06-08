@@ -1,6 +1,7 @@
 export const en = {
   "Calendar": "Calendar",
   "Cancel": "Cancel",
+  "Default": "Default",
   "Email": "Email",
   "Enter email": "Enter email",
   "Enter password": "Enter password",

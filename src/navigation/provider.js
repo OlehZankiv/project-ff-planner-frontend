@@ -13,8 +13,7 @@ export const AppRouterProvider = () => (
   <BrowserRouter basename={BASE_GITHUB_PAGES_URL}>
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path={ROUTES.HOME} element={<MainLayout />}>
-          <Route index element={<div>Home Page</div>} />
+        <Route element={<MainLayout />}>
           <Route
             path={ROUTES.PROFILE}
             element={
@@ -23,7 +22,6 @@ export const AppRouterProvider = () => (
               </ProtectedRoute>
             }
           />
-
           <Route
             path={ROUTES.CALENDAR}
             element={
@@ -32,18 +30,10 @@ export const AppRouterProvider = () => (
               </ProtectedRoute>
             }
           />
-          {/* TODO: Add additional pages here */}
         </Route>
 
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-        <Route
-          path={ROUTES.REGISTER}
-          element={
-            <Suspense fallback={<Loader />}>
-              <RegisterPage />
-            </Suspense>
-          }
-        />
+        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
 
         {/* TODO: Add 404 Page */}
         <Route path='*' element={<div>404 Page</div>} />
@@ -53,12 +43,10 @@ export const AppRouterProvider = () => (
 )
 
 const ProtectedRoute = ({ children }) => {
-  const { logger } = useAuthContext()
+  const { token } = useAuthContext()
   const location = useLocation()
 
-  if (!logger) {
-    return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
-  }
+  if (!token) return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
 
   return children
 }

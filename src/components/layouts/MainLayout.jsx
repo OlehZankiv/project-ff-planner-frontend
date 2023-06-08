@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -28,7 +28,9 @@ export const MainLayout = () => {
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [selectedRoute, setSelectedRoute] = useState(ROUTES.CALENDAR)
+
+  const location = useLocation()
+  const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -53,9 +55,7 @@ export const MainLayout = () => {
     [ROUTES.CALENDAR]: t('Calendar'),
   }
 
-  if (!logger) return null
-
-  const userName = logger.name
+  const userName = logger?.name || t('Default')
 
   return (
     <MainWrap>
@@ -219,14 +219,10 @@ const DesktopTitleWrap = styled.div`
 `
 
 const OutletWrapper = styled.div`
-  padding: 64px 20px 40px 20px;
   z-index: 0;
-  ${getBreakpointsStyles({
-    tablet: css`
-      padding: 64px 32px 32px 32px;
-    `,
-    desktop: css`
-      padding: 32px;
-    `,
-  })}
+  margin-top: 64px;
+
+  ${getDesktopStyles(css`
+    margin-top: 32px;
+  `)}
 `
