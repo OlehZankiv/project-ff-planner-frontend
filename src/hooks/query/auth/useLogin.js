@@ -5,6 +5,7 @@ import { useAuthContext } from '../../../contexts/auth'
 import { toUser } from '../mappers'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../navigation/routes'
+import { loginError } from '../../../pages/auth/components/notification'
 
 export const useLogin = () => {
   const { setLogger, setToken } = useAuthContext()
@@ -14,7 +15,8 @@ export const useLogin = () => {
   const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.login],
     mutationFn: login,
-    onError: () => {
+    onError: (error) => {
+      loginError(error)
       // TODO: Vitalii task: add error notification
     },
     onSuccess: (res) => {
