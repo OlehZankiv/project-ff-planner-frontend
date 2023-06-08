@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+import { Button } from '../../../../components/buttons/Button';
+import { getBreakpointsStyles } from '../../../../styles/breakpoints'
 
 export const CalendarToolbarWrapper = styled.div`
     background-color: #EAEAEA;
@@ -31,11 +32,11 @@ export const MonthWrapper = styled.div`
   ${getBreakpointsStyles({
   tablet: css`
      width: 131px; 
-    height: 38px;
+    height: 34px;
     `,
   desktop: css`
      width: 131px; 
-    height: 38px; 
+    height: 34px; 
       `,
 })}
 `
@@ -102,6 +103,23 @@ export const DayButton = styled.button`
 })}
 `
 
+
+export const DayButtons = styled(Button)`
+    background-color: #E3F3FF; 
+    width: 76px;
+    height: 34px;
+    border-radius: 0px 8px 8px 0px;
+    border: none;
+     ${getBreakpointsStyles({
+  tablet: css`
+    width: 82px;
+    height: 34px;`,
+  desktop: css`
+    width: 82px;
+    height: 34px;`,
+})}
+`
+
 export const PrevMonthIconButton = styled.button`
     display: flex;
     background-color: #FFFFFF;
@@ -125,7 +143,6 @@ export const PrevMonthIconButton = styled.button`
           `,
 })}
 `
-
 
 export const NextMonthIconButton = styled.button`
     display: flex;
@@ -151,24 +168,27 @@ export const NextMonthIconButton = styled.button`
 
 export const IconsWrapper = styled.div`
     display: flex;
+    height: 30px;
      ${getBreakpointsStyles({
   tablet: css`
     margin-left: 8px;
+    height: 34px;
      `,
   desktop: css`
     margin-left: 8px;
+    height: 34px;
          `,
 })}
 `
 
 export const AlignItemsWrapper = styled.div`
     display: flex;
-
       ${getBreakpointsStyles({
   tablet: css`
-    justify-content: center;
-    aling-items: center
+        align-items: start
      `,
-  desktop: css``,
+  desktop: css`
+       align-items: start
+       `,
 })}
 `

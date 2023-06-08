@@ -34,6 +34,7 @@ export const lightTheme = themeCreator({
     mainBackground: '#F7F6F9',
     background: '#ffffff',
     secondaryBackground: '#dcebf7',
+    inactiveToolbarBtnBg: '#CAE8FF',
 
     // Others
     feedbackModalLabels: '#5D5D5D',
@@ -82,6 +83,7 @@ export const darkTheme = themeCreator({
     mainBackground: '#171820',
     background: '#13151A',
     secondaryBackground: '#dcebf7',
+
 
     // Others
     feedbackModalLabels: '#5B5C61',
