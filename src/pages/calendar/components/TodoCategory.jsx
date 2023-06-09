@@ -2,6 +2,8 @@ import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { Button, OpacityButton, Text } from '../../../components'
 import { PlusCircleIcon, PlusIcon } from '../../../assets/icons'
+import { TodoItem } from './TodoItem'
+import { getMobileStyles } from '../../../styles/breakpoints'
 
 export const TodoCategory = ({ type, todos }) => {
   const { colors } = useTheme()
@@ -18,7 +20,11 @@ export const TodoCategory = ({ type, todos }) => {
       <Text type='h5' fontSize={20} lineHeight={24}>
         {titles[type]}
       </Text>
-      <TodosWrapper>{todos}</TodosWrapper>
+      <TodosWrapper>
+        {todos.map((todo) => (
+          <TodoItem {...todo} key={todo.id} />
+        ))}
+      </TodosWrapper>
       <PlusCircleIconButton onClick={() => {}}>
         <PlusCircleIcon color={colors.text} />
       </PlusCircleIconButton>
@@ -54,6 +60,7 @@ const Wrapper = styled.div`
 
 const BottomButton = styled.div`
   padding-right: 12px;
+  margin-top: 32px;
 `
 
 const TodosWrapper = styled.div`
@@ -61,6 +68,12 @@ const TodosWrapper = styled.div`
   flex-direction: column;
   row-gap: 18px;
   margin-top: 34px;
+  padding-right: 12px;
+  max-height: 40vh;
+  overflow-y: auto;
+  ${getMobileStyles(css`
+    max-height: 50vh;
+  `)}
 `
 
 const PlusCircleIconButton = styled(OpacityButton)`

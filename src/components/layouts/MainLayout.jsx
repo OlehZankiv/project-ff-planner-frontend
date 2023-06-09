@@ -146,10 +146,13 @@ const MainWrap = styled.div`
 
 const ContentWrap = styled.div`
   width: 100%;
-  min-height: 100vh;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   padding: 20px 24px;
+  ${getDesktopStyles(css`
+    width: 75%;
+  `)}
 `
 
 const Header = styled.header`

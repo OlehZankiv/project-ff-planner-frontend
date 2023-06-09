@@ -8,9 +8,28 @@ export const TodosContent = ({ selectedDate }) => {
 
   const todoCategories = useMemo(
     () =>
-      [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category) => ({
+      [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category, i) => ({
         ...category,
-        todos: [],
+        todos: [
+          {
+            id: i,
+            title: 'wake up & finnaly do something',
+            assignedUser: {},
+            priority: 'low',
+          },
+          {
+            id: i + 1,
+            title: 'wake up & finnaly do something',
+            assignedUser: {},
+            priority: 'medium',
+          },
+          {
+            id: i + 2,
+            title: 'wake up & finnaly do something',
+            assignedUser: {},
+            priority: 'high',
+          },
+        ],
       })),
     [],
   )
@@ -28,24 +47,22 @@ const Wrapper = styled.div`
   display: flex;
   flex: 1;
   gap: 26px;
-  height: 100%;
 
-  overflow: auto;
-
-  & > * {
-    flex-basis: ${100 / 3}%;
-  }
+  overflow-x: auto;
 
   ${getBreakpointsStyles({
+    desktop: css`
+      & > * {
+        width: calc(${100 / 3}% - 26px * 2 / 3);
+      }
+    `,
     tablet: css`
       & > * {
-        max-height: 80%;
-        min-width: calc(50vw - ((28px * 2) / 3) - ((28px * 2) / 3) - 26px);
+        min-width: calc(50vw - ((28px * 2) / 3) - ((28px * 2) / 3) - 18px);
       }
     `,
     mobile: css`
       & > * {
-        max-height: 90%;
         min-width: calc(100vw - 24px - 24px);
       }
     `,

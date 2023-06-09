@@ -30,6 +30,11 @@ export const lightTheme = themeCreator({
     icon: '#343434',
     text: '#111111',
 
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
+
     // Background
     mainBackground: '#F7F6F9',
     background: '#ffffff',
@@ -83,6 +88,11 @@ export const darkTheme = themeCreator({
     content: '#21222C',
     icon: '#ffffff',
     text: '#ffffff',
+
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
 
     // Background
     mainBackground: '#171820',
