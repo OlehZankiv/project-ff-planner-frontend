@@ -8,6 +8,7 @@ import { getMobileStyles } from '../../styles/breakpoints'
 export const Input = ({
   name,
   type,
+  value,
   placeholder,
   title,
   errorMessage,
@@ -59,6 +60,7 @@ export const Input = ({
 
       <InputWrapper>
         <InputStyled
+          value={value}
           style={{ borderColor: inputBorderColor }}
           type={type}
           name={name}

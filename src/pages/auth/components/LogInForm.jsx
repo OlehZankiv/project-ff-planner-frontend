@@ -3,7 +3,7 @@ import { AuthNavigate } from './AuthNavigate'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { loginFormSchema } from '../../../utils/schemas'
-import { Button, Input, Text } from '../../../components'
+import { Button, DatePicker, Input, Text } from '../../../components'
 import { css } from 'styled-components'
 import { LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
@@ -49,6 +49,8 @@ export const LogInForm = () => {
           >
             {t('Log In')}
           </Text>
+          <DatePicker />
+
           <Input
             type='email'
             name='email'
