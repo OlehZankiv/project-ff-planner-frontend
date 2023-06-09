@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import styled, { css, useTheme } from 'styled-components'
+import styled, { keyframes, css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
@@ -19,6 +19,8 @@ import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
 
 export const MainLayout = () => {
+const [isClicked, setIsClicked] = useState(false);
+
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
@@ -41,7 +43,15 @@ export const MainLayout = () => {
     desktopValue: 18,
   })
 
-  const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
+  // const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
+
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+      setThemeType(themeType === 'light' ? 'dark' : 'light');
+    }, 500);
+  };
 
   const firstLettersMaker = (str) =>
     str
@@ -97,13 +107,26 @@ export const MainLayout = () => {
                   </>
                 )}
                 <InfoWrap>
-                  <OpacityButton onClick={handleThemeChange}>
+                  <ThemeButton onClick={handleClick}>
+                    {themeType === 'light' ? (
+                      <RotateIcon isClicked={isClicked}>
+                        <MoonIcon size={iconSize} color={colors.primary} />
+                        </RotateIcon>
+                    ) : (
+                        <RotateIcon isClicked={isClicked}>
+                          <SunIcon size={iconSize} color={colors.primary} />
+                          </RotateIcon>
+  )}
+</ThemeButton>
+
+
+                  {/* <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
                       <MoonIcon size={iconSize} color={colors.primary} />
                     ) : (
                       <SunIcon size={iconSize} color={colors.primary} />
                     )}
-                  </OpacityButton>
+                  </OpacityButton> */}
                   <Text
                     type='p'
                     color={colors.userNameText}
@@ -136,6 +159,35 @@ export const MainLayout = () => {
     </MainWrap>
   )
 }
+
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(360deg);
+    opacity: 1s;
+  }
+`;
+
+const RotateIcon = styled.div`
+animation: ${rotate} ${({ isClicked }) => (isClicked ? '1s' : '0s')} linear infinite;
+/* &:active {
+  opacity: 1;
+} */
+`;
+
+const ThemeButton = styled(OpacityButton)`
+ transition: opacity 1s ease-in-out;
+/*   
+  &:active {
+    opacity: 1;
+    animation: ${rotate} 0.5s linear infinite;
+  } */
+`;
+
 
 const MainWrap = styled.div`
   width: 100%;
