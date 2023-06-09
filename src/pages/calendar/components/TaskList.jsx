@@ -39,7 +39,7 @@ export const TaskList = () => {
         <Container>
 
             <Heading>
-                <Text type='p'>ToDo</Text>
+                <Text type='h5'>To do</Text>
                 <OpacityButton onClick={addTodo}><PlusIcon color={colors.text} /></OpacityButton>
             </Heading>
 
