@@ -8,14 +8,20 @@ import { BASE_GITHUB_PAGES_URL } from '../utils/constants'
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
+
 const UserPage = lazy(() => import('../pages/userPage/UserPage'))
+
+const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter basename={BASE_GITHUB_PAGES_URL}>
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path={ROUTES.HOME} element={<MainLayout />}>
-          <Route index element={<div>Home Page</div>} />
+        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.LANDING} element={<LandingPage />} />
+
+        <Route element={<MainLayout />}>
           <Route
             path={ROUTES.PROFILE}
             element={
@@ -34,16 +40,6 @@ export const AppRouterProvider = () => (
           />
         </Route>
 
-        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-        <Route
-          path={ROUTES.REGISTER}
-          element={
-            <Suspense fallback={<Loader />}>
-              <RegisterPage />
-            </Suspense>
-          }
-        />
-
         {/* TODO: Add 404 Page */}
         <Route path='*' element={<div>404 Page</div>} />
       </Routes>
@@ -52,12 +48,10 @@ export const AppRouterProvider = () => (
 )
 
 const ProtectedRoute = ({ children }) => {
-  const { logger } = useAuthContext()
+  const { token } = useAuthContext()
   const location = useLocation()
 
-  if (!logger) {
-    return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
-  }
+  if (!token) return <Navigate to={ROUTES.LOGIN} replace state={{ from: location }} />
 
   return children
 }
