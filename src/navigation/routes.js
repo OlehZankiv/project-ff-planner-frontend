@@ -4,4 +4,5 @@ export const ROUTES = {
   LOGIN: '/login',
   LANDING: '/',
   REGISTER: '/register',
+  TASKLIST: '/tasklist'
 }
