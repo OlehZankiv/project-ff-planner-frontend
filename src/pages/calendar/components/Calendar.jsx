@@ -4,6 +4,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
+import dayjs from 'dayjs'
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const { height, width } = useDimensions()
@@ -11,13 +12,18 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   return (
     <CalendarWrapper>
       <FullCalendar
+        key={selectedDate.getMonth()}
         dayHeaders={false}
-        dateClick={(info) => setSelectedDate(info.date)}
+        initialDate={selectedDate}
+        dateClick={(info) => {
+          if (!dayjs(info.date).isBefore(new Date(), 'day')) setSelectedDate(info.date)
+        }}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={null}
         initialView='dayGridMonth'
         dayCellContent={(props) => (
           <DayCell
+            disabled={dayjs(props.date).isBefore(new Date(), 'day')}
             className={
               props.date.toDateString() === selectedDate.toDateString() ? 'selected' : undefined
             }
@@ -27,23 +33,34 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         )}
         events={[
           {
-            id: 'awdwdw',
+            id: '1',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
+
           {
-            id: 'awdwdw2',
+            id: '2',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
+
           {
-            id: 'awdwdw3',
+            id: '3',
+            title: 'All-day event',
+            start: selectedDate,
+            backgroundColor: '#FCF0D4',
+            textColor: '#F3B249',
+            display: 'block',
+          },
+
+          {
+            id: '4',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
@@ -61,7 +78,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
 }
 
 const DayCell = styled.div`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors }, disabled }) => css`
     width: 26px;
     height: 26px;
     margin: 14px 14px 0 0;
@@ -74,6 +91,7 @@ const DayCell = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 18px;
+    opacity: ${disabled ? 0.5 : 1};
 
     &.selected {
       background-color: ${colors.primary};
@@ -92,10 +110,19 @@ const DayCell = styled.div`
 
 const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
-    table {
-      border-radius: 8px;
+    .fc.fc-media-screen {
       border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
+    }
+
+    table {
+      border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
       overflow: hidden;
+    }
+
+    .fc-scrollgrid {
+      border-collapse: collapse;
     }
 
     td.fc-day {
@@ -136,7 +163,7 @@ const CalendarWrapper = styled.section`
       flex-direction: column;
       row-gap: 4px;
       padding: 8px;
-      max-height: calc(34px * 5.5); // 5.5 events per day
+      max-height: calc(34px * 3.5);
       overflow-y: auto;
 
       .fc-event {
