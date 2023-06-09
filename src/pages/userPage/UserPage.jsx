@@ -258,7 +258,6 @@ export const DivForm = styled.div`
 export const InputWrapper = styled.div`
   ${getBreakpointsStyles({
     desktop: css`
-      // overflow: hidden;
       height: 120px;
       break-inside: avoid-column;
     `,
