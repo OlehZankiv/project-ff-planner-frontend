@@ -135,10 +135,13 @@ const MainWrap = styled.div`
 
 const ContentWrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   padding: 20px 24px;
+  ${getDesktopStyles(css`
+    width: 75%;
+  `)}
 `
 
 const Header = styled.header`
@@ -208,6 +211,9 @@ const DesktopTitleWrap = styled.div`
 `
 
 const OutletWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   z-index: 0;
   margin-top: 64px;
 
