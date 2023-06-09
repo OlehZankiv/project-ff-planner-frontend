@@ -1,6 +1,7 @@
 {
   "name": "project-aaa4bbb8",
   "version": "0.1.0",
+  "homepage": "https://olehzankiv.github.io/project-ff-planner-frontend",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -8,7 +9,6 @@
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
-    "@mui/x-date-pickers": "^6.6.0",
     "@tanstack/react-query": "^4.29.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -21,6 +21,7 @@
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-day-picker": "^8.7.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
     "react-router-dom": "^6.11.2",
@@ -37,7 +38,8 @@
     "test": "react-scripts test",
     "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
     "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
-    "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc"
+    "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +69,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.8"
   },
   "resolutions": {

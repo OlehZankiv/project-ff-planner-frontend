@@ -1,198 +1,60 @@
 import styled, { css } from 'styled-components'
-import { useBreakpointValue, getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
-import { useState } from 'react' // use for day
+import { getMobileStyles } from '../../../styles/breakpoints'
+import { OpacityButton, Text } from '../../../components'
+import { useWeekDays } from '../hooks/useWeekDays'
+import dayjs from 'dayjs'
 
-export const CalendarWeek = () => {
-  const [currentDay, setCurrentDay] = useState(true); // use for day
-
-  const mon = useBreakpointValue({
-    desktopValue: 'mon',
-    tabletValue: 'mon',
-    mobileValue: 'm',
-  })
-  const tue = useBreakpointValue({
-    desktopValue: 'tue',
-    tabletValue: 'tue',
-    mobileValue: 't',
-  })
-  const wed = useBreakpointValue({
-    desktopValue: 'wed',
-    tabletValue: 'wed',
-    mobileValue: 'w',
-  })
-  const thu = useBreakpointValue({
-    desktopValue: 'thu',
-    tabletValue: 'thu',
-    mobileValue: 't',
-  })
-  const fri = useBreakpointValue({
-    desktopValue: 'fri',
-    tabletValue: 'fri',
-    mobileValue: 'f',
-  })
-  const sat = useBreakpointValue({
-    desktopValue: 'sat',
-    tabletValue: 'sat',
-    mobileValue: 's',
-  })
-  const sun = useBreakpointValue({
-    desktopValue: 'sun',
-    tabletValue: 'sun',
-    mobileValue: 's',
-  })
-
-  const days = [
-    {
-      id: '1',
-      value: mon,
-    },
-    {
-      id: '2',
-      value: tue,
-    },
-    {
-      id: '3',
-      value: wed,
-    },
-    {
-      id: '4',
-      value: thu,
-    },
-    {
-      id: '5',
-      value: fri,
-    },
-    {
-      id: '6',
-      value: sat,
-    },
-    {
-      id: '7',
-      value: sun,
-    },
-  ]
+export const CalendarWeek = ({ selectedDate, setSelectedDate, isDayView }) => {
+  const week = useWeekDays(selectedDate)
 
   return (
-    <WeekWrapper>
-      {/* month */}
+    <WeekList>
+      {week.map(({ text, date }, index) => {
+        const isSelected = date.getDay() === selectedDate?.getDay()
+        const isDisabled = !isDayView || dayjs(date).isBefore(new Date(), 'day')
 
-      {/* <WeekList>
-        {days.map(({ id, value }) => (
-          <WeekItem key={id}>
-            <WeekDay>{value}</WeekDay>
-          </WeekItem>
-        ))}
-      </WeekList> */}
-
-      {/* day */}
-
-            <WeekList>
-        {days.map(({ id, value }) => (
-          <WeekItem key={id} onClick={() => setCurrentDay(prev => !prev)}>
-            <WeekDay>{value}</WeekDay>
-            <WeekDayNum className={currentDay ? " selected" : undefined}>1</WeekDayNum>
-          </WeekItem>
-        ))}
-      </WeekList>
-    </WeekWrapper>
+        return (
+          <WeekDay
+            key={index}
+            disabled={isDisabled}
+            onClick={isDisabled ? undefined : () => setSelectedDate(date)}
+          >
+            <Text
+              style={{ textTransform: 'uppercase' }}
+              type='h4'
+              color='calendarWeekDayText'
+              mobileStyles={css`
+                font-size: 16px;
+              `}
+            >
+              {text}
+            </Text>
+            {isDayView && (
+              <WeekNumberWrapper selected={isSelected}>
+                <Text
+                  style={{ textTransform: 'uppercase' }}
+                  type='h4'
+                  color={isSelected ? 'white' : 'userNameText'}
+                  mobileStyles={css`
+                    font-size: 16px;
+                  `}
+                >
+                  {date.getDate()}
+                </Text>
+              </WeekNumberWrapper>
+            )}
+          </WeekDay>
+        )
+      })}
+    </WeekList>
   )
 }
 
-/* month */
-
-// const WeekWrapper = styled.div`
-//   width: 100%;
-//   ${getBreakpointsStyles({
-//     desktop: css`
-//       min-height: 46px;
-//       padding: 32px 32px 0px;
-//     `,
-//     tablet: css`
-//       min-height: 46px;
-//       padding: 32px 32px 0px;
-//     `,
-//     mobile: css`
-//       min-height: 50px;
-//       padding: 24px 20px 0px;
-//     `,
-//   })}
-// `
-
-// const WeekList = styled.ul`
-//   ${({ theme: { colors } }) => css`
-//     display: flex;
-//     justify-content: space-around;
-//     padding: 0;
-//     margin: 0;
-//     list-style: none;
-//     border: 1px solid ${colors.calendarBorder};
-//     border-radius: 8px;
-//     background: ${colors.content};
-//   `}
-// `
-
-// const WeekItem = styled.li`
-//   ${({ theme: { colors } }) => css`
-//     cursor: pointer;
-//     :hover {
-//       opacity: 0.85;
-//     }
-//     &:nth-last-child(-n + 2) div {
-//       color: ${colors.primary};
-//     }
-//     ${getBreakpointsStyles({
-//       desktop: css`
-//         padding-top: 14px;
-//         padding-bottom: 14px;
-//       `,
-//       tablet: css`
-//         padding-top: 14px;
-//         padding-bottom: 14px;
-//       `,
-//       mobile: css`
-//         padding-top: 16px;
-//         padding-bottom: 16px;
-//       `,
-//     })}
-//   `}
-// `
-
-// const WeekDay = styled.div`
-//   ${({ theme: { colors } }) => css`
-//     font-weight: 600;
-//     font-size: 16px;
-//     line-height: 18px;
-//     text-transform: uppercase;
-//     color: ${colors.secondaryButtonText};
-//   `}
-// `
-
-/* day */
-
-const WeekWrapper = styled.div`
-  width: 100%;
-  ${getBreakpointsStyles({
-    desktop: css`
-      min-height: 68px;
-      padding: 32px 32px 0px;
-    `,
-    tablet: css`
-      min-height: 68px;
-      padding: 32px 32px 0px;
-    `,
-    mobile: css`
-      min-height: 74px;
-      padding: 24px 20px 0px;
-    `,
-  })}
-`
-
-const WeekList = styled.ul`
+const WeekList = styled.section`
   ${({ theme: { colors } }) => css`
     display: flex;
+    margin-bottom: 16px;
     justify-content: space-around;
-    padding: 0;
-    margin: 0;
     list-style: none;
     border: 1px solid ${colors.calendarBorder};
     border-radius: 8px;
@@ -200,75 +62,32 @@ const WeekList = styled.ul`
   `}
 `
 
-const WeekItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-    cursor: pointer;
-    :hover {
-      opacity: 0.85;
-    }
-    ${getBreakpointsStyles({
-      desktop: css`
-        padding-top: 10px;
-        padding-bottom: 10px;
-      `,
-      tablet: css`
-        padding-top: 10px;
-        padding-bottom: 10px;
-      `,
-      mobile: css`
-        padding-top: 14px;
-        padding-bottom: 14px;
-      `,
-    })}
-`
-
-const WeekDay = styled.div`
-  ${({ theme: { colors } }) => css`
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 18px;
-    text-transform: uppercase;
-    color: ${colors.secondaryButtonText};
+const WeekDay = styled(OpacityButton)`
+  ${({ disabled }) => css`
+    opacity: ${disabled ? 0.7 : 1};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 6px;
+    width: calc(100% / 7);
+    padding: 10px 5px;
   `}
-  ${getBreakpointsStyles({
-    desktop: css`
-      padding-bottom: 4px;
-    `,
-    tablet: css`
-      padding-bottom: 4px;
-    `,
-    mobile: css`
-      padding-bottom: 6px;
-    `,
-  })}
 `
 
-const WeekDayNum = styled.div`
-  ${({ theme: { colors } }) => css`
+const WeekNumberWrapper = styled.div`
+  ${({ selected, theme: { colors } }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 26px;
     height: 26px;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    color: ${colors.secondaryButtonText};
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 18px;
 
-    &.selected {
-      background-color: ${colors.primary};
-      color: ${colors.white};
-    }
+    background: ${selected ? colors.primary : 'transparent'};
+    border-radius: 8px;
 
     ${getMobileStyles(css`
       width: 20px;
       height: 20px;
-      font-size: 12px;
-      line-height: 14px;
     `)}
   `}
 `
