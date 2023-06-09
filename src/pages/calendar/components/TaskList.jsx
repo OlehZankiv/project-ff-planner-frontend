@@ -1,74 +1,74 @@
-import React, { useState } from 'react';
-import styled, { useTheme } from 'styled-components';
-import { PencilIcon, TrashIcon, ArrowIcon, PlusIcon } from '../../../assets/icons';
-import { Text } from '../../../components';
-import { OpacityButton } from '../../../components/buttons/OpacityButton'
-
-
+import React, { useState } from 'react'
+import styled, { useTheme } from 'styled-components'
+import { ArrowCircleIcon, PencilIcon, PlusIcon, TrashIcon } from '../../../assets/icons'
+import { Text } from '../../../components'
+import { OpacityButton } from '../../../components/'
 
 export const TaskList = () => {
-    const [list, setList] = useState([]);
-    const { colors } = useTheme()
+  const [list, setList] = useState([])
+  const { colors } = useTheme()
 
-    const addTodo = () => {
-        const newTodo = {
-            id: Math.random(),
-            todo: 'New Task',
-        };
+  const addTodo = () => {
+    const newTodo = {
+      id: Math.random(),
+      todo: 'New Task',
+    }
 
-        setList([...list, newTodo]);
-    };
+    setList([...list, newTodo])
+  }
 
-    const deleteTodo = (id) => {
-        const newList = list.filter((todo) => todo.id !== id);
-        setList(newList);
-    };
+  const deleteTodo = (id) => {
+    const newList = list.filter((todo) => todo.id !== id)
+    setList(newList)
+  }
 
-    const handleTaskEdit = (id, updatedTodo) => {
-        const updatedList = list.map((todo) => {
-            if (todo.id === id) {
-                return { ...todo, todo: updatedTodo };
-            }
-            return todo;
-        });
+  const handleTaskEdit = (id, updatedTodo) => {
+    const updatedList = list.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, todo: updatedTodo }
+      }
+      return todo
+    })
 
-        setList(updatedList);
-    };
+    setList(updatedList)
+  }
 
-    return (
-        <Container>
+  return (
+    <Container>
+      <Heading>
+        <Text type='h5'>To do</Text>
+        <OpacityButton onClick={addTodo}>
+          <PlusIcon color={colors.text} />
+        </OpacityButton>
+      </Heading>
 
-            <Heading>
-                <Text type='h5'>To do</Text>
-                <OpacityButton onClick={addTodo}><PlusIcon color={colors.text} /></OpacityButton>
-            </Heading>
+      <List>
+        {list.map((todo) => (
+          <ListItem key={todo.id}>
+            <TaskText contentEditable onBlur={(e) => handleTaskEdit(todo.id, e.target.innerText)}>
+              {todo.todo}
+            </TaskText>
+            <ButtonContainer>
+              <Button>
+                <ArrowCircleIcon color={colors.text} />
+              </Button>
+              <Button>
+                <PencilIcon color={colors.text} />
+              </Button>
 
-            <List>
-                {list.map((todo) => (
-                    <ListItem key={todo.id}>
-                        <TaskText
-                            contentEditable
-                            onBlur={(e) => handleTaskEdit(todo.id, e.target.innerText)}
-                        >
-                            {todo.todo}
-                        </TaskText>
-                        <ButtonContainer>
-                            
-                            <Button><ArrowIcon color={colors.text} /></Button>
-                            <Button><PencilIcon color={colors.text} /></Button>
-                            
-                            <Button onClick={() => deleteTodo(todo.id)}><TrashIcon color={colors.text} /></Button>
-                        </ButtonContainer>
-                    </ListItem>
-                ))}
-            </List>
-            <AddButton onClick={addTodo}>Add Task</AddButton>
-        </Container>
-    );
-};
+              <Button onClick={() => deleteTodo(todo.id)}>
+                <TrashIcon color={colors.text} />
+              </Button>
+            </ButtonContainer>
+          </ListItem>
+        ))}
+      </List>
+      <AddButton onClick={addTodo}>Add Task</AddButton>
+    </Container>
+  )
+}
 
-export default TaskList;
-
+export default TaskList
 
 const Container = styled.div`
   width: 350px;
@@ -78,7 +78,7 @@ const Container = styled.div`
   border-radius: 4px;
   max-height: 400px;
   overflow-y: auto;
-`;
+`
 
 const Heading = styled.h1`
   font-size: 24px;
@@ -87,13 +87,12 @@ const Heading = styled.h1`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
- 
-`;
+`
 
 const ListItem = styled.li`
   display: flex;
@@ -107,7 +106,7 @@ const ListItem = styled.li`
   border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
-`;
+`
 
 const TaskText = styled.span`
   flex-grow: 1;
@@ -115,7 +114,7 @@ const TaskText = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
+`
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -123,7 +122,7 @@ const ButtonContainer = styled.div`
   position: absolute;
   right: 10px;
   bottom: 10px;
-`;
+`
 
 const Button = styled.button`
   width: 30px;
@@ -138,21 +137,20 @@ const Button = styled.button`
   justify-content: center;
   font-size: 16px;
   margin-left: 5px;
-`;
+`
 
 const AddButton = styled.button`
   display: block;
   width: 300px;
   padding: 10px;
-  background-color: #E3F3FF;
+  background-color: #e3f3ff;
   color: #000000;
-  border: 1px dashed #3E85F3;
+  border: 1px dashed #3e85f3;
   border-radius: 8px;
   cursor: pointer;
-  
 
   &:hover {
-    background-color: #3E85F3;
+    background-color: #3e85f3;
     color: #ffffff;
   }
-`;
+`
