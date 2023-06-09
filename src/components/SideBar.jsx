@@ -98,7 +98,6 @@ export const SideBar = ({
         <Button
           isDefaultShadow
           title={t('Log out')}
-          buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
           onClick={logout}
           rightIcon={<LogOutIcon size={iconLogOutSize} color={colors.white} />}
         />
