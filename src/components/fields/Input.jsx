@@ -6,8 +6,10 @@ import { ErrorIcon, SuccessIcon } from '../../assets/icons'
 import { getMobileStyles } from '../../styles/breakpoints'
 
 export const Input = ({
+  readonly,
   name,
   type,
+  value,
   placeholder,
   title,
   errorMessage,
@@ -59,6 +61,8 @@ export const Input = ({
 
       <InputWrapper>
         <InputStyled
+          readOnly={readonly}
+          value={value}
           style={{ borderColor: inputBorderColor }}
           type={type}
           name={name}

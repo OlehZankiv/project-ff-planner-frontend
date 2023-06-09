@@ -69,7 +69,7 @@ export const lightTheme = themeCreator({
     changeCalendarTypeBtn: '#3E85F3',
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
-
+    calendarPickerBorder: '#659DF5',
   },
   shadows,
   animation,
@@ -127,6 +127,7 @@ export const darkTheme = themeCreator({
     changeCalendarTypeBtn: '#3E85F3',
     scrollbarTrackBackground: '#2D3037',
     scrollbarThumbBackground: '#171820',
+    calendarPickerBorder: '#659DF5',
   },
   shadows,
   animation,
