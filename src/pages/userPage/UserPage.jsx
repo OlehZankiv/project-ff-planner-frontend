@@ -9,12 +9,13 @@ import { Input } from '../../components/fields/Input'
 import Avatar from '../../components/avatar/Avatar'
 import InputStatus from '../../components/InputStatus'
 import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
+import { DatePicker } from '../../components'
 
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-  const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/
+  const birthdayRegex = /^\d{4}-(0[1-9]|1[0-2])-([12][0-9]|0[1-9]|3[01])$/
   const currentDate = new Date().toISOString().slice(0, 10)
-  const phoneRegex = /^38 \(\d{3}\) \d{3} \d{2} \d{2}$/
+  const phoneRegex = /^(\+?38)?(\s?(\()?\d{3}(\))?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2})$/
   const skypeRegex = /^[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
 
   const userProfileFormValidationSchema = Yup.object().shape({
@@ -45,7 +46,6 @@ const UserPage = () => {
     }
     input.click()
   }
-  // const { colors } = useTheme()
 
   if (!logger) return null
 
@@ -95,7 +95,7 @@ const UserPage = () => {
                 </InputWrapper>
 
                 <InputWrapper>
-                  <Input
+                  <DatePicker
                     type='date'
                     id='birthday'
                     name='birthday'
@@ -106,7 +106,6 @@ const UserPage = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-
                   <InputStatus error={errors.birthday} touched={touched.birthday} />
                 </InputWrapper>
                 <InputWrapper>
@@ -148,7 +147,7 @@ const UserPage = () => {
                     title={'Skype'}
                     rightIcon={null}
                     isError={errors.skype && touched.skype}
-                    successMessage={'This is Correct phone'}
+                    successMessage={'This is Correct Skype'}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -170,18 +169,6 @@ const UserPage = () => {
 
 export default UserPage
 
-// const userNameStyles = {
-//   desktopValue: styled.h1`
-//     background-color: greenyellow;
-//   `,
-//   tabletValue: styled.p`
-//     background-color: #7b3816;
-//   `,
-//   mobileValue: styled.div`
-//     background-color: #1a2250;
-//   `,
-// }
-
 const styles = {
   desktop: `
     margin-top: 40px;
@@ -202,7 +189,7 @@ export const UserWrapper = styled.div`
     min-height: 474px;
     /* margin-top: 151px; */
     background-color: ${colors.content};
-    color: white;
+
     justify-content: center;
     border-radius: 16px;
     ${getBreakpointsStyles({
@@ -213,27 +200,29 @@ export const UserWrapper = styled.div`
 `
 
 export const UserText = styled.p`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 1.17;
-  color: #343434;
-  text-align: center;
-  margin-bottom: 40px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 14px;
-      line-height: 1.29;
-    `,
-    desktop: css``,
-  })}
+  ${({ theme: { colors } }) => css`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.17;
+    margin-top: 5px;
+    color: ${colors.inputLabel};
+    text-align: center;
+    margin-bottom: 40px;
+    ${getBreakpointsStyles({
+      tablet: css`
+        font-size: 14px;
+        line-height: 1.29;
+      `,
+      desktop: css``,
+    })}
+  `}
 `
 
 export const UserForm = styled.form`
   // width: calc(100% - 36px);
   padding: 20px;
-  background: green;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,13 +230,10 @@ export const UserForm = styled.form`
   margin: 0 auto;
   ${getBreakpointsStyles({
     tablet: css`
-      background: red;
-
       // width: 374px;
       // padding: 20px 175px;
     `,
     desktop: css`
-      background: blue;
       // padding: 20px 164px;
       // width: 768px;
 
@@ -267,7 +253,6 @@ export const DivForm = styled.div`
       width: 768px;
     `,
     tablet: css`
-      background: red;
       width: 374px;
       //padding: 20px 175px;
     `,
@@ -282,31 +267,33 @@ export const InputWrapper = styled.div`
 `
 
 export const UserButton = styled.button`
-  width: 195px;
-  height: 46px;
-  background: #3e85f3;
-  border: #3e85f3;
-  border-radius: 16px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.29;
-  display: block;
-  margin: auto;
-  margin-top: 40px;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.06em;
-  color: #fff;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 262px;
-    `,
-    desktop: css`
-      margin-bottom: 60px;
-    `,
-  })}
+  ${({ theme: { colors } }) => css`
+    width: 195px;
+    height: 46px;
+    background: ${colors.primary};
+    border: ${colors.primary};
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.29;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: ${colors.white};
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    ${getBreakpointsStyles({
+      tablet: css`
+        width: 262px;
+      `,
+      desktop: css`
+        margin-bottom: 60px;
+      `,
+    })}
+  `}
 `

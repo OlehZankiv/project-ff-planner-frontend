@@ -79,6 +79,7 @@ export const AvatarWrapper = styled.div`
     width: ${mobileSize}px;
     height: ${mobileSize}px;
     border: 2px solid ${colors.primary};
+    background-color: ${colors.avatarBackgroundColor};
     ${styles.mobile}
 
     ${getBreakpointsStyles({
