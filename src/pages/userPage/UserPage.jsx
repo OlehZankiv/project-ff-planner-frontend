@@ -1,7 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-// import { CalendarIcon } from '../../assets/icons/CalendarIcon'
 import { useAuthContext } from '../../contexts/auth'
 import { Text } from '../../components/Text'
 import styled, { css } from 'styled-components'
@@ -40,7 +39,6 @@ const UserPage = () => {
     input.type = 'file'
     input.accept = 'image/png, image/gif, image/jpeg'
     input.onchange = (e) => {
-      // Ready to upload file on server
       const file = e.target.files[0]
       console.log('selected file', file)
     }
@@ -101,7 +99,6 @@ const UserPage = () => {
                     name='birthday'
                     placeholder='Enter your birthday'
                     title={'Birthday'}
-                    // rightIcon={<CalendarIcon></CalendarIcon>}
                     value={values.birthday}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -158,7 +155,6 @@ const UserPage = () => {
               <UserButton type='submit' disabled={isSubmitting}>
                 Save Changes
               </UserButton>
-              {/* <DisplayFormikState {...props} /> */}
             </UserForm>
           )
         }}
