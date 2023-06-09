@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../navigation/routes'
 
-import { AppLogo, Button, generateSrcConfig } from '../../components/'
+import { AppLogo, Button, generateSrcConfig } from '../../components'
 import { LoginIcon } from '../../assets/icons/'
 import { getBreakpointsStyles, getMobileStyles } from '../../styles/breakpoints'
 import {

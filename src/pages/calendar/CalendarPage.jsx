@@ -1,20 +1,29 @@
 import { useState } from 'react'
 import { CalendarWeek } from './components/CalendarWeek'
-import { Calendar } from './components/Calendar'
+import { TodosContent } from './components/TodosContent'
+import styled from 'styled-components'
 
 const CalendarPage = ({}) => {
   const [selectedDate, setSelectedDate] = useState(new Date('08.07.2023'))
 
   return (
-    <div>
+    <Wrapper>
       <CalendarWeek
         isDayView={true}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-    </div>
+
+      <TodosContent selectedDate={selectedDate} />
+      {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
+    </Wrapper>
   )
 }
 
 export default CalendarPage
+
+const Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`
