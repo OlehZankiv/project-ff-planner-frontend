@@ -146,7 +146,7 @@ const MainWrap = styled.div`
 
 const ContentWrap = styled.div`
   width: 100%;
-  min-height: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 20px 24px;

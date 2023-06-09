@@ -1,7 +1,7 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { OpacityButton, Text } from '../../../components'
-import { PlusCircleIcon } from '../../../assets/icons'
+import { Button, OpacityButton, Text } from '../../../components'
+import { PlusCircleIcon, PlusIcon } from '../../../assets/icons'
 
 export const TodoCategory = ({ type, todos }) => {
   const { colors } = useTheme()
@@ -22,6 +22,20 @@ export const TodoCategory = ({ type, todos }) => {
       <PlusCircleIconButton onClick={() => {}}>
         <PlusCircleIcon color={colors.text} />
       </PlusCircleIconButton>
+
+      <BottomButton>
+        <Button
+          buttonTextProps={{ style: { color: colors.text } }}
+          style={{
+            color: colors.text,
+            border: `1px dashed ${colors.primary}`,
+            backgroundColor: colors.taskButtonBackground,
+          }}
+          leftIcon={<PlusIcon color={colors.text} />}
+          fullWidth
+          title={t('Add task')}
+        />
+      </BottomButton>
     </Wrapper>
   )
 }
@@ -29,12 +43,17 @@ export const TodoCategory = ({ type, todos }) => {
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
     position: relative;
+    height: fit-content;
     padding: 25px 8px 25px 20px;
     border-radius: 12px;
 
     background: ${colors.content};
     border: 1px solid ${colors.calendarBorder};
   `}
+`
+
+const BottomButton = styled.div`
+  padding-right: 12px;
 `
 
 const TodosWrapper = styled.div`

@@ -1,4 +1,5 @@
 export const en = {
+  "Add task": "Add task",
   "All in": "All in",
   "Calendar": "Calendar",
   "Cancel": "Cancel",
