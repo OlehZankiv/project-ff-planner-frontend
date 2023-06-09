@@ -41,7 +41,10 @@ export const useWeekDays = (selectedDate) => {
     mobileValue: t('Sunday').slice(0, 1),
   })
 
-  const daysText = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+  const daysText = useMemo(
+    () => [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday],
+    [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday],
+  )
 
   return useMemo(() => {
     const days = new Array(7).fill(null).map((_, i) => {
@@ -54,5 +57,5 @@ export const useWeekDays = (selectedDate) => {
       text: daysText[i],
       date,
     }))
-  }, [selectedDate])
+  }, [selectedDate, daysText])
 }
