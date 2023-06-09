@@ -70,7 +70,6 @@ export const lightTheme = themeCreator({
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
     calendarPickerBorder: '#659DF5',
-
   },
   shadows,
   animation,
