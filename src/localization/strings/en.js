@@ -18,6 +18,7 @@ export const en = {
   "Rating": "Rating",
   "Review": "Review",
   "Save": "Save",
+  "Edit": "Edit",
   "Sign Up": "Sign Up",
   "This is a CORRECT email": "This is a CORRECT email",
   "This is a CORRECT password": "This is a CORRECT password",

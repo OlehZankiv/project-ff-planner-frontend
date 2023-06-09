@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../hooks/query/reviews/useReviews'
 import { getMobileStyles } from '../styles/breakpoints'
+import { FeedbackEditModal } from './FeedbackEditModal'
+import { PencilIcon } from '../assets/icons'
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
@@ -12,12 +14,23 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   const [ratingValue, setRatingValue] = useState(0)
   const [reviewText, setReviewText] = useState('')
+  const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
+  const [editReview, setReview] = useState('')
+
+  const handleEditFeedbackClick = (id) => {
+    const review = reviews.find((r) => r.id === id)
+    setReview(review)
+    setFeedbackEditModalVisible(true)
+  }
 
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
     const review = { rating: ratingValue, review: reviewText }
-    console.log('form data:', review)
+    console.log('form data to send:', review)
+
+    setRatingValue(0)
+    setReviewText('')
   }
 
   useEffect(() => {
@@ -26,6 +39,16 @@ export const FeedbackModal = ({ visible, setVisible }) => {
       setReviewText('')
     }
   }, [visible])
+
+  if (isFeedbackEditModalVisible) {
+    return (
+      <FeedbackEditModal
+        visible={isFeedbackEditModalVisible}
+        setVisible={setFeedbackEditModalVisible}
+        review={editReview}
+      />
+    )
+  }
 
   return (
     <Modal
@@ -52,7 +75,12 @@ export const FeedbackModal = ({ visible, setVisible }) => {
       <FeedbackWrapper>
         <FeedbackList>
           {reviews.map((review) => (
-            <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
+            <>
+              <EditWrapper onClick={() => handleEditFeedbackClick(review.id)}>
+                <PencilIcon color={'black'} />
+              </EditWrapper>
+              <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
+            </>
           ))}
         </FeedbackList>
       </FeedbackWrapper>
@@ -80,4 +108,8 @@ const FeedbackList = styled.div`
   ${getMobileStyles(css`
     row-gap: 14px;
   `)}
+`
+
+const EditWrapper = styled.div`
+  display: flex;
 `
