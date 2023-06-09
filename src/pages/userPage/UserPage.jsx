@@ -251,6 +251,7 @@ export const DivForm = styled.div`
       flex: 1;
       // margin-left: 10px;
       width: 768px;
+      break-inside: avoid-column;
     `,
     tablet: css`
       width: 374px;
@@ -261,7 +262,9 @@ export const DivForm = styled.div`
 export const InputWrapper = styled.div`
   ${getBreakpointsStyles({
     desktop: css`
-      overflow: hidden;
+      // overflow: hidden;
+      height: 120px;
+      break-inside: avoid-column;
     `,
   })}
 `
