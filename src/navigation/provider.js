@@ -3,6 +3,7 @@ import { ROUTES } from './routes'
 import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 import { useAuthContext } from '../contexts/auth'
+import { TaskList } from '../pages/calendar/components/TaskList'
 
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
@@ -33,8 +34,16 @@ export const AppRouterProvider = () => (
           }
         />
         {/* TODO: Add additional pages here */}
-      </Route>
 
+        
+      </Route>
+<Route
+          path={ROUTES.TASKLIST}
+          element={
+              <TaskList />
+          }
+        />
+          {/* TODO: delete when calender implemente */}
       <Route
         path={ROUTES.LOGIN}
         element={
