@@ -62,6 +62,10 @@ export const lightTheme = themeCreator({
     modalsInputBorder: 'transparent',
     feedbackListBackground: '#e3f3ff',
     calendarWeekDayText: '#21222C',
+    toolbarBtnTextColor: '#3e85f3',
+    toolbarBtnBgColor: '#E3F3FF',
+    arrowIconsBgColor: '#ffffff',
+    changeCalendarTypeBtn: '#3E85F3',
   },
   shadows,
   animation,
@@ -84,7 +88,7 @@ export const darkTheme = themeCreator({
     mainBackground: '#171820',
     background: '#13151A',
     secondaryBackground: '#dcebf7',
-
+    inactiveToolbarBtnBg: '#3E85F3',
 
     // Others
     feedbackModalLabels: '#5B5C61',
@@ -112,6 +116,10 @@ export const darkTheme = themeCreator({
     modalsInputBorder: '#3A3B41',
     feedbackListBackground: '#21222C',
     calendarWeekDayText: '#62636A',
+    toolbarBtnTextColor: '#ffffff',
+    toolbarBtnBgColor: '#21222C',
+    arrowIconsBgColor: '#21222C',
+    changeCalendarTypeBtn: '#3E85F3',
   },
   shadows,
   animation,

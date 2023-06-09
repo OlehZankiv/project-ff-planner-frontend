@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 import { Text } from '../Text'
 
-
 export const Button = ({
   isDefaultShadow = false,
   type,
@@ -28,7 +27,7 @@ export const Button = ({
       {...buttonTextProps}
       type='h4'
       mobileStyles={css`
-        font-size: 14px;
+        font-size: 13px;
         line-height: 18px;
       `}
       color={variant === 'primary' ? 'white' : 'secondaryButtonText'}

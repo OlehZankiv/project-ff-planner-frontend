@@ -41,4 +41,3 @@ export const en = {
   "Saturday": "Saturday",
   "Sunday": "Sunday",
 }
-
