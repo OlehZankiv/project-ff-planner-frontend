@@ -213,23 +213,6 @@ export const UserWrapper = styled.div`
   `}
 `
 
-export const NameText = styled.p`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.29;
-  color: #343434;
-  text-align: center;
-  margin-bottom: 4px;
-  ${getBreakpointsStyles({
-    tablet: css`
-      font-size: 18px;
-      line-height: 1;
-    `,
-    desktop: css``,
-  })}
-`
 export const UserText = styled.p`
   font-family: 'Inter';
   font-style: normal;
