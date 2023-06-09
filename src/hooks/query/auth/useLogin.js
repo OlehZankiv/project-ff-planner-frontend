@@ -1,20 +1,34 @@
 import { useMutation } from '@tanstack/react-query'
-import { login as loginRequest } from '../../../api'
+import { login } from '../../../api'
 import { queryKeys } from '../queryKeys'
+import { useAuthContext } from '../../../contexts/auth'
+import { toUser } from '../mappers'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../../navigation/routes'
 
-// TODO: Implement login functionality
-export const useLogin = (onSuccess) => {
+export const useLogin = () => {
+  const { setLogger, setToken } = useAuthContext()
+  const navigate = useNavigate()
+  const location = useLocation()
+
   const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.login],
-    mutationFn: loginRequest,
+    mutationFn: login,
     onError: () => {
-      // Add error function if it will be needed
+      // TODO: Vitalii task: add error notification
     },
-    onSuccess,
+    onSuccess: (res) => {
+      const { token, user } = res.data
+
+      setToken(token)
+      setLogger(toUser(user))
+
+      navigate(location.state?.from?.pathname || ROUTES.CALENDAR)
+    },
   })
 
   return {
-    login: ({ email, password }) => mutate({ email, password }),
+    login: ({ password, email }) => mutate({ password, email }),
     isLoading,
   }
 }
