@@ -27,34 +27,23 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         )}
         events={[
           {
-            id: '1',
+            id: 'awdwdw',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
-
           {
-            id: '2',
+            id: 'awdwdw2',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
             textColor: '#F3B249',
             display: 'block',
           },
-
           {
-            id: '3',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-
-          {
-            id: '4',
+            id: 'awdwdw3',
             title: 'All-day event',
             start: selectedDate,
             backgroundColor: '#FCF0D4',
@@ -103,19 +92,22 @@ const DayCell = styled.div`
 
 const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
-    .fc.fc-media-screen {
-      border: 1px solid ${colors.calendarBorder} !important;
-      border-radius: 8px;
-    }
+        ${getBreakpointsStyles({
+          desktop: css`
+            padding: 15px 32px 32px;
+          `,
+          tablet: css`
+            padding: 18px 32px 42px;
+          `,
+          mobile: css`
+            padding: 14px 20px 52px;
+          `,
+        })}
 
     table {
-      border: 1px solid ${colors.calendarBorder} !important;
       border-radius: 8px;
+      border: 1px solid ${colors.calendarBorder} !important;
       overflow: hidden;
-    }
-
-    .fc-scrollgrid {
-      border-collapse: collapse;
     }
 
     td.fc-day {
@@ -156,7 +148,7 @@ const CalendarWrapper = styled.section`
       flex-direction: column;
       row-gap: 4px;
       padding: 8px;
-      max-height: calc(34px * 3.5);
+      max-height: calc(34px * 5.5); // 5.5 events per day
       overflow-y: auto;
 
       .fc-event {
