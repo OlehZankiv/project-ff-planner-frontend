@@ -199,7 +199,6 @@ const styles = {
 
 export const UserWrapper = styled.div`
   ${({ theme: { colors } }) => css`
-    width: calc(100% - 20px);
     min-height: 474px;
     /* margin-top: 151px; */
     background-color: ${colors.content};
@@ -232,31 +231,52 @@ export const UserText = styled.p`
 `
 
 export const UserForm = styled.form`
-  width: calc(100% - 36px);
+  // width: calc(100% - 36px);
+  padding: 20px;
+  background: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin: 0 auto;
   ${getBreakpointsStyles({
     tablet: css`
-      width: 374px;
+      background: red;
+
+      // width: 374px;
+      // padding: 20px 175px;
     `,
     desktop: css`
-      width: 768px;
+      background: blue;
+      // padding: 20px 164px;
+      // width: 768px;
+
+      flex-wrap: wrap;
     `,
   })}
 `
 export const DivForm = styled.div`
   margin-bottom: 10px;
+  width: 100%;
   ${getBreakpointsStyles({
     desktop: css`
-      display: flex;
-      flex-wrap: wrap;
+      column-count: 2;
       column-gap: 50px;
+      flex: 1;
+      // margin-left: 10px;
+      width: 768px;
+    `,
+    tablet: css`
+      background: red;
+      width: 374px;
+      //padding: 20px 175px;
     `,
   })}
 `
 export const InputWrapper = styled.div`
   ${getBreakpointsStyles({
     desktop: css`
-      width: 354px;
+      overflow: hidden;
     `,
   })}
 `

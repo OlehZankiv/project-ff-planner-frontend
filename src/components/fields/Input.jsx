@@ -108,9 +108,9 @@ const InputIconWrapper = styled.div`
 `
 
 export const InputStyled = styled(Field)`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors }, type }) => css`
     width: 100%;
-    padding: 18px;
+    padding: ${type === 'date' ? '15px' : '18px'};
     border-radius: 8px;
     color: ${colors.text};
     border-width: 1px;
