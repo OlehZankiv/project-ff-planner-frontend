@@ -39,14 +39,12 @@ const PeriodPaginator = ({
         >
           {isPeriodMonth ? (
             <PrevMonthIcon
-              width={11}
-              height={11}
+               width={11}
+                height={11}
               color={isPrevMonthDisabled ? colors.placeholderColor : colors.icon}
             ></PrevMonthIcon>
           ) : (
             <PrevMonthIcon
-              width={11}
-              height={11}
               color={isPrevDayDisabled ? colors.placeholderColor : colors.icon}
             ></PrevMonthIcon>
           )}

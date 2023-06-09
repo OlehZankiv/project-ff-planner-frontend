@@ -15,8 +15,6 @@ const CalendarToolbar = ({ changeCalendarType, selectedDate, setSelectedDate, ca
 
   const isPrevDayDisabled = selectedDate - new Date() < 0
 
-  console.log(selectedDate - new Date())
-
   const handlePrevMonth = () => {
     if (month === 0) {
       setMonth(11)
@@ -57,8 +55,6 @@ const CalendarToolbar = ({ changeCalendarType, selectedDate, setSelectedDate, ca
   return (
     <CalendarToolbarWrapper style={{ marginBottom: '24px' }}>
       <PeriodPaginator
-        month={month}
-        year={year}
         isPrevMonthDisabled={isPrevMonthDisabled}
         isPrevDayDisabled={isPrevDayDisabled}
         handleNextMonth={handleNextMonth}
