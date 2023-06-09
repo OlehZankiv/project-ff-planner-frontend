@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../utils/storage'
+import { getStorageItem, removeStorageItem, setStorageItem, STORAGE_KEYS } from '../utils/storage'
 import { useUser } from '../hooks/query'
 
 const AuthContext = createContext({
   logger: null,
+  token: null,
   setLogger: () => {},
   setToken: () => {},
 })
@@ -15,21 +16,24 @@ export const AuthContextProvider = ({ children }) => {
   const { user: dbUser } = useUser(logger?.id)
 
   useEffect(() => {
+    if (!dbUser) return
+
     if (JSON.stringify(dbUser) !== JSON.stringify(logger)) setLogger(dbUser)
   }, [dbUser, logger])
 
   useEffect(() => {
-    setStorageItem(STORAGE_KEYS.TOKEN, token)
+    token ? setStorageItem(STORAGE_KEYS.TOKEN, token) : removeStorageItem(STORAGE_KEYS.TOKEN)
   }, [token])
 
   useEffect(() => {
-    setStorageItem(STORAGE_KEYS.LOGGER, logger)
+    logger ? setStorageItem(STORAGE_KEYS.LOGGER, logger) : removeStorageItem(STORAGE_KEYS.LOGGER)
   }, [logger])
 
   return (
     <AuthContext.Provider
       value={{
         logger,
+        token,
         setToken,
         setLogger,
       }}
