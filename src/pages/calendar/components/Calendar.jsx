@@ -4,6 +4,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
+import dayjs from 'dayjs'
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const { height, width } = useDimensions()
@@ -11,13 +12,18 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   return (
     <CalendarWrapper>
       <FullCalendar
+        key={selectedDate.getMonth()}
         dayHeaders={false}
-        dateClick={(info) => setSelectedDate(info.date)}
+        initialDate={selectedDate}
+        dateClick={(info) => {
+          if (!dayjs(info.date).isBefore(new Date(), 'day')) setSelectedDate(info.date)
+        }}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={null}
         initialView='dayGridMonth'
         dayCellContent={(props) => (
           <DayCell
+            disabled={dayjs(props.date).isBefore(new Date(), 'day')}
             className={
               props.date.toDateString() === selectedDate.toDateString() ? 'selected' : undefined
             }
@@ -72,7 +78,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
 }
 
 const DayCell = styled.div`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors }, disabled }) => css`
     width: 26px;
     height: 26px;
     margin: 14px 14px 0 0;
@@ -85,6 +91,7 @@ const DayCell = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 18px;
+    opacity: ${disabled ? 0.5 : 1};
 
     &.selected {
       background-color: ${colors.primary};

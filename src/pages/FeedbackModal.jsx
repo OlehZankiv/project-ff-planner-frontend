@@ -3,8 +3,9 @@ import { Button, Modal, Ratings, Review, Textarea } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../hooks/query/reviews/useReviews'
+import { getMobileStyles } from '../styles/breakpoints'
 
-const FeedbackModal = ({ visible, setVisible }) => {
+export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
   const { reviews } = useReviews()
@@ -48,25 +49,35 @@ const FeedbackModal = ({ visible, setVisible }) => {
         onClick={feedbackSubmit}
       />
 
-      <FeedbackList>
-        {reviews.map((review) => (
-          <Review {...review} key={review.id} style={{ border: 'none' }} />
-        ))}
-      </FeedbackList>
+      <FeedbackWrapper>
+        <FeedbackList>
+          {reviews.map((review) => (
+            <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
+          ))}
+        </FeedbackList>
+      </FeedbackWrapper>
     </Modal>
   )
 }
 
-export default FeedbackModal
+const FeedbackWrapper = styled.div`
+  ${({ theme: { colors } }) => css`
+    padding: 16px 4px;
+    background-color: ${colors.feedbackListBackground};
+    margin-top: 32px;
+    border-radius: 8px;
+  `}
+`
 
 const FeedbackList = styled.div`
-  ${({ theme: { colors } }) => css`
-    width: 100%;
-    margin-top: 32px;
-    padding: 16px;
-    background-color: ${colors.feedbackListBackground};
-    border-radius: 8px;
-    max-height: 292px;
-    overflow-y: auto;
-  `}
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 20px;
+  padding: 0 12px;
+  max-height: 292px;
+  overflow-y: auto;
+  ${getMobileStyles(css`
+    row-gap: 14px;
+  `)}
 `
