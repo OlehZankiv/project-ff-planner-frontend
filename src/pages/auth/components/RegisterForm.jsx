@@ -21,8 +21,7 @@ export const RegisterForm = () => {
   const { t } = useTranslation()
   const { register, isLoading } = useRegister()
 
-  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
-  console.log(isLoading)
+  // console.log(isLoading)
 
   const handleSubmit = (values, { resetForm }) => {
     register(values)

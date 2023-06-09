@@ -20,8 +20,7 @@ export const LogInForm = () => {
   const { t } = useTranslation()
   const { login, isLoading } = useLogin()
 
-  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
-  console.log(isLoading)
+  // console.log(isLoading)
 
   const handleSubmit = (values, { resetForm }) => {
     login(values)
