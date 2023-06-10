@@ -8,7 +8,6 @@ import { LoginIcon } from '../../../assets/icons'
 import { css } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
-import { Spinner } from './Spinner'
 
 const initialValues = {
   name: '',
@@ -79,9 +78,10 @@ export const RegisterForm = () => {
             style={{ marginTop: '8px' }}
             type='submit'
             fullWidth
-            rightIcon={isLoading ? <Spinner /> : <LoginIcon />}
+            rightIcon={<LoginIcon color={'white'} />}
             title={isLoading ? t('Loading') : t('Sign up')}
             variant='primary'
+            isLoading={isLoading}
           />
           <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
         </AuthFormStyled>

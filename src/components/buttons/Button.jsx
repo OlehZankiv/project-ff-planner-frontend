@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 import { Text } from '../Text'
+import { Spinner } from '../../pages/auth/components/Spinner'
 
 export const Button = ({
   isDefaultShadow = false,
@@ -13,6 +14,7 @@ export const Button = ({
   rightIcon,
   style,
   buttonTextProps,
+  isLoading = false,
 }) => (
   <Wrapper
     style={style}
@@ -34,7 +36,7 @@ export const Button = ({
     >
       {title}
     </Text>
-    {rightIcon}
+    {isLoading ? <Spinner /> : rightIcon}
   </Wrapper>
 )
 

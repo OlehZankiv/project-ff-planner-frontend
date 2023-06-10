@@ -34,14 +34,12 @@ export const en = {
   "User Profile": "User Profile",
   "View": "View",
   "Well done": "Well done",
-  "Wrong email or password!": "Wrong email or password!",
   "We send a verify letter to your email!": "We send a verify letter to your email!",
   "email is a required field": "email is a required field",
   "email must be a valid email": "email must be a valid email",
   "name is a required field": "name is a required field",
   "password is a required field": "password is a required field",
   "password must be at least 4 characters": "password must be at least 4 characters",
-  "Ooops! Try again": "Ooops! Try again",
 
   // Week days
   "Monday": "Monday",

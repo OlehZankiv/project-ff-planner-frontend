@@ -8,8 +8,6 @@ import { css } from 'styled-components'
 import { LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
 import { useLogin } from '../../../hooks/query'
-import { Spinner } from '../components/Spinner'
-
 
 const initialValues = {
   email: '',
@@ -19,8 +17,6 @@ const initialValues = {
 export const LogInForm = () => {
   const { t } = useTranslation()
   const { login, isLoading } = useLogin()
-
-  // console.log(isLoading)
 
   const handleSubmit = (values, { resetForm }) => {
     login(values)
@@ -69,12 +65,13 @@ export const LogInForm = () => {
             isError={errors.password && touched.password}
           />
           <Button
-            style={{ marginTop: '8px' }}
+            style={{ marginTop: '24px' }}
             type='submit'
             fullWidth
-            rightIcon={isLoading ? <Spinner /> : <LoginIcon />}
+            rightIcon={<LoginIcon color={'white'} />}
             title={isLoading ? t('Loading') : t('Log In')}
             variant='primary'
+            isLoading={isLoading}
           />
           <AuthNavigate text={t('Sign Up')} route={ROUTES.REGISTER} />
         </AuthFormStyled>
