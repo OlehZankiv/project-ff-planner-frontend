@@ -5,6 +5,7 @@ export const en = {
   "Cancel": "Cancel",
   "Day": "Day",
   "Default": "Default",
+  "Edit": "Edit",
   "Email": "Email",
   "Enter email": "Enter email",
   "Enter password": "Enter password",
