@@ -35,8 +35,15 @@ const Avatar = ({ type, plus, styles = {}, onPlusHandler }) => {
   if (!logger) return null
 
   const userName = logger.name
+
+  console.log(currentSize.desktop, type)
   return (
-    <ImageWrapper data-component='avatar'>
+    <ImageWrapper
+      data-component='avatar'
+      mobileSize={currentSize.mobile}
+      tabletSize={currentSize.tablet}
+      desktopSize={currentSize.desktop}
+    >
       <AvatarWrapper
         mobileSize={currentSize.mobile}
         tabletSize={currentSize.tablet}
@@ -66,13 +73,33 @@ const Avatar = ({ type, plus, styles = {}, onPlusHandler }) => {
   )
 }
 export const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  ${({ desktopSize, mobileSize, tabletSize }) => css`
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 60px;
+
+    width: ${mobileSize}px;
+    height: ${mobileSize}px;
+
+    ${getBreakpointsStyles({
+      tablet: css`
+        width: ${tabletSize}px;
+        height: ${tabletSize}px;
+      `,
+      desktop: css`
+        width: ${desktopSize}px;
+        height: ${desktopSize}px;
+      `,
+    })}
+  `}
 `
 
 export const AvatarWrapper = styled.div`
   ${({ theme: { colors }, desktopSize, mobileSize, tabletSize, styles }) => css`
     border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,23 +126,28 @@ export const AvatarWrapper = styled.div`
 export const BackgroundSvg = styled.a`
   ${({ theme: { colors } }) => css`
     background-color: ${colors.primary};
+    position: absolute;
+    right: 18px;
+    top: 21px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    translate: -30px 22px;
+
     ${getBreakpointsStyles({
       tablet: css`
         width: 24px;
         height: 24px;
-        translate: -50px 68px;
+        right: 30px;
+        top: 66px;
       `,
       desktop: css`
         width: 24px;
         height: 24px;
-        translate: -50px 144px;
+        right: 22px;
+        top: 145px;
       `,
     })}
   `}

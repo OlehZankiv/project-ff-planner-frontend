@@ -9,6 +9,7 @@ import Avatar from '../../components/avatar/Avatar'
 import InputStatus from '../../components/InputStatus'
 import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { DatePicker } from '../../components'
+import { t } from 'i18next'
 
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -34,6 +35,11 @@ const UserPage = () => {
     tabletValue: 18,
     desktopValue: 18,
   })
+  const userFontSize = useBreakpointValue({
+    mobileValue: 12,
+    tabletValue: 14,
+    desktopValue: 14,
+  })
   const onPlusHandler = () => {
     const input = document.createElement('input')
     input.type = 'file'
@@ -56,11 +62,19 @@ const UserPage = () => {
         color='userNameText'
         fontWeight={1000}
         fontSize={nameFontSize}
-        style={{ textAlign: 'center' }}
+        style={{ textAlign: 'center', marginBottom: 8 }}
       >
         {userName}
       </Text>
-      <UserText>User</UserText>
+      <Text
+        type='p'
+        color='userAvatar'
+        fontWeight={600}
+        fontSize={userFontSize}
+        style={{ textAlign: 'center' }}
+      >
+        User
+      </Text>
       <Formik
         initialValues={{ email: '', birthday: currentDate }}
         onSubmit={async (values) => {
@@ -85,7 +99,7 @@ const UserPage = () => {
                     rightIcon={null}
                     isError={errors.username && touched.username}
                     successMessage={'This is Correct name'}
-                    placeholder='Enter your name'
+                    placeholder={t('Enter your name')}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   ></Input>
@@ -97,7 +111,7 @@ const UserPage = () => {
                     type='date'
                     id='birthday'
                     name='birthday'
-                    placeholder='Enter your birthday'
+                    placeholder={t('Enter your birthday')}
                     title={'Birthday'}
                     value={values.birthday}
                     onChange={handleChange}
@@ -110,7 +124,7 @@ const UserPage = () => {
                     id='email'
                     name='email'
                     type='text'
-                    placeholder='Enter your email'
+                    placeholder={t('Enter your email')}
                     title={'Email'}
                     rightIcon={null}
                     isError={errors.email && touched.email}
@@ -125,7 +139,7 @@ const UserPage = () => {
                     id='phone'
                     name='phone'
                     type='tel'
-                    placeholder='Enter your phone number'
+                    placeholder={t('Enter your phone number')}
                     title={'Phone'}
                     rightIcon={null}
                     isError={errors.phone && touched.phone}
@@ -140,7 +154,7 @@ const UserPage = () => {
                     id='skype'
                     name='skype'
                     type='text'
-                    placeholder='Enter your skype'
+                    placeholder={t('Enter your skype')}
                     title={'Skype'}
                     rightIcon={null}
                     isError={errors.skype && touched.skype}
@@ -239,19 +253,13 @@ export const UserForm = styled.form`
 `
 export const DivForm = styled.div`
   margin-bottom: 10px;
-  width: 100%;
+  width: 70%;
   ${getBreakpointsStyles({
     desktop: css`
       column-count: 2;
       column-gap: 50px;
       flex: 1;
-      // margin-left: 10px;
-      width: 768px;
       break-inside: avoid-column;
-    `,
-    tablet: css`
-      width: 374px;
-      //padding: 20px 175px;
     `,
   })}
 `

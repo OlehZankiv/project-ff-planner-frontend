@@ -73,7 +73,7 @@ export const lightTheme = themeCreator({
     taskButtonBackground: '#e3f3ff',
 
     avatarBackgroundColor: '#F8F8F8',
-
+    userAvatar: '#343434',
     groupButtonsTextSelected: '#3E85F3',
     groupButtonsBackground: '#E3F3FF',
     groupButtonsBackgroundSelected: '#CAE8FF',
@@ -138,7 +138,7 @@ export const darkTheme = themeCreator({
     taskButtonBackground: '#3E85F3',
 
     avatarBackgroundColor: '#171820',
-
+    userAvatar: 'rgba(250, 250, 250, 0.3)',
     groupButtonsTextSelected: '#FFFFFF',
     groupButtonsBackground: '#21222C',
     groupButtonsBackgroundSelected: '#3E85F3',
