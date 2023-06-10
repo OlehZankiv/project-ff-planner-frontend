@@ -14,17 +14,15 @@ import { t } from 'i18next'
 
 const UserPage = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-  const birthdayRegex = /^\d{4}-(0[1-9]|1[0-2])-([12][0-9]|0[1-9]|3[01])$/
-  const currentDate = new Date().toISOString().slice(0, 10)
   const phoneRegex = /^(\+?38)?(\s?(\()?\d{3}(\))?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2})$/
-  const skypeRegex = /^[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
+  const skypeRegex = /^(?!$)[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
 
   const userProfileFormValidationSchema = Yup.object().shape({
     email: Yup.string()
       .matches(emailRegex, 'Invalid email format. Example: test@test.com')
       .required('Required'),
     username: Yup.string().min(3).max(30).required('Required'),
-    birthday: Yup.string().matches(birthdayRegex, 'Invalid date format. Example: 01.01.2023 '),
+    birthday: Yup.date().required('Invalid date format. Example: 01/01/2023 ').nullable(),
     phone: Yup.string()
       .matches(phoneRegex, 'Invalid phone format. Example: 38 (097) 256 34 77')
       .required('Required'),
@@ -84,9 +82,9 @@ const UserPage = () => {
         User
       </Text>
       <Formik
-        initialValues={{ email: '', birthday: currentDate }}
+        initialValues={{ email: '', birthday: new Date() }}
         onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 500))
+          await new Promise((resolve) => setTimeout(resolve, 1000))
           alert(JSON.stringify(values, null, 2))
         }}
         validationSchema={userProfileFormValidationSchema}
@@ -94,6 +92,8 @@ const UserPage = () => {
         {(props) => {
           const { touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, values } =
             props
+
+          console.log(isSubmitting)
 
           return (
             <UserForm onSubmit={handleSubmit}>
@@ -116,7 +116,6 @@ const UserPage = () => {
 
                 <InputWrapper>
                   <DatePicker
-                    type='date'
                     id='birthday'
                     name='birthday'
                     placeholder={t('Enter your birthday')}
