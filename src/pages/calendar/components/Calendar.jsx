@@ -2,12 +2,37 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 import dayjs from 'dayjs'
+import { useTasks } from '../../../hooks/query'
+import { useMemo } from 'react'
 
 export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => {
+  const theme = useTheme()
+
   const { height, width } = useDimensions()
+
+  const { tasks } = useTasks()
+
+  const taskColors = {
+    low: { text: theme.colors.eventLowText, background: theme.colors.eventLowBackground },
+    medium: { text: theme.colors.eventMediumText, background: theme.colors.eventMediumBackground },
+    high: { text: theme.colors.eventHighText, background: theme.colors.eventHighBackground },
+  }
+
+  const events = useMemo(
+    () =>
+      tasks.map((task) => ({
+        id: task.id,
+        title: task.title,
+        start: task.startAt,
+        backgroundColor: taskColors[task.priority].background,
+        textColor: taskColors[task.priority].text,
+        display: 'block',
+      })),
+    [tasks, theme],
+  )
 
   return (
     <CalendarWrapper>
@@ -34,43 +59,7 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
             {props.dayNumberText}
           </DayCell>
         )}
-        events={[
-          {
-            id: '1',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-
-          {
-            id: '2',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-
-          {
-            id: '3',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-
-          {
-            id: '4',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-        ]}
+        events={events}
         showNonCurrentDates={false}
         fixedWeekCount={false}
         aspectRatio={width / height}

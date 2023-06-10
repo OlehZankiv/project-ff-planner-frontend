@@ -8,24 +8,6 @@ import { useCalendarPageLogic } from './hooks/useCalendarPageLogic'
 const CalendarPage = () => {
   const { selectedDate, setSelectedDate, calendarType, setCalendarType } = useCalendarPageLogic()
 
-  // const { tasks } = useTasks()
-  // const { createTask } = useCreateTask()
-  //
-  // useEffect(() => {
-  //   createTask(
-  //     toTaskDTO(
-  //       toTask({
-  //         category: 'to-do',
-  //         startAt: new Date().getTime(),
-  //         endAt: new Date().getTime(),
-  //         priority: 'low',
-  //         title: 'Do something',
-  //       }),
-  //     ),
-  //   )
-  // }, [])
-  //
-  // console.log(tasks)
   return (
     <Wrapper>
       <CalendarToolbar
