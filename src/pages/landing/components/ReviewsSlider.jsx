@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from '../../../assets/icons'
 
 
 import { getDesktopStyles } from '../../../styles/breakpoints'
-
+import { useReviews } from '../../../hooks/query'
 // import { Review } from '../../../components/Review'
 
 
@@ -12,7 +12,11 @@ import { getDesktopStyles } from '../../../styles/breakpoints'
 
 export const Reviews = () => {
     const { colors } = useTheme();
-  const [currentReview, setCurrentReview] = useState(0);
+    const [currentReview, setCurrentReview] = useState(0);
+    const { reviews } = useReviews('best');
+//   console.log({ reviews, isLoading })
+    
+    // const { reviews, isLoading } = useReviews('best');
 
   const nextReview = () => {
     setCurrentReview(
@@ -28,18 +32,24 @@ export const Reviews = () => {
 
   return (
     <Container>
-      <ReviewsTitle>reviews</ReviewsTitle>
-      <WrapperReviewConteiner>
+          <ReviewsTitle>reviews</ReviewsTitle>
+          
+          
+<WrapperReviewConteiner>
         {reviews
           .slice(
             currentReview,
-            currentReview + (window.innerWidth >= 1280 ? 2 : 1)
+            currentReview + (window.innerWidth >= 1440 ? 2 : 1)
           )
-          .map(review => (
-            <ReviewContainer key={review.id}>
+                  .map(review => (
+              
+                      
+                    //   замість ReviewContainer треба вставити Review?
+            
+            <ReviewContainer key={review._id}>
               <FlexConteiner>
-                <Avatar src={review.avatar} alt={review.name} />
-                <Name>{review.name}</Name>
+                
+                <Name>{review.owner.name}</Name>
               </FlexConteiner>
               <Rating>
                 {[...Array(5)].map((_, index) => (
@@ -53,10 +63,13 @@ export const Reviews = () => {
                 ))}
               </Rating>
 
-              <ReviewText>{review.text}</ReviewText>
+              <ReviewText>{review.comment}</ReviewText>
             </ReviewContainer>
           ))}
       </WrapperReviewConteiner>
+
+
+      
       <ButtonContainer>
         <Button onClick={prevReview}>
                   <ArrowLeft color={colors.black} />
@@ -115,12 +128,15 @@ export const ReviewContainer = styled.div`
   `)}
 `;
 
-export const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
+// Avatar src={review.avatar} alt={review.name}
+
+// export const Avatar = styled.img`
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 50%;
+//   object-fit: cover;
+// `;
+
 
 export const Name = styled.h3`
   margin-top: 10px;

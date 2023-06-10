@@ -19,15 +19,14 @@ import {
 } from '../../assets/images'
 import { ContentItem } from './components/ContentItem'
 import { Reviews } from './components/ReviewsSlider'
-import { useReviews } from '../../hooks/query'
+
 
 const LandingPage = () => {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const navigate = useNavigate()
 
-  const { reviews, isLoading } = useReviews('best')
-  console.log({ reviews, isLoading })
+ 
 
   const items = [
     {
