@@ -9,6 +9,7 @@ export const useUpdateUser = () => {
 
   const { mutate, isLoading } = useMutation((data) => updateUser(id, data), {
     mutationKey: [queryKeys.updateUser],
+    id,
   })
 
   return {
