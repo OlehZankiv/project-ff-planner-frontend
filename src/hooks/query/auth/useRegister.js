@@ -7,14 +7,10 @@ export const useRegister = () => {
   const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.register],
     mutationFn: register,
-    onError: (error) => {
-      registerError(error)
-      // TODO: Vitalii task: add error notification
-    },
+    onError: registerError,
     onSuccess: (res) => {
       registerSuccess(res)
       console.log(res.data.user)
-      // TODO: Vitalii task: add success notification
     },
   })
 

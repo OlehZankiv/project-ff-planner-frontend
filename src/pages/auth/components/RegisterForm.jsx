@@ -21,8 +21,6 @@ export const RegisterForm = () => {
   const { t } = useTranslation()
   const { register, isLoading } = useRegister()
 
-  // console.log(isLoading)
-
   const handleSubmit = (values, { resetForm }) => {
     register(values)
     resetForm()
