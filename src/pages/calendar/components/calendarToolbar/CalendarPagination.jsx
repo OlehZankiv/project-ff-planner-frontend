@@ -2,6 +2,7 @@ import styled, { css, useTheme } from 'styled-components'
 import dayjs from 'dayjs'
 import { OpacityButton, Text } from '../../../../components'
 import { ChevronDownIcon } from '../../../../assets/icons'
+import { getMobileStyles } from '../../../../styles/breakpoints'
 
 export const CalendarPagination = ({ selectedDate, setSelectedDate, calendarType }) => {
   const { colors } = useTheme()
@@ -54,6 +55,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
+  ${getMobileStyles(css`
+    justify-content: space-between;
+    width: 100%;
+  `)}
 `
 
 const MonthWrapper = styled.div`

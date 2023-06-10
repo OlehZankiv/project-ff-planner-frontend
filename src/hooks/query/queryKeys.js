@@ -4,6 +4,7 @@ export const queryKeys = Object.freeze({
   logout: 'logout',
   getReviews: 'getReviews',
   getUsers: 'getUsers',
+  updateUser: 'updateUser',
   getTasks: 'getTasks',
   createTask: 'createTask',
   updateTask: 'updateTask',
