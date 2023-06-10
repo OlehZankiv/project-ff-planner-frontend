@@ -4,25 +4,29 @@ import { OpacityButton, Text } from '../../../components'
 import { useWeekDays } from '../hooks/useWeekDays'
 import dayjs from 'dayjs'
 
-export const CalendarWeek = ({ selectedDate, setSelectedDate, isDayView }) => {
+export const CalendarWeek = ({ selectedDate, setSelectedDate, calendarType }) => {
   const week = useWeekDays(selectedDate)
+
+  const isDayView = calendarType === 'day'
 
   return (
     <WeekList>
       {week.map(({ text, date }, index) => {
         const isSelected = date.getDay() === selectedDate?.getDay()
         const isDisabled = !isDayView || dayjs(date).isBefore(new Date(), 'day')
+        const isWeekend = [6, 0].includes(date.getDay())
 
         return (
           <WeekDay
             key={index}
+            isDayView={isDayView}
             disabled={isDisabled}
             onClick={isDisabled ? undefined : () => setSelectedDate(date)}
           >
             <Text
               style={{ textTransform: 'uppercase' }}
               type='h4'
-              color='calendarWeekDayText'
+              color={!isDayView && isWeekend ? 'primary' : 'calendarWeekDayText'}
               mobileStyles={css`
                 font-size: 16px;
               `}
@@ -63,8 +67,8 @@ const WeekList = styled.section`
 `
 
 const WeekDay = styled(OpacityButton)`
-  ${({ disabled }) => css`
-    opacity: ${disabled ? 0.7 : 1};
+  ${({ disabled, isDayView }) => css`
+    opacity: ${disabled && isDayView ? 0.5 : 1};
     display: flex;
     flex-direction: column;
     align-items: center;
