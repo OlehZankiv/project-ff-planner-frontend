@@ -68,10 +68,7 @@ export const lightTheme = themeCreator({
     modalsInputBorder: 'transparent',
     feedbackListBackground: '#e3f3ff',
     calendarWeekDayText: '#21222C',
-    toolbarBtnTextColor: '#3e85f3',
     toolbarBtnBgColor: '#E3F3FF',
-    arrowIconsBgColor: '#ffffff',
-    changeCalendarTypeBtn: '#3E85F3',
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
     calendarPickerBorder: '#659DF5',
@@ -133,10 +130,7 @@ export const darkTheme = themeCreator({
     feedbackListBackground: '#21222C',
     calendarWeekDayText: '#62636A',
 
-    toolbarBtnTextColor: '#ffffff',
     toolbarBtnBgColor: '#21222C',
-    arrowIconsBgColor: '#21222C',
-    changeCalendarTypeBtn: '#3E85F3',,
     scrollbarTrackBackground: '#21222C',
     scrollbarThumbBackground: '#2D3037',
 

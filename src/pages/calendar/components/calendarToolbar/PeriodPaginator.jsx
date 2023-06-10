@@ -6,51 +6,71 @@ import dayjs from 'dayjs'
 
 const PeriodPaginator = ({
   selectedDate,
-  isPrevMonthDisabled,
-  isPrevDayDisabled,
-  handleNextMonth,
-  handlePrevMonth,
+  setSelectedDate,
   calendarType,
-  handleNextWeek,
-  handlePrevWeek,
 }) => {
   const { colors } = useTheme()
- 
 
+  const currentMonth = new Date().getMonth()
+  const currentYear = new Date().getFullYear()
+  const selectedMonth = selectedDate.getMonth();
+  const selectedYear = selectedDate.getFullYear();
+
+  const isPrevMonthDisabled = currentYear === selectedYear && currentMonth === selectedMonth
+
+  const isPrevDayDisabled = selectedDate - new Date() < 0
+ 
   const isPeriodMonth = calendarType === 'month'
 
-  const month = dayjs(selectedDate).format('MMMM YYYY').toUpperCase()
-  const day = dayjs(selectedDate).format('D MMM YYYY').toUpperCase()
+  const formattedMonth = dayjs(selectedDate).format('MMMM YYYY').toUpperCase()
+  const formattedDay = dayjs(selectedDate).format('D MMM YYYY').toUpperCase()
+
+    const handlePrevMonth = () => {
+    if (selectedDate - new Date() < 0) {
+      return
+    }
+    const subtractedMonth = dayjs(selectedDate).subtract(1, 'month')
+    setSelectedDate(subtractedMonth.$d)
+  }
+
+  const handleNextMonth = () => {
+    const addedMonth = dayjs(selectedDate).add(1, 'month')
+    setSelectedDate(addedMonth.$d)
+  }
+
+  const handleNextWeek = () => {
+    const addedWeek = dayjs(selectedDate).add(7, 'day')
+    setSelectedDate(addedWeek.$d)
+  }
+
+  const handlePrevWeek = () => {
+    if (selectedDate - new Date() < 0) {
+      return
+    }
+    const substractedWeek = dayjs(selectedDate).subtract(7, 'day')
+    setSelectedDate(substractedWeek.$d)
+  }
+
 
   return (
     <AlignItemsWrapper>
       <MonthWrapper>
-        {calendarType === 'month' && <MonthText>{month}</MonthText>}
-        {calendarType === 'day' && <DayText>{day}</DayText>
+        {calendarType === 'month' && <MonthText>{formattedMonth}</MonthText>}
+        {calendarType === 'day' && <DayText>{formattedDay}</DayText>
         }
       </MonthWrapper>
-
-     
-
       <IconsWrapper>
         <PrevMonthIconButton
           onClick={isPeriodMonth ? handlePrevMonth : handlePrevWeek}
           disabled={isPeriodMonth ? isPrevMonthDisabled : isPrevDayDisabled}
         >
-          {isPeriodMonth ? (
             <PrevMonthIcon
-               width={11}
-                height={11}
-              color={isPrevMonthDisabled ? colors.placeholderColor : colors.icon}
+               size={11}
+              color={isPeriodMonth && isPrevMonthDisabled || isPrevDayDisabled? colors.placeholderColor : colors.icon}
             ></PrevMonthIcon>
-          ) : (
-            <PrevMonthIcon
-              color={isPrevDayDisabled ? colors.placeholderColor : colors.icon}
-            ></PrevMonthIcon>
-          )}
         </PrevMonthIconButton>
         <NextMonthIconButton onClick={isPeriodMonth ? handleNextMonth : handleNextWeek}>
-          <NextMonthIcon width={11} height={11} color={colors.icon}></NextMonthIcon>
+          <NextMonthIcon size={11} color={colors.icon}></NextMonthIcon>
         </NextMonthIconButton>
       </IconsWrapper>
     </AlignItemsWrapper>
@@ -63,8 +83,10 @@ const MonthWrapper = styled.div`
     background-color: ${colors.primary};
     box-shadow: ${shadows.modalShadow};
     border-radius: 8px;
-    width: 118px;
+    min-width: 111px;
     height: 30px;
+    padding-right: 3px;
+    padding-left: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,6 +106,7 @@ const MonthWrapper = styled.div`
 
 const AlignItemsWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   ${getBreakpointsStyles({
     tablet: css`
       align-items: start;
@@ -137,25 +160,23 @@ const DayText = styled.p`
 const PrevMonthIconButton = styled.button`
   ${({ theme: { colors } }) => css`
     display: flex;
-    background-color: ${colors.arrowIconsBgColor};
-    width: 36px;
-    height: 30px;
+    background-color: ${colors.scrollbarTrackBackground};
+    height: fit-content;
+    padding: 9px 12px;
     align-items: center;
     justify-content: center;
     border-radius: 8px 0px 0px 8px;
     border: none;
-    border-right: 1px solid rgba(220, 227, 229, 0.5);
+    border-right: 1px solid  ${colors.placeholderColor};
     color: ${colors.white};
     text-align: center;
-    border: 1px solid rgba(220, 227, 229, 0.5);
+    border: 1px solid ${colors.placeholderColor} ;
     ${getBreakpointsStyles({
       tablet: css`
-        width: 38px;
-        height: 34px;
+        padding: 11px 12px;
       `,
       desktop: css`
-        width: 38px;
-        height: 34px;
+      padding: 11px 12px;
       `,
     })}
   `}
@@ -164,22 +185,20 @@ const PrevMonthIconButton = styled.button`
 const NextMonthIconButton = styled.button`
   ${({ theme: { colors } }) => css`
     display: flex;
-    background-color: ${colors.arrowIconsBgColor};
-    width: 36px;
-    height: 30px;
+    background-color: ${colors.scrollbarTrackBackground};
+    height: fit-content;
+    padding: 9px 12px;
     align-items: center;
     justify-content: center;
     border: none;
     border-radius: 0px 8px 8px 0px;
-    border: 1px solid rgba(220, 227, 229, 0.5);
+    border: 1px solid ${colors.placeholderColor};
     ${getBreakpointsStyles({
       tablet: css`
-        width: 38px;
-        height: 34px;
+          padding: 11px 12px;
       `,
       desktop: css`
-        width: 38px;
-        height: 34px;
+        padding: 11px 12px;
       `,
     })}
   `}
@@ -187,15 +206,12 @@ const NextMonthIconButton = styled.button`
 
 const IconsWrapper = styled.div`
   display: flex;
-  height: 30px;
   ${getBreakpointsStyles({
     tablet: css`
       margin-left: 8px;
-      height: 34px;
     `,
     desktop: css`
       margin-left: 8px;
-      height: 34px;
     `,
   })}
 `

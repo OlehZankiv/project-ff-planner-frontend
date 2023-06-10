@@ -1,7 +1,7 @@
-export const PrevMonthIcon = ({ width, height, color }) => (
+export const PrevMonthIcon = ({ size, color }) => (
   <svg
-    width={width}
-    height={height}
+    width={size}
+    height={size}
     viewBox='0 0 6 10'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

@@ -38,8 +38,8 @@ const CalendarPage = ({}) => {
       {calendarType === 'month' && (
         <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       )}
-      {calendarType === 'day' && <div>Add day calendar</div>}
-      <TodosContent selectedDate={selectedDate} />
+      {calendarType === 'day' && <TodosContent selectedDate={selectedDate} />}
+     
       {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
       </Wrapper>
       </div>
