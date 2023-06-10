@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components'
-import { Button, Modal, Ratings, Review, Textarea, OpacityButton } from '../components'
+import { Button, Modal, Ratings, Review, Textarea } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../hooks/query/'
 import { getMobileStyles } from '../styles/breakpoints'
 import { FeedbackEditModal } from './FeedbackEditModal'
-import { PencilIcon } from '../assets/icons'
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
@@ -17,6 +16,16 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
   const [editReview, setReview] = useState('')
 
+  const feedbackSubmit = (event) => {
+    event.preventDefault()
+
+    const review = { rating: ratingValue, review: reviewText }
+    console.log('form data to send:', review)
+
+    setRatingValue(0)
+    setReviewText('')
+  }
+
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
 
@@ -27,14 +36,8 @@ export const FeedbackModal = ({ visible, setVisible }) => {
     setFeedbackEditModalVisible(true)
   }
 
-  const feedbackSubmit = (event) => {
-    event.preventDefault()
-
-    const review = { rating: ratingValue, review: reviewText }
-    console.log('form data to send:', review)
-
-    setRatingValue(0)
-    setReviewText('')
+  const handleDeleteFeedbackClick = (id) => {
+    console.log('req to delete review with id ', id)
   }
 
   useEffect(() => {
@@ -79,14 +82,14 @@ export const FeedbackModal = ({ visible, setVisible }) => {
       <FeedbackWrapper>
         <FeedbackList>
           {reviews.map((review) => (
-            <>
-              <EditWrapper onClick={() => handleEditFeedbackClick(review.id)}>
-                <OpacityButton>
-                  <PencilIcon color={'black'} />
-                </OpacityButton>
-              </EditWrapper>
-              <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
-            </>
+            <Review
+              {...review}
+              key={review.id}
+              style={{ border: 'none', padding: 0 }}
+              showEdit={true}
+              editOnClick={() => handleEditFeedbackClick(review.id)}
+              deleteOnClick={() => handleDeleteFeedbackClick(review.id)}
+            />
           ))}
         </FeedbackList>
       </FeedbackWrapper>
@@ -114,8 +117,4 @@ const FeedbackList = styled.div`
   ${getMobileStyles(css`
     row-gap: 14px;
   `)}
-`
-
-const EditWrapper = styled.div`
-  display: flex;
 `

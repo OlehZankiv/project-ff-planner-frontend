@@ -1,9 +1,18 @@
 import styled, { css, useTheme } from 'styled-components'
 import { getMobileStyles, ScreenWrapper } from '../styles/breakpoints'
 import { Text } from './Text'
-import { RatingStarUserIcon } from '../assets/icons'
+import { RatingStarUserIcon, PencilIcon, TrashIcon } from '../assets/icons'
+import { OpacityButton } from '../components'
 
-export const Review = ({ style, rating, comment, owner: { name } }) => {
+export const Review = ({
+  style,
+  rating,
+  comment,
+  owner: { name },
+  showEdit = false,
+  editOnClick,
+  deleteOnClick,
+}) => {
   const { colors } = useTheme()
 
   const commentJSX = (
@@ -16,7 +25,17 @@ export const Review = ({ style, rating, comment, owner: { name } }) => {
     <Wrapper style={style}>
       <div style={{ width: 50, height: 50, backgroundColor: 'red' }} />
       <div>
-        <Text type='h5'>{name}</Text>
+        <ReviewTop>
+          <Text type='h5'>{name}</Text>
+          <EditWrapper>
+            <OpacityButton onClick={editOnClick}>
+              <PencilIcon color={'black'} />
+            </OpacityButton>
+            <OpacityButton onClick={deleteOnClick}>
+              <TrashIcon color={'black'} />
+            </OpacityButton>
+          </EditWrapper>
+        </ReviewTop>
         <StarsWrapper style={{ marginTop: 12 }}>
           {new Array(5).fill(0).map((_, index) => (
             <RatingStarUserIcon
@@ -28,6 +47,7 @@ export const Review = ({ style, rating, comment, owner: { name } }) => {
         </StarsWrapper>
         <ScreenWrapper tablet={commentJSX} desktop={commentJSX} />
         <ScreenWrapper mobile={commentJSX} />
+        {showEdit && <p>showEdit</p>}
       </div>
     </Wrapper>
   )
@@ -55,4 +75,14 @@ const StarsWrapper = styled.div`
   align-items: center;
   column-gap: 10px;
   margin-top: 12px;
+`
+
+const ReviewTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const EditWrapper = styled.div`
+  display: flex;
+  column-gap: 10px;
 `
