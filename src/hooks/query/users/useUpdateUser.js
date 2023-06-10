@@ -8,8 +8,8 @@ export const useUpdateUser = () => {
   const { id } = logger
 
   const { mutate, isLoading } = useMutation((data) => updateUser(id, data), {
-    mutationKey: [queryKeys.updateUser],
-    id,
+    mutationKey: [queryKeys.updateUser, id],
+    enabled: !!id,
   })
 
   return {
