@@ -3,12 +3,13 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useAuthContext } from '../../contexts/auth'
 import { Text } from '../../components/Text'
+
 import styled, { css } from 'styled-components'
 import { Input } from '../../components/fields/Input'
 import Avatar from '../../components/avatar/Avatar'
 import InputStatus from '../../components/InputStatus'
 import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
-import { DatePicker } from '../../components'
+import { Button, DatePicker } from '../../components'
 import { t } from 'i18next'
 
 const UserPage = () => {
@@ -40,6 +41,13 @@ const UserPage = () => {
     tabletValue: 14,
     desktopValue: 14,
   })
+
+  const buttonSize = useBreakpointValue({
+    mobileValue: 195,
+    tabletValue: 262,
+    desktopValue: 262,
+  })
+
   const onPlusHandler = () => {
     const input = document.createElement('input')
     input.type = 'file'
@@ -165,10 +173,14 @@ const UserPage = () => {
                   <InputStatus error={errors.skype} touched={touched.skype} />
                 </InputWrapper>
               </DivForm>
-
-              <UserButton type='submit' disabled={isSubmitting}>
+              <Button
+                type='submit'
+                title={'Save Changes'}
+                disabled={isSubmitting}
+                style={{ width: buttonSize }}
+              >
                 Save Changes
-              </UserButton>
+              </Button>
             </UserForm>
           )
         }}
@@ -270,36 +282,4 @@ export const InputWrapper = styled.div`
       break-inside: avoid-column;
     `,
   })}
-`
-
-export const UserButton = styled.button`
-  ${({ theme: { colors } }) => css`
-    width: 195px;
-    height: 46px;
-    background: ${colors.primary};
-    border: ${colors.primary};
-    border-radius: 16px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 1.29;
-    display: block;
-    margin: auto;
-    margin-top: 40px;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.06em;
-    color: ${colors.white};
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    ${getBreakpointsStyles({
-      tablet: css`
-        width: 262px;
-      `,
-      desktop: css`
-        margin-bottom: 60px;
-      `,
-    })}
-  `}
 `
