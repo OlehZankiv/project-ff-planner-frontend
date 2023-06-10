@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Button, Modal, Ratings, Review, Textarea } from '../components'
+import { Button, Modal, Ratings, Review, Textarea, OpacityButton } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReviews } from '../hooks/query/reviews/useReviews'
@@ -19,6 +19,10 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
+
+    if (!review) {
+      return alert('review not found')
+    }
     setReview(review)
     setFeedbackEditModalVisible(true)
   }
@@ -77,7 +81,9 @@ export const FeedbackModal = ({ visible, setVisible }) => {
           {reviews.map((review) => (
             <>
               <EditWrapper onClick={() => handleEditFeedbackClick(review.id)}>
-                <PencilIcon color={'black'} />
+                <OpacityButton>
+                  <PencilIcon color={'black'} />
+                </OpacityButton>
               </EditWrapper>
               <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
             </>
