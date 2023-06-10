@@ -3,6 +3,7 @@ import { GlobalStyle } from './globalStyles'
 import { darkTheme, lightTheme } from './themes'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useAuthContext } from '../../contexts/auth'
+import { useUpdateUser } from '../../hooks/query'
 
 const themes = {
   dark: darkTheme,
@@ -17,10 +18,15 @@ const AppThemeContext = createContext({
 export const AppThemeProvider = ({ children }) => {
   const { logger } = useAuthContext()
   const [themeType, setThemeType] = useState('light')
+  const { updateTheme } = useUpdateUser()
 
   useEffect(() => {
     setThemeType(logger?.theme ?? 'light')
   }, [logger?.theme])
+
+  useEffect(() => {
+    updateTheme(themeType)
+  }, [themeType])
 
   return (
     <AppThemeContext.Provider value={{ themeType, setThemeType }}>

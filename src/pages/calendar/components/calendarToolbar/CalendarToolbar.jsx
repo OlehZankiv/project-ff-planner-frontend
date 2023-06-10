@@ -21,16 +21,8 @@ export const CalendarToolbar = ({
       <GroupButtons
         selected={calendarType}
         buttons={[
-          {
-            type: 'month',
-            onClick: setCalendarType,
-            title: t('Month'),
-          },
-          {
-            type: 'day',
-            onClick: setCalendarType,
-            title: t('Day'),
-          },
+          { type: 'month', onClick: setCalendarType, title: t('Month') },
+          { type: 'day', onClick: setCalendarType, title: t('Day') },
         ]}
       />
     </CalendarToolbarWrapper>
@@ -41,4 +33,6 @@ const CalendarToolbarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
 `
