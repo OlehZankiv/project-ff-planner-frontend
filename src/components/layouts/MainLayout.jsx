@@ -17,14 +17,14 @@ import { Button } from '../buttons/Button'
 import { FeedbackModal } from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
-import { useUpdateUser } from '../../hooks/query'
+import { useUpdateTheme } from '../../hooks/query'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
-  const { updateUser } = useUpdateUser()
+  const { updateTheme } = useUpdateTheme()
 
   const { logger } = useAuthContext()
 
@@ -45,8 +45,9 @@ export const MainLayout = () => {
 
   const handleThemeChange = () => {
     const newTheme = themeType === 'light' ? 'dark' : 'light'
+    console.log(newTheme)
+    updateTheme({ theme: newTheme })
     setThemeType(newTheme)
-    updateUser({ theme: newTheme })
   }
 
   const firstLettersMaker = (str) =>

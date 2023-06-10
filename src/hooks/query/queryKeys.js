@@ -6,4 +6,5 @@ export const queryKeys = Object.freeze({
   getTasks: 'getTasks',
   getUsers: 'getUsers',
   updateUser: 'updateUser',
+  updateTheme: 'updateTheme',
 })
