@@ -1,6 +1,6 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { ROUTES } from '../navigation/routes'
 
 import {
@@ -45,6 +45,21 @@ export const SideBar = ({
   const iconCheckSize = useBreakpointValue({ mobileValue: 20, tabletValue: 24, desktopValue: 24 })
   const iconLogOutSize = useBreakpointValue({ mobileValue: 18, tabletValue: 20, desktopValue: 20 })
   const iconCloseSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
+
+  useEffect(() => {
+    if (isBurgerMenuOpen) {
+      // Заборонити прокручування
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Дозволити прокручування
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      // Відмінити ефект та дозволити прокручування при розмонтовуванні компонента
+      document.body.style.overflow = 'auto'
+    }
+  }, [isBurgerMenuOpen])
 
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -147,7 +162,8 @@ const SidebarWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    height: 100%;
     background-color: ${theme.colors.background};
     width: 70%;
     padding: 20px 24px;
