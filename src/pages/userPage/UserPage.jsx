@@ -7,7 +7,11 @@ import { Text } from '../../components/Text'
 import styled, { css } from 'styled-components'
 import { Input } from '../../components/fields/Input'
 import Avatar from '../../components/avatar/Avatar'
-import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
+import {
+  getBreakpointsStyles,
+  getDesktopStyles,
+  useBreakpointValue,
+} from '../../styles/breakpoints'
 import { Button, DatePicker } from '../../components'
 import { t } from 'i18next'
 
@@ -182,6 +186,7 @@ export const UserWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-radius: 16px;
     ${getBreakpointsStyles({
       tablet: css``,
@@ -196,21 +201,25 @@ export const UserForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-`
-export const DivForm = styled.div`
-  margin-bottom: 10px;
+  /* margin: 0 auto; */
   width: 100%;
   ${getBreakpointsStyles({
     tablet: css`
       width: 70%;
     `,
     desktop: css`
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
       width: 70%;
-      column-gap: 50px;
     `,
   })}
+`
+export const DivForm = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  column-gap: 50px;
+  ${getDesktopStyles(css`
+    justify-content: start;
+  `)}
 `
