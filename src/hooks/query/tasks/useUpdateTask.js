@@ -4,9 +4,8 @@ import { queryKeys } from '../queryKeys'
 import { toTaskDTO } from '../mappers'
 
 export const useUpdateTask = () => {
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation(updateTask, {
     mutationKey: [queryKeys.updateTask],
-    mutationFn: updateTask,
   })
 
   return {

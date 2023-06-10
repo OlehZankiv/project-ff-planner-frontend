@@ -11,9 +11,8 @@ export const useLogin = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation(login, {
     mutationKey: [queryKeys.login],
-    mutationFn: login,
     onError: () => {
       // TODO: Vitalii task: add error notification
     },

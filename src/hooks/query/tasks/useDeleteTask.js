@@ -3,9 +3,8 @@ import { queryKeys } from '../queryKeys'
 import { deleteTask } from '../../../api'
 
 export const useDeleteTask = () => {
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation(deleteTask, {
     mutationKey: [queryKeys.deleteTask],
-    mutationFn: deleteTask,
   })
 
   return {
