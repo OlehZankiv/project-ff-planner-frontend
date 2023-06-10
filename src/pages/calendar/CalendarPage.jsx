@@ -4,10 +4,29 @@ import { CalendarToolbar } from './components/calendarToolbar/CalendarToolbar'
 import { TodosContent } from './components/TodosContent'
 import styled from 'styled-components'
 import { useCalendarPageLogic } from './hooks/useCalendarPageLogic'
+import { useTasks } from '../../hooks/query'
 
 const CalendarPage = () => {
   const { selectedDate, setSelectedDate, calendarType, setCalendarType } = useCalendarPageLogic()
 
+  const { tasks } = useTasks()
+  // const { createTask } = useCreateTask()
+  //
+  // useEffect(() => {
+  //   createTask(
+  //     toTaskDTO(
+  //       toTask({
+  //         category: 'to-do',
+  //         startAt: new Date().getTime(),
+  //         endAt: new Date().getTime(),
+  //         priority: 'low',
+  //         title: 'Do something',
+  //       }),
+  //     ),
+  //   )
+  // }, [])
+  //
+  // console.log(tasks)
   return (
     <Wrapper>
       <CalendarToolbar
