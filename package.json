@@ -1,7 +1,6 @@
 {
   "name": "project-aaa4bbb8",
   "version": "0.1.0",
-  "homepage": "https://olehzankiv.github.io/project-ff-planner-frontend",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -39,7 +38,8 @@
     "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
     "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
     "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
