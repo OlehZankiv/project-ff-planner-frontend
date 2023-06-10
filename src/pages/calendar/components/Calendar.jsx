@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 import dayjs from 'dayjs'
 
-export const Calendar = ({ selectedDate, setSelectedDate }) => {
+export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => {
   const { height, width } = useDimensions()
 
   return (
@@ -16,7 +16,10 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         dayHeaders={false}
         initialDate={selectedDate}
         dateClick={(info) => {
-          if (!dayjs(info.date).isBefore(new Date(), 'day')) setSelectedDate(info.date)
+          if (!dayjs(info.date).isBefore(new Date(), 'day')) {
+            setCalendarType('day')
+            setSelectedDate(info.date)
+          }
         }}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={null}

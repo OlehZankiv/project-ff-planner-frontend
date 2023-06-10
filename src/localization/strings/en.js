@@ -3,6 +3,7 @@ export const en = {
   "All in": "All in",
   "Calendar": "Calendar",
   "Cancel": "Cancel",
+  "Day": "Day",
   "Default": "Default",
   "Email": "Email",
   "Enter email": "Enter email",
@@ -18,6 +19,7 @@ export const en = {
   "Log out": "Log out",
   "Low": "Low",
   "Medium": "Medium",
+  "Month": "Month",
   "My Account": "My Account",
   "Name": "Name",
   "One": "One",
@@ -38,8 +40,6 @@ export const en = {
   "name is a required field": "name is a required field",
   "password is a required field": "password is a required field",
   "password must be at least 4 characters": "password must be at least 4 characters",
-  "Month": "Month",
-  "Day": "Day",
 
   // Week days
   "Monday": "Monday",

@@ -1,48 +1,36 @@
-import { useState } from 'react'
 import { CalendarWeek } from './components/CalendarWeek'
 import { Calendar } from './components/Calendar'
-import CalendarToolbar from './components/calendarToolbar/CalendarToolbar'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { CalendarToolbar } from './components/calendarToolbar/CalendarToolbar'
 import { TodosContent } from './components/TodosContent'
 import styled from 'styled-components'
+import { useCalendarPageLogic } from './hooks/useCalendarPageLogic'
 
-const CalendarPage = ({}) => {
-  const [selectedDate, setSelectedDate] = useState(new Date())
-  const [calendarType, setCalendarType] = useState('month')
-
-  const navigate = useNavigate()
-  const location = useLocation()
-
-  const changeCalendarType = (type) => {
-    setCalendarType(type)
-    const queryParams = new URLSearchParams(location.search)
-    queryParams.set('type', type)
-    navigate(`${location.pathname}?${queryParams.toString()}`)
-  }
+const CalendarPage = () => {
+  const { selectedDate, setSelectedDate, calendarType, setCalendarType } = useCalendarPageLogic()
 
   return (
-    <div>
+    <Wrapper>
       <CalendarToolbar
-        changeCalendarType={changeCalendarType}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         calendarType={calendarType}
         setCalendarType={setCalendarType}
-      ></CalendarToolbar>
-      <Wrapper>
-        <CalendarWeek
-          isDayView={false}
+      />
+      <CalendarWeek
+        calendarType={calendarType}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
+      {calendarType === 'month' ? (
+        <Calendar
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          setCalendarType={setCalendarType}
         />
-        {calendarType === 'month' && (
-          <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-        )}
-        {calendarType === 'day' && <TodosContent selectedDate={selectedDate} />}
-
-        {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
-      </Wrapper>
-    </div>
+      ) : (
+        <TodosContent selectedDate={selectedDate} />
+      )}
+    </Wrapper>
   )
 }
 

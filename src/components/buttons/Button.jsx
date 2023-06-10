@@ -27,7 +27,7 @@ export const Button = ({
       {...buttonTextProps}
       type='h4'
       mobileStyles={css`
-        font-size: 13px;
+        font-size: 14px;
         line-height: 18px;
       `}
       color={variant === 'primary' ? 'white' : 'secondaryButtonText'}

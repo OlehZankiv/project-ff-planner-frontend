@@ -1,40 +1,44 @@
-import styled, { css } from 'styled-components'
-import { getBreakpointsStyles } from '../../../../styles/breakpoints'
-import PeriodPaginator from './PeriodPaginator'
-import PeriodTypeSelect from './PeriodTypeSelect'
+import styled from 'styled-components'
+import { CalendarPagination } from './CalendarPagination'
+import { GroupButtons } from '../../../../components'
+import { useTranslation } from 'react-i18next'
 
-const CalendarToolbar = ({ changeCalendarType, selectedDate, setSelectedDate, calendarType }) => {
+export const CalendarToolbar = ({
+  selectedDate,
+  setSelectedDate,
+  calendarType,
+  setCalendarType,
+}) => {
+  const { t } = useTranslation()
+
   return (
     <CalendarToolbarWrapper style={{ marginBottom: '24px' }}>
-      <PeriodPaginator
+      <CalendarPagination
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         calendarType={calendarType}
-      >
-        {' '}
-      </PeriodPaginator>
-      <PeriodTypeSelect
-        changeCalendarType={changeCalendarType}
-        calendarType={calendarType}
-      ></PeriodTypeSelect>
+      />
+      <GroupButtons
+        selected={calendarType}
+        buttons={[
+          {
+            type: 'month',
+            onClick: setCalendarType,
+            title: t('Month'),
+          },
+          {
+            type: 'day',
+            onClick: setCalendarType,
+            title: t('Day'),
+          },
+        ]}
+      />
     </CalendarToolbarWrapper>
   )
 }
 
 const CalendarToolbarWrapper = styled.div`
-    display: block;
-    flex-direction: row;
-     ${getBreakpointsStyles({
-       tablet: css`
-         display: flex;
-         justify-content: space-between;
-       `,
-       desktop: css`
-         display: flex;
-         justify-content: space-between;
-       `,
-     })}
- }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
-
-export default CalendarToolbar
