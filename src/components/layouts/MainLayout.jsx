@@ -43,9 +43,10 @@ export const MainLayout = () => {
     desktopValue: 18,
   })
 
-  const handleThemeChange = async () => {
-    await setThemeType(themeType === 'light' ? 'dark' : 'light')
-    updateUser({ theme: themeType })
+  const handleThemeChange = () => {
+    const newTheme = themeType === 'light' ? 'dark' : 'light'
+    setThemeType(newTheme)
+    updateUser({ theme: newTheme })
   }
 
   const firstLettersMaker = (str) =>
