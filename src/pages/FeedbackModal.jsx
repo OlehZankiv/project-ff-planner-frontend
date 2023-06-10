@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea, OpacityButton } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useReviews } from '../hooks/query/reviews/useReviews'
+import { useReviews } from '../hooks/query/'
 import { getMobileStyles } from '../styles/breakpoints'
 import { FeedbackEditModal } from './FeedbackEditModal'
 import { PencilIcon } from '../assets/icons'
@@ -10,7 +10,7 @@ import { PencilIcon } from '../assets/icons'
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
-  const { reviews } = useReviews()
+  const { reviews } = useReviews('owner')
 
   const [ratingValue, setRatingValue] = useState(0)
   const [reviewText, setReviewText] = useState('')

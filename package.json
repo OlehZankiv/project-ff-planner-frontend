@@ -1,7 +1,6 @@
 {
   "name": "project-aaa4bbb8",
   "version": "0.1.0",
-  "homepage": "https://olehzankiv.github.io/project-ff-planner-frontend",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -9,19 +8,19 @@
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
-    "@mui/x-date-pickers": "^6.6.0",
     "@tanstack/react-query": "^4.29.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "clear": "^0.1.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "formik": "^2.4.1",
     "i18next": "^22.5.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-day-picker": "^8.7.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
     "react-router-dom": "^6.11.2",
@@ -39,7 +38,8 @@
     "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
     "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
     "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
