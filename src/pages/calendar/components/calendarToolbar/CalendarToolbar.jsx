@@ -4,7 +4,6 @@ import PeriodPaginator from './PeriodPaginator'
 import PeriodTypeSelect from './PeriodTypeSelect'
 
 const CalendarToolbar = ({ changeCalendarType, selectedDate, setSelectedDate, calendarType }) => {
-
   return (
     <CalendarToolbarWrapper style={{ marginBottom: '24px' }}>
       <PeriodPaginator

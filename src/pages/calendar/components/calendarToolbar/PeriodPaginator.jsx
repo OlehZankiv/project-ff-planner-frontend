@@ -4,28 +4,24 @@ import { NextMonthIcon } from '../../../../assets/icons/NextMonthIcon'
 import { PrevMonthIcon } from '../../../../assets/icons/PrevMonthIcon'
 import dayjs from 'dayjs'
 
-const PeriodPaginator = ({
-  selectedDate,
-  setSelectedDate,
-  calendarType,
-}) => {
+const PeriodPaginator = ({ selectedDate, setSelectedDate, calendarType }) => {
   const { colors } = useTheme()
 
   const currentMonth = new Date().getMonth()
   const currentYear = new Date().getFullYear()
-  const selectedMonth = selectedDate.getMonth();
-  const selectedYear = selectedDate.getFullYear();
+  const selectedMonth = selectedDate.getMonth()
+  const selectedYear = selectedDate.getFullYear()
 
   const isPrevMonthDisabled = currentYear === selectedYear && currentMonth === selectedMonth
 
   const isPrevDayDisabled = selectedDate - new Date() < 0
- 
+
   const isPeriodMonth = calendarType === 'month'
 
   const formattedMonth = dayjs(selectedDate).format('MMMM YYYY').toUpperCase()
   const formattedDay = dayjs(selectedDate).format('D MMM YYYY').toUpperCase()
 
-    const handlePrevMonth = () => {
+  const handlePrevMonth = () => {
     if (selectedDate - new Date() < 0) {
       return
     }
@@ -51,23 +47,25 @@ const PeriodPaginator = ({
     setSelectedDate(substractedWeek.$d)
   }
 
-
   return (
     <AlignItemsWrapper>
       <MonthWrapper>
         {calendarType === 'month' && <MonthText>{formattedMonth}</MonthText>}
-        {calendarType === 'day' && <DayText>{formattedDay}</DayText>
-        }
+        {calendarType === 'day' && <DayText>{formattedDay}</DayText>}
       </MonthWrapper>
       <IconsWrapper>
         <PrevMonthIconButton
           onClick={isPeriodMonth ? handlePrevMonth : handlePrevWeek}
           disabled={isPeriodMonth ? isPrevMonthDisabled : isPrevDayDisabled}
         >
-            <PrevMonthIcon
-               size={11}
-              color={isPeriodMonth && isPrevMonthDisabled || isPrevDayDisabled? colors.placeholderColor : colors.icon}
-            ></PrevMonthIcon>
+          <PrevMonthIcon
+            size={11}
+            color={
+              (isPeriodMonth && isPrevMonthDisabled) || isPrevDayDisabled
+                ? colors.placeholderColor
+                : colors.icon
+            }
+          ></PrevMonthIcon>
         </PrevMonthIconButton>
         <NextMonthIconButton onClick={isPeriodMonth ? handleNextMonth : handleNextWeek}>
           <NextMonthIcon size={11} color={colors.icon}></NextMonthIcon>
@@ -167,16 +165,16 @@ const PrevMonthIconButton = styled.button`
     justify-content: center;
     border-radius: 8px 0px 0px 8px;
     border: none;
-    border-right: 1px solid  ${colors.placeholderColor};
+    border-right: 1px solid ${colors.placeholderColor};
     color: ${colors.white};
     text-align: center;
-    border: 1px solid ${colors.placeholderColor} ;
+    border: 1px solid ${colors.placeholderColor};
     ${getBreakpointsStyles({
       tablet: css`
         padding: 11px 12px;
       `,
       desktop: css`
-      padding: 11px 12px;
+        padding: 11px 12px;
       `,
     })}
   `}
@@ -195,7 +193,7 @@ const NextMonthIconButton = styled.button`
     border: 1px solid ${colors.placeholderColor};
     ${getBreakpointsStyles({
       tablet: css`
-          padding: 11px 12px;
+        padding: 11px 12px;
       `,
       desktop: css`
         padding: 11px 12px;

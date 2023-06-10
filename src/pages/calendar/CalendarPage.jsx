@@ -29,20 +29,20 @@ const CalendarPage = ({}) => {
         calendarType={calendarType}
         setCalendarType={setCalendarType}
       ></CalendarToolbar>
-    <Wrapper>
-      <CalendarWeek
-        isDayView={false}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      />
-      {calendarType === 'month' && (
-        <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      )}
-      {calendarType === 'day' && <TodosContent selectedDate={selectedDate} />}
-     
-      {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
+      <Wrapper>
+        <CalendarWeek
+          isDayView={false}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
+        {calendarType === 'month' && (
+          <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+        )}
+        {calendarType === 'day' && <TodosContent selectedDate={selectedDate} />}
+
+        {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
       </Wrapper>
-      </div>
+    </div>
   )
 }
 
@@ -53,6 +53,3 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
-
-

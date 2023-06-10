@@ -12,15 +12,12 @@ const PeriodTypeSelect = ({ calendarType, changeCalendarType }) => {
 
   return (
     <div>
-      <MonthButton
-        onClick={() => changeCalendarType('month')}
-        isActive={isPeriodMonth }
-      >
+      <MonthButton onClick={() => changeCalendarType('month')} isActive={isPeriodMonth}>
         <Text type='p' color={colors.primary}>
           {t('Month')}
         </Text>
       </MonthButton>
-      <DayButton onClick={() => changeCalendarType('day')} isActive={isPeriodDay }>
+      <DayButton onClick={() => changeCalendarType('day')} isActive={isPeriodDay}>
         <Text type='p' color={colors.primary}>
           {t('Day')}
         </Text>
