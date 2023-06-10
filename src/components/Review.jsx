@@ -27,14 +27,16 @@ export const Review = ({
       <div>
         <ReviewTop>
           <Text type='h5'>{name}</Text>
-          <EditWrapper>
-            <OpacityButton onClick={editOnClick}>
-              <PencilIcon color={'black'} />
-            </OpacityButton>
-            <OpacityButton onClick={deleteOnClick}>
-              <TrashIcon color={'black'} />
-            </OpacityButton>
-          </EditWrapper>
+          {showEdit && (
+            <EditWrapper>
+              <OpacityButton onClick={editOnClick}>
+                <PencilIcon color={colors.text} />
+              </OpacityButton>
+              <OpacityButton onClick={deleteOnClick}>
+                <TrashIcon color={colors.text} />
+              </OpacityButton>
+            </EditWrapper>
+          )}
         </ReviewTop>
         <StarsWrapper style={{ marginTop: 12 }}>
           {new Array(5).fill(0).map((_, index) => (
@@ -47,7 +49,6 @@ export const Review = ({
         </StarsWrapper>
         <ScreenWrapper tablet={commentJSX} desktop={commentJSX} />
         <ScreenWrapper mobile={commentJSX} />
-        {showEdit && <p>showEdit</p>}
       </div>
     </Wrapper>
   )
