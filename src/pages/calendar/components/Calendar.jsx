@@ -34,18 +34,21 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
     [tasks, theme],
   )
 
+  const onDateClick = (date) => {
+    if (!dayjs(date).isBefore(new Date(), 'day')) {
+      setCalendarType('day')
+      setSelectedDate(date)
+    }
+  }
+
   return (
     <CalendarWrapper>
       <FullCalendar
         key={selectedDate.getMonth()}
         dayHeaders={false}
         initialDate={selectedDate}
-        dateClick={(info) => {
-          if (!dayjs(info.date).isBefore(new Date(), 'day')) {
-            setCalendarType('day')
-            setSelectedDate(info.date)
-          }
-        }}
+        eventClick={({ event }) => onDateClick(event.start)}
+        dateClick={(info) => onDateClick(info.date)}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={null}
         initialView='dayGridMonth'
