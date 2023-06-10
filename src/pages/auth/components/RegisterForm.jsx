@@ -75,7 +75,8 @@ export const RegisterForm = () => {
             isError={errors.password && touched.password}
           />
           <Button
-            style={{ marginTop: '8px' }}
+            style={{ marginTop: '15px' }}
+            buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
             type='submit'
             fullWidth
             rightIcon={<LoginIcon color={'white'} />}

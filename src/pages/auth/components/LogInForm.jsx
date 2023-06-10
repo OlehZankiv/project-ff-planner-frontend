@@ -65,7 +65,8 @@ export const LogInForm = () => {
             isError={errors.password && touched.password}
           />
           <Button
-            style={{ marginTop: '24px' }}
+            buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
+            style={{ marginTop: '15px' }}
             type='submit'
             fullWidth
             rightIcon={<LoginIcon color={'white'} />}
