@@ -18,6 +18,7 @@ import {
   Sidebars_3x,
 } from '../../assets/images'
 import { ContentItem } from './components/ContentItem'
+import { Reviews } from './components/ReviewsSlider'
 
 const LandingPage = () => {
   const { t } = useTranslation()
@@ -95,6 +96,7 @@ const LandingPage = () => {
           <ContentItem key={index} {...item} index={`${index + 1}.`} />
         ))}
       </ListWrapper>
+      <Reviews />
     </Container>
   )
 }
