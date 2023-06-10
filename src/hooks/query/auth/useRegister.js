@@ -3,9 +3,8 @@ import { register } from '../../../api'
 import { queryKeys } from '../queryKeys'
 
 export const useRegister = () => {
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation(register, {
     mutationKey: [queryKeys.register],
-    mutationFn: register,
     onError: () => {
       // TODO: Vitalii task: add error notification
     },

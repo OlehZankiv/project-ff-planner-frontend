@@ -3,8 +3,10 @@ export const queryKeys = Object.freeze({
   register: 'register',
   logout: 'logout',
   getReviews: 'getReviews',
-  getTasks: 'getTasks',
   getUsers: 'getUsers',
   updateUser: 'updateUser',
-  updateTheme: 'updateTheme',
+  getTasks: 'getTasks',
+  createTask: 'createTask',
+  updateTask: 'updateTask',
+  deleteTask: 'deleteTask',
 })
