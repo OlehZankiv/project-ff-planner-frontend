@@ -71,7 +71,12 @@ export const lightTheme = themeCreator({
     scrollbarThumbBackground: '#E7E5E5',
     calendarPickerBorder: '#659DF5',
     taskButtonBackground: '#e3f3ff',
+
     avatarBackgroundColor: '#F8F8F8',
+
+    groupButtonsTextSelected: '#3E85F3',
+    groupButtonsBackground: '#E3F3FF',
+    groupButtonsBackgroundSelected: '#CAE8FF',
   },
   shadows,
   animation,
@@ -131,7 +136,12 @@ export const darkTheme = themeCreator({
     scrollbarThumbBackground: '#2D3037',
     calendarPickerBorder: '#659DF5',
     taskButtonBackground: '#3E85F3',
+
     avatarBackgroundColor: '#171820',
+
+    groupButtonsTextSelected: '#FFFFFF',
+    groupButtonsBackground: '#21222C',
+    groupButtonsBackgroundSelected: '#3E85F3',
   },
   shadows,
   animation,
