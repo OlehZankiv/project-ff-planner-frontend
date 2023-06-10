@@ -190,15 +190,15 @@ export const SignupLink = styled(NavLink)`
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 64px 20px;
+  padding: 64px 20px 0px;
   gap: 64px;
 
   ${getBreakpointsStyles({
     tablet: css`
-      padding: 64px 32px;
+      padding: 64px 32px 0px;
     `,
     desktop: css`
-      padding: 64px 128px;
+      padding: 64px 128px 0px;
     `,
   })}
 `
