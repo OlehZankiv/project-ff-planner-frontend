@@ -3,6 +3,8 @@ import { CalendarWeek } from './components/CalendarWeek'
 import { Calendar } from './components/Calendar'
 import CalendarToolbar from './components/calendarToolbar/CalendarToolbar'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { TodosContent } from './components/TodosContent'
+import styled from 'styled-components'
 
 const CalendarPage = ({}) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -27,6 +29,7 @@ const CalendarPage = ({}) => {
         calendarType={calendarType}
         setCalendarType={setCalendarType}
       ></CalendarToolbar>
+    <Wrapper>
       <CalendarWeek
         isDayView={false}
         selectedDate={selectedDate}
@@ -36,8 +39,20 @@ const CalendarPage = ({}) => {
         <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       )}
       {calendarType === 'day' && <div>Add day calendar</div>}
-    </div>
+      <TodosContent selectedDate={selectedDate} />
+      {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />*/}
+      </Wrapper>
+      </div>
   )
 }
 
 export default CalendarPage
+
+const Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`
+
+
+
