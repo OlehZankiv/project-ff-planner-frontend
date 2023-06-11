@@ -24,7 +24,7 @@ export const Review = ({
   return (
     <Wrapper style={style}>
       <div style={{ width: 50, height: 50, backgroundColor: 'red' }} />
-      <div>
+      <div style={{width: '100%'}}>
         <ReviewTop>
           <Text type='h5'>{name}</Text>
           {showEdit && (

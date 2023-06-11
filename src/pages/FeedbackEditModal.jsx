@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import { Modal, Ratings, Textarea, Button } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useUpdateReview } from '../hooks/query/'
 
 export const FeedbackEditModal = ({ visible, setVisible, review }) => {
   const { t } = useTranslation()
+  const { updateReview } = useUpdateReview()
 
   const [ratingValue, setRatingValue] = useState(review.rating)
   const [reviewText, setReviewText] = useState(review.comment)
@@ -12,8 +14,10 @@ export const FeedbackEditModal = ({ visible, setVisible, review }) => {
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
-    const review = { rating: ratingValue, review: reviewText }
-    console.log('edit form data to send:', review)
+    const newReview = { id: review.id, rating: ratingValue, comment: reviewText }
+
+    updateReview(newReview)
+
     setVisible(false)
   }
 

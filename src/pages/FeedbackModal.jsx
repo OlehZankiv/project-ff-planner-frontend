@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useReviews } from '../hooks/query/'
+import { useReviews, useAddReview, useDeleteReview } from '../hooks/query/'
 import { getMobileStyles } from '../styles/breakpoints'
 import { FeedbackEditModal } from './FeedbackEditModal'
 
@@ -10,6 +10,8 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
   const { reviews } = useReviews('owner')
+  const { addReview } = useAddReview()
+  const { deleteReview } = useDeleteReview()
 
   const [ratingValue, setRatingValue] = useState(0)
   const [reviewText, setReviewText] = useState('')
@@ -19,8 +21,9 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
-    const review = { rating: ratingValue, review: reviewText }
-    console.log('form data to send:', review)
+    const review = { rating: ratingValue, comment: reviewText }
+
+    addReview(review)
 
     setRatingValue(0)
     setReviewText('')
@@ -37,7 +40,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   }
 
   const handleDeleteFeedbackClick = (id) => {
-    console.log('req to delete review with id ', id)
+    deleteReview(id)
   }
 
   useEffect(() => {

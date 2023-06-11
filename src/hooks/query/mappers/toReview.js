@@ -17,3 +17,8 @@ export const toReviewDTO = ({ id, owner, createdAt, updatedAt, comment, rating }
   comment,
   rating,
 })
+
+export const toNewReviewDTO = ({ comment, rating }) => ({
+  comment,
+  rating,
+})
