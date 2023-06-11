@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -34,11 +34,10 @@ export const MainLayout = () => {
 
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
-  const searchParams = new URLSearchParams(location.search)
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get('calendar-type')
   const showTitleGooseLogo =
-    width >= 1024 &&
-    window.location.pathname.includes(ROUTES.CALENDAR) &&
-    searchParams.get('calendar-type') === 'day'
+    width >= 1024 && window.location.pathname.includes(ROUTES.CALENDAR) && search === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
