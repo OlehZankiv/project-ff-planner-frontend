@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useBreakpointValue } from '../../../styles/breakpoints'
 import { useMemo } from 'react'
+import dayjs from 'dayjs'
 
 export const useWeekDays = (selectedDate) => {
   const { t } = useTranslation()
@@ -47,11 +48,13 @@ export const useWeekDays = (selectedDate) => {
   )
 
   return useMemo(() => {
-    const days = new Array(7).fill(null).map((_, i) => {
-      const date = new Date(selectedDate)
-      date.setDate(selectedDate.getDate?.() - (selectedDate.getDay?.() - i - 1))
-      return date
-    })
+    let day = dayjs(selectedDate)
+
+    if (day.day() === 0) day = day.subtract(1, 'day')
+
+    const monday = day.day(1)
+
+    const days = new Array(7).fill(null).map((_, i) => monday.clone().add(i, 'day').toDate())
 
     return days.map((date, i) => ({
       text: daysText[i],

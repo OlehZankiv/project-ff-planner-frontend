@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import styled, { keyframes, css, useTheme } from 'styled-components'
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
@@ -17,12 +17,15 @@ import { Button } from '../buttons/Button'
 import { FeedbackModal } from '../../pages/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
+import { gooseCalendar } from '../../assets/images'
+import { useDimensions } from '../../hooks'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
+  const { width } = useDimensions()
 
   const { logger } = useAuthContext()
 
@@ -31,6 +34,11 @@ export const MainLayout = () => {
 
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
+  const [searchParams] = useSearchParams()
+  const showTitleGooseLogo =
+    width >= 1024 &&
+    window.location.pathname.includes(ROUTES.CALENDAR) &&
+    searchParams.get('calendar-type') === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -75,16 +83,35 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                <Text
-                  type='h1'
-                  fontSize={32}
-                  fontWeight={700}
-                  lineHeight={1}
-                  color={colors.text}
-                  style={{ textShadow: shadows.headingShadow }}
-                >
-                  {routeTitles[selectedRoute]}
-                </Text>
+                {showTitleGooseLogo && <img src={gooseCalendar} style={{ width: '60px' }} />}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <Text
+                    type='h1'
+                    fontSize={32}
+                    fontWeight={700}
+                    color={colors.text}
+                    lineHeight={32}
+                    style={{ textShadow: shadows.headingShadow }}
+                  >
+                    {routeTitles[selectedRoute]}
+                  </Text>
+                  {showTitleGooseLogo && (
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <Text
+                        type='p'
+                        fontSize={14}
+                        fontWeight={600}
+                        style={{ marginRight: '4px' }}
+                        color={'primary'}
+                      >
+                        {t("Let's go")}
+                      </Text>
+                      <Text type='p' color={'text'} fontWeight={600} fontSize={14}>
+                        {t('of the past and focus on the present!')}
+                      </Text>
+                    </div>
+                  )}
+                </div>
               </DesktopTitleWrap>
               <TabWrap>
                 {selectedRoute === ROUTES.CALENDAR && (
@@ -177,10 +204,13 @@ const MainWrap = styled.div`
 
 const ContentWrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   padding: 20px 24px;
+  ${getDesktopStyles(css`
+    width: 75%;
+  `)}
 `
 
 const Header = styled.header`
@@ -244,12 +274,15 @@ const DesktopTitleWrap = styled.div`
   display: none;
   ${getDesktopStyles(css`
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 8px;
   `)}
 `
 
 const OutletWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   z-index: 0;
   margin-top: 64px;
 

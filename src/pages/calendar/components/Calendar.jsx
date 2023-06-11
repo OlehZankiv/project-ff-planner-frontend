@@ -2,12 +2,44 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 import dayjs from 'dayjs'
+import { useTasks } from '../../../hooks/query'
+import { useMemo } from 'react'
 
-export const Calendar = ({ selectedDate, setSelectedDate }) => {
+export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => {
+  const theme = useTheme()
+
   const { height, width } = useDimensions()
+
+  const { tasks } = useTasks()
+
+  const taskColors = {
+    low: { text: theme.colors.eventLowText, background: theme.colors.eventLowBackground },
+    medium: { text: theme.colors.eventMediumText, background: theme.colors.eventMediumBackground },
+    high: { text: theme.colors.eventHighText, background: theme.colors.eventHighBackground },
+  }
+
+  const events = useMemo(
+    () =>
+      tasks.map((task) => ({
+        id: task.id,
+        title: task.title,
+        start: task.startAt,
+        backgroundColor: taskColors[task.priority].background,
+        textColor: taskColors[task.priority].text,
+        display: 'block',
+      })),
+    [tasks, theme],
+  )
+
+  const onDateClick = (date) => {
+    if (!dayjs(date).isBefore(new Date(), 'day')) {
+      setCalendarType('day')
+      setSelectedDate(date)
+    }
+  }
 
   return (
     <CalendarWrapper>
@@ -15,9 +47,8 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
         key={selectedDate.getMonth()}
         dayHeaders={false}
         initialDate={selectedDate}
-        dateClick={(info) => {
-          if (!dayjs(info.date).isBefore(new Date(), 'day')) setSelectedDate(info.date)
-        }}
+        eventClick={({ event }) => onDateClick(event.start)}
+        dateClick={(info) => onDateClick(info.date)}
         plugins={[dayGridPlugin, interactionPlugin]}
         headerToolbar={null}
         initialView='dayGridMonth'
@@ -31,32 +62,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
             {props.dayNumberText}
           </DayCell>
         )}
-        events={[
-          {
-            id: 'awdwdw',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-          {
-            id: 'awdwdw2',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-          {
-            id: 'awdwdw3',
-            title: 'All-day event',
-            start: selectedDate,
-            backgroundColor: '#FCF0D4',
-            textColor: '#F3B249',
-            display: 'block',
-          },
-        ]}
+        events={events}
         showNonCurrentDates={false}
         fixedWeekCount={false}
         aspectRatio={width / height}

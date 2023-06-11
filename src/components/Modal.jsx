@@ -28,7 +28,7 @@ export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
 
   return createPortal(
     <>
-      <OpacityButton hoverOpacity={0.975} activeOpacity={0.9} onClick={onClose}>
+      <OpacityButton hoverOpacity={1} activeOpacity={1} onClick={onClose}>
         <Overlay visible={visible} />
       </OpacityButton>
       <ModalWindow style={style} visible={visible}>
@@ -44,6 +44,7 @@ export const Modal = ({ visible, style, onClose, onEnterPress, children }) => {
 
 const ModalWindow = styled.div`
   ${({ theme: { colors, shadows }, visible }) => css`
+    z-index: 100;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -84,6 +85,7 @@ const CloseButtonWrapper = styled(OpacityButton)`
 const Overlay = styled.div`
   ${({ theme: { colors }, visible }) => css`
     position: fixed;
+    z-index: 99;
     top: 0;
     right: 0;
     width: 100vw;

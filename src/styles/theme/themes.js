@@ -30,6 +30,17 @@ export const lightTheme = themeCreator({
     icon: '#343434',
     text: '#111111',
 
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
+
     // Background
     mainBackground: '#F7F6F9',
     background: '#ffffff',
@@ -38,7 +49,7 @@ export const lightTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5D5D5D',
     userNameText: '#343434',
-    sideBarOverlay: '#e7ecfc79',
+    sideBarOverlay: '#13151A79',
     sidebarTitle: '#999999',
     tabButtonActive: '#E3F3FF',
     tabContent: '#999999',
@@ -65,6 +76,10 @@ export const lightTheme = themeCreator({
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
     calendarPickerBorder: '#659DF5',
+    taskButtonBackground: '#e3f3ff',
+    groupButtonsTextSelected: '#3E85F3',
+    groupButtonsBackground: '#E3F3FF',
+    groupButtonsBackgroundSelected: '#CAE8FF',
   },
   shadows,
   animation,
@@ -83,6 +98,17 @@ export const darkTheme = themeCreator({
     icon: '#ffffff',
     text: '#ffffff',
 
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
+
     // Background
     mainBackground: '#171820',
     background: '#13151A',
@@ -91,7 +117,7 @@ export const darkTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5B5C61',
     userNameText: '#ffffff',
-    sideBarOverlay: '#28282a79',
+    sideBarOverlay: '#3f3f3f79',
     sidebarTitle: '#585A5D',
     tabButtonActive: '#3e85f3',
     tabContent: '#ffffff',
@@ -115,9 +141,13 @@ export const darkTheme = themeCreator({
     modalsInputBorder: '#3A3B41',
     feedbackListBackground: '#21222C',
     calendarWeekDayText: '#62636A',
-    scrollbarTrackBackground: '#2D3037',
-    scrollbarThumbBackground: '#171820',
+    scrollbarTrackBackground: '#21222C',
+    scrollbarThumbBackground: '#2D3037',
     calendarPickerBorder: '#659DF5',
+    taskButtonBackground: '#3E85F3',
+    groupButtonsTextSelected: '#FFFFFF',
+    groupButtonsBackground: '#21222C',
+    groupButtonsBackgroundSelected: '#3E85F3',
   },
   shadows,
   animation,

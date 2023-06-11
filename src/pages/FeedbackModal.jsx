@@ -2,22 +2,42 @@ import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useReviews } from '../hooks/query/reviews/useReviews'
+import { useReviews } from '../hooks/query/'
 import { getMobileStyles } from '../styles/breakpoints'
+import { FeedbackEditModal } from './FeedbackEditModal'
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
-  const { reviews } = useReviews()
+  const { reviews } = useReviews('owner')
 
   const [ratingValue, setRatingValue] = useState(0)
   const [reviewText, setReviewText] = useState('')
+  const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
+  const [editReview, setReview] = useState('')
 
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
     const review = { rating: ratingValue, review: reviewText }
-    console.log('form data:', review)
+    console.log('form data to send:', review)
+
+    setRatingValue(0)
+    setReviewText('')
+  }
+
+  const handleEditFeedbackClick = (id) => {
+    const review = reviews.find((r) => r.id === id)
+
+    if (!review) {
+      return alert('review not found')
+    }
+    setReview(review)
+    setFeedbackEditModalVisible(true)
+  }
+
+  const handleDeleteFeedbackClick = (id) => {
+    console.log('req to delete review with id ', id)
   }
 
   useEffect(() => {
@@ -26,6 +46,16 @@ export const FeedbackModal = ({ visible, setVisible }) => {
       setReviewText('')
     }
   }, [visible])
+
+  if (isFeedbackEditModalVisible) {
+    return (
+      <FeedbackEditModal
+        visible={isFeedbackEditModalVisible}
+        setVisible={setFeedbackEditModalVisible}
+        review={editReview}
+      />
+    )
+  }
 
   return (
     <Modal
@@ -52,7 +82,14 @@ export const FeedbackModal = ({ visible, setVisible }) => {
       <FeedbackWrapper>
         <FeedbackList>
           {reviews.map((review) => (
-            <Review {...review} key={review.id} style={{ border: 'none', padding: 0 }} />
+            <Review
+              {...review}
+              key={review.id}
+              style={{ border: 'none', padding: 0 }}
+              showEdit={true}
+              editOnClick={() => handleEditFeedbackClick(review.id)}
+              deleteOnClick={() => handleDeleteFeedbackClick(review.id)}
+            />
           ))}
         </FeedbackList>
       </FeedbackWrapper>
@@ -70,6 +107,7 @@ const FeedbackWrapper = styled.div`
 `
 
 const FeedbackList = styled.div`
+  align-items: stretch;
   display: flex;
   flex-direction: column;
   width: 100%;
