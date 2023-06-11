@@ -23,3 +23,14 @@ export const registerFormSchema = yup.object().shape({
     .min(4, en['password must be at least 4 characters'])
     .required(en['password is a required field']),
 })
+
+export const userFormSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email(en['email must be a valid email'])
+    .required(en['email is a required field']),
+  username: yup.string().min(3).max(30),
+  birthday: yup.date().nullable(),
+  phone: yup.string(),
+  skype: yup.string(),
+})

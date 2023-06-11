@@ -1,6 +1,5 @@
 import React from 'react'
 import { Formik } from 'formik'
-import * as Yup from 'yup'
 import { useAuthContext } from '../../contexts/auth'
 import { Text } from '../../components/Text'
 import styled, { css } from 'styled-components'
@@ -12,25 +11,11 @@ import {
 } from '../../styles/breakpoints'
 import { Button, DatePicker } from '../../components'
 import { t } from 'i18next'
-import PhoneInput from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
+import { userFormSchema } from '../../utils/schemas'
+
+import { PhoneInputField } from '../../components/fields/PhoneInputField'
 
 const UserPage = () => {
-  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-  const phoneRegex = /^(\+?38)?(\s?(\()?\d{3}(\))?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2})$/
-  const skypeRegex = /^(?!$)[a-zA-Z][a-zA-Z0-9.,\-_]{5,31}$/
-
-  const userProfileFormValidationSchema = Yup.object().shape({
-    email: Yup.string()
-      .matches(emailRegex, 'Invalid email format. Example: test@test.com')
-      .required('Required'),
-    username: Yup.string().min(3).max(30).required('Required'),
-    birthday: Yup.date().required('Invalid date format. Example: 01/01/2023 ').nullable(),
-    phone: Yup.string()
-      .matches(phoneRegex, 'Invalid phone format. Example: 38 (097) 256 34 77')
-      .required('Required'),
-    skype: Yup.string().matches(skypeRegex, 'Invalid skype format. Example: my_username123'),
-  })
   const { logger } = useAuthContext()
   const nameFontSize = useBreakpointValue({
     mobileValue: 14,
@@ -49,6 +34,11 @@ const UserPage = () => {
     desktopValue: 262,
   })
 
+  // const handleSubmit = (values, { resetForm }) => {
+  //   login(values)
+  //   resetForm()
+  // }
+
   if (!logger) return null
 
   const userName = logger.name
@@ -66,19 +56,21 @@ const UserPage = () => {
 
   return (
     <UserWrapper>
-      <Text type='h2' color='userNameText' fontWeight={1000} fontSize={nameFontSize}>
-        {userName}
-      </Text>
-      <Text type='p' color='userAvatar' fontWeight={600} fontSize={userFontSize}>
-        {t('User')}
-      </Text>
+      <div style={{ textAlign: 'center' }}>
+        <Text type='h2' color='userNameText' fontWeight={1000} fontSize={nameFontSize}>
+          {userName}
+        </Text>
+        <Text type='p' color='userAvatar' fontWeight={600} fontSize={userFontSize}>
+          {t('User')}
+        </Text>
+      </div>
       <Formik
         initialValues={{ email: '', birthday: new Date() }}
         onSubmit={async (values) => {
           await new Promise((resolve) => setTimeout(resolve, 1000))
           alert(JSON.stringify(values, null, 2))
         }}
-        validationSchema={userProfileFormValidationSchema}
+        validationSchema={userFormSchema}
       >
         {(props) => {
           const { touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, values } =
@@ -123,7 +115,7 @@ const UserPage = () => {
                   />
                 </Column>
                 <Column>
-                  <PhoneInput
+                  <PhoneInputField
                     id='phone'
                     name='phone'
                     country={'th'}
@@ -132,7 +124,7 @@ const UserPage = () => {
                     rightIcon={null}
                     isError={errors.phone && touched.phone}
                     successMessage={t('This is Correct phone')}
-                    onChange={(val) => handleChange('phone', val)}
+                    onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   <Input
@@ -171,10 +163,11 @@ export const UserWrapper = styled.div`
     display: flex;
     padding: 40px;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-radius: 16px;
-    max-height: 80%;
+    height: 100%;
+    /* max-height: 80%; */
   `}
 `
 
@@ -191,13 +184,13 @@ export const UserForm = styled.form`
     `,
     desktop: css`
       width: 80%;
+      justify-content: space-between;
     `,
   })}
 `
 
 export const DivForm = styled.div`
   width: 100%;
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
