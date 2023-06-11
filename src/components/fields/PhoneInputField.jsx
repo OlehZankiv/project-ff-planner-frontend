@@ -19,7 +19,6 @@ export const PhoneInputField = ({
   isError,
   style,
   onChange,
-  onBlur,
 }) => {
   const { colors } = useTheme()
 
@@ -65,12 +64,11 @@ export const PhoneInputField = ({
       <InputWrapper>
         <PhoneInputStyled
           readOnly={readonly}
-          value={value}
+          {...(value !== undefined && { value })}
           style={{ borderColor: inputBorderColor }}
           name={name}
           placeholder={placeholder}
           onChange={onChange}
-          onBlur={onBlur}
           country='UA'
           international
           withCountryCallingCode

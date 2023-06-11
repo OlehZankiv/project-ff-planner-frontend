@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { useAuthContext } from '../../contexts/auth'
 import { Text } from '../../components/Text'
 import styled, { css } from 'styled-components'
 import { Input } from '../../components/fields/Input'
+import { PhoneInputField } from '../../components/fields/PhoneInputField'
 import {
   getBreakpointsStyles,
   getDesktopStyles,
@@ -12,11 +13,13 @@ import {
 import { Button, DatePicker } from '../../components'
 import { t } from 'i18next'
 import { userFormSchema } from '../../utils/schemas'
-
-import { PhoneInputField } from '../../components/fields/PhoneInputField'
+// import { useUpdateUser } from '../../hooks/query'
 
 const UserPage = () => {
+  const [phone, setPhone] = useState('')
   const { logger } = useAuthContext()
+  // const { updateUser } = useUpdateUser()
+
   const nameFontSize = useBreakpointValue({
     mobileValue: 14,
     tabletValue: 18,
@@ -34,14 +37,16 @@ const UserPage = () => {
     desktopValue: 262,
   })
 
-  // const handleSubmit = (values, { resetForm }) => {
-  //   login(values)
-  //   resetForm()
-  // }
+  const handleSubmit = (
+    values,
+    // { resetForm }
+  ) => {
+    console.log(values)
+    // updateUser({ ...values, phone })
+    // resetForm()
+  }
 
   if (!logger) return null
-
-  const userName = logger.name
 
   // const onPlusHandler = () => {
   //   const input = document.createElement('input')
@@ -58,39 +63,37 @@ const UserPage = () => {
     <UserWrapper>
       <div style={{ textAlign: 'center' }}>
         <Text type='h2' color='userNameText' fontWeight={1000} fontSize={nameFontSize}>
-          {userName}
+          {logger.name}
         </Text>
         <Text type='p' color='userAvatar' fontWeight={600} fontSize={userFontSize}>
           {t('User')}
         </Text>
       </div>
       <Formik
-        initialValues={{ email: '', birthday: new Date() }}
-        onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000))
-          alert(JSON.stringify(values, null, 2))
+        initialValues={{
+          name: '',
+          email: '',
+          birthday: new Date(),
+          skype: '',
+          ...logger,
         }}
+        onSubmit={handleSubmit}
         validationSchema={userFormSchema}
       >
         {(props) => {
-          const { touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit, values } =
-            props
+          const { touched, errors, isSubmitting, handleSubmit, values } = props
 
           return (
             <UserForm onSubmit={handleSubmit}>
               <DivForm>
                 <Column>
                   <Input
-                    id='username'
-                    name='username'
+                    name='name'
                     type='text'
                     title={t('User name')}
-                    rightIcon={null}
                     isError={errors.username && touched.username}
                     successMessage={t('This is Correct name')}
                     placeholder={t('Enter your name')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   ></Input>
                   <DatePicker
                     id='birthday'
@@ -98,46 +101,33 @@ const UserPage = () => {
                     placeholder={t('Enter your birthday')}
                     title={t('Birthday')}
                     value={values.birthday}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                   <Input
-                    id='email'
                     name='email'
                     type='text'
                     placeholder={t('Enter your email')}
                     title={t('Email')}
-                    rightIcon={null}
                     isError={errors.email && touched.email}
                     successMessage={t('This is Correct email')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                 </Column>
                 <Column>
                   <PhoneInputField
-                    id='phone'
                     name='phone'
-                    country={'th'}
                     placeholder={t('Enter your phone number')}
                     title={t('Phone')}
-                    rightIcon={null}
+                    value={phone}
                     isError={errors.phone && touched.phone}
                     successMessage={t('This is Correct phone')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    onChange={setPhone}
                   />
                   <Input
-                    id='skype'
                     name='skype'
                     type='text'
                     placeholder={t('Enter your skype')}
                     title={t('Skype')}
-                    rightIcon={null}
                     isError={errors.skype && touched.skype}
                     successMessage={t('This is Correct Skype')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                 </Column>
               </DivForm>

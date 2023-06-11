@@ -55,6 +55,7 @@ export const en = {
   "Phone": "Phone",
   "Skype": "Skype",
   "User": "User",
+  "phone is a required field": "phone is a required field",
 
   // Week days
   "Monday": "Monday",

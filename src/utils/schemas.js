@@ -31,6 +31,6 @@ export const userFormSchema = yup.object().shape({
     .required(en['email is a required field']),
   username: yup.string().min(3).max(30),
   birthday: yup.date().nullable(),
-  phone: yup.string(),
+  phone: yup.string().required(en['phone is a required field']),
   skype: yup.string(),
 })
