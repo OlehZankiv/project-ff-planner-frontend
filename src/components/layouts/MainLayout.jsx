@@ -35,7 +35,10 @@ export const MainLayout = () => {
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
   const searchParams = new URLSearchParams(location.search)
-  const value = searchParams.get('calendar-type')
+  const showTitleGooseLogo =
+    width >= 1024 &&
+    window.location.pathname.includes(ROUTES.CALENDAR) &&
+    searchParams.get('calendar-type') === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -80,9 +83,7 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                {width >= 1024 && !!value && value === 'day' && (
-                  <img src={gooseCalendar} style={{ width: '60px' }} />
-                )}
+                {showTitleGooseLogo && <img src={gooseCalendar} style={{ width: '60px' }} />}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Text
                     type='h1'
@@ -94,7 +95,7 @@ export const MainLayout = () => {
                   >
                     {routeTitles[selectedRoute]}
                   </Text>
-                  {width >= 1024 && !!value && value === 'day' && (
+                  {showTitleGooseLogo && (
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Text
                         type='p'
@@ -103,7 +104,7 @@ export const MainLayout = () => {
                         style={{ marginRight: '4px' }}
                         color={'primary'}
                       >
-                        {t('Let go')}
+                        {t("Let's go")}
                       </Text>
                       <Text type='p' color={'text'} fontWeight={600} fontSize={14}>
                         {t('of the past and focus on the present!')}

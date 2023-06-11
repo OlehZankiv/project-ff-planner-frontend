@@ -24,7 +24,7 @@ export const en = {
   "Medium": "Medium",
   "Month": "Month",
   "My Account": "My Account",
-  "Let go": "Let go",
+  "Let's go": "Let's go",
   "of the past and focus on the present!": "of the past and focus on the present!",
   "Name": "Name",
   "One": "One",

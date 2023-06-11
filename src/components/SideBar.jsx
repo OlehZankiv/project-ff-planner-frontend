@@ -47,16 +47,8 @@ export const SideBar = ({
   const iconCloseSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
 
   useEffect(() => {
-    if (isBurgerMenuOpen) {
-      // Заборонити прокручування
-      document.body.style.overflow = 'hidden'
-    } else {
-      // Дозволити прокручування
-      document.body.style.overflow = 'auto'
-    }
-
+    document.body.style.overflow = isBurgerMenuOpen ? 'hidden' : 'auto'
     return () => {
-      // Відмінити ефект та дозволити прокручування при розмонтовуванні компонента
       document.body.style.overflow = 'auto'
     }
   }, [isBurgerMenuOpen])
@@ -163,7 +155,6 @@ const SidebarWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    /* min-height: 100vh; */
     height: 100%;
     background-color: ${theme.colors.background};
     width: 70%;
