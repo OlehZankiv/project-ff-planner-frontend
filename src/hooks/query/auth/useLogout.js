@@ -18,7 +18,7 @@ export const useLogout = () => {
 
       removeStorageItem(STORAGE_KEYS.TOKEN)
       removeStorageItem(STORAGE_KEYS.LOGGER)
-      navigate(ROUTES.LOGIN)
+      navigate(ROUTES.LANDING)
     },
   })
 

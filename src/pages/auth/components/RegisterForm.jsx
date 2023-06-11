@@ -3,12 +3,13 @@ import { AuthNavigate } from './AuthNavigate'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
-import { Button, Input, Text } from '../../../components'
-import { LoginIcon } from '../../../assets/icons'
-import { css, useTheme } from 'styled-components'
+import { Button, Input, OpacityButton, Text } from '../../../components'
+import { CloseIcon, LoginIcon } from '../../../assets/icons'
+import styled, { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const initialValues = {
   name: '',
@@ -25,6 +26,7 @@ export const RegisterForm = () => {
     formik.current?.resetForm({ values: initialValues }),
   )
   const { colors } = useTheme()
+  const navigate = useNavigate()
 
   return (
     <Formik
@@ -35,6 +37,9 @@ export const RegisterForm = () => {
     >
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
+          <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
+            <CloseIcon color={colors.text} />
+          </CloseIconWrapper>
           <Text
             style={{ marginBottom: '40px' }}
             type='h5'
@@ -93,3 +98,9 @@ export const RegisterForm = () => {
     </Formik>
   )
 }
+
+const CloseIconWrapper = styled(OpacityButton)`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+`
