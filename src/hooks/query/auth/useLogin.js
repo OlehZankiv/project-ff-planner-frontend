@@ -15,9 +15,7 @@ export const useLogin = () => {
   const { mutate, isLoading, isFetching } = useMutation({
     mutationKey: [queryKeys.login],
     mutationFn: login,
-    onError: (error) => {
-      handleRequestError(error)
-    },
+    onError: handleRequestError,
     onSuccess: (res) => {
       const { token, user } = res.data
 

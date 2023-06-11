@@ -10,9 +10,8 @@ export const useLogout = () => {
   const { setToken, setLogger } = useAuthContext()
   const navigate = useNavigate()
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation(logout, {
     mutationKey: [queryKeys.logout],
-    mutationFn: logout,
     onSuccess: () => {
       setToken(null)
       setLogger(null)
