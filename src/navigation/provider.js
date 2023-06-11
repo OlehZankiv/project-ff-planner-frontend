@@ -9,6 +9,7 @@ const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
 const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
+const NotFoundPage = lazy(() => import('../pages/notFoundPage/NotFoundPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter basename={BASE_GITHUB_PAGES_URL}>
@@ -38,7 +39,7 @@ export const AppRouterProvider = () => (
         </Route>
 
         {/* TODO: Add 404 Page */}
-        <Route path='*' element={<div>404 Page</div>} />
+        <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   </BrowserRouter>

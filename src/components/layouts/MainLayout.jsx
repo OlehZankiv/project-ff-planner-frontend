@@ -19,8 +19,6 @@ import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
 
 export const MainLayout = () => {
-const [isClicked, setIsClicked] = useState(false);
-
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
@@ -43,15 +41,7 @@ const [isClicked, setIsClicked] = useState(false);
     desktopValue: 18,
   })
 
-  // const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
-
-  const handleClick = () => {
-    setIsClicked(true);
-    setTimeout(() => {
-      setIsClicked(false);
-      setThemeType(themeType === 'light' ? 'dark' : 'light');
-    }, 500);
-  };
+  const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
   const firstLettersMaker = (str) =>
     str
@@ -107,18 +97,13 @@ const [isClicked, setIsClicked] = useState(false);
                   </>
                 )}
                 <InfoWrap>
-                  <ThemeButton onClick={handleClick}>
+                  <ThemeButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
-                      <RotateIcon isClicked={isClicked}>
-                        <MoonIcon size={iconSize} color={colors.primary} />
-                        </RotateIcon>
+                      <MoonIcon size={iconSize} color={colors.primary} />
                     ) : (
-                        <RotateIcon isClicked={isClicked}>
-                          <SunIcon size={iconSize} color={colors.primary} />
-                          </RotateIcon>
-  )}
-</ThemeButton>
-
+                      <SunIcon size={iconSize} color={colors.primary} />
+                    )}
+                  </ThemeButton>
 
                   {/* <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
@@ -160,7 +145,6 @@ const [isClicked, setIsClicked] = useState(false);
   )
 }
 
-
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -168,26 +152,21 @@ const rotate = keyframes`
   }
   to {
     transform: rotate(360deg);
-    opacity: 1s;
+    opacity: 1;
   }
-`;
-
-const RotateIcon = styled.div`
-animation: ${rotate} ${({ isClicked }) => (isClicked ? '1s' : '0s')} linear infinite;
-/* &:active {
-  opacity: 1;
-} */
-`;
+`
 
 const ThemeButton = styled(OpacityButton)`
- transition: opacity 1s ease-in-out;
-/*   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1 ease-in-out;
+
   &:active {
     opacity: 1;
     animation: ${rotate} 0.5s linear infinite;
-  } */
-`;
-
+  }
+`
 
 const MainWrap = styled.div`
   width: 100%;
