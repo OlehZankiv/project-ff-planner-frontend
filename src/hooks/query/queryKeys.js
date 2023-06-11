@@ -8,6 +8,7 @@ export const queryKeys = Object.freeze({
   deleteReview: 'deleteReview',
   getUsers: 'getUsers',
   updateUser: 'updateUser',
+  updateUserAvatar: 'updateUserAvatar',
   getTasks: 'getTasks',
   createTask: 'createTask',
   updateTask: 'updateTask',

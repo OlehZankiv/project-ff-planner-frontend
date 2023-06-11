@@ -51,6 +51,8 @@ export const en = {
   "User Name": "User Name",
   "User Pane": "User Pane",
   "User Profile": "User Profile",
+  "User was updated successfully": "User was updated successfully",
+  "User": "User",
   "View": "View",
   "We send a verify letter to your email!": "We send a verify letter to your email!",
   "Well done": "Well done",
@@ -59,7 +61,9 @@ export const en = {
   "name is a required field": "name is a required field",
   "of the past and focus on the present!": "of the past and focus on the present!",
   "password is a required field": "password is a required field",
-  "password must be at least 4 characters": "password must be at least 4 characters",
+  "password must be at least 6 characters": "password must be at least 6 characters",
+  "name can have maximum 40 characters": "name can have maximum 40 characters",
+  "phone can have maximum 20 characters": "phone can have maximum 20 characters",
 
   // Week days
   "Monday": "Monday",

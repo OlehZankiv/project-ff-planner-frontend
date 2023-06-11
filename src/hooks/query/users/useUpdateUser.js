@@ -5,7 +5,7 @@ import { useAuthContext } from '../../../contexts/auth'
 import { handleRequestError } from '../../../utils/notifications'
 import { toUserDTO } from '../mappers'
 
-export const useUpdateUser = () => {
+export const useUpdateUser = (onSuccess) => {
   const { logger } = useAuthContext()
   const id = logger?.id || ''
 
@@ -15,7 +15,10 @@ export const useUpdateUser = () => {
     mutationKey: [queryKeys.updateUser, id],
     enabled: !!id,
     onError: handleRequestError,
-    onSuccess: () => queryClient.invalidateQueries([queryKeys.getUsers]),
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.getUsers])
+      onSuccess?.()
+    },
   })
 
   return {

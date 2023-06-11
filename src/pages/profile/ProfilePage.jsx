@@ -1,23 +1,55 @@
 import styled, { css } from 'styled-components'
 import { profileUpdateValidationFormSchema } from '../../utils/schemas'
-import { Button, DatePicker, Input } from '../../components'
+import { Avatar, Button, DatePicker, Input, Text } from '../../components'
 import { Form, Formik } from 'formik'
 import { useUpdateUser } from '../../hooks/query'
 import { useTranslation } from 'react-i18next'
 import { useAuthContext } from '../../contexts/auth'
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
+import { handleRequestSuccess } from '../../utils/notifications'
+import { useState } from 'react'
+import { useUpdateUserAvatar } from '../../hooks/query/users/useUpdateUserAvatar'
 
 const ProfilePage = () => {
   const { t } = useTranslation()
-  const { updateUser, isLoading } = useUpdateUser()
+  const { updateUser, isLoading: isUpdateUserLoading } = useUpdateUser()
+
+  const [selectedAvatar, setSelectedAvatar] = useState(null)
+
+  const { updateUserAvatar, isLoading: isUpdateUserAvatarLoading } = useUpdateUserAvatar(() =>
+    setTimeout(() => {
+      handleRequestSuccess(t('User was updated successfully'))
+      setSelectedAvatar(null)
+    }, 100),
+  )
+
+  const isLoading = isUpdateUserLoading || isUpdateUserAvatarLoading
+
   const { logger } = useAuthContext()
 
+  const avatarSize = useBreakpointValue({ desktopValue: 124, tabletValue: 124, mobileValue: 72 })
+
   const onUserUpdate = (values) => {
+    if (selectedAvatar) updateUserAvatar(selectedAvatar)
     updateUser(values)
   }
 
   return (
     <Wrapper>
+      <Avatar
+        selectedAvatar={selectedAvatar}
+        onAvatarPick={setSelectedAvatar}
+        size={avatarSize}
+        name={logger?.name}
+        withUpload
+        image={logger?.avatarURL}
+      />
+      <Text type='h5' style={{ textAlign: 'center', marginTop: 20 }}>
+        {logger?.name}
+      </Text>
+      <Text type='p' style={{ marginTop: 8, textAlign: 'center' }} fontWeight={600}>
+        {t('User')}
+      </Text>
       <Formik
         initialValues={logger}
         onSubmit={onUserUpdate}
@@ -68,7 +100,7 @@ const ProfilePage = () => {
                 errorMessage={t(errors.email)}
                 successMessage={t('This is a CORRECT email')}
                 isError={errors.email && touched.email}
-              />{' '}
+              />
             </FormFields>
 
             <Button
@@ -88,6 +120,9 @@ const ProfilePage = () => {
 
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     background-color: ${colors.content};
@@ -98,7 +133,7 @@ const Wrapper = styled.div`
         padding: 40px 23vw;
       `,
       mobile: css`
-        padding: 60px 18px 40px 18px;
+        padding: 40px 18px;
       `,
     })}
   `}
@@ -108,8 +143,9 @@ const ProfileForm = styled(Form)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  flex: 1;
   column-gap: 32px;
+  margin-top: 40px;
 `
 
 const FormFields = styled.div`
