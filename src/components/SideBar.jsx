@@ -1,6 +1,6 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { ROUTES } from '../navigation/routes'
 
 import {
@@ -35,7 +35,7 @@ export const SideBar = ({
   selectedRoute,
   setSelectedRoute,
 }) => {
-  const { logout } = useLogout()
+  const { logout, isLoading } = useLogout()
 
   const { colors } = useTheme()
   const { t } = useTranslation()
@@ -45,6 +45,13 @@ export const SideBar = ({
   const iconCheckSize = useBreakpointValue({ mobileValue: 20, tabletValue: 24, desktopValue: 24 })
   const iconLogOutSize = useBreakpointValue({ mobileValue: 18, tabletValue: 20, desktopValue: 20 })
   const iconCloseSize = useBreakpointValue({ mobileValue: 25, tabletValue: 33 })
+
+  useEffect(() => {
+    document.body.style.overflow = isBurgerMenuOpen ? 'hidden' : 'auto'
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isBurgerMenuOpen])
 
   const handleOverlayClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -96,9 +103,9 @@ export const SideBar = ({
           </div>
         </div>
         <Button
+          isLoading={isLoading}
           isDefaultShadow
           title={t('Log out')}
-          buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
           onClick={logout}
           rightIcon={<LogOutIcon size={iconLogOutSize} color={colors.white} />}
         />
@@ -148,7 +155,7 @@ const SidebarWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    min-height: 100vh;
+    height: 100%;
     background-color: ${theme.colors.background};
     width: 70%;
     padding: 20px 24px;

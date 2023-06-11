@@ -10,12 +10,9 @@ export const toTask = ({ _id, startAt, endAt, title, assignedUser, priority, cat
   category: category ?? 'in-progress',
 })
 
-export const toTaskDTO = ({ id, startAt, endAt, ...instance }) => {
-  console.log({ startAt })
-  return {
-    _id: id,
-    startAt: startAt.getTime(),
-    endAt: endAt.getTime(),
-    ...instance,
-  }
-}
+export const toTaskDTO = ({ id, startAt, endAt, ...instance }) => ({
+  _id: id,
+  startAt: startAt.getTime(),
+  endAt: endAt.getTime(),
+  ...instance,
+})

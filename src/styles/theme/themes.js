@@ -34,6 +34,12 @@ export const lightTheme = themeCreator({
     low: '#72C2F8',
     medium: '#F3B249',
     high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
 
     // Background
     mainBackground: '#F7F6F9',
@@ -43,7 +49,7 @@ export const lightTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5D5D5D',
     userNameText: '#343434',
-    sideBarOverlay: '#e7ecfc79',
+    sideBarOverlay: '#13151A79',
     sidebarTitle: '#999999',
     tabButtonActive: '#E3F3FF',
     tabContent: '#999999',
@@ -96,6 +102,12 @@ export const darkTheme = themeCreator({
     low: '#72C2F8',
     medium: '#F3B249',
     high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
 
     // Background
     mainBackground: '#171820',
@@ -105,7 +117,7 @@ export const darkTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5B5C61',
     userNameText: '#ffffff',
-    sideBarOverlay: '#28282a79',
+    sideBarOverlay: '#3f3f3f79',
     sidebarTitle: '#585A5D',
     tabButtonActive: '#3e85f3',
     tabContent: '#ffffff',

@@ -5,17 +5,17 @@ import { useAuthContext } from '../../../contexts/auth'
 import { toUser } from '../mappers'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../navigation/routes'
+import { handleRequestError } from '../../../utils/notifications'
 
 export const useLogin = () => {
   const { setLogger, setToken } = useAuthContext()
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { mutate, isLoading } = useMutation(login, {
+  const { mutate, isLoading, isFetching } = useMutation({
     mutationKey: [queryKeys.login],
-    onError: () => {
-      // TODO: Vitalii task: add error notification
-    },
+    mutationFn: login,
+    onError: handleRequestError,
     onSuccess: (res) => {
       const { token, user } = res.data
 
@@ -28,6 +28,6 @@ export const useLogin = () => {
 
   return {
     login: ({ password, email }) => mutate({ password, email }),
-    isLoading,
+    isLoading: isLoading || isFetching,
   }
 }
