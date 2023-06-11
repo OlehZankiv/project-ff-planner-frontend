@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
-import { Button, Modal, Ratings, Review, Textarea } from '../components'
+import { Button, Modal, Ratings, Review, Textarea } from '../index'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAddReview, useDeleteReview, useReviews } from '../hooks/query/'
-import { getMobileStyles } from '../styles/breakpoints'
+import { useAddReview, useDeleteReview, useReviews } from '../../hooks/query'
+import { getMobileStyles } from '../../styles/breakpoints'
 import { FeedbackEditModal } from './FeedbackEditModal'
-import { toReview } from '../hooks/query/mappers'
+import { toReview } from '../../hooks/query/mappers'
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()

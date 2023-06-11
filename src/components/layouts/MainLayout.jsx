@@ -14,7 +14,7 @@ import {
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
-import { FeedbackModal } from '../../pages/FeedbackModal'
+import { FeedbackModal } from '../modals/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
 import { gooseCalendar } from '../../assets/images'
@@ -83,7 +83,9 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                {showTitleGooseLogo && <img src={gooseCalendar} style={{ width: '60px' }} />}
+                {showTitleGooseLogo && (
+                  <img src={gooseCalendar} style={{ width: '60px' }} alt='Goose calendar logo' />
+                )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Text
                     type='h1'

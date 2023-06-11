@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { Button, Modal, Ratings, Textarea } from '../components'
+import { Button, Modal, Ratings, Textarea } from '../index'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useUpdateReview } from '../hooks/query/'
-import { toReview } from '../hooks/query/mappers'
+import { useUpdateReview } from '../../hooks/query'
+import { toReview } from '../../hooks/query/mappers'
 
 export const FeedbackEditModal = ({ visible, setVisible, review }) => {
   const { t } = useTranslation()

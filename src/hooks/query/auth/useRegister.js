@@ -6,7 +6,7 @@ import { handleRequestError, handleRequestSuccess } from '../../../utils/notific
 
 export const useRegister = (onSuccess) => {
   const { t } = useTranslation()
-  const { mutate, isLoading, isFetching } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationKey: [queryKeys.register],
     mutationFn: register,
     onError: handleRequestError,
@@ -18,6 +18,6 @@ export const useRegister = (onSuccess) => {
 
   return {
     register: ({ password, name, email }) => mutate({ password, name, email }),
-    isLoading: isLoading || isFetching,
+    isLoading,
   }
 }
