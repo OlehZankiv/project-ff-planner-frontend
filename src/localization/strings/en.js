@@ -4,6 +4,7 @@ export const en = {
   "Calendar": "Calendar",
   "Cancel": "Cancel",
   "Day": "Day",
+  "Reviews": "Reviews",
   "Default": "Default",
   "Edit": "Edit",
   "Email": "Email",

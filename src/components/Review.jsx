@@ -1,7 +1,7 @@
 import styled, { css, useTheme } from 'styled-components'
 import { getMobileStyles, ScreenWrapper } from '../styles/breakpoints'
 import { Text } from './Text'
-import { RatingStarUserIcon, PencilIcon, TrashIcon } from '../assets/icons'
+import { PencilIcon, RatingStarUserIcon, TrashIcon } from '../assets/icons'
 import { OpacityButton } from '../components'
 
 export const Review = ({
@@ -23,8 +23,8 @@ export const Review = ({
 
   return (
     <Wrapper style={style}>
-      <div style={{ width: 50, height: 50, backgroundColor: 'red' }} />
-      <div>
+      <div style={{ minWidth: 50, minHeight: 50, backgroundColor: 'red', borderRadius: 25 }} />
+      <InfoWrapper>
         <ReviewTop>
           <Text type='h5'>{name}</Text>
           {showEdit && (
@@ -49,7 +49,7 @@ export const Review = ({
         </StarsWrapper>
         <ScreenWrapper tablet={commentJSX} desktop={commentJSX} />
         <ScreenWrapper mobile={commentJSX} />
-      </div>
+      </InfoWrapper>
     </Wrapper>
   )
 }
@@ -60,7 +60,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    column-gap: 8px;
+    column-gap: 14px;
     border-radius: 8px;
     background-color: transparent;
     border: 1px solid ${colors.reviewBorder};
@@ -69,6 +69,10 @@ const Wrapper = styled.div`
       padding: 24px;
     `)}
   `}
+`
+
+const InfoWrapper = styled.div`
+  flex: 1;
 `
 
 const StarsWrapper = styled.div`

@@ -107,6 +107,7 @@ const FeedbackWrapper = styled.div`
 `
 
 const FeedbackList = styled.div`
+  align-items: stretch;
   display: flex;
   flex-direction: column;
   width: 100%;
