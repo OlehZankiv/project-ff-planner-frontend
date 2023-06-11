@@ -37,7 +37,7 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",

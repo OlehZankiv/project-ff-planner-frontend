@@ -16,8 +16,8 @@ import { userFormSchema } from '../../utils/schemas'
 // import { useUpdateUser } from '../../hooks/query'
 
 const UserPage = () => {
-  const [phone, setPhone] = useState('')
   const { logger } = useAuthContext()
+  const [phone, setPhone] = useState(logger.phone ? logger.phone : '')
   // const { updateUser } = useUpdateUser()
 
   const nameFontSize = useBreakpointValue({
@@ -37,27 +37,13 @@ const UserPage = () => {
     desktopValue: 262,
   })
 
-  const handleSubmit = (
-    values,
-    // { resetForm }
-  ) => {
+  const handleSubmit = (values) => {
     console.log(values)
     // updateUser({ ...values, phone })
-    // resetForm()
   }
 
   if (!logger) return null
-
-  // const onPlusHandler = () => {
-  //   const input = document.createElement('input')
-  //   input.type = 'file'
-  //   input.accept = 'image/png, image/gif, image/jpeg'
-  //   input.onchange = (e) => {
-  //     const file = e.target.files[0]
-  //     console.log('selected file', file)
-  //   }
-  //   input.click()
-  // }
+  console.log(phone)
 
   return (
     <UserWrapper>
@@ -96,7 +82,6 @@ const UserPage = () => {
                     placeholder={t('Enter your name')}
                   ></Input>
                   <DatePicker
-                    id='birthday'
                     name='birthday'
                     placeholder={t('Enter your birthday')}
                     title={t('Birthday')}
@@ -113,7 +98,6 @@ const UserPage = () => {
                 </Column>
                 <Column>
                   <PhoneInputField
-                    name='phone'
                     placeholder={t('Enter your phone number')}
                     title={t('Phone')}
                     value={phone}
@@ -201,3 +185,14 @@ export const Column = styled.div`
     max-width: 50%;
   `)}
 `
+
+// const onPlusHandler = () => {
+//   const input = document.createElement('input')
+//   input.type = 'file'
+//   input.accept = 'image/png, image/gif, image/jpeg'
+//   input.onchange = (e) => {
+//     const file = e.target.files[0]
+//     console.log('selected file', file)
+//   }
+//   input.click()
+// }
