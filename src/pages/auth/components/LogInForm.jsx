@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { loginFormSchema } from '../../../utils/schemas'
 import { Button, Input, Text } from '../../../components'
-import { css } from 'styled-components'
+import { css, useTheme } from 'styled-components'
 import { LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
 import { useLogin } from '../../../hooks/query'
@@ -17,6 +17,7 @@ const initialValues = {
 export const LogInForm = () => {
   const { t } = useTranslation()
   const { login, isLoading } = useLogin()
+  const { colors } = useTheme()
 
   const handleSubmit = (values, { resetForm }) => {
     login(values)
@@ -69,8 +70,8 @@ export const LogInForm = () => {
             style={{ marginTop: '15px' }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon color={'white'} />}
-            title={isLoading ? t('Loading') : t('Log In')}
+            rightIcon={<LoginIcon color={colors.white} />}
+            title={t('Log In')}
             variant='primary'
             isLoading={isLoading}
           />

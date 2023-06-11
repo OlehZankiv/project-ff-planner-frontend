@@ -5,7 +5,7 @@ import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
 import { Button, Input, Text } from '../../../components'
 import { LoginIcon } from '../../../assets/icons'
-import { css } from 'styled-components'
+import { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
 
@@ -18,6 +18,7 @@ const initialValues = {
 export const RegisterForm = () => {
   const { t } = useTranslation()
   const { register, isLoading } = useRegister()
+  const { colors } = useTheme()
 
   const handleSubmit = (values, { resetForm }) => {
     register(values)
@@ -79,7 +80,7 @@ export const RegisterForm = () => {
             buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon color={'white'} />}
+            rightIcon={<LoginIcon color={colors.white} />}
             title={isLoading ? t('Loading') : t('Sign up')}
             variant='primary'
             isLoading={isLoading}

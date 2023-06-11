@@ -1,15 +1,14 @@
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 
-export const handleRequestError = ({ message }) => {
-
-  return toast.error(message, {
+export const handleRequestError = (error) => {
+  toast.error(error?.message || 'Developers forgot to handle this error', {
     position: toast.POSITION.TOP_LEFT,
   })
 }
 
 export const handleRequestSuccess = (message) => {
-  return toast.success(message, {
+  toast.success(message, {
     position: toast.POSITION.TOP_LEFT,
   })
 }

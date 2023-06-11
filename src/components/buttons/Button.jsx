@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 import { Text } from '../Text'
 import { Spinner } from '../../pages/auth/components/Spinner'
+import { useTranslation } from 'react-i18next'
 
 export const Button = ({
   isDefaultShadow = false,
@@ -15,30 +16,33 @@ export const Button = ({
   style,
   buttonTextProps,
   isLoading = false,
-}) => (
-  <Wrapper
-    style={style}
-    onClick={onClick}
-    isDefaultShadow={isDefaultShadow}
-    fullWidth={fullWidth}
-    variant={variant}
-    type={type}
-  >
-    {leftIcon}
-    <Text
-      {...buttonTextProps}
-      type='h4'
-      mobileStyles={css`
-        font-size: 14px;
-        line-height: 18px;
-      `}
-      color={variant === 'primary' ? 'white' : 'secondaryButtonText'}
+}) => {
+  const { t } = useTranslation()
+    return (
+    <Wrapper
+      style={style}
+      onClick={onClick}
+      isDefaultShadow={isDefaultShadow}
+      fullWidth={fullWidth}
+      variant={variant}
+      type={type}
     >
-      {title}
-    </Text>
-    {isLoading ? <Spinner /> : rightIcon}
-  </Wrapper>
-)
+      {leftIcon}
+      <Text
+        {...buttonTextProps}
+        type='h4'
+        mobileStyles={css`
+          font-size: 14px;
+          line-height: 18px;
+        `}
+        color={variant === 'primary' ? 'white' : 'secondaryButtonText'}
+      >
+        {isLoading ? t('Loading') : title}
+      </Text>
+      {isLoading ? <Spinner /> : rightIcon}
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.button`
   ${({ theme: { colors, shadows }, isDefaultShadow, variant, fullWidth }) => css`
