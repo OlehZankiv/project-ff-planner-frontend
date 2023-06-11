@@ -3,74 +3,55 @@ import React, { useState } from 'react'
 import { ArrowLeft, ArrowRight } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 
-
 import { getDesktopStyles } from '../../../styles/breakpoints'
 import { useReviews } from '../../../hooks/query'
 import { Review } from '../../../components/Review'
 
-
-
-
 export const Reviews = () => {
-    const { colors } = useTheme();
-    const [currentReview, setCurrentReview] = useState(0);
-    const { reviews } = useReviews('best');
-const { t } = useTranslation();
-    
+  const { colors } = useTheme()
+  const [currentReview, setCurrentReview] = useState(0)
+  const { reviews } = useReviews('best')
+  const { t } = useTranslation()
 
   const nextReview = () => {
-    setCurrentReview(
-      currentReview === reviews.length - 1 ? 0 : currentReview + 1
-    );
-  };
+    setCurrentReview(currentReview === reviews.length - 1 ? 0 : currentReview + 1)
+  }
 
   const prevReview = () => {
-    setCurrentReview(
-      currentReview === 0 ? reviews.length - 1 : currentReview - 1
-    );
-  };
+    setCurrentReview(currentReview === 0 ? reviews.length - 1 : currentReview - 1)
+  }
 
   return (
     <Container>
-          <ReviewsTitle>{t('Reviews')}</ReviewsTitle>
-          
-          
-<WrapperReviewContainer>
+      <ReviewsTitle>{t('Reviews')}</ReviewsTitle>
+
+      <WrapperReviewContainer>
         {reviews
-          .slice(
-            currentReview,
-            currentReview + (window.innerWidth >= 1440 ? 2 : 1)
-          )
-                  .map(review => (
-            
+          .slice(currentReview, currentReview + (window.innerWidth >= 1440 ? 2 : 1))
+          .map((review) => (
             <Review
               key={review._id}
               owner={review.owner.name}
               comment={review.comment}
               rating={review.rating}
             />
-              
           ))}
       </WrapperReviewContainer>
 
-
-      
       <ButtonContainer>
         <Button onClick={prevReview}>
-                  <ArrowLeft color={colors.black} />
+          <ArrowLeft color={colors.black} />
         </Button>
         <Button onClick={nextReview}>
           <ArrowRight color={colors.black} />
         </Button>
       </ButtonContainer>
     </Container>
-  );
-};
-
-
+  )
+}
 
 export const ReviewsTitle = styled.h2`
- ${({ theme }) => css`
+  ${({ theme }) => css`
   font-weight: 700;
   font-size: 28px;
   line-height: 32px;
@@ -83,7 +64,7 @@ export const ReviewsTitle = styled.h2`
   `)}
   }
   `}
-`;
+`
 
 export const Container = styled.div`
   display: flex;
@@ -91,11 +72,10 @@ export const Container = styled.div`
   align-items: center;
   margin-top: 64px;
 
-   ${getDesktopStyles(css`
-   margin-top: 100px;
+  ${getDesktopStyles(css`
+    margin-top: 100px;
   `)}
-
-`;
+`
 
 // Avatar src={review.avatar} alt={review.name}
 
@@ -109,7 +89,7 @@ export const Container = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
+`
 
 export const Button = styled.button`
   padding: 18px 20px;
@@ -119,18 +99,18 @@ export const Button = styled.button`
   font-size: 16px;
   cursor: pointer;
   outline: none;
-`;
+`
 
 export const WrapperReviewContainer = styled.div`
-max-width: 90vw;
-margin-top: 40px;
+  max-width: 90vw;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
 
-   ${getDesktopStyles(css`
-   margin-top: 50px;
-   display: flex;
+  ${getDesktopStyles(css`
+    margin-top: 50px;
+    display: flex;
     flex-direction: row;
-    gap: 24px
+    gap: 24px;
   `)}
-`;
+`

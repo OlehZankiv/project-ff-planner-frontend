@@ -20,13 +20,10 @@ import {
 import { ContentItem } from './components/ContentItem'
 import { Reviews } from './components/ReviewsSlider'
 
-
 const LandingPage = () => {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const navigate = useNavigate()
-
- 
 
   const items = [
     {
