@@ -5,6 +5,7 @@ import { removeStorageItem, STORAGE_KEYS } from '../../../utils/storage'
 import { useAuthContext } from '../../../contexts/auth'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../navigation/routes'
+import { handleRequestError } from '../../../utils/notifications'
 
 export const useLogout = () => {
   const { setToken, setLogger } = useAuthContext()
@@ -12,6 +13,7 @@ export const useLogout = () => {
 
   const { mutate, isLoading } = useMutation(logout, {
     mutationKey: [queryKeys.logout],
+    onError: handleRequestError,
     onSuccess: () => {
       setToken(null)
       setLogger(null)

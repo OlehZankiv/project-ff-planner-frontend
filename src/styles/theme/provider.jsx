@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { useAuthContext } from '../../contexts/auth'
 import { useUpdateUser } from '../../hooks/query'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../../utils/storage'
+import { ROUTES } from '../../navigation/routes'
 
 const themes = {
   dark: darkTheme,
@@ -17,21 +18,25 @@ const AppThemeContext = createContext({
 })
 
 export const AppThemeProvider = ({ children }) => {
-  const { logger, isLoading } = useAuthContext()
+  const { logger } = useAuthContext()
 
   const [themeType, setThemeType] = useState(getStorageItem(STORAGE_KEYS.THEME, 'light'))
   const { updateTheme } = useUpdateUser()
 
   useEffect(() => {
-    if (!logger) {
-      return isLoading ? undefined : setTheme('light')
-    }
+    const isAuthTheme =
+      [ROUTES.LOGIN, ROUTES.REGISTER].some((route) => window.location.pathname.includes(route)) ||
+      window.location.pathname === ROUTES.LANDING
+
+    if (isAuthTheme) return setThemeType('light')
+    if (!logger?.theme) return
 
     setTheme(logger.theme)
-  }, [logger?.theme, isLoading])
+  }, [logger?.theme, window.location.pathname])
 
   const setTheme = (type, withRequest = false) => {
     setStorageItem(STORAGE_KEYS.THEME, type)
+    setStorageItem(STORAGE_KEYS.LOGGER, { ...logger, theme: type })
     withRequest && updateTheme(type)
     setThemeType(type)
   }

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createTask } from '../../../api'
 import { queryKeys } from '../queryKeys'
 import { toTaskDTO } from '../mappers'
+import { handleRequestError } from '../../../utils/notifications'
 
 export const useCreateTask = () => {
   const queryClient = useQueryClient()
@@ -11,14 +12,11 @@ export const useCreateTask = () => {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.getTasks])
     },
+    onError: handleRequestError,
   })
 
   return {
-    createTask: (task) => {
-      // eslint-disable-next-line no-unused-vars
-      const { _id, assignedUser, ...data } = toTaskDTO(task)
-      mutate(data)
-    },
+    createTask: (task) => mutate(toTaskDTO(task)),
     isLoading,
   }
 }
