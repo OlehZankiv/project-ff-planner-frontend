@@ -22,9 +22,6 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       removeStorageItem(STORAGE_KEYS.TOKEN)
       removeStorageItem(STORAGE_KEYS.LOGGER)
-
-      // if (!window.location.pathname.includes(ROUTES.LOGIN))
-      //   return (window.location = BASE_GITHUB_PAGES_URL + ROUTES.LOGIN)
     }
 
     return Promise.reject(error)
