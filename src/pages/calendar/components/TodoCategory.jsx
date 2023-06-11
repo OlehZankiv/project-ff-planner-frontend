@@ -4,8 +4,11 @@ import { Button, OpacityButton, Text } from '../../../components'
 import { PlusCircleIcon, PlusIcon } from '../../../assets/icons'
 import { TodoItem } from './TodoItem'
 import { getMobileStyles } from '../../../styles/breakpoints'
+import { useState } from 'react'
+import { TaskModal } from './AddTask/TaskModal'
 
 export const TodoCategory = ({ type, todos }) => {
+  const [isTaskModalVisible, setTaskModalVisible] = useState(false)
   const { colors } = useTheme()
   const { t } = useTranslation()
 
@@ -25,7 +28,7 @@ export const TodoCategory = ({ type, todos }) => {
           <TodoItem {...todo} key={todo.id} />
         ))}
       </TodosWrapper>
-      <PlusCircleIconButton onClick={() => {}}>
+      <PlusCircleIconButton onClick={() => setTaskModalVisible(true)}>
         <PlusCircleIcon color={colors.text} />
       </PlusCircleIconButton>
 
@@ -40,8 +43,10 @@ export const TodoCategory = ({ type, todos }) => {
           leftIcon={<PlusIcon color={colors.text} />}
           fullWidth
           title={t('Add task')}
+          onClick={() => setTaskModalVisible(true)}
         />
       </BottomButton>
+      <TaskModal visible={isTaskModalVisible} setVisible={setTaskModalVisible} />
     </Wrapper>
   )
 }

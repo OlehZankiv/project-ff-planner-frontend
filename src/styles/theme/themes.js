@@ -80,6 +80,7 @@ export const lightTheme = themeCreator({
     groupButtonsTextSelected: '#3E85F3',
     groupButtonsBackground: '#E3F3FF',
     groupButtonsBackgroundSelected: '#CAE8FF',
+    addTaskCancelButtonBackground:'#EFEFEF'
   },
   shadows,
   animation,
@@ -148,6 +149,7 @@ export const darkTheme = themeCreator({
     groupButtonsTextSelected: '#FFFFFF',
     groupButtonsBackground: '#21222C',
     groupButtonsBackgroundSelected: '#3E85F3',
+    addTaskCancelButtonBackground:'#EFEFEF'
   },
   shadows,
   animation,
