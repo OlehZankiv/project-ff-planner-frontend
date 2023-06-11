@@ -18,7 +18,7 @@ import {
   Sidebars_3x,
 } from '../../assets/images'
 import { ContentItem } from './components/ContentItem'
-import { Reviews } from './components/ReviewsSlider'
+import { ReviewsSlider } from './components/ReviewsSlider'
 
 const LandingPage = () => {
   const { t } = useTranslation()
@@ -96,7 +96,7 @@ const LandingPage = () => {
           <ContentItem key={index} {...item} index={`${index + 1}.`} />
         ))}
       </ListWrapper>
-      <Reviews />
+      <ReviewsSlider />
     </Container>
   )
 }
@@ -105,8 +105,18 @@ export default LandingPage
 
 export const Container = styled.div`
   ${({ theme }) => css`
-    margin: 0 auto;
     background-color: ${theme.colors.background};
+    ${getBreakpointsStyles({
+      desktop: css`
+        padding-bottom: 118px;
+      `,
+      tablet: css`
+        padding-bottom: 100px;
+      `,
+      mobile: css`
+        padding-bottom: 64px;
+      `,
+    })}
   `}
 `
 
@@ -187,15 +197,15 @@ export const SignupLink = styled(NavLink)`
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 64px 20px 0px;
+  padding: 64px 20px 0;
   gap: 64px;
 
   ${getBreakpointsStyles({
     tablet: css`
-      padding: 64px 32px 0px;
+      padding: 64px 32px 0;
     `,
     desktop: css`
-      padding: 64px 128px 0px;
+      padding: 64px 128px 0;
     `,
   })}
 `

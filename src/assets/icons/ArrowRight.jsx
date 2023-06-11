@@ -1,17 +1,20 @@
-export const ArrowRight = ({ size = 61, color }) => (
-  <svg width={size} height={size} fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <g clipPath='url(#a)'>
+export const ArrowRight = ({ size = 62, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox='0 0 62 61'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <g clipPath='url(#clip0_182_6197)'>
       <path
-        d='m41.815 28.194 2.293 1.559L.5 29.754v1.22l43.335-.001-2.16 1.241.608 1.058 4.97-2.856-4.751-3.231-.687 1.009Z'
-        stroke={color}
-        strokeLinecap='square'
-        strokeWidth='1'
-        strokeLinejoin='square'
+        d='M41.8153 28.1937L44.1083 29.7529L0.5 29.7541L0.5 30.9741L43.835 30.9729L41.675 32.2142L42.2826 33.272L47.2535 30.416L42.5016 27.1848L41.8153 28.1937Z'
+        fill={color}
       />
     </g>
     <defs>
-      <clipPath id='a'>
-        <path fill='fff' transform='matrix(0 -1 1 0 .5 61)' d='M0 0h61v61H0z' />
+      <clipPath id='clip0_182_6197'>
+        <rect width={size} height={size} fill='white' transform='matrix(0 -1 1 0 0.5 61)' />
       </clipPath>
     </defs>
   </svg>

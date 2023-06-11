@@ -1,11 +1,14 @@
 export const ArrowLeft = ({ size = 61, color }) => (
-  <svg width={size} height={size} fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg
+    width={size}
+    height={size}
+    viewBox='0 0 62 61'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
     <path
-      d='m15.185 32.535-2.293-1.56H56.5v-1.22H13.165l2.16-1.241-.608-1.058-4.97 2.856 4.751 3.232.687-1.01Z'
-      stroke={color}
-      strokeLinecap='square'
-      strokeWidth='1'
-      strokeLinejoin='square'
+      d='M15.1847 32.5346L12.8917 30.9754L56.5 30.9742V29.7542L13.165 29.7554L15.325 28.514L14.7174 27.4563L9.74654 30.3123L14.4984 33.5435L15.1847 32.5346Z'
+      fill={color}
     />
   </svg>
 )

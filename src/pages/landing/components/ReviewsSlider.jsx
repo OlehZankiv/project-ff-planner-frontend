@@ -1,116 +1,128 @@
 import styled, { css, useTheme } from 'styled-components'
-import React, { useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ArrowLeft, ArrowRight } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
-
-import { getDesktopStyles } from '../../../styles/breakpoints'
 import { useReviews } from '../../../hooks/query'
-import { Review } from '../../../components/Review'
+import { OpacityButton, Review, Text } from '../../../components'
+import { getBreakpointsStyles, getDesktopStyles } from '../../../styles/breakpoints'
+import { useDimensions } from '../../../hooks'
 
-export const Reviews = () => {
-  const { colors } = useTheme()
-  const [currentReview, setCurrentReview] = useState(0)
-  const { reviews } = useReviews('best')
+export const ReviewsSlider = () => {
   const { t } = useTranslation()
+  const { colors } = useTheme()
+  const { width } = useDimensions()
 
-  const nextReview = () => {
-    setCurrentReview(currentReview === reviews.length - 1 ? 0 : currentReview + 1)
+  const container = useRef(null)
+  const itemsRef = useRef({})
+  const currentIndex = useRef(0)
+
+  const { reviews } = useReviews('best')
+
+  const updateListPosition = (behavior) =>
+    itemsRef.current[currentIndex.current - 1]?.scrollIntoView({
+      behavior,
+      block: 'start',
+      inline: 'start',
+    })
+
+  useEffect(updateListPosition, [width])
+
+  useEffect(() => {
+    container?.current?.addEventListener('wheel', (event) => event.preventDefault())
+  }, [])
+
+  const next = () => {
+    const prev = currentIndex.current
+    currentIndex.current = prev === reviews.length - 1 ? 0 : prev + 1
+
+    updateListPosition('smooth')
   }
 
-  const prevReview = () => {
-    setCurrentReview(currentReview === 0 ? reviews.length - 1 : currentReview - 1)
+  const prev = () => {
+    const prev = currentIndex.current
+    currentIndex.current = prev === 0 ? reviews.length - 1 : prev - 1
+
+    updateListPosition('smooth')
   }
 
   return (
-    <Container>
-      <ReviewsTitle>{t('Reviews')}</ReviewsTitle>
+    <Wrapper>
+      <Text type='h2' color='primary'>
+        {t('Reviews')}
+      </Text>
+      <ReviewList ref={container}>
+        {reviews.map((review, index) => (
+          <div key={review.id} ref={(ref) => (itemsRef.current[index] = ref)}>
+            <Review style={{ height: '100%' }} {...review} />
+          </div>
+        ))}
+      </ReviewList>
 
-      <WrapperReviewContainer>
-        {reviews
-          .slice(currentReview, currentReview + (window.innerWidth >= 1440 ? 2 : 1))
-          .map((review) => (
-            <Review
-              key={review._id}
-              owner={review.owner.name}
-              comment={review.comment}
-              rating={review.rating}
-            />
-          ))}
-      </WrapperReviewContainer>
-
-      <ButtonContainer>
-        <Button onClick={prevReview}>
-          <ArrowLeft color={colors.black} />
-        </Button>
-        <Button onClick={nextReview}>
-          <ArrowRight color={colors.black} />
-        </Button>
-      </ButtonContainer>
-    </Container>
+      <PaginationWrapper>
+        <IconButton onClick={prev}>
+          <ArrowLeft color={colors.text} />
+        </IconButton>
+        <IconButton onClick={next}>
+          <ArrowRight color={colors.text} />
+        </IconButton>
+      </PaginationWrapper>
+    </Wrapper>
   )
 }
 
-export const ReviewsTitle = styled.h2`
-  ${({ theme }) => css`
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 32px;
-  text-transform: uppercase;
-  color: ${theme.colors.primary};
-
-  ${getDesktopStyles(css`
-    font-size: 40px;
-    line-height: 44px;
-  `)}
-  }
-  `}
-`
-
-export const Container = styled.div`
+const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 64px;
+  padding: 0 20px;
 
-  ${getDesktopStyles(css`
-    margin-top: 100px;
-  `)}
+  ${getBreakpointsStyles({
+    desktop: css`
+      margin-top: 100px;
+      padding: 0 128px;
+    `,
+    tablet: css`
+      padding: 0 62px;
+    `,
+  })}
 `
 
-// Avatar src={review.avatar} alt={review.name}
-
-// export const Avatar = styled.img`
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 50%;
-//   object-fit: cover;
-// `;
-
-export const ButtonContainer = styled.div`
+const IconButton = styled(OpacityButton)`
   display: flex;
+  align-items: center;
   justify-content: center;
 `
 
-export const Button = styled.button`
-  padding: 18px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: transparent;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
-`
-
-export const WrapperReviewContainer = styled.div`
-  max-width: 90vw;
-  margin-top: 40px;
+const ReviewList = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  column-gap: 24px;
+  margin-top: 46px;
+  overflow-x: scroll;
+  width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > div {
+    min-width: 100%;
+  }
 
   ${getDesktopStyles(css`
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
+    > div {
+      min-width: calc(50% - 12px);
+    }
   `)}
+`
+
+const PaginationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 24px;
+  margin-top: 32px;
 `
