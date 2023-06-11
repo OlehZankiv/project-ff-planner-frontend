@@ -35,9 +35,10 @@ export const MainLayout = () => {
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
   const [searchParams] = useSearchParams()
-  const search = searchParams.get('calendar-type')
   const showTitleGooseLogo =
-    width >= 1024 && window.location.pathname.includes(ROUTES.CALENDAR) && search === 'day'
+    width >= 1024 &&
+    window.location.pathname.includes(ROUTES.CALENDAR) &&
+    searchParams.get('calendar-type') === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
