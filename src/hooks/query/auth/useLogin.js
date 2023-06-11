@@ -5,7 +5,7 @@ import { useAuthContext } from '../../../contexts/auth'
 import { toUser } from '../mappers'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../navigation/routes'
-import { handleRequestError } from '../../../components/helpers/handleReaquestNotification'
+import { handleRequestError } from '../../../utils/notifications'
 
 export const useLogin = () => {
   const { setLogger, setToken } = useAuthContext()

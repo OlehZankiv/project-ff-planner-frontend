@@ -2,10 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { register } from '../../../api'
 import { queryKeys } from '../queryKeys'
 import { useTranslation } from 'react-i18next'
-import {
-  handleRequestError,
-  handleRequestSuccess,
-} from '../../../components/helpers/handleReaquestNotification'
+import { handleRequestError, handleRequestSuccess } from '../../../utils/notifications'
 
 export const useRegister = (onSuccess) => {
   const { t } = useTranslation()
