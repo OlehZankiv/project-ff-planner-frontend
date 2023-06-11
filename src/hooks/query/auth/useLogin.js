@@ -12,7 +12,7 @@ export const useLogin = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading, isFetching } = useMutation({
     mutationKey: [queryKeys.login],
     mutationFn: login,
     onError: (error) => {
@@ -30,6 +30,6 @@ export const useLogin = () => {
 
   return {
     login: ({ password, email }) => mutate({ password, email }),
-    isLoading,
+    isLoading: isLoading || isFetching,
   }
 }

@@ -9,7 +9,7 @@ import {
 
 export const useRegister = () => {
   const { t } = useTranslation()
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading, isFetching } = useMutation({
     mutationKey: [queryKeys.register],
     mutationFn: register,
     onError: handleRequestError,
@@ -18,6 +18,6 @@ export const useRegister = () => {
 
   return {
     register: ({ password, name, email }) => mutate({ password, name, email }),
-    isLoading,
+    isLoading: isLoading || isFetching,
   }
 }
