@@ -1,62 +1,77 @@
+/* eslint-disable no-unused-vars */
 import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
+import { Text } from '../../../../components'
 
-export const RadioButton = ({ title, checked, onChange }) => {
-  const { t } = useTranslation();
-  let radioColor = '';
-  let priority=title.charAt(0).toUpperCase() + title.slice(1);
-
-  switch (title) {
+export const RadioButton = ({
+  label,
+  id,
+  value,
+  text,
+  checked,
+  onChange,
+  backgroundColor,
+  boxShadowColor,
+}) => {
+  const { t } = useTranslation()
+  const { shadows } = useTheme()
+  let radioColor = ''
+  switch (value) {
     case 'low':
-      radioColor = '114, 194, 248'
+      radioColor = shadows.radioButtonShadowLow
       break
     case 'medium':
-      radioColor = '243,178,73'
+      radioColor = shadows.radioButtonShadowMedium
       break
     case 'high':
-      radioColor = '234,61,101'
+      radioColor = shadows.radioButtonShadowHigh
       break
-    default: radioColor='114, 194, 248'
+    default:
+      radioColor = shadows.radioButtonShadowLow
       break
   }
-  
+
   return (
-    <RadioLabel htmlFor={title}>
+    <RadioLabel htmlFor={label}>
       <RadioInput
+        id={id}
         type='radio'
-        value={title}
-        id={title}
-        checked={checked === title}
+        value={value}
+        checked={checked === id}
         onChange={onChange}
         radioColor={radioColor}
+        style={{
+          background: backgroundColor,
+        }}
       />
-      <span>{t(priority)}</span>
+      <Text style={{ paddingLeft: '17px' }} type='p'>
+        {t(text)}
+      </Text>
     </RadioLabel>
   )
 }
 
-
 const RadioInput = styled.input`
- ${({ theme: { colors } }) => css`
-  position: absolute;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background: rgb(${props=>props.radioColor});
-  border-radius: 100%;
-  border: 1px solid transparent;
-  display: flex;
-  flex-direction: row;
-  height: 10px;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  vertical-align: text-bottom;
-  width: 10px;
-  :checked {
-    height: 14px;
-    width: 14px;
-    border-color: ${colors.background};
-    box-shadow: 0 0 0 1.3px rgba(${props=>props.radioColor}, 0.5);
-  }`}
+  ${({ theme: { colors, shadows } }) => css`
+    position: absolute;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 100%;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: row;
+    height: 10px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    vertical-align: text-bottom;
+    width: 10px;
+    :checked {
+      height: 14px;
+      width: 14px;
+      border-color: ${colors.background};
+      box-shadow: ${(props) => props.radioColor};
+    }
+  `}
 `
 const RadioLabel = styled.label`
   ${({ theme: { colors } }) => css`
@@ -67,8 +82,5 @@ const RadioLabel = styled.label`
     gap: 5px;
     align-items: center;
     color: ${colors.text};
-    & span {
-      padding-left: 17px;
-    }
   `}
 `
