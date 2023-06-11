@@ -2,36 +2,20 @@ import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { TodoCategory } from './TodoCategory'
 import { getBreakpointsStyles } from '../../../styles/breakpoints'
+import { useTasks } from '../../../hooks/query'
 
 export const TodosContent = ({ selectedDate }) => {
+  const { tasks } = useTasks()
+
   console.log(selectedDate)
 
   const todoCategories = useMemo(
     () =>
-      [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category, i) => ({
+      [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category) => ({
         ...category,
-        todos: [
-          {
-            id: i,
-            title: 'wake up & finnaly do something',
-            assignedUser: {},
-            priority: 'low',
-          },
-          {
-            id: i + 1,
-            title: 'wake up & finnaly do something',
-            assignedUser: {},
-            priority: 'medium',
-          },
-          {
-            id: i + 2,
-            title: 'wake up & finnaly do something',
-            assignedUser: {},
-            priority: 'high',
-          },
-        ],
+        todos: tasks.filter((task) => task.category === category.type),
       })),
-    [],
+    [tasks],
   )
 
   return (

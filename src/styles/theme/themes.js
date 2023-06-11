@@ -34,6 +34,12 @@ export const lightTheme = themeCreator({
     low: '#72C2F8',
     medium: '#F3B249',
     high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
 
     // Background
     mainBackground: '#F7F6F9',
@@ -96,6 +102,12 @@ export const darkTheme = themeCreator({
     low: '#72C2F8',
     medium: '#F3B249',
     high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
 
     // Background
     mainBackground: '#171820',

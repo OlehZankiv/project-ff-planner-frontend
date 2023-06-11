@@ -5,6 +5,7 @@ import { useUser } from '../hooks/query'
 const AuthContext = createContext({
   logger: null,
   token: null,
+  isLoading: false,
   setLogger: () => {},
   setToken: () => {},
 })
@@ -13,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(getStorageItem(STORAGE_KEYS.TOKEN, null))
   const [logger, setLogger] = useState(getStorageItem(STORAGE_KEYS.LOGGER, null, false))
 
-  const { user: dbUser } = useUser(logger?.id)
+  const { user: dbUser, isLoading } = useUser(logger?.id)
 
   useEffect(() => {
     if (!dbUser) return
@@ -32,6 +33,7 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isLoading,
         logger,
         token,
         setToken,

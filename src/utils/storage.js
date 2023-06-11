@@ -2,6 +2,7 @@ export const STORAGE_KEYS = {
   SELECTED_DATE: 'SELECTED_DAY',
   TOKEN: 'TOKEN',
   LOGGER: 'LOGGER',
+  THEME: 'THEME',
 }
 
 export const getStorageItem = (key, defaultValue = '', isString = true) => {
