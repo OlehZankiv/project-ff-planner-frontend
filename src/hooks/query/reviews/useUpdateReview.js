@@ -1,8 +1,10 @@
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { updateReview } from '../../../api'
 import { queryKeys } from '../queryKeys'
 
 export const useUpdateReview = () => {
+  const QueryClient = useQueryClient()
+
   const { mutate, isLoading } = useMutation(updateReview, {
     mutationKey: [queryKeys.updateReview],
 

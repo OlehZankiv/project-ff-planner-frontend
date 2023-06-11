@@ -1,9 +1,11 @@
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { addReview } from '../../../api'
 import { queryKeys } from '../queryKeys'
 import { toNewReviewDTO } from '../mappers'
 
 export const useAddReview = () => {
+  const QueryClient = useQueryClient()
+
   const { mutate, isLoading } = useMutation(addReview, {
     mutationKey: [queryKeys.addReview],
 
