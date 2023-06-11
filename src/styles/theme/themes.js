@@ -49,7 +49,7 @@ export const lightTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5D5D5D',
     userNameText: '#343434',
-    sideBarOverlay: '#e7ecfc79',
+    sideBarOverlay: '#13151A79',
     sidebarTitle: '#999999',
     tabButtonActive: '#E3F3FF',
     tabContent: '#999999',
@@ -117,7 +117,7 @@ export const darkTheme = themeCreator({
     // Others
     feedbackModalLabels: '#5B5C61',
     userNameText: '#ffffff',
-    sideBarOverlay: '#28282a79',
+    sideBarOverlay: '#3f3f3f79',
     sidebarTitle: '#585A5D',
     tabButtonActive: '#3e85f3',
     tabContent: '#ffffff',
