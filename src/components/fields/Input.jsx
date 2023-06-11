@@ -72,6 +72,7 @@ export const Input = ({
             onChange={setFormValue}
             id={name}
             onBlur={onFormBlur}
+            numberInputProps={{ style: { borderColor: inputBorderColor } }}
             inputComponent={SimpleInput}
           />
         ) : (
