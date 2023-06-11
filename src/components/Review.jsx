@@ -2,13 +2,13 @@ import styled, { css, useTheme } from 'styled-components'
 import { getMobileStyles, ScreenWrapper } from '../styles/breakpoints'
 import { Text } from './Text'
 import { PencilIcon, RatingStarUserIcon, TrashIcon } from '../assets/icons'
-import { OpacityButton } from '../components'
+import { Avatar, OpacityButton } from '../components'
 
 export const Review = ({
   style,
   rating,
   comment,
-  owner: { name },
+  owner: { name, avatarURL },
   showEdit = false,
   editOnClick,
   deleteOnClick,
@@ -16,14 +16,14 @@ export const Review = ({
   const { colors } = useTheme()
 
   const commentJSX = (
-    <Text type='p' style={{ marginTop: 24 }}>
-      {comment}
-    </Text>
+    <DescriptionWrapper>
+      <Text type='p'>{comment}</Text>
+    </DescriptionWrapper>
   )
 
   return (
     <Wrapper style={style}>
-      <div style={{ minWidth: 50, minHeight: 50, backgroundColor: 'red', borderRadius: 25 }} />
+      <Avatar size={50} name={name} image={avatarURL} />
       <InfoWrapper>
         <ReviewTop>
           <Text type='h5'>{name}</Text>
@@ -62,6 +62,7 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     column-gap: 14px;
     border-radius: 8px;
+    overflow: hidden;
     background-color: transparent;
     border: 1px solid ${colors.reviewBorder};
     width: 100%;
@@ -73,6 +74,14 @@ const Wrapper = styled.div`
 
 const InfoWrapper = styled.div`
   flex: 1;
+`
+
+const DescriptionWrapper = styled.div`
+  margin-top: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `
 
 const StarsWrapper = styled.div`

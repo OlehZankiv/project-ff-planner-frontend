@@ -24,6 +24,8 @@ api.interceptors.response.use(
       removeStorageItem(STORAGE_KEYS.TOKEN)
       removeStorageItem(STORAGE_KEYS.LOGGER)
 
+      if (window.location.pathname === ROUTES.LANDING) return
+
       if (
         ![ROUTES.LOGIN, ROUTES.REGISTER].some((route) => window.location.pathname.includes(route))
       )
