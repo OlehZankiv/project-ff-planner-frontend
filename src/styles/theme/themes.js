@@ -30,6 +30,17 @@ export const lightTheme = themeCreator({
     icon: '#343434',
     text: '#111111',
 
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
+
     // Background
     mainBackground: '#F7F6F9',
     background: '#ffffff',
@@ -65,6 +76,10 @@ export const lightTheme = themeCreator({
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
     calendarPickerBorder: '#659DF5',
+    taskButtonBackground: '#e3f3ff',
+    groupButtonsTextSelected: '#3E85F3',
+    groupButtonsBackground: '#E3F3FF',
+    groupButtonsBackgroundSelected: '#CAE8FF',
   },
   shadows,
   animation,
@@ -82,6 +97,17 @@ export const darkTheme = themeCreator({
     content: '#21222C',
     icon: '#ffffff',
     text: '#ffffff',
+
+    // Priority
+    low: '#72C2F8',
+    medium: '#F3B249',
+    high: '#EA3D65',
+    eventLowBackground: '#CEEEFD',
+    eventLowText: '#3E85F3',
+    eventMediumBackground: '#FCF0D4',
+    eventMediumText: '#F3B249',
+    eventHighBackground: '#FFD2DD',
+    eventHighText: '#EA3D65',
 
     // Background
     mainBackground: '#171820',
@@ -115,9 +141,13 @@ export const darkTheme = themeCreator({
     modalsInputBorder: '#3A3B41',
     feedbackListBackground: '#21222C',
     calendarWeekDayText: '#62636A',
-    scrollbarTrackBackground: '#2D3037',
-    scrollbarThumbBackground: '#171820',
+    scrollbarTrackBackground: '#21222C',
+    scrollbarThumbBackground: '#2D3037',
     calendarPickerBorder: '#659DF5',
+    taskButtonBackground: '#3E85F3',
+    groupButtonsTextSelected: '#FFFFFF',
+    groupButtonsBackground: '#21222C',
+    groupButtonsBackgroundSelected: '#3E85F3',
   },
   shadows,
   animation,

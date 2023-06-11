@@ -35,7 +35,7 @@ export const SideBar = ({
   selectedRoute,
   setSelectedRoute,
 }) => {
-  const { logout } = useLogout()
+  const { logout, isLoading } = useLogout()
 
   const { colors } = useTheme()
   const { t } = useTranslation()
@@ -111,6 +111,7 @@ export const SideBar = ({
           </div>
         </div>
         <Button
+          isLoading={isLoading}
           isDefaultShadow
           title={t('Log out')}
           onClick={logout}

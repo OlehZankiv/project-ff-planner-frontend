@@ -1,12 +1,14 @@
 export const STORAGE_KEYS = {
+  SELECTED_DATE: 'SELECTED_DAY',
   TOKEN: 'TOKEN',
   LOGGER: 'LOGGER',
+  THEME: 'THEME',
 }
 
 export const getStorageItem = (key, defaultValue = '', isString = true) => {
   try {
     return isString
-      ? localStorage.getItem(key)
+      ? localStorage.getItem(key) ?? defaultValue
       : JSON.parse(localStorage.getItem(key)) ?? defaultValue
   } catch (_) {
     return defaultValue

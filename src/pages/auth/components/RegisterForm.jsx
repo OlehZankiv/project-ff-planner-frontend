@@ -3,12 +3,13 @@ import { AuthNavigate } from './AuthNavigate'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
-import { Button, Input } from '../../../components/'
-import { LoginIcon } from '../../../assets/icons'
-import { Text } from '../../../components'
-import { css } from 'styled-components'
+import { Button, Input, OpacityButton, Text } from '../../../components'
+import { CloseIcon, LoginIcon } from '../../../assets/icons'
+import styled, { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
+import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const initialValues = {
   name: '',
@@ -18,24 +19,27 @@ const initialValues = {
 
 export const RegisterForm = () => {
   const { t } = useTranslation()
-  const { register, isLoading } = useRegister()
 
-  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
-  console.log(isLoading)
+  const formik = useRef(null)
 
-  const handleSubmit = (values, { resetForm }) => {
-    register(values)
-    resetForm()
-  }
+  const { register, isLoading } = useRegister(() =>
+    formik.current?.resetForm({ values: initialValues }),
+  )
+  const { colors } = useTheme()
+  const navigate = useNavigate()
 
   return (
     <Formik
+      innerRef={formik}
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={register}
       validationSchema={registerFormSchema}
     >
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
+          <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
+            <CloseIcon color={colors.text} />
+          </CloseIconWrapper>
           <Text
             style={{ marginBottom: '40px' }}
             type='h5'
@@ -79,12 +83,14 @@ export const RegisterForm = () => {
             isError={errors.password && touched.password}
           />
           <Button
-            style={{ marginTop: '8px' }}
+            style={{ marginTop: '15px' }}
+            buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon />}
-            title={t('Sign Up')}
+            rightIcon={<LoginIcon color={colors.white} />}
+            title={t('Sign up')}
             variant='primary'
+            isLoading={isLoading}
           />
           <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
         </AuthFormStyled>
@@ -92,3 +98,9 @@ export const RegisterForm = () => {
     </Formik>
   )
 }
+
+const CloseIconWrapper = styled(OpacityButton)`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+`
