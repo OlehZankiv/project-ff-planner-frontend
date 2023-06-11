@@ -27,7 +27,9 @@ export const AuthContextProvider = ({ children }) => {
   }, [token])
 
   useEffect(() => {
-    logger ? setStorageItem(STORAGE_KEYS.LOGGER, logger) : removeStorageItem(STORAGE_KEYS.LOGGER)
+    logger?.id
+      ? setStorageItem(STORAGE_KEYS.LOGGER, logger)
+      : removeStorageItem(STORAGE_KEYS.LOGGER)
   }, [logger])
 
   return (

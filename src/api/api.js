@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ROUTES } from '../navigation/routes'
 import { BASE_URL } from '../utils/constants'
 import { getStorageItem, removeStorageItem, STORAGE_KEYS } from '../utils/storage'
 
@@ -22,6 +23,11 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       removeStorageItem(STORAGE_KEYS.TOKEN)
       removeStorageItem(STORAGE_KEYS.LOGGER)
+
+      if (
+        ![ROUTES.LOGIN, ROUTES.REGISTER].some((route) => window.location.pathname.includes(route))
+      )
+        return (window.location = ROUTES.LOGIN)
     }
 
     return Promise.reject(error)

@@ -133,22 +133,20 @@ export const Hero = styled.div`
 `
 
 export const LinkBox = styled.div`
-  margin-top: 32px;
+  margin-top: 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
+  gap: 24px;
 
-  ${getBreakpointsStyles({
-    desktop: css`
-      margin-top: 40px;
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: center;
-      align-items: center;
-      gap: 24px;
-    `,
-  })},
+  ${getMobileStyles(css`
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `)},
 `
 
 export const SignupLink = styled(NavLink)`
