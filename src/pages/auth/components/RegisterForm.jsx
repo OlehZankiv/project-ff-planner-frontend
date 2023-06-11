@@ -5,9 +5,10 @@ import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
 import { Button, Input, Text } from '../../../components'
 import { LoginIcon } from '../../../assets/icons'
-import { css } from 'styled-components'
+import { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
+import { useRef } from 'react'
 
 const initialValues = {
   name: '',
@@ -17,20 +18,19 @@ const initialValues = {
 
 export const RegisterForm = () => {
   const { t } = useTranslation()
-  const { register, isLoading } = useRegister()
 
-  // TODO: Vitalii task: show loader instead of button icon. add "loading" prop to button
-  console.log(isLoading)
+  const formik = useRef(null)
 
-  const handleSubmit = (values, { resetForm }) => {
-    register(values)
-    resetForm()
-  }
+  const { register, isLoading } = useRegister(() =>
+    formik.current?.resetForm({ values: initialValues }),
+  )
+  const { colors } = useTheme()
 
   return (
     <Formik
+      innerRef={formik}
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={register}
       validationSchema={registerFormSchema}
     >
       {({ errors, touched }) => (
@@ -78,12 +78,14 @@ export const RegisterForm = () => {
             isError={errors.password && touched.password}
           />
           <Button
-            style={{ marginTop: '8px' }}
+            style={{ marginTop: '15px' }}
+            buttonTextProps={{ lineHeight: 24, fontSize: 18 }}
             type='submit'
             fullWidth
-            rightIcon={<LoginIcon />}
-            title={t('Sign Up')}
+            rightIcon={<LoginIcon color={colors.white} />}
+            title={t('Sign up')}
             variant='primary'
+            isLoading={isLoading}
           />
           <AuthNavigate text={t('Log In')} route={ROUTES.LOGIN} />
         </AuthFormStyled>
