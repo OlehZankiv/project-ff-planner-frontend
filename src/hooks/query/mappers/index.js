@@ -1,3 +1,3 @@
 export { toUserDTO, toUser } from './toUser'
-export { toReviewDTO, toReview, toNewReviewDTO } from './toReview'
+export { toReviewDTO, toReview } from './toReview'
 export { toTask, toTaskDTO } from './toTask'

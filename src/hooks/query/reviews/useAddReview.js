@@ -1,21 +1,18 @@
-import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { addReview } from '../../../api'
 import { queryKeys } from '../queryKeys'
-import { toNewReviewDTO } from '../mappers'
+import { toReviewDTO } from '../mappers'
 
 export const useAddReview = () => {
-  const QueryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
   const { mutate, isLoading } = useMutation(addReview, {
     mutationKey: [queryKeys.addReview],
-
-    onSuccess: () => {
-      QueryClient.invalidateQueries([queryKeys.getReviews])
-    },
+    onSuccess: () => queryClient.invalidateQueries([queryKeys.getReviews]),
   })
 
   return {
-    addReview: (review) => mutate(toNewReviewDTO(review)),
+    addReview: (review) => mutate(toReviewDTO(review)),
     isLoading,
   }
 }

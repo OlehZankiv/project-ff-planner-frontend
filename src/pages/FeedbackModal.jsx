@@ -2,101 +2,97 @@ import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea } from '../components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useReviews, useAddReview, useDeleteReview } from '../hooks/query/'
+import { useAddReview, useDeleteReview, useReviews } from '../hooks/query/'
 import { getMobileStyles } from '../styles/breakpoints'
 import { FeedbackEditModal } from './FeedbackEditModal'
+import { toReview } from '../hooks/query/mappers'
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
 
   const { reviews } = useReviews('owner')
-  const { addReview } = useAddReview()
+  const { addReview, isLoading } = useAddReview()
   const { deleteReview } = useDeleteReview()
 
-  const [ratingValue, setRatingValue] = useState(0)
-  const [reviewText, setReviewText] = useState('')
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
-  const [editReview, setReview] = useState('')
+  const [editedReview, setEditedReview] = useState('')
 
   const feedbackSubmit = (event) => {
     event.preventDefault()
 
-    const review = { rating: ratingValue, comment: reviewText }
+    addReview(toReview({ rating, comment }))
 
-    addReview(review)
-
-    setRatingValue(0)
-    setReviewText('')
+    setRating(0)
+    setComment('')
   }
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
 
-    if (!review) {
-      return alert('review not found')
-    }
-    setReview(review)
-    setFeedbackEditModalVisible(true)
-  }
+    if (!review) return alert('review not found')
 
-  const handleDeleteFeedbackClick = (id) => {
-    deleteReview(id)
+    setEditedReview(review)
+    setFeedbackEditModalVisible(true)
   }
 
   useEffect(() => {
     if (!visible) {
-      setRatingValue(0)
-      setReviewText('')
+      setRating(0)
+      setComment('')
     }
   }, [visible])
 
-  if (isFeedbackEditModalVisible) {
-    return (
+  return (
+    <>
       <FeedbackEditModal
         visible={isFeedbackEditModalVisible}
         setVisible={setFeedbackEditModalVisible}
-        review={editReview}
+        review={editedReview}
       />
-    )
-  }
+      {!isFeedbackEditModalVisible && (
+        <Modal
+          visible={visible}
+          onClose={() => setVisible(false)}
+          onEnterPress={() => setVisible(false)}
+        >
+          <Ratings value={rating} onInputValueChange={setRating} />
+          <Textarea
+            value={comment}
+            style={{ marginTop: 24 }}
+            label={t('Review')}
+            placeholder={t('Enter text')}
+            onChange={(event) => setComment(event.target.value)}
+          />
+          <Button
+            fullWidth
+            style={{ marginTop: 18, borderRadius: 8 }}
+            type='submit'
+            title={t('Save')}
+            isLoading={isLoading}
+            onClick={feedbackSubmit}
+          />
 
-  return (
-    <Modal
-      visible={visible}
-      onClose={() => setVisible(false)}
-      onEnterPress={() => setVisible(false)}
-    >
-      <Ratings value={ratingValue} onInputValueChange={setRatingValue} />
-      <Textarea
-        value={reviewText}
-        style={{ marginTop: 24 }}
-        label={t('Review')}
-        placeholder={t('Enter text')}
-        onChange={(event) => setReviewText(event.target.value)}
-      />
-      <Button
-        fullWidth
-        style={{ marginTop: 18, borderRadius: 8 }}
-        type='submit'
-        title={t('Save')}
-        onClick={feedbackSubmit}
-      />
-
-      <FeedbackWrapper>
-        <FeedbackList>
-          {reviews.map((review) => (
-            <Review
-              {...review}
-              key={review.id}
-              style={{ border: 'none', padding: 0 }}
-              showEdit={true}
-              editOnClick={() => handleEditFeedbackClick(review.id)}
-              deleteOnClick={() => handleDeleteFeedbackClick(review.id)}
-            />
-          ))}
-        </FeedbackList>
-      </FeedbackWrapper>
-    </Modal>
+          {!!reviews.length && (
+            <FeedbackWrapper>
+              <FeedbackList>
+                {reviews.map((review) => (
+                  <Review
+                    {...review}
+                    key={review.id}
+                    style={{ border: 'none', padding: 0 }}
+                    showEdit
+                    editOnClick={() => handleEditFeedbackClick(review.id)}
+                    deleteOnClick={() => deleteReview(review.id)}
+                  />
+                ))}
+              </FeedbackList>
+            </FeedbackWrapper>
+          )}
+        </Modal>
+      )}
+    </>
   )
 }
 
