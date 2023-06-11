@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
@@ -26,7 +26,6 @@ export const MainLayout = () => {
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
   const { width } = useDimensions()
-  const { type } = useParams()
 
   const { logger } = useAuthContext()
 
@@ -35,6 +34,8 @@ export const MainLayout = () => {
 
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
+  const searchParams = new URLSearchParams(location.search)
+  const value = searchParams.get('calendar-type')
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -79,7 +80,7 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                {width >= 1024 && !!type && type === 'day' && (
+                {width >= 1024 && !!value && value === 'day' && (
                   <img src={gooseCalendar} style={{ width: '60px' }} />
                 )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -93,7 +94,7 @@ export const MainLayout = () => {
                   >
                     {routeTitles[selectedRoute]}
                   </Text>
-                  {width >= 1024 && !!type && type === 'day' && (
+                  {width >= 1024 && !!value && value === 'day' && (
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Text
                         type='p'
