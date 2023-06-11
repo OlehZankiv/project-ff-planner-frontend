@@ -63,6 +63,7 @@ export const lightTheme = themeCreator({
     calendarWeekDayText: '#21222C',
     scrollbarTrackBackground: '#ffffff',
     scrollbarThumbBackground: '#E7E5E5',
+    addTaskCancelButtonBackground:'#EFEFEF'
   },
   shadows,
   animation,
@@ -114,6 +115,7 @@ export const darkTheme = themeCreator({
     calendarWeekDayText: '#62636A',
     scrollbarTrackBackground: '#2D3037',
     scrollbarThumbBackground: '#171820',
+    addTaskCancelButtonBackground:'#EFEFEF'
   },
   shadows,
   animation,
