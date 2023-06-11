@@ -8,6 +8,7 @@ import { LoginIcon } from '../../../assets/icons'
 import { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
+import { useRef } from 'react'
 
 const initialValues = {
   name: '',
@@ -17,18 +18,19 @@ const initialValues = {
 
 export const RegisterForm = () => {
   const { t } = useTranslation()
-  const { register, isLoading } = useRegister()
-  const { colors } = useTheme()
 
-  const handleSubmit = (values, { resetForm }) => {
-    register(values)
-    resetForm()
-  }
+  const formik = useRef(null)
+
+  const { register, isLoading } = useRegister(() =>
+    formik.current?.resetForm({ values: initialValues }),
+  )
+  const { colors } = useTheme()
 
   return (
     <Formik
+      innerRef={formik}
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={register}
       validationSchema={registerFormSchema}
     >
       {({ errors, touched }) => (
@@ -81,7 +83,7 @@ export const RegisterForm = () => {
             type='submit'
             fullWidth
             rightIcon={<LoginIcon color={colors.white} />}
-            title={isLoading ? t('Loading') : t('Sign up')}
+            title={t('Sign up')}
             variant='primary'
             isLoading={isLoading}
           />

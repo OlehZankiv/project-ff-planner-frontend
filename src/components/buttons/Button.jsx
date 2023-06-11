@@ -18,7 +18,8 @@ export const Button = ({
   isLoading = false,
 }) => {
   const { t } = useTranslation()
-    return (
+
+  return (
     <Wrapper
       style={style}
       onClick={onClick}

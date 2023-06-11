@@ -7,13 +7,16 @@ import {
   handleRequestSuccess,
 } from '../../../components/helpers/handleReaquestNotification'
 
-export const useRegister = () => {
+export const useRegister = (onSuccess) => {
   const { t } = useTranslation()
   const { mutate, isLoading, isFetching } = useMutation({
     mutationKey: [queryKeys.register],
     mutationFn: register,
     onError: handleRequestError,
-    onSuccess: () => handleRequestSuccess(t('We send a verify letter to your email!')),
+    onSuccess: () => {
+      handleRequestSuccess(t('We send a verify letter to your email!'))
+      onSuccess?.()
+    },
   })
 
   return {

@@ -19,17 +19,8 @@ export const LogInForm = () => {
   const { login, isLoading } = useLogin()
   const { colors } = useTheme()
 
-  const handleSubmit = (values, { resetForm }) => {
-    login(values)
-    resetForm()
-  }
-
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={loginFormSchema}
-    >
+    <Formik initialValues={initialValues} onSubmit={login} validationSchema={loginFormSchema}>
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
           <Text

@@ -62,11 +62,11 @@ export const Input = ({
       <InputWrapper>
         <InputStyled
           readOnly={readonly}
-          value={value}
           style={{ borderColor: inputBorderColor }}
           type={type}
           name={name}
           placeholder={placeholder}
+          {...(value !== undefined && { value })}
         />
         {inputIcon && <InputIconWrapper>{inputIcon}</InputIconWrapper>}
         {!!hintMessage && (

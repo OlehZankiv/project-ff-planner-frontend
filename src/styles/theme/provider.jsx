@@ -23,20 +23,25 @@ export const AppThemeProvider = ({ children }) => {
   const { updateTheme } = useUpdateUser()
 
   useEffect(() => {
-    if (!logger || isLoading) return
+    if (!logger || isLoading) {
+      setTheme('light')
+      return
+    }
     setStorageItem(STORAGE_KEYS.THEME, logger.theme)
     setThemeType(logger.theme)
   }, [logger?.theme])
+
+  const setTheme = (type) => {
+    setStorageItem(STORAGE_KEYS.THEME, type)
+    updateTheme(type)
+    setThemeType(type)
+  }
 
   return (
     <AppThemeContext.Provider
       value={{
         themeType,
-        setThemeType: (type) => {
-          setStorageItem(STORAGE_KEYS.THEME, type)
-          updateTheme(type)
-          setThemeType(type)
-        },
+        setThemeType: setTheme,
       }}
     >
       <ThemeProvider theme={themes[themeType]}>
