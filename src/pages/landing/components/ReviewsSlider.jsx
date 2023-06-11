@@ -24,7 +24,7 @@ export const ReviewsSlider = () => {
       block: 'start',
       inline: 'start',
     })
-    document.body.scrollIntoView()
+    if (!behavior) document.body.scrollIntoView()
   }
   useEffect(updateListPosition, [width])
 

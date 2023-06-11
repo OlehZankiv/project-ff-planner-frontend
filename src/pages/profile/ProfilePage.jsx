@@ -55,64 +55,66 @@ const ProfilePage = () => {
         onSubmit={onUserUpdate}
         validationSchema={profileUpdateValidationFormSchema}
       >
-        {({ errors, touched }) => (
-          <ProfileForm autoComplete='off'>
-            <FormFields>
-              <Input
-                type='name'
-                name='name'
-                title={t('User Name')}
-                placeholder={t('Enter your user name')}
-                errorMessage={t(errors.name)}
-                successMessage={t('This is a CORRECT name')}
-                isError={errors.name && touched.name}
-              />
-              <Input
-                type='name'
-                name='phone'
-                title={t('Phone')}
-                placeholder={t('Enter your phone')}
-                errorMessage={t(errors.phone)}
-                successMessage={t('This is a CORRECT phone')}
-                isError={errors.phone && touched.phone}
-              />
-              <DatePicker
-                name='birthday'
-                title={t('Birthday')}
-                placeholder={t('Enter your birthday')}
-                errorMessage={t(errors.birthday)}
-                successMessage={t('This is a CORRECT birthday')}
-                isError={errors.birthday && touched.birthday}
-              />
-              <Input
-                name='skype'
-                title={t('Skype')}
-                placeholder={t('Enter your skype')}
-                errorMessage={t(errors.password)}
-                successMessage={t('This is a CORRECT skype')}
-                isError={errors.skype && touched.skype}
-              />
-              <Input
-                type='email'
-                name='email'
-                title={t('Email')}
-                placeholder={t('Enter your email')}
-                errorMessage={t(errors.email)}
-                successMessage={t('This is a CORRECT email')}
-                isError={errors.email && touched.email}
-              />
-            </FormFields>
+        {({ errors, touched }) => {
+          return (
+            <ProfileForm autoComplete='off'>
+              <FormFields>
+                <Input
+                  type='name'
+                  name='name'
+                  title={t('User Name')}
+                  placeholder={t('Enter your user name')}
+                  errorMessage={t(errors.name)}
+                  successMessage={t('This is a CORRECT name')}
+                  isError={errors.name && touched.name}
+                />
+                <Input
+                  type='phone'
+                  name='phone'
+                  title={t('Phone')}
+                  placeholder={t('Enter your phone')}
+                  errorMessage={t(errors.phone)}
+                  successMessage={t('This is a CORRECT phone')}
+                  isError={errors.phone && touched.phone}
+                />
+                <DatePicker
+                  name='birthday'
+                  title={t('Birthday')}
+                  placeholder={t('Enter your birthday')}
+                  errorMessage={t(errors.birthday)}
+                  successMessage={t('This is a CORRECT birthday')}
+                  isError={errors.birthday && touched.birthday}
+                />
+                <Input
+                  name='skype'
+                  title={t('Skype')}
+                  placeholder={t('Enter your skype')}
+                  errorMessage={t(errors.password)}
+                  successMessage={t('This is a CORRECT skype')}
+                  isError={errors.skype && touched.skype}
+                />
+                <Input
+                  type='email'
+                  name='email'
+                  title={t('Email')}
+                  placeholder={t('Enter your email')}
+                  errorMessage={t(errors.email)}
+                  successMessage={t('This is a CORRECT email')}
+                  isError={errors.email && touched.email}
+                />
+              </FormFields>
 
-            <Button
-              buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
-              type='submit'
-              fullWidth
-              title={t('Save changes')}
-              variant='primary'
-              isLoading={isLoading}
-            />
-          </ProfileForm>
-        )}
+              <Button
+                buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
+                type='submit'
+                fullWidth
+                title={t('Save changes')}
+                variant='primary'
+                isLoading={isLoading}
+              />
+            </ProfileForm>
+          )
+        }}
       </Formik>
     </Wrapper>
   )
