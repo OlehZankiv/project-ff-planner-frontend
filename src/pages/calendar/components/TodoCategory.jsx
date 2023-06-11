@@ -64,13 +64,19 @@ const BottomButton = styled.div`
 `
 
 const TodosWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 18px;
   margin-top: 34px;
   padding-right: 12px;
   max-height: 40vh;
   overflow-y: auto;
+
+  > div {
+    margin-top: 18px;
+  }
+
+  > div:first-child {
+    margin-top: 0;
+  }
+
   ${getMobileStyles(css`
     max-height: 50vh;
   `)}

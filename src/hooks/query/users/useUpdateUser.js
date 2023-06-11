@@ -5,8 +5,7 @@ import { useAuthContext } from '../../../contexts/auth'
 
 export const useUpdateUser = () => {
   const { logger } = useAuthContext()
-  const id = logger.id || ''
-
+  const id = logger?.id || ''
   const { mutate, isLoading } = useMutation((data) => updateUser(id, data), {
     mutationKey: [queryKeys.updateUser, id],
     enabled: !!id,
