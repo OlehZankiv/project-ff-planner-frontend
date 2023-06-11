@@ -19,7 +19,7 @@ export const ReviewsSlider = () => {
   const { reviews } = useReviews('best')
 
   const updateListPosition = (behavior) =>
-    itemsRef.current[currentIndex.current - 1]?.scrollIntoView({
+    itemsRef.current[currentIndex.current]?.scrollIntoView({
       behavior,
       block: 'start',
       inline: 'start',
@@ -34,7 +34,6 @@ export const ReviewsSlider = () => {
   const next = () => {
     const prev = currentIndex.current
     currentIndex.current = prev === reviews.length - 1 ? 0 : prev + 1
-
     updateListPosition('smooth')
   }
 
