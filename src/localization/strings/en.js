@@ -40,6 +40,17 @@ export const en = {
   "name is a required field": "name is a required field",
   "password is a required field": "password is a required field",
   "password must be at least 4 characters": "password must be at least 4 characters",
+  "Save Changes": "Save Changes",
+
+  "This is Correct Skype": "This is Correct Skype",
+  "This is Correct phone": "This is Correct phone",
+  "This is Correct email": "This is Correct email",
+  "This is Correct name": "This is Correct name",
+  "User name": "User name",
+  "Birthday": "Birthday",
+  "Phone": "Phone",
+  "Skype": "Skype",
+  "User": "User",
 
   // Week days
   "Monday": "Monday",

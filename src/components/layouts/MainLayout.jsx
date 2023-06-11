@@ -131,6 +131,9 @@ const MainWrap = styled.div`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.mainBackground};
   display: flex;
+  ${getDesktopStyles(css`
+    max-height: 100vh;
+  `)}
 `
 
 const ContentWrap = styled.div`

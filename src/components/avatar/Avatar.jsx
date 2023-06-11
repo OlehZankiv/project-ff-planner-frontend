@@ -36,7 +36,6 @@ const Avatar = ({ type, plus, styles = {}, onPlusHandler }) => {
 
   const userName = logger.name
 
-  console.log(currentSize.desktop, type)
   return (
     <ImageWrapper
       data-component='avatar'
