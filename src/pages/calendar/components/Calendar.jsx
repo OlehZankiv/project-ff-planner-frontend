@@ -3,10 +3,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
 import styled, { css, useTheme } from 'styled-components'
-import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 import dayjs from 'dayjs'
-import { useTasks } from '../../../hooks/query'
 import { useMemo } from 'react'
+import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
+import { useTasks } from '../../../hooks/query'
 
 export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => {
   const theme = useTheme()

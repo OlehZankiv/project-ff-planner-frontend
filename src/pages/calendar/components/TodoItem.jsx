@@ -22,7 +22,7 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority, assignedUser, _id }) => {
+export const TodoItem = ({ title, priority, assignedUser, id }) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const { updateCategory } = useUpdateTask()
@@ -51,24 +51,24 @@ export const TodoItem = ({ title, priority, assignedUser, _id }) => {
               {
                 title: t('In progress'),
                 onClick: () => {
-                  updateCategory(_id, 'in-progress')
+                  updateCategory('in-progress', id)
                 },
               },
               {
                 title: t('Done'),
-                onClick: () => {
-                  updateCategory(_id, 'done')
-                },
+                onClick: () => updateCategory('done', id),
               },
             ]}
-            renderOption={({ title, onClick }) => (
-              <OptionWrapper onClick={onClick}>
-                <Text type='h6' fontSize={14}>
-                  {title}
-                </Text>
-                <ArrowCircleIcon color={colors.text} />
-              </OptionWrapper>
-            )}
+            renderOption={({ title, onClick }) => {
+              return (
+                <OptionWrapper onClick={onClick}>
+                  <Text type='h6' fontSize={14}>
+                    {title}
+                  </Text>
+                  <ArrowCircleIcon color={colors.text} />
+                </OptionWrapper>
+              )
+            }}
             onShowClassName='show'
           >
             <ArrowCircleIcon color={colors.text} />
@@ -76,7 +76,7 @@ export const TodoItem = ({ title, priority, assignedUser, _id }) => {
           <OpacityButton>
             <PencilIcon color={colors.text} />
           </OpacityButton>
-          <OpacityButton onClick={() => deleteTask(_id)}>
+          <OpacityButton onClick={() => deleteTask(id)}>
             <TrashIcon color={colors.text} />
           </OpacityButton>
         </Actions>

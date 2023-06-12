@@ -22,7 +22,7 @@ export const TodoCategory = ({ type, todos }) => {
       </Text>
       <TodosWrapper>
         {todos.map((todo) => (
-          <TodoItem {...todo} key={todo._id} />
+          <TodoItem {...todo} key={todo.id} />
         ))}
       </TodosWrapper>
       <PlusCircleIconButton onClick={() => {}}>

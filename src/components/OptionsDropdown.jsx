@@ -26,7 +26,6 @@ export const OptionsDropdown = ({ children, renderOption, onShowClassName, optio
   return (
     <Wrapper>
       <OpacityButton
-        ref={wrapper}
         className={showOptions ? onShowClassName : 'none'}
         onClick={(e) => {
           setMousePosition({ x: e.clientX, y: e.clientY })
@@ -37,22 +36,22 @@ export const OptionsDropdown = ({ children, renderOption, onShowClassName, optio
       </OpacityButton>
       {showOptions &&
         createPortal(
-          <OptionsContainer x={mousePosition?.x} y={mousePosition?.y}>
+          <OptionsContainer x={mousePosition?.x} y={mousePosition?.y} ref={wrapper}>
             {options.map((option, i) => (
               <Fragment key={i}>
                 {renderOption ? (
                   renderOption({
                     ...option,
                     onClick: () => {
-                      setShowOptions(false)
                       option.onClick()
+                      setShowOptions(false)
                     },
                   })
                 ) : (
                   <OpacityButton
                     onClick={() => {
-                      setShowOptions(false)
                       option.onClick()
+                      setShowOptions(false)
                     }}
                   >
                     {option.title}
