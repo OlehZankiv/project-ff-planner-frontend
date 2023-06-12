@@ -31,5 +31,49 @@ export const GlobalStyle = createGlobalStyle`
       background-color: ${colors.background};
       color: ${colors.text};
     }
+
+    // MUI time picker
+
+    .MuiPaper-root.MuiPaper-elevation {
+      border-radius: 10px;
+      background-color: ${colors.modalBackground};
+
+      .MuiTypography-root {
+        color: ${colors.text};
+      }
+
+      .MuiClock-squareMask {
+        background-color: ${colors.primary};
+      }
+
+      .MuiClockNumber-root {
+        color: ${colors.white};
+
+        &.Mui-selected {
+          color: ${colors.primary};
+        }
+
+        &.Mui-disabled {
+          opacity: 0.5;
+          color: ${colors.white};
+        }
+      }
+
+      .MuiClockPointer-root,
+      .MuiClock-pin,
+      .MuiClockPointer-thumb {
+        opacity: 0.85;
+        border-color: ${colors.white};
+        background-color: ${colors.white};
+      }
+
+      .MuiTimeClock-arrowSwitcher button {
+        color: ${colors.text};
+      }
+
+      .MuiDialogActions-root button {
+        color: ${colors.primary};
+      }
+    }
   `}
 `

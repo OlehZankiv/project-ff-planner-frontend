@@ -18,13 +18,14 @@ export const ReviewsSlider = () => {
 
   const { reviews } = useReviews('best')
 
-  const updateListPosition = (behavior) =>
+  const updateListPosition = (behavior) => {
     itemsRef.current[currentIndex.current]?.scrollIntoView({
       behavior,
       block: 'start',
       inline: 'start',
     })
-
+    if (!behavior) document.body.scrollIntoView()
+  }
   useEffect(updateListPosition, [width])
 
   useEffect(() => {
@@ -49,7 +50,12 @@ export const ReviewsSlider = () => {
       <Text type='h2' color='primary'>
         {t('Reviews')}
       </Text>
-      <ReviewList ref={container}>
+      <ReviewList
+        ref={container}
+        onScroll={(e) => {
+          e.preventDefault()
+        }}
+      >
         {reviews.map((review, index) => (
           <div key={review.id} ref={(ref) => (itemsRef.current[index] = ref)}>
             <Review style={{ height: '100%' }} {...review} />

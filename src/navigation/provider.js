@@ -4,10 +4,11 @@ import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 import { useAuthContext } from '../contexts/auth'
 
+const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
+const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
-const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
 const NotFoundPage = lazy(() => import('../pages/notFoundPage/NotFoundPage'))
 
 export const AppRouterProvider = () => (
@@ -23,7 +24,7 @@ export const AppRouterProvider = () => (
             path={ROUTES.PROFILE}
             element={
               <ProtectedRoute>
-                <div>PROFILE</div>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />
@@ -37,7 +38,6 @@ export const AppRouterProvider = () => (
           />
         </Route>
 
-        {/* TODO: Add 404 Page */}
         <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
       </Routes>
     </Suspense>

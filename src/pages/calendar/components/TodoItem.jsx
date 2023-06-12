@@ -1,7 +1,8 @@
 import styled, { css, useTheme } from 'styled-components'
-import { OpacityButton, OptionsDropdown, Text } from '../../../components'
+import { Avatar, OpacityButton, OptionsDropdown, TaskModal, Text } from '../../../components'
 import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -21,54 +22,65 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority }) => {
+export const TodoItem = ({ title, priority, assignedUser, ...rest }) => {
+  const [isEditVisible, setEditVisible] = useState(false)
+
   const { t } = useTranslation()
   const { colors } = useTheme()
 
   return (
-    <Wrapper>
-      <Text
-        type='p'
-        style={{
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-        }}
-      >
-        {title}
-      </Text>
-      <BottomSide>
-        <AvatarWrapper>
-          <div style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: 'red' }} />
-          <TodoItemStatus priority={priority} />
-        </AvatarWrapper>
-        <Actions>
-          <OptionsDropdown
-            options={[
-              { title: t('In progress'), onClick: () => {} },
-              { title: t('Done'), onClick: () => {} },
-            ]}
-            renderOption={({ title, onClick }) => (
-              <OptionWrapper onClick={onClick}>
-                <Text type='h6' fontSize={14}>
-                  {title}
-                </Text>
-                <ArrowCircleIcon color={colors.text} />
-              </OptionWrapper>
-            )}
-            onShowClassName='show'
-          >
-            <ArrowCircleIcon color={colors.text} />
-          </OptionsDropdown>
-          <OpacityButton>
-            <PencilIcon color={colors.text} />
-          </OpacityButton>
-          <OpacityButton>
-            <TrashIcon color={colors.text} />
-          </OpacityButton>
-        </Actions>
-      </BottomSide>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Text
+          type='p'
+          style={{
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+          }}
+        >
+          {title}
+        </Text>
+        <BottomSide>
+          <AvatarWrapper>
+            <Avatar size={32} image={assignedUser.avatar} name={assignedUser.name} />
+            <TodoItemStatus priority={priority} />
+          </AvatarWrapper>
+          <Actions>
+            <OptionsDropdown
+              options={[
+                { title: t('In progress'), onClick: () => {} },
+                { title: t('Done'), onClick: () => {} },
+              ]}
+              renderOption={({ title, onClick }) => (
+                <OptionWrapper onClick={onClick}>
+                  <Text type='h6' fontSize={14}>
+                    {title}
+                  </Text>
+                  <ArrowCircleIcon color={colors.text} />
+                </OptionWrapper>
+              )}
+              onShowClassName='show'
+            >
+              <ArrowCircleIcon color={colors.text} />
+            </OptionsDropdown>
+            <OpacityButton onClick={() => setEditVisible(true)}>
+              <PencilIcon color={colors.text} />
+            </OpacityButton>
+            <OpacityButton>
+              <TrashIcon color={colors.text} />
+            </OpacityButton>
+          </Actions>
+        </BottomSide>
+      </Wrapper>
+      <TaskModal
+        selectedDate={rest.startAt}
+        category={rest.category}
+        updateValues={{ ...rest, title, priority }}
+        visible={isEditVisible}
+        setVisible={setEditVisible}
+      />
+    </>
   )
 }
 

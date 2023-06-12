@@ -20,9 +20,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       removeStorageItem(STORAGE_KEYS.TOKEN)
       removeStorageItem(STORAGE_KEYS.LOGGER)
+
+      if (window.location.pathname === ROUTES.LANDING) return
 
       if (
         ![ROUTES.LOGIN, ROUTES.REGISTER].some((route) => window.location.pathname.includes(route))

@@ -6,19 +6,16 @@ import { useTranslation } from 'react-i18next'
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
 import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
-import {
-  getBreakpointsStyles,
-  getDesktopStyles,
-  useBreakpointValue,
-} from '../../styles/breakpoints'
+import { getDesktopStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
-import { FeedbackModal } from '../../pages/FeedbackModal'
+import { FeedbackModal } from '../modals/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
 import { gooseCalendar } from '../../assets/images'
 import { useDimensions } from '../../hooks'
+import { Avatar } from '../Avatar'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
@@ -51,13 +48,6 @@ export const MainLayout = () => {
 
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
-  const firstLettersMaker = (str) =>
-    str
-      .split(' ')
-      .map((word) => word[0].toUpperCase())
-      .join('')
-      .slice(0, 2)
-
   const routeTitles = {
     [ROUTES.PROFILE]: t('User Profile'),
     [ROUTES.CALENDAR]: t('Calendar'),
@@ -83,7 +73,9 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                {showTitleGooseLogo && <img src={gooseCalendar} style={{ width: '60px' }} />}
+                {showTitleGooseLogo && (
+                  <img src={gooseCalendar} style={{ width: '60px' }} alt='Goose calendar logo' />
+                )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Text
                     type='h1'
@@ -147,17 +139,11 @@ export const MainLayout = () => {
                   >
                     {userName}
                   </Text>
-                  <OpacityButton>
-                    <AvatarWrap onClick={() => setSelectedRoute(ROUTES.PROFILE)}>
-                      <Text
-                        type='p'
-                        color={colors.userNameText}
-                        fontWeight={700}
-                        fontSize={nameFontSize}
-                      >
-                        {firstLettersMaker(userName)}
-                      </Text>
-                    </AvatarWrap>
+                  <OpacityButton
+                    style={{ marginLeft: 8 }}
+                    onClick={() => setSelectedRoute(ROUTES.PROFILE)}
+                  >
+                    <Avatar size={44} name={userName} image={logger?.avatarURL} />
                   </OpacityButton>
                 </InfoWrap>
               </TabWrap>
@@ -247,27 +233,6 @@ const BurgerWrap = styled.div`
   ${getDesktopStyles(css`
     display: none;
   `)}
-`
-
-const AvatarWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1.8px solid ${({ theme }) => theme.colors.primary};
-  border-radius: 50%;
-
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 44px;
-      height: 44px;
-    `,
-    desktop: css`
-      width: 44px;
-      height: 44px;
-    `,
-  })}
 `
 
 const DesktopTitleWrap = styled.div`

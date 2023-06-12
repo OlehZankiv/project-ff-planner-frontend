@@ -1,9 +1,10 @@
 import styled, { css, useTheme } from 'styled-components'
-import { Field } from 'formik'
+import { Field, useField } from 'formik'
 import { Text } from '../Text'
 import { useEffect, useState } from 'react'
 import { ErrorIcon, SuccessIcon } from '../../assets/icons'
 import { getMobileStyles } from '../../styles/breakpoints'
+import PhoneInput from 'react-phone-number-input'
 
 export const Input = ({
   readonly,
@@ -17,6 +18,7 @@ export const Input = ({
   rightIcon,
   isError,
   style,
+  resetState,
 }) => {
   const { colors } = useTheme()
 
@@ -45,6 +47,12 @@ export const Input = ({
       <SuccessIcon color={colors[inputColor]} />,
     )
 
+  useEffect(() => {
+    if (resetState) setWasError(false)
+  }, [resetState])
+
+  const [{ onBlur: onFormBlur }, { value: formValue }, { setValue: setFormValue }] = useField(name)
+
   return (
     <Wrapper style={style}>
       {!!title && (
@@ -60,14 +68,28 @@ export const Input = ({
       )}
 
       <InputWrapper>
-        <InputStyled
-          readOnly={readonly}
-          style={{ borderColor: inputBorderColor }}
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          {...(value !== undefined && { value })}
-        />
+        {type === 'phone' ? (
+          <PhoneInput
+            defaultCountry='UA'
+            placeholder={placeholder}
+            countrySelectComponent={() => null}
+            value={formValue}
+            onChange={setFormValue}
+            id={name}
+            onBlur={onFormBlur}
+            numberInputProps={{ style: { borderColor: inputBorderColor } }}
+            inputComponent={SimpleInput}
+          />
+        ) : (
+          <InputStyled
+            readOnly={readonly}
+            style={{ borderColor: inputBorderColor }}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            {...(value !== undefined && { value })}
+          />
+        )}
         {inputIcon && <InputIconWrapper>{inputIcon}</InputIconWrapper>}
         {!!hintMessage && (
           <HintMessageWrapper>
@@ -106,7 +128,7 @@ const InputIconWrapper = styled.div`
   transform: translateY(-50%);
 `
 
-export const InputStyled = styled(Field)`
+const inputStyles = css`
   ${({ theme: { colors } }) => css`
     width: 100%;
     padding: 18px;
@@ -135,4 +157,12 @@ export const InputStyled = styled(Field)`
       color: ${colors.placeholderColor};
     }
   `}
+`
+
+export const InputStyled = styled(Field)`
+  ${inputStyles}
+`
+
+export const SimpleInput = styled.input`
+  ${inputStyles}
 `
