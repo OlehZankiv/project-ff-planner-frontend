@@ -7,7 +7,6 @@ import { useCalendarPageLogic } from './hooks/useCalendarPageLogic'
 
 const CalendarPage = () => {
   const { selectedDate, setSelectedDate, calendarType, setCalendarType } = useCalendarPageLogic()
-  console.log(selectedDate, calendarType)
 
   return (
     <Wrapper>
