@@ -4,7 +4,7 @@ import { queryKeys } from '../queryKeys'
 import { toTaskDTO } from '../mappers'
 import { handleRequestError } from '../../../utils/notifications'
 
-export const useUpdateTask = (onSuccess) => {
+export const useUpdateTask = (id, onSuccess) => {
   const queryClient = useQueryClient()
 
   const { mutate, isLoading } = useMutation(updateTask, {
@@ -17,8 +17,8 @@ export const useUpdateTask = (onSuccess) => {
   })
 
   return {
-    updateTask: (task, id) => mutate(toTaskDTO({ ...task, id })),
-    updateCategory: (category, _id) => mutate({ category, _id }),
+    updateTask: (task) => mutate(toTaskDTO({ ...task, id })),
+    updateCategory: (category) => mutate({ category, _id: id }),
     isLoading,
   }
 }

@@ -3,7 +3,7 @@ import { Avatar, OpacityButton, OptionsDropdown, TaskModal, Text } from '../../.
 import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
-import { useUpdateTask, useDeleteTask } from '../../../hooks/query'
+import { useDeleteTask, useUpdateTask } from '../../../hooks/query'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -25,7 +25,7 @@ const TodoItemStatus = ({ priority }) => {
 
 export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
   const [isEditVisible, setEditVisible] = useState(false)
-  const { updateCategory } = useUpdateTask()
+  const { updateCategory } = useUpdateTask(id)
   const { deleteTask } = useDeleteTask()
   const { t } = useTranslation()
   const { colors } = useTheme()
@@ -52,14 +52,21 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
             <OptionsDropdown
               options={[
                 {
-                  title: t('In progress'),
-                  onClick: () => updateCategory('in-progress', id),
+                  type: 'to-do',
+                  title: t('To do'),
+                  onClick: () => updateCategory('to-do'),
                 },
                 {
-                  title: t('Done'),
-                  onClick: () => updateCategory('done', id),
+                  type: 'in-progress',
+                  title: t('In progress'),
+                  onClick: () => updateCategory('in-progress'),
                 },
-              ]}
+                {
+                  type: 'done',
+                  title: t('Done'),
+                  onClick: () => updateCategory('done'),
+                },
+              ].filter((category) => category.type !== rest.category)}
               renderOption={({ title, onClick }) => (
                 <OptionWrapper onClick={onClick}>
                   <Text type='h6' fontSize={14}>
@@ -84,7 +91,7 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
       <TaskModal
         selectedDate={rest.startAt}
         category={rest.category}
-        updateValues={{ ...rest, title, priority }}
+        updateValues={{ ...rest, title, id, priority }}
         visible={isEditVisible}
         setVisible={setEditVisible}
       />

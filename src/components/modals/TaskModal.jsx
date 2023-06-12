@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Button, Input, Modal, TimePicker } from '../index'
 import styled, { useTheme } from 'styled-components'
 import { PencilIcon, PlusIcon } from '../../assets/icons'
@@ -30,7 +30,7 @@ export const TaskModal = ({ selectedDate, category, updateValues, visible, setVi
   }
 
   const { createTask, isLoading: isCreateTaskLoading } = useCreateTask(onClose)
-  const { updateTask, isLoading: isUpdateTaskLoading } = useUpdateTask(onClose)
+  const { updateTask, isLoading: isUpdateTaskLoading } = useUpdateTask(updateValues?.id, onClose)
 
   const isLoading = isCreateTaskLoading || isUpdateTaskLoading
 
@@ -43,6 +43,11 @@ export const TaskModal = ({ selectedDate, category, updateValues, visible, setVi
     endAt: dayjs(selectedDate).add(1, 'hour').toDate(),
     ...updateValues,
   }
+
+  useEffect(
+    () => formik.current?.resetForm({ values: initialValues }),
+    [JSON.stringify(initialValues)],
+  )
 
   return (
     <Modal visible={visible} onClose={onClose}>

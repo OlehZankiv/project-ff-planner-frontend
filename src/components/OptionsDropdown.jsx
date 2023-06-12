@@ -28,7 +28,12 @@ export const OptionsDropdown = ({ children, renderOption, onShowClassName, optio
       <OpacityButton
         className={showOptions ? onShowClassName : 'none'}
         onClick={(e) => {
-          setMousePosition({ x: e.clientX, y: e.clientY })
+          let x = e.clientX
+          let y = e.clientY
+
+          if (window.innerWidth - x < 150) x -= window.innerWidth - x
+
+          setMousePosition({ x, y })
           setShowOptions(true)
         }}
       >
