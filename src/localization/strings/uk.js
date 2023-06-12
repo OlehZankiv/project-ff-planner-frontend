@@ -22,7 +22,7 @@ export const uk = {
   "Enter your skype": "Може ше Skype?",
   "Enter your user name": "Впиши своє назвисько",
   "End": "Закінчуєсі",
-  "Feedback": "Впиши свої прокльони",
+  "Feedback": "Прокльони",
   "Go Back": "Повирнути що було",
   "GooseTrack is an all-in-one productivity tool that helps you stay on top of your tasks, events, and deadlines. Say goodbye to scattered to-do lists and hello to streamlined productivity with GooseTrack.": "GooseTrack - це все в одному інструменті продуктивності, який допомагає вам керувати вашими завданнями, подіями та строками. Попрощайтеся з розкиданими списками справ і привітайте з організованою продуктивністю з GooseTrack.",
   "GooseTrack offers easy access to your account settings, calendar, and filters. The My Account section allows you to manage your profile information and preferences, while the calendar provides a quick and convenient way to view your upcoming events and tasks.": "GooseTrack надає легкий доступ до налаштувань облікового запису, календаря та фільтрів. Розділ Мій обліковий запис дозволяє вам керувати інформацією про профіль та вподобаннями, а календар надає швидкий та зручний спосіб перегляду майбутніх подій та завдань.",
