@@ -13,7 +13,7 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
 
   const { height, width } = useDimensions()
 
-  const { tasks } = useTasks('byMonth', selectedDate.getTime())
+  const { tasks } = useTasks('month', selectedDate.getTime())
 
   const taskColors = {
     low: { text: theme.colors.eventLowText, background: theme.colors.eventLowBackground },

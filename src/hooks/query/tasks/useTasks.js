@@ -4,10 +4,10 @@ import { getTasks } from '../../../api/'
 import { toTask } from '../mappers'
 import { handleRequestError } from '../../../utils/notifications'
 
-export const useTasks = (filterBy = 'byMonth', date) => {
+export const useTasks = (filter = 'month', date) => {
   const { isLoading, data: tasks = [] } = useQuery(
-    [queryKeys.getTasks, filterBy, date],
-    () => getTasks({ filterBy, date }),
+    [queryKeys.getTasks, filter, date],
+    () => getTasks({ filter, date }),
     {
       select: (res) => res.data.map(toTask),
       onError: handleRequestError,
