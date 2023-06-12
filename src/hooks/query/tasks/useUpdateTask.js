@@ -7,7 +7,7 @@ import { handleRequestError } from '../../../utils/notifications'
 export const useUpdateTask = (onSuccess) => {
   const queryClient = useQueryClient()
 
-  const { mutate, isLoading } = useMutation((data) => updateTask(data.task, data.id), {
+  const { mutate, isLoading } = useMutation(updateTask, {
     mutationKey: [queryKeys.updateTask],
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.getTasks])
@@ -16,18 +16,9 @@ export const useUpdateTask = (onSuccess) => {
     onError: handleRequestError,
   })
 
-  const updateTaskWithDTO = (task) => {
-    const taskDTO = toTaskDTO(task)
-    mutate({ task: taskDTO, id: task.id })
-  }
-
-  const updateCategory = (category, id) => {
-    mutate({ task: { category }, id })
-  }
-
   return {
-    updateTask: updateTaskWithDTO,
-    updateCategory,
+    updateTask: (task, id) => mutate(toTaskDTO({ ...task, id })),
+    updateCategory: (category, id) => mutate({ category, id }),
     isLoading,
   }
 }
