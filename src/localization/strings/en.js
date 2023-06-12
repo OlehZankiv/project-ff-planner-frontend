@@ -47,6 +47,7 @@ export const en = {
   "Sidebar": "Sidebar",
   "Sign Up": "Sign Up",
   "Skype": "Skype",
+  "The user was verified": "The user was verified",
   "This is a CORRECT birthday": "This is a CORRECT birthday",
   "This is a CORRECT email": "This is a CORRECT email",
   "This is a CORRECT name": "This is a CORRECT name",

@@ -5,3 +5,5 @@ export const login = (params) => api.post('users/login', params)
 export const register = (params) => api.post('users/register', params)
 
 export const logout = () => api.post('users/logout')
+
+export const verify = (token) => api.get('users/verify/' + token)
