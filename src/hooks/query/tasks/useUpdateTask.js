@@ -18,7 +18,7 @@ export const useUpdateTask = (onSuccess) => {
 
   return {
     updateTask: (task, id) => mutate(toTaskDTO({ ...task, id })),
-    updateCategory: (category, id) => mutate({ category, _id: id }),
+    updateCategory: (category, _id) => mutate({ category, _id }),
     isLoading,
   }
 }
