@@ -48,15 +48,21 @@ export const GlobalStyle = createGlobalStyle`
 
       .MuiClockNumber-root {
         color: ${colors.white};
-      }
 
-      .MuiClockNumber-root.Mui-selected {
-        color: ${colors.primary};
+        &.Mui-selected {
+          color: ${colors.primary};
+        }
+
+        &.Mui-disabled {
+          opacity: 0.5;
+          color: ${colors.white};
+        }
       }
 
       .MuiClockPointer-root,
       .MuiClock-pin,
       .MuiClockPointer-thumb {
+        opacity: 0.85;
         border-color: ${colors.white};
         background-color: ${colors.white};
       }
