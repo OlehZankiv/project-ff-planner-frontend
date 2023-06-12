@@ -38,7 +38,7 @@ export const AppRouterProvider = () => (
           />
         </Route>
 
-        <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   </BrowserRouter>

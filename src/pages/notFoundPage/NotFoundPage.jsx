@@ -6,16 +6,16 @@ import { Button } from '../../components'
 import { ROUTES } from '../../navigation/routes'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   return (
     <Wrapper>
       <TextWrapper>
-      <ErrorText>404</ErrorText>
-          <InfoText>{t('Oh! The page you were looking for was probably stolen by geese')}</InfoText>
+        <ErrorText>404</ErrorText>
+        <InfoText>{t('Oh! The page you were looking for was probably stolen by geese')}</InfoText>
         <ActionText>{t('Go back where you came from')}</ActionText>
-        </TextWrapper>
+      </TextWrapper>
       <Button
         style={{ marginTop: '20px' }}
         type='submit'
@@ -31,8 +31,7 @@ export const NotFoundPage = () => {
 
 export const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
-  max-width: 1000px;
-  height: 400px;
+    max-width: 1000px;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -44,10 +43,9 @@ export const Wrapper = styled.div`
     justify-content: space-evenly;
     top: 0;
     left: 0;
-    overflow: auto; */
+    overflow: auto;
     background-color: ${colors.secondaryBackground};
   `}
-
 `
 
 export const TextWrapper = styled.div`
@@ -62,17 +60,16 @@ export const ErrorText = styled.p`
     text-align: center;
     color: ${colors.primary};
     ${getBreakpointsStyles({
-        desktop: css`
-          font-size: 205px;
-        `,
-        tablet: css`
-          font-size: 170px;
-
-        `,
-        mobile: css`
-          font-size: 135px;
-        `,
-      })}
+      desktop: css`
+        font-size: 205px;
+      `,
+      tablet: css`
+        font-size: 170px;
+      `,
+      mobile: css`
+        font-size: 135px;
+      `,
+    })}
   `}
 `
 
@@ -82,20 +79,19 @@ export const InfoText = styled.p`
     text-align: center;
     color: ${colors.userNameText};
     ${getBreakpointsStyles({
-        desktop: css`
-    font-size: 22px;
+      desktop: css`
+        font-size: 22px;
         padding-top: 25px;
-        `,
-        tablet: css`
-    font-size: 22px;
+      `,
+      tablet: css`
+        font-size: 22px;
         padding-top: 25px;
-
-        `,
-        mobile: css`
-    font-size: 18px;
+      `,
+      mobile: css`
+        font-size: 18px;
         padding-top: 20px;
-        `,
-      })}
+      `,
+    })}
   `}
 `
 
@@ -105,19 +101,20 @@ export const ActionText = styled.p`
     text-align: center;
     color: ${colors.userNameText};
     ${getBreakpointsStyles({
-        desktop: css`
-    font-size: 18px;
-    padding-top: 20px;
-        `,
-        tablet: css`
-    font-size: 18px;
-    padding-top: 20px;
-
-        `,
-        mobile: css`
-    font-size: 16px;
+      desktop: css`
+        font-size: 18px;
+        padding-top: 20px;
+      `,
+      tablet: css`
+        font-size: 18px;
+        padding-top: 20px;
+      `,
+      mobile: css`
+        font-size: 16px;
         padding-top: 15px;
-        `,
-      })}
+      `,
+    })}
   `}
 `
+
+export default NotFoundPage

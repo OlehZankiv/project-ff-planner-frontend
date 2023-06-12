@@ -148,7 +148,7 @@ const CalendarWrapper = styled.section`
       flex-direction: column;
       row-gap: 4px;
       padding: 8px;
-      max-height: calc(34px * 5.5); // 5.5 events per day
+      max-height: calc(34px * 3.5); // 3.5 events per day
       overflow-y: auto;
 
       .fc-event {
