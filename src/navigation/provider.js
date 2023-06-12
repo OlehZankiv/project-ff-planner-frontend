@@ -4,10 +4,11 @@ import { Loader, MainLayout } from '../components'
 import { lazy, Suspense } from 'react'
 import { useAuthContext } from '../contexts/auth'
 
+const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
+const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
-const LandingPage = lazy(() => import('../pages/landing/LandingPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
@@ -22,7 +23,7 @@ export const AppRouterProvider = () => (
             path={ROUTES.PROFILE}
             element={
               <ProtectedRoute>
-                <div>PROFILE</div>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />

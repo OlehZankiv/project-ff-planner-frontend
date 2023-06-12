@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
 import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
-import {
-  getBreakpointsStyles,
-  getDesktopStyles,
-  useBreakpointValue,
-} from '../../styles/breakpoints'
+import { getDesktopStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
-import { FeedbackModal } from '../../pages/FeedbackModal'
+import { FeedbackModal } from '../modals/FeedbackModal'
 import { ROUTES } from '../../navigation/routes'
 import { useAuthContext } from '../../contexts/auth'
+import { gooseCalendar } from '../../assets/images'
+import { useDimensions } from '../../hooks'
+import { Avatar } from '../Avatar'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
   const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
+  const { width } = useDimensions()
 
   const { logger } = useAuthContext()
 
@@ -31,6 +31,11 @@ export const MainLayout = () => {
 
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
+  const [searchParams] = useSearchParams()
+  const showTitleGooseLogo =
+    width >= 1024 &&
+    window.location.pathname.includes(ROUTES.CALENDAR) &&
+    searchParams.get('calendar-type') === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
@@ -42,13 +47,6 @@ export const MainLayout = () => {
   })
 
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
-
-  const firstLettersMaker = (str) =>
-    str
-      .split(' ')
-      .map((word) => word[0].toUpperCase())
-      .join('')
-      .slice(0, 2)
 
   const routeTitles = {
     [ROUTES.PROFILE]: t('User Profile'),
@@ -75,16 +73,37 @@ export const MainLayout = () => {
                 </OpacityButton>
               </BurgerWrap>
               <DesktopTitleWrap>
-                <Text
-                  type='h1'
-                  fontSize={32}
-                  fontWeight={700}
-                  lineHeight={1}
-                  color={colors.text}
-                  style={{ textShadow: shadows.headingShadow }}
-                >
-                  {routeTitles[selectedRoute]}
-                </Text>
+                {showTitleGooseLogo && (
+                  <img src={gooseCalendar} style={{ width: '60px' }} alt='Goose calendar logo' />
+                )}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <Text
+                    type='h1'
+                    fontSize={32}
+                    fontWeight={700}
+                    color={colors.text}
+                    lineHeight={32}
+                    style={{ textShadow: shadows.headingShadow }}
+                  >
+                    {routeTitles[selectedRoute]}
+                  </Text>
+                  {showTitleGooseLogo && (
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <Text
+                        type='p'
+                        fontSize={14}
+                        fontWeight={600}
+                        style={{ marginRight: '4px' }}
+                        color={'primary'}
+                      >
+                        {t("Let's go")}
+                      </Text>
+                      <Text type='p' color={'text'} fontWeight={600} fontSize={14}>
+                        {t('of the past and focus on the present!')}
+                      </Text>
+                    </div>
+                  )}
+                </div>
               </DesktopTitleWrap>
               <TabWrap>
                 {selectedRoute === ROUTES.CALENDAR && (
@@ -112,17 +131,11 @@ export const MainLayout = () => {
                   >
                     {userName}
                   </Text>
-                  <OpacityButton>
-                    <AvatarWrap onClick={() => setSelectedRoute(ROUTES.PROFILE)}>
-                      <Text
-                        type='p'
-                        color={colors.userNameText}
-                        fontWeight={700}
-                        fontSize={nameFontSize}
-                      >
-                        {firstLettersMaker(userName)}
-                      </Text>
-                    </AvatarWrap>
+                  <OpacityButton
+                    style={{ marginLeft: 8 }}
+                    onClick={() => setSelectedRoute(ROUTES.PROFILE)}
+                  >
+                    <Avatar size={44} name={userName} image={logger?.avatarURL} />
                   </OpacityButton>
                 </InfoWrap>
               </TabWrap>
@@ -191,33 +204,12 @@ const BurgerWrap = styled.div`
   `)}
 `
 
-const AvatarWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1.8px solid ${({ theme }) => theme.colors.primary};
-  border-radius: 50%;
-
-  ${getBreakpointsStyles({
-    tablet: css`
-      width: 44px;
-      height: 44px;
-    `,
-    desktop: css`
-      width: 44px;
-      height: 44px;
-    `,
-  })}
-`
-
 const DesktopTitleWrap = styled.div`
   display: none;
   ${getDesktopStyles(css`
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 8px;
   `)}
 `
 

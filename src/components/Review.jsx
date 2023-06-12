@@ -1,38 +1,46 @@
 import styled, { css, useTheme } from 'styled-components'
 import { getMobileStyles, ScreenWrapper } from '../styles/breakpoints'
 import { Text } from './Text'
-import { RatingStarUserIcon, PencilIcon, TrashIcon } from '../assets/icons'
-import { OpacityButton } from '../components'
+import { PencilIcon, RatingStarUserIcon, TrashIcon } from '../assets/icons'
+import { Avatar, OpacityButton } from '../components'
+import { useState } from 'react'
 
 export const Review = ({
   style,
   rating,
   comment,
-  owner: { name },
+  owner: { name, avatarURL },
   showEdit = false,
   editOnClick,
   deleteOnClick,
 }) => {
+  const [isFullView, setFullView] = useState(false)
+
   const { colors } = useTheme()
 
   const commentJSX = (
-    <Text type='p' style={{ marginTop: 24 }}>
-      {comment}
-    </Text>
+    <DescriptionWrapper isFullView={isFullView}>
+      <Text type='p'>{comment}</Text>
+    </DescriptionWrapper>
   )
 
+  const withStopPropagation = (callback) => (e) => {
+    e.stopPropagation()
+    callback()
+  }
+
   return (
-    <Wrapper style={style}>
-      <div style={{ width: 50, height: 50, backgroundColor: 'red' }} />
-      <div>
+    <Wrapper style={style} onClick={() => setFullView((prev) => !prev)}>
+      <Avatar size={50} name={name} image={avatarURL} />
+      <InfoWrapper>
         <ReviewTop>
           <Text type='h5'>{name}</Text>
           {showEdit && (
             <EditWrapper>
-              <OpacityButton onClick={editOnClick}>
+              <OpacityButton onClick={withStopPropagation(editOnClick)}>
                 <PencilIcon color={colors.text} />
               </OpacityButton>
-              <OpacityButton onClick={deleteOnClick}>
+              <OpacityButton onClick={withStopPropagation(deleteOnClick)}>
                 <TrashIcon color={colors.text} />
               </OpacityButton>
             </EditWrapper>
@@ -49,18 +57,18 @@ export const Review = ({
         </StarsWrapper>
         <ScreenWrapper tablet={commentJSX} desktop={commentJSX} />
         <ScreenWrapper mobile={commentJSX} />
-      </div>
+      </InfoWrapper>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled(OpacityButton)`
   ${({ theme: { colors } }) => css`
     padding: 32px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    column-gap: 8px;
+    column-gap: 14px;
     border-radius: 8px;
     background-color: transparent;
     border: 1px solid ${colors.reviewBorder};
@@ -68,6 +76,25 @@ const Wrapper = styled.div`
     ${getMobileStyles(css`
       padding: 24px;
     `)}
+  `}
+`
+
+const InfoWrapper = styled.div`
+  flex: 1;
+  max-width: calc(100% - 64px);
+`
+
+const DescriptionWrapper = styled.div`
+  ${({ isFullView }) => css`
+    margin-top: 24px;
+    word-break: break-word;
+    ${!isFullView &&
+    css`
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    `}
   `}
 `
 

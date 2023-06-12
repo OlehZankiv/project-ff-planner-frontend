@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
-import { TodoCategory } from './TodoCategory'
 import { getBreakpointsStyles } from '../../../styles/breakpoints'
 import { useTasks } from '../../../hooks/query'
+import { TodoCategory } from './TodoCategory'
 
 export const TodosContent = ({ selectedDate }) => {
   const { tasks } = useTasks()
-
   console.log(selectedDate)
 
   const todoCategories = useMemo(

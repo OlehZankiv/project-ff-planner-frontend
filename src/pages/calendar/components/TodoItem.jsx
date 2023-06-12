@@ -1,5 +1,5 @@
 import styled, { css, useTheme } from 'styled-components'
-import { OpacityButton, OptionsDropdown, Text } from '../../../components'
+import { Avatar, OpacityButton, OptionsDropdown, Text } from '../../../components'
 import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 
@@ -21,7 +21,7 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority }) => {
+export const TodoItem = ({ title, priority, assignedUser }) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
 
@@ -39,7 +39,7 @@ export const TodoItem = ({ title, priority }) => {
       </Text>
       <BottomSide>
         <AvatarWrapper>
-          <div style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: 'red' }} />
+          <Avatar size={32} image={assignedUser.avatar} name={assignedUser.name} />
           <TodoItemStatus priority={priority} />
         </AvatarWrapper>
         <Actions>
