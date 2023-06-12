@@ -1,120 +1,82 @@
 import { useNavigate } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { LoginIcon } from '../../assets/icons'
-import { Button } from '../../components'
+import { Button, Text } from '../../components'
 import { ROUTES } from '../../navigation/routes'
-import { getBreakpointsStyles } from '../../styles/breakpoints'
+import { ArrowCircleIcon } from '../../assets/icons'
+import { getDesktopStyles, ScreenWrapper } from '../../styles/breakpoints'
 
 const NotFoundPage = () => {
+  const { colors } = useTheme()
   const { t } = useTranslation()
   const navigate = useNavigate()
+
   return (
     <Wrapper>
+      <ScreenWrapper tablet={<div />} mobile={<div />} />
       <TextWrapper>
-        <ErrorText>404</ErrorText>
-        <InfoText>{t('Oh! The page you were looking for was probably stolen by geese')}</InfoText>
-        <ActionText>{t('Go back where you came from')}</ActionText>
+        <Text type='h1' color='primary'>
+          404
+        </Text>
+        <Text
+          type='h2'
+          color='primary'
+          tabletStyles={{ fontSize: 28 }}
+          mobileStyles={{ fontSize: 20, lineHeight: 1.3 }}
+        >
+          {t('Oh! The page you were looking for was probably stolen by geese')}
+        </Text>
       </TextWrapper>
       <Button
-        style={{ marginTop: '20px' }}
+        style={{ marginTop: 64 }}
         type='submit'
-        width='300px'
-        rightIcon={<LoginIcon color={'white'} />}
-        title={t('Back to Home Page')}
+        title={t('Go Back')}
         variant='primary'
+        buttonTextProps={{ fontSize: 24 }}
+        leftIcon={
+          <IconWrapper>
+            <ArrowCircleIcon size={34} color={colors.white} />
+          </IconWrapper>
+        }
         onClick={() => navigate(ROUTES.CALENDAR)}
       />
     </Wrapper>
   )
 }
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
-    max-width: 1000px;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    padding: 64px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    align-content: center;
-    justify-content: space-evenly;
-    top: 0;
-    left: 0;
-    overflow: auto;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: ${colors.secondaryBackground};
+
+    ${getDesktopStyles(css`
+      row-gap: 64px;
+      justify-content: center;
+    `)}
   `}
 `
 
-export const TextWrapper = styled.div`
+const TextWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+  row-gap: 32px;
+  text-align: center;
 `
 
-export const ErrorText = styled.p`
-  ${({ theme: { colors } }) => css`
-    font-weight: 600;
-    font-size: 205px;
-    text-align: center;
-    color: ${colors.primary};
-    ${getBreakpointsStyles({
-      desktop: css`
-        font-size: 205px;
-      `,
-      tablet: css`
-        font-size: 170px;
-      `,
-      mobile: css`
-        font-size: 135px;
-      `,
-    })}
-  `}
-`
-
-export const InfoText = styled.p`
-  ${({ theme: { colors } }) => css`
-    font-weight: 600;
-    text-align: center;
-    color: ${colors.userNameText};
-    ${getBreakpointsStyles({
-      desktop: css`
-        font-size: 22px;
-        padding-top: 25px;
-      `,
-      tablet: css`
-        font-size: 22px;
-        padding-top: 25px;
-      `,
-      mobile: css`
-        font-size: 18px;
-        padding-top: 20px;
-      `,
-    })}
-  `}
-`
-
-export const ActionText = styled.p`
-  ${({ theme: { colors } }) => css`
-    font-weight: 600;
-    text-align: center;
-    color: ${colors.userNameText};
-    ${getBreakpointsStyles({
-      desktop: css`
-        font-size: 18px;
-        padding-top: 20px;
-      `,
-      tablet: css`
-        font-size: 18px;
-        padding-top: 20px;
-      `,
-      mobile: css`
-        font-size: 16px;
-        padding-top: 15px;
-      `,
-    })}
-  `}
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(180deg);
+  margin-right: 8px;
 `
 
 export default NotFoundPage
