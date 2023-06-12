@@ -116,21 +116,13 @@ export const MainLayout = () => {
                   </>
                 )}
                 <InfoWrap>
-                  <ThemeButton onClick={handleThemeChange}>
+                  <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
                       <MoonIcon size={iconSize} color={colors.primary} />
                     ) : (
                       <SunIcon size={iconSize} color={colors.primary} />
                     )}
-                  </ThemeButton>
-
-                  {/* <OpacityButton onClick={handleThemeChange}>
-                    {themeType === 'light' ? (
-                      <MoonIcon size={iconSize} color={colors.primary} />
-                    ) : (
-                      <SunIcon size={iconSize} color={colors.primary} />
-                    )}
-                  </OpacityButton> */}
+                  </OpacityButton>
                   <Text
                     type='p'
                     color={colors.userNameText}
@@ -157,29 +149,6 @@ export const MainLayout = () => {
     </MainWrap>
   )
 }
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-    opacity: 0;
-  }
-  to {
-    transform: rotate(360deg);
-    opacity: 1;
-  }
-`
-
-const ThemeButton = styled(OpacityButton)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 1 ease-in-out;
-
-  &:active {
-    opacity: 1;
-    animation: ${rotate} 0.5s linear infinite;
-  }
-`
 
 const MainWrap = styled.div`
   width: 100%;
