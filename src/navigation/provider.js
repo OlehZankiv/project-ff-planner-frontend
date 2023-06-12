@@ -9,6 +9,7 @@ const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
+const NotFoundPage = lazy(() => import('../pages/notFoundPage/NotFoundPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
@@ -37,8 +38,7 @@ export const AppRouterProvider = () => (
           />
         </Route>
 
-        {/* TODO: Add 404 Page */}
-        <Route path='*' element={<div>404 Page</div>} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   </BrowserRouter>
