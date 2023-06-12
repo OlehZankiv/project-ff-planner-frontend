@@ -6,7 +6,6 @@ import { TodoCategory } from './TodoCategory'
 
 export const TodosContent = ({ selectedDate }) => {
   const { tasks } = useTasks()
-  console.log(selectedDate)
 
   const todoCategories = useMemo(
     () =>
@@ -20,7 +19,7 @@ export const TodosContent = ({ selectedDate }) => {
   return (
     <Wrapper>
       {todoCategories.map((category) => (
-        <TodoCategory key={category.type} {...category} />
+        <TodoCategory key={category.type} selectedDate={selectedDate} {...category} />
       ))}
     </Wrapper>
   )

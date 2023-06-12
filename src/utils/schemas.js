@@ -40,3 +40,8 @@ export const registerFormSchema = yup.object().shape({
     .min(6, en['password must be at least 6 characters'])
     .required(en['password is a required field']),
 })
+
+export const createTaskFormSchema = yup.object().shape({
+  title: yup.string().required(en['title is a required field']),
+  priority: yup.string().required(en['priority is a required field']),
+})

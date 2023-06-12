@@ -1,16 +1,16 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { Button, OpacityButton, Text } from '../../../components'
+import { Button, OpacityButton, TaskModal, Text } from '../../../components'
 import { PlusCircleIcon, PlusIcon } from '../../../assets/icons'
 import { TodoItem } from './TodoItem'
 import { getMobileStyles } from '../../../styles/breakpoints'
 import { useState } from 'react'
-import { TaskModal } from './AddTask/TaskModal'
 
-export const TodoCategory = ({ type, todos }) => {
-  const [isTaskModalVisible, setTaskModalVisible] = useState(false)
+export const TodoCategory = ({ type, selectedDate, todos }) => {
   const { colors } = useTheme()
   const { t } = useTranslation()
+
+  const [isTaskModalVisible, setTaskModalVisible] = useState(false)
 
   const titles = {
     'to-do': t('To do'),
@@ -46,7 +46,12 @@ export const TodoCategory = ({ type, todos }) => {
           onClick={() => setTaskModalVisible(true)}
         />
       </BottomButton>
-      <TaskModal visible={isTaskModalVisible} setVisible={setTaskModalVisible} />
+      <TaskModal
+        selectedDate={selectedDate}
+        visible={isTaskModalVisible}
+        setVisible={setTaskModalVisible}
+        category={type}
+      />
     </Wrapper>
   )
 }

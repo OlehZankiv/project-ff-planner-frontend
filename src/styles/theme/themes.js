@@ -15,9 +15,6 @@ const shadows = {
   headingShadow: '0px 47px 355px rgba(0, 0, 0, 0.07),0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
   secondButtonShadow: '4px 2px 16px rgba(97, 97, 97, 0.1)',
   titleShadow: '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
-  radioButtonShadowLow: '0 0 0 1.3px rgba(114, 194, 248, 0.5)',
-  radioButtonShadowMedium: '0 0 0 1.3px rgba(243, 178, 73, 0.5)',
-  radioButtonShadowHigh: '0 0 0 1.3px rgba(234, 61, 101, 0.5)',
 }
 
 export const lightTheme = themeCreator({
@@ -83,9 +80,6 @@ export const lightTheme = themeCreator({
     groupButtonsTextSelected: '#3E85F3',
     groupButtonsBackground: '#E3F3FF',
     groupButtonsBackgroundSelected: '#CAE8FF',
-    addTaskCancelButtonBackground:'#EFEFEF',
-    addTaskInputLabel: 'rgba(52, 52, 52, 0.8)',
-    addTaskInputText: '#343434',
   },
   shadows,
   animation,
@@ -154,9 +148,6 @@ export const darkTheme = themeCreator({
     groupButtonsTextSelected: '#FFFFFF',
     groupButtonsBackground: '#21222C',
     groupButtonsBackgroundSelected: '#3E85F3',
-    addTaskCancelButtonBackground:'#EFEFEF',
-    addTaskInputLabel: 'rgba(250, 250, 250, 0.3)',
-    addTaskInputText: '#ffffff',
   },
   shadows,
   animation,
