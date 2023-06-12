@@ -16,15 +16,15 @@ import { useAuthContext } from '../../contexts/auth'
 import { gooseCalendar } from '../../assets/images'
 import { useDimensions } from '../../hooks'
 import { Avatar } from '../Avatar'
+import { LanguagePicker } from '../LanguagePicker'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
-  const { t } = useTranslation()
   const { themeType, setThemeType } = useAppThemeContext()
   const navigate = useNavigate()
   const { width } = useDimensions()
-
   const { logger } = useAuthContext()
+  const { t } = useTranslation()
 
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -116,6 +116,7 @@ export const MainLayout = () => {
                   </>
                 )}
                 <InfoWrap>
+                  <LanguagePicker color={colors.icon} fontSize={18} />
                   <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
                       <MoonIcon size={iconSize} color={colors.primary} />
