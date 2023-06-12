@@ -28,6 +28,7 @@ export const TimePicker = ({ name, minTime, ...props }) => {
             <Input
               {...fieldProps}
               {...props}
+              name={name}
               style={{ marginBottom: 0, ...props.style }}
               value={dayjs(value).format('HH:mm')}
               readonly
