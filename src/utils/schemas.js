@@ -45,3 +45,14 @@ export const createTaskFormSchema = yup.object().shape({
   title: yup.string().required(en['title is a required field']),
   priority: yup.string().required(en['priority is a required field']),
 })
+
+export const feedbackFormSchema = yup.object().shape({
+  rating: yup
+    .number()
+    .min(1, en['rating is a required field'])
+    .required(en['rating is a required field']),
+  comment: yup
+    .string()
+    .min(3, en['comment must be at least 6 characters'])
+    .required(en['comment is a required field']),
+})

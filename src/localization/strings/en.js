@@ -62,6 +62,8 @@ export const en = {
   "View": "View",
   "We send a verify letter to your email!": "We send a verify letter to your email!",
   "Well done": "Well done",
+  "comment is a required field": "email is a required field",
+  "comment must be at least 3 characters": "comment must be at least 3 characters",
   "email is a required field": "email is a required field",
   "email must be a valid email": "email must be a valid email",
   "name can have maximum 40 characters": "name can have maximum 40 characters",
@@ -71,6 +73,7 @@ export const en = {
   "password must be at least 6 characters": "password must be at least 6 characters",
   "phone can have maximum 20 characters": "phone can have maximum 20 characters",
   "priority is a required field": "priority is a required field",
+  "rating is a required field": "rating is a required field",
   "title is a required field": "title is a required field",
 
   // Week days

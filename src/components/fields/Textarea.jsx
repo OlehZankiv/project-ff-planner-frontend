@@ -1,30 +1,49 @@
 import styled, { css } from 'styled-components'
 import { Text } from '../Text'
 import { getMobileStyles } from '../../styles/breakpoints'
+import { useField } from 'formik'
 
-export const Textarea = ({ value, style, label, placeholder, onChange }) => (
-  <Wrapper style={style}>
-    <label htmlFor='textarea'>
-      <Text type='p' fontSize={12} lineHeight={14} color='feedbackModalLabels'>
-        {label}
-      </Text>
-    </label>
-    <InputArea
-      type='text'
-      id='textarea'
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-    />
-  </Wrapper>
-)
+export const Textarea = ({ name, errorMessage, isError, style, label, placeholder }) => {
+  const [handlers, { value }] = useField(name)
 
-const Wrapper = styled.div``
+  const inputColor = isError ? 'error' : 'transparent'
+  const labelColor = isError ? 'error' : 'feedbackModalLabels'
+
+  return (
+    <Wrapper style={style}>
+      <label htmlFor='textarea'>
+        <Text type='p' fontSize={12} lineHeight={14} color={labelColor}>
+          {label}
+        </Text>
+      </label>
+      <InputArea
+        {...handlers}
+        type='text'
+        id='textarea'
+        placeholder={placeholder}
+        value={value}
+        isError={isError}
+      />
+
+      {isError && !!errorMessage && (
+        <HintMessageWrapper>
+          <Text type='p' color={inputColor} fontWeight={400} fontSize={14} lineHeight={18}>
+            {errorMessage}
+          </Text>
+        </HintMessageWrapper>
+      )}
+    </Wrapper>
+  )
+}
+
+const Wrapper = styled.div`
+  position: relative;
+`
 
 const InputArea = styled.textarea`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors }, isError }) => css`
     background-color: ${colors.modalsInputBackground};
-    border: 1px solid ${colors.modalsInputBorder};
+    border: 1px solid ${isError ? colors.error : colors.modalsInputBorder};
     min-height: 128px;
     max-height: 164px;
     border-radius: 8px;
@@ -48,4 +67,11 @@ const InputArea = styled.textarea`
       line-height: 18px;
     }
   `}
+`
+
+const HintMessageWrapper = styled.div`
+  position: absolute;
+  transform: translateY(100%);
+  bottom: 2px;
+  left: 18px;
 `

@@ -15,7 +15,6 @@ export const useReviews = (filterBy = 'best') => {
     () => getReviews({ filterBy, ownerId: id }),
     {
       onError: handleRequestError,
-
       select: (res) => res.data.map(toReview),
       enabled: filterBy === 'owner' ? !!id : true,
     },

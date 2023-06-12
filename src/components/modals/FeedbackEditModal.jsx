@@ -1,56 +1,66 @@
 import styled from 'styled-components'
 import { Button, Modal, Ratings, Textarea } from '../index'
-import { useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUpdateReview } from '../../hooks/query'
-import { toReview } from '../../hooks/query/mappers'
+import { feedbackFormSchema } from '../../utils/schemas'
+import { Form, Formik } from 'formik'
 
 export const FeedbackEditModal = ({ visible, setVisible, review }) => {
   const { t } = useTranslation()
-  const { updateReview, isLoading } = useUpdateReview(() => setVisible(false))
 
-  const [rating, setRating] = useState(review.rating)
-  const [comment, setComment] = useState(review.comment)
+  const formik = useRef(null)
 
-  const feedbackSubmit = (event) => {
-    event.preventDefault()
+  const { updateReview, isLoading } = useUpdateReview(() => {
+    setVisible(false)
+    formik.current?.resetForm()
+  })
 
-    updateReview(toReview({ _id: review.id, rating, comment }))
-  }
-
-  useEffect(() => {
-    if (visible) {
-      setRating(review.rating)
-      setComment(review.comment)
-    }
-  }, [visible, review.rating, review.comment])
+  const renderValues = [review.comment, review.id, review.rating]
 
   return (
-    <Modal visible={visible} onClose={() => setVisible(false)} onEnterPress={feedbackSubmit}>
-      <Ratings value={rating} onInputValueChange={setRating} />
-      <Textarea
-        value={comment}
-        style={{ marginTop: 24 }}
-        label={t('Review')}
-        onChange={(event) => setComment(event.target.value)}
-      />
-      <ButtonsWrapper>
-        <Button
-          style={{ marginRight: 8, borderRadius: 8 }}
-          fullWidth
-          type='submit'
-          title={t('Edit')}
-          onClick={feedbackSubmit}
-          isLoading={isLoading}
-        />
-        <Button
-          variant='secondary'
-          fullWidth
-          style={{ borderRadius: 8 }}
-          title={t('Cancel')}
-          onClick={() => setVisible(false)}
-        />
-      </ButtonsWrapper>
+    <Modal visible={visible} onClose={() => setVisible(false)}>
+      <Formik
+        key={JSON.stringify(renderValues)}
+        innerRef={formik}
+        initialValues={{ ...review }}
+        onSubmit={updateReview}
+        validationSchema={feedbackFormSchema}
+      >
+        {({ errors, touched }) => (
+          <Form autoComplete='off'>
+            <Ratings
+              name='rating'
+              errorMessage={t(errors.rating)}
+              isError={errors.rating && touched.rating}
+            />
+            <Textarea
+              name='comment'
+              style={{ marginTop: 24 }}
+              label={t('Review')}
+              placeholder={t('Enter text')}
+              errorMessage={t(errors.comment)}
+              isError={errors.comment && touched.comment}
+            />
+            <ButtonsWrapper>
+              <Button
+                style={{ marginRight: 8, borderRadius: 8 }}
+                fullWidth
+                type='submit'
+                title={t('Edit')}
+                isLoading={isLoading}
+              />
+              <Button
+                variant='secondary'
+                fullWidth
+                style={{ borderRadius: 8 }}
+                title={t('Cancel')}
+                onClick={() => setVisible(false)}
+              />
+            </ButtonsWrapper>
+          </Form>
+        )}
+      </Formik>
     </Modal>
   )
 }

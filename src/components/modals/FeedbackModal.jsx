@@ -1,32 +1,28 @@
 import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea } from '../index'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAddReview, useDeleteReview, useReviews } from '../../hooks/query'
 import { getMobileStyles } from '../../styles/breakpoints'
+import { Form, Formik } from 'formik'
+import { feedbackFormSchema } from '../../utils/schemas'
 import { FeedbackEditModal } from './FeedbackEditModal'
-import { toReview } from '../../hooks/query/mappers'
+
+const initialValues = {
+  rating: 0,
+  comment: '',
+}
 
 export const FeedbackModal = ({ visible, setVisible }) => {
   const { t } = useTranslation()
+  const formik = useRef(null)
 
   const { reviews } = useReviews('owner')
-  const { addReview, isLoading } = useAddReview()
+  const { addReview, isLoading } = useAddReview(formik.current?.resetForm)
   const { deleteReview } = useDeleteReview()
 
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
   const [editedReview, setEditedReview] = useState('')
-
-  const feedbackSubmit = (event) => {
-    event.preventDefault()
-
-    addReview(toReview({ rating, comment }))
-
-    setRating(0)
-    setComment('')
-  }
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
@@ -38,10 +34,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   }
 
   useEffect(() => {
-    if (!visible) {
-      setRating(0)
-      setComment('')
-    }
+    if (!visible) formik.current?.resetForm()
   }, [visible])
 
   return (
@@ -57,22 +50,37 @@ export const FeedbackModal = ({ visible, setVisible }) => {
           onClose={() => setVisible(false)}
           onEnterPress={() => setVisible(false)}
         >
-          <Ratings value={rating} onInputValueChange={setRating} />
-          <Textarea
-            value={comment}
-            style={{ marginTop: 24 }}
-            label={t('Review')}
-            placeholder={t('Enter text')}
-            onChange={(event) => setComment(event.target.value)}
-          />
-          <Button
-            fullWidth
-            style={{ marginTop: 18, borderRadius: 8 }}
-            type='submit'
-            title={t('Save')}
-            isLoading={isLoading}
-            onClick={feedbackSubmit}
-          />
+          <Formik
+            innerRef={formik}
+            initialValues={initialValues}
+            onSubmit={addReview}
+            validationSchema={feedbackFormSchema}
+          >
+            {({ errors, touched }) => (
+              <Form autoComplete='off'>
+                <Ratings
+                  name='rating'
+                  errorMessage={t(errors.rating)}
+                  isError={errors.rating && touched.rating}
+                />
+                <Textarea
+                  name='comment'
+                  style={{ marginTop: 24 }}
+                  label={t('Review')}
+                  placeholder={t('Enter text')}
+                  errorMessage={t(errors.comment)}
+                  isError={errors.comment && touched.comment}
+                />
+                <Button
+                  fullWidth
+                  style={{ marginTop: 24, borderRadius: 8 }}
+                  type='submit'
+                  title={t('Save')}
+                  isLoading={isLoading}
+                />
+              </Form>
+            )}
+          </Formik>
 
           {!!reviews.length && (
             <FeedbackWrapper>

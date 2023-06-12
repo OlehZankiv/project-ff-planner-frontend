@@ -9,11 +9,9 @@ export const toReview = ({ _id, comment, owner, rating, createdAt, updatedAt }) 
   updatedAt: updatedAt ? new Date(updatedAt) : new Date(),
 })
 
-export const toReviewDTO = ({ id, owner, createdAt, updatedAt, comment, rating }) => ({
+export const toReviewDTO = ({ id, owner, comment, rating }) => ({
   _id: id,
-  owner: toUserDTO(owner),
-  createdAt: createdAt.getTime(),
-  updatedAt: updatedAt.getTime(),
+  owner: toUserDTO(owner ?? {}),
   comment,
   rating,
 })
