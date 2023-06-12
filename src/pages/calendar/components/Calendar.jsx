@@ -107,7 +107,17 @@ const CalendarWrapper = styled.section`
   ${({ theme: { colors } }) => css`
     .fc.fc-media-screen {
       border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
+    }
+
+    table {
+      border: 1px solid ${colors.calendarBorder} !important;
+      border-radius: 8px;
       overflow: hidden;
+    }
+
+    .fc-scrollgrid {
+      border-collapse: collapse;
     }
 
     td.fc-day {
@@ -148,7 +158,7 @@ const CalendarWrapper = styled.section`
       flex-direction: column;
       row-gap: 4px;
       padding: 8px;
-      max-height: calc(34px * 3.5); // 3.5 events per day
+      max-height: calc(34px * 3.5);
       overflow-y: auto;
 
       .fc-event {
