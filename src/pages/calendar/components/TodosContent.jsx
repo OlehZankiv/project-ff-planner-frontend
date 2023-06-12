@@ -5,8 +5,7 @@ import { useTasks } from '../../../hooks/query'
 import { TodoCategory } from './TodoCategory'
 
 export const TodosContent = ({ selectedDate }) => {
-  const { tasks } = useTasks()
-
+  const { tasks } = useTasks('day', selectedDate.getTime())
   const todoCategories = useMemo(
     () =>
       [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category) => ({

@@ -3,6 +3,7 @@ import { Avatar, OpacityButton, OptionsDropdown, TaskModal, Text } from '../../.
 import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
+import { useUpdateTask, useDeleteTask } from '../../../hooks/query'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -22,9 +23,10 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority, assignedUser, ...rest }) => {
+export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
   const [isEditVisible, setEditVisible] = useState(false)
-
+  const { updateCategory } = useUpdateTask()
+  const { deleteTask } = useDeleteTask()
   const { t } = useTranslation()
   const { colors } = useTheme()
 
@@ -49,8 +51,14 @@ export const TodoItem = ({ title, priority, assignedUser, ...rest }) => {
           <Actions>
             <OptionsDropdown
               options={[
-                { title: t('In progress'), onClick: () => {} },
-                { title: t('Done'), onClick: () => {} },
+                {
+                  title: t('In progress'),
+                  onClick: () => updateCategory('in-progress', id),
+                },
+                {
+                  title: t('Done'),
+                  onClick: () => updateCategory('done', id),
+                },
               ]}
               renderOption={({ title, onClick }) => (
                 <OptionWrapper onClick={onClick}>
@@ -67,7 +75,7 @@ export const TodoItem = ({ title, priority, assignedUser, ...rest }) => {
             <OpacityButton onClick={() => setEditVisible(true)}>
               <PencilIcon color={colors.text} />
             </OpacityButton>
-            <OpacityButton>
+            <OpacityButton onClick={() => deleteTask(id)}>
               <TrashIcon color={colors.text} />
             </OpacityButton>
           </Actions>
