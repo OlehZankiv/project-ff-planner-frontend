@@ -1,7 +1,8 @@
 import styled, { css, useTheme } from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { Avatar, OpacityButton, OptionsDropdown, Text } from '../../../components'
 import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
-import { useTranslation } from 'react-i18next'
+import { useUpdateTask, useDeleteTask } from '../../../hooks/query'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -21,9 +22,11 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority, assignedUser }) => {
+export const TodoItem = ({ title, priority, assignedUser, _id }) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
+  const { updateCategory } = useUpdateTask()
+  const { deleteTask } = useDeleteTask()
 
   return (
     <Wrapper>
@@ -45,8 +48,18 @@ export const TodoItem = ({ title, priority, assignedUser }) => {
         <Actions>
           <OptionsDropdown
             options={[
-              { title: t('In progress'), onClick: () => {} },
-              { title: t('Done'), onClick: () => {} },
+              {
+                title: t('In progress'),
+                onClick: () => {
+                  updateCategory(_id, 'in-progress')
+                },
+              },
+              {
+                title: t('Done'),
+                onClick: () => {
+                  updateCategory(_id, 'done')
+                },
+              },
             ]}
             renderOption={({ title, onClick }) => (
               <OptionWrapper onClick={onClick}>
@@ -63,7 +76,7 @@ export const TodoItem = ({ title, priority, assignedUser }) => {
           <OpacityButton>
             <PencilIcon color={colors.text} />
           </OpacityButton>
-          <OpacityButton>
+          <OpacityButton onClick={() => deleteTask(_id)}>
             <TrashIcon color={colors.text} />
           </OpacityButton>
         </Actions>

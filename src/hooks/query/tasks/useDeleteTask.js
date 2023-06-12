@@ -6,7 +6,7 @@ import { handleRequestError } from '../../../utils/notifications'
 export const useDeleteTask = () => {
   const queryClient = useQueryClient()
 
-  const { mutate, isLoading } = useMutation(deleteTask, {
+  const { mutate, isLoading } = useMutation((id) => deleteTask(id), {
     mutationKey: [queryKeys.deleteTask],
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.getTasks])

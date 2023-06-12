@@ -5,9 +5,7 @@ import { getBreakpointsStyles } from '../../../styles/breakpoints'
 import { useTasks } from '../../../hooks/query'
 
 export const TodosContent = ({ selectedDate }) => {
-  const { tasks } = useTasks()
-
-  console.log(selectedDate)
+  const { tasks } = useTasks('byDay', selectedDate.getTime())
 
   const todoCategories = useMemo(
     () =>
