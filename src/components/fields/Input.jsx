@@ -18,6 +18,7 @@ export const Input = ({
   rightIcon,
   isError,
   style,
+  resetState,
 }) => {
   const { colors } = useTheme()
 
@@ -45,6 +46,10 @@ export const Input = ({
       <ErrorIcon color={colors[inputColor]} />,
       <SuccessIcon color={colors[inputColor]} />,
     )
+
+  useEffect(() => {
+    if (resetState) setWasError(false)
+  }, [resetState])
 
   const [{ onBlur: onFormBlur }, { value: formValue }, { setValue: setFormValue }] = useField(name)
 

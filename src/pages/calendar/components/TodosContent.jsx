@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
-import { TodoCategory } from './TodoCategory'
 import { getBreakpointsStyles } from '../../../styles/breakpoints'
 import { useTasks } from '../../../hooks/query'
+import { TodoCategory } from './TodoCategory'
 
 export const TodosContent = ({ selectedDate }) => {
   const { tasks } = useTasks('day', selectedDate.getTime())
-
   const todoCategories = useMemo(
     () =>
       [{ type: 'to-do' }, { type: 'in-progress' }, { type: 'done' }].map((category) => ({
@@ -19,7 +18,7 @@ export const TodosContent = ({ selectedDate }) => {
   return (
     <Wrapper>
       {todoCategories.map((category) => (
-        <TodoCategory key={category.type} {...category} />
+        <TodoCategory key={category.type} selectedDate={selectedDate} {...category} />
       ))}
     </Wrapper>
   )
