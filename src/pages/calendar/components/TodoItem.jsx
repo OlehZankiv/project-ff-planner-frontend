@@ -4,7 +4,7 @@ import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { useDeleteTask, useUpdateTask } from '../../../hooks/query'
-import { DeleteModal } from '../../../components/DeleteModal'
+import { DeleteModal } from '../../../components/modals/DeleteModal'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Modal } from './Modal'
-import { Text } from './Text'
+import { Modal } from '../Modal'
+import { Text } from '../Text'
 import { useTranslation } from 'react-i18next'
-import { Button } from './buttons/Button'
+import { Button } from '../buttons/Button'
 
 export const DeleteModal = ({
   visible,

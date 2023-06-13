@@ -7,7 +7,7 @@ import { getMobileStyles } from '../../styles/breakpoints'
 import { Form, Formik } from 'formik'
 import { feedbackFormSchema } from '../../utils/schemas'
 import { FeedbackEditModal } from './FeedbackEditModal'
-import { DeleteModal } from '../DeleteModal'
+import { DeleteModal } from './DeleteModal'
 
 const initialValues = {
   rating: 0,
