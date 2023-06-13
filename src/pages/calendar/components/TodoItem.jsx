@@ -24,14 +24,25 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
-  const [isEditVisible, setEditVisible] = useState(false)
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const [isAskingAgain, setIsAskingAgain] = useState(true)
-  const { updateCategory } = useUpdateTask(id)
-  const { deleteTask } = useDeleteTask()
+export const TodoItem = ({
+  title,
+  priority,
+  showWithoutModalNextTime,
+  setShowWithoutModalNextTime,
+  assignedUser,
+  id,
+  ...rest
+}) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
+
+  const [isEditVisible, setEditVisible] = useState(false)
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
+  const { updateCategory } = useUpdateTask(id)
+
+  const { deleteTask, isLoading: isDeleteModalLoading } = useDeleteTask(() =>
+    setDeleteModalVisible(false),
+  )
 
   return (
     <>
@@ -86,7 +97,9 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
               <PencilIcon color={colors.text} />
             </OpacityButton>
             <OpacityButton
-              onClick={isAskingAgain ? () => setIsDeleteModalOpen(true) : () => deleteTask(id)}
+              onClick={() =>
+                showWithoutModalNextTime ? deleteTask(id) : setDeleteModalVisible(true)
+              }
             >
               <TrashIcon color={colors.text} />
             </OpacityButton>
@@ -101,12 +114,14 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
         setVisible={setEditVisible}
       />
       <DeleteModal
-        visible={isDeleteModalOpen}
-        setVisible={setIsDeleteModalOpen}
-        deleteFn={() => deleteTask(id)}
-        text={t('Are you really want to delete this task?')}
-        setIsAskingAgain={setIsAskingAgain}
         title={t('Delete Task')}
+        text={t('Are you really want to delete this task?')}
+        visible={isDeleteModalVisible}
+        setVisible={setDeleteModalVisible}
+        showWithoutModalNextTime={showWithoutModalNextTime}
+        onWithoutModalNextTimeChange={setShowWithoutModalNextTime}
+        onDelete={() => deleteTask(id)}
+        isLoading={isDeleteModalLoading}
       />
     </>
   )

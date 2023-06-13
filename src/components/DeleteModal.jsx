@@ -1,34 +1,40 @@
 import styled from 'styled-components'
-import { useState } from 'react'
 import { Modal } from './Modal'
 import { Text } from './Text'
 import { useTranslation } from 'react-i18next'
 import { Button } from './buttons/Button'
 
-export const DeleteModal = ({ visible, setVisible, deleteFn, text, title, setIsAskingAgain }) => {
+export const DeleteModal = ({
+  visible,
+  setVisible,
+  onDelete,
+  text,
+  title,
+  isLoading,
+  showWithoutModalNextTime,
+  onWithoutModalNextTimeChange,
+}) => {
   const { t } = useTranslation()
-  const [isChecked, setIsChecked] = useState(false)
+
+  const decline = () => {
+    setVisible(false)
+    onWithoutModalNextTimeChange(false)
+  }
+
   return (
-    <Modal
-      visible={visible}
-      onClose={() => setVisible(false)}
-      onEnterPress={() => setVisible(false)}
-    >
+    <Modal visible={visible} onClose={decline} onEnterPress={onDelete}>
       <DeleteModalWrap>
-        <Text type='h3' fontSize={28} style={{ marginBottom: '30px' }}>
+        <Text type='h3' fontSize={28} style={{ marginBottom: 30 }}>
           {title}
         </Text>
-        <Text type='p' style={{ marginBottom: '20px' }}>
+        <Text type='p' style={{ marginBottom: 20 }}>
           {text}
         </Text>
         <CheckWrapper>
           <input
             type='checkbox'
-            checked={isChecked}
-            onClick={() => {
-              setIsChecked(!isChecked)
-              setIsAskingAgain(isChecked)
-            }}
+            checked={showWithoutModalNextTime}
+            onClick={() => onWithoutModalNextTimeChange((prev) => !prev)}
           />
           <Text type='p' fontSize={12}>
             {t("Don't show it again?")}
@@ -40,18 +46,15 @@ export const DeleteModal = ({ visible, setVisible, deleteFn, text, title, setIsA
             fullWidth
             variant='primary'
             title={t('Yes')}
-            type='submit'
-            onClick={() => {
-              deleteFn()
-              setVisible(false)
-            }}
+            isLoading={isLoading}
+            onClick={onDelete}
           />
           <Button
             style={{ borderRadius: 8 }}
             fullWidth
             variant='secondary'
             title={t('No')}
-            onClick={() => setVisible(false)}
+            onClick={decline}
           />
         </ButtonsWrapper>
       </DeleteModalWrap>
