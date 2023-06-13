@@ -49,7 +49,7 @@ export const en = {
   "Month": "Month",
   "My Account": "My Account",
   "Name can have maximum 40 characters": "name can have maximum 40 characters",
-  "Name is a required field": "name is a required field",
+  "Name is a required field": "Name is a required field",
   "Name": "Name",
   "Oh! The page you were looking for was probably stolen by geese": "Oh! The page you were looking for was probably stolen by geese",
   "One": "One",
