@@ -25,9 +25,8 @@ export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false })
     const newLanguage = currentLanguage === 'en' ? 'uk' : 'en'
 
     i18n.changeLanguage(newLanguage)
-    isUserLogged ?? updateLanguage(newLanguage)
+    isUserLogged && updateLanguage(newLanguage)
     setStorageItem(STORAGE_KEYS.LANGUAGE, newLanguage)
-    dayjs.locale(newLanguage)
   }
 
   return (
