@@ -2,9 +2,9 @@ import { en } from './strings/en'
 import { uk } from './strings/uk'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import { getStorageItem } from '../utils/storage'
+import { getStorageItem, STORAGE_KEYS } from '../utils/storage'
 
-const savedLanguage = getStorageItem('language', 'en')
+const savedLanguage = getStorageItem(STORAGE_KEYS.LANGUAGE, 'en')
 
 const DEFAULT_LANGUAGE = savedLanguage ? savedLanguage : 'en'
 

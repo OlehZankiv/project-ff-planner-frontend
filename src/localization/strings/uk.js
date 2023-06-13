@@ -87,11 +87,11 @@ export const uk = {
   "of the past and focus on the present!": "Плануй тут і зараз",
 
   // Week days
-  "Monday": "Пн",
-  "Tuesday": "Вт",
-  "Wednesday": "Ср",
-  "Thursday": "Чт",
-  "Friday": "Пт",
-  "Saturday": "Сб",
-  "Sunday": "Нд",
+  "Mon": "Пн",
+  "Tue": "Вт",
+  "Wed": "Ср",
+  "Thu": "Чт",
+  "Fri": "Пт",
+  "Sat": "Сб",
+  "Sun": "Нд",
 }

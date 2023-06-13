@@ -87,11 +87,11 @@ export const en = {
   "of the past and focus on the present!": "of the past and focus on the present!",
 
   // Week days
-  "Monday": "Mon",
-  "Tuesday": "Tue",
-  "Wednesday": "Wed",
-  "Thursday": "Thu",
-  "Friday": "Fri",
-  "Saturday": "Sat",
-  "Sunday": "Sun",
+  "Mon": "Mon",
+  "Tue": "Tue",
+  "Wed": "Wed",
+  "Thu": "Thu",
+  "Fri": "Fri",
+  "Sat": "Sat",
+  "Sun": "Sun",
 }

@@ -4,7 +4,10 @@ import { useAuthContext } from '../contexts/auth'
 import { useUpdateUser } from '../hooks/query'
 import { OpacityButton } from './buttons/OpacityButton'
 import { Text } from './Text'
-import { setStorageItem } from '../utils/storage'
+import { setStorageItem, STORAGE_KEYS } from '../utils/storage'
+import dayjs from 'dayjs'
+import 'dayjs/locale/en'
+import 'dayjs/locale/uk'
 
 export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false }) => {
   const { i18n } = useTranslation()
@@ -12,6 +15,7 @@ export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false })
   const { logger } = useAuthContext()
 
   const currentLanguage = i18n.language
+  dayjs.locale(currentLanguage)
 
   useEffect(() => {
     if (logger?.language) i18n.changeLanguage(logger.language)
@@ -22,7 +26,8 @@ export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false })
 
     i18n.changeLanguage(newLanguage)
     isUserLogged ?? updateLanguage(newLanguage)
-    setStorageItem('language', newLanguage)
+    setStorageItem(STORAGE_KEYS.LANGUAGE, newLanguage)
+    dayjs.locale(newLanguage)
   }
 
   return (

@@ -3,6 +3,7 @@ export const STORAGE_KEYS = {
   TOKEN: 'TOKEN',
   LOGGER: 'LOGGER',
   THEME: 'THEME',
+  LANGUAGE: 'LANGUAGE',
 }
 
 export const getStorageItem = (key, defaultValue = '', isString = true) => {
