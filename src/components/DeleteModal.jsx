@@ -11,6 +11,7 @@ export const DeleteModal = ({ visible, setVisible, deleteFn, text }) => {
       visible={visible}
       onClose={() => setVisible(false)}
       onEnterPress={() => setVisible(false)}
+      style={{ zIndex: 1000 }}
     >
       <Text type='h6' style={{ textAlign: 'center', padding: '10px' }}>
         {text}
