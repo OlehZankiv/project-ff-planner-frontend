@@ -6,7 +6,7 @@ import { OpacityButton } from './buttons/OpacityButton'
 import { Text } from './Text'
 import { setStorageItem } from '../utils/storage'
 
-export const LanguagePicker = ({ style, color, fontSize, isUserLogged }) => {
+export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false }) => {
   const { i18n } = useTranslation()
   const { updateLanguage } = useUpdateUser()
   const { logger } = useAuthContext()
