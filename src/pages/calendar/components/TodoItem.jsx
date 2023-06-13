@@ -4,6 +4,7 @@ import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { useDeleteTask, useUpdateTask } from '../../../hooks/query'
+import { DeleteModal } from '../../../components/DeleteModal'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -23,12 +24,25 @@ const TodoItemStatus = ({ priority }) => {
   )
 }
 
-export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
-  const [isEditVisible, setEditVisible] = useState(false)
-  const { updateCategory } = useUpdateTask(id)
-  const { deleteTask } = useDeleteTask()
+export const TodoItem = ({
+  title,
+  priority,
+  showWithoutModalNextTime,
+  setShowWithoutModalNextTime,
+  assignedUser,
+  id,
+  ...rest
+}) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
+
+  const [isEditVisible, setEditVisible] = useState(false)
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
+  const { updateCategory } = useUpdateTask(id)
+
+  const { deleteTask, isLoading: isDeleteModalLoading } = useDeleteTask(() =>
+    setDeleteModalVisible(false),
+  )
 
   return (
     <>
@@ -82,7 +96,11 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
             <OpacityButton onClick={() => setEditVisible(true)}>
               <PencilIcon color={colors.text} />
             </OpacityButton>
-            <OpacityButton onClick={() => deleteTask(id)}>
+            <OpacityButton
+              onClick={() =>
+                showWithoutModalNextTime ? deleteTask(id) : setDeleteModalVisible(true)
+              }
+            >
               <TrashIcon color={colors.text} />
             </OpacityButton>
           </Actions>
@@ -94,6 +112,16 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
         updateValues={{ ...rest, title, id, priority }}
         visible={isEditVisible}
         setVisible={setEditVisible}
+      />
+      <DeleteModal
+        title={t('Delete Task')}
+        text={t('Are you really want to delete this task?')}
+        visible={isDeleteModalVisible}
+        setVisible={setDeleteModalVisible}
+        showWithoutModalNextTime={showWithoutModalNextTime}
+        onWithoutModalNextTimeChange={setShowWithoutModalNextTime}
+        onDelete={() => deleteTask(id)}
+        isLoading={isDeleteModalLoading}
       />
     </>
   )

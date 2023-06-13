@@ -6,7 +6,13 @@ import { TodoItem } from './TodoItem'
 import { getMobileStyles } from '../../../styles/breakpoints'
 import { useState } from 'react'
 
-export const TodoCategory = ({ type, selectedDate, todos }) => {
+export const TodoCategory = ({
+  showWithoutModalNextTime,
+  setShowWithoutModalNextTime,
+  type,
+  selectedDate,
+  todos,
+}) => {
   const { colors } = useTheme()
   const { t } = useTranslation()
 
@@ -25,7 +31,12 @@ export const TodoCategory = ({ type, selectedDate, todos }) => {
       </Text>
       <TodosWrapper>
         {todos.map((todo) => (
-          <TodoItem {...todo} key={todo.id} />
+          <TodoItem
+            setShowWithoutModalNextTime={setShowWithoutModalNextTime}
+            showWithoutModalNextTime={showWithoutModalNextTime}
+            {...todo}
+            key={todo.id}
+          />
         ))}
       </TodosWrapper>
       <PlusCircleIconButton onClick={() => setTaskModalVisible(true)}>

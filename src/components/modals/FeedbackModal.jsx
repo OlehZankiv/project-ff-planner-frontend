@@ -7,6 +7,7 @@ import { getMobileStyles } from '../../styles/breakpoints'
 import { Form, Formik } from 'formik'
 import { feedbackFormSchema } from '../../utils/schemas'
 import { FeedbackEditModal } from './FeedbackEditModal'
+import { DeleteModal } from '../DeleteModal'
 
 const initialValues = {
   rating: 0,
@@ -19,10 +20,16 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   const { reviews } = useReviews('owner')
   const { addReview, isLoading } = useAddReview(formik.current?.resetForm)
-  const { deleteReview } = useDeleteReview()
+  const { deleteReview, isLoading: isDeleteModalLoading } = useDeleteReview(() => {
+    setDeletedReviewId('')
+    setDeleteModalVisible(false)
+  })
 
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
   const [editedReview, setEditedReview] = useState('')
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [withoutDeleteModal, setWithoutDeleteModal] = useState(false)
+  const [deletedReviewId, setDeletedReviewId] = useState('')
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
@@ -37,70 +44,92 @@ export const FeedbackModal = ({ visible, setVisible }) => {
     if (!visible) formik.current?.resetForm()
   }, [visible])
 
-  return (
-    <>
+  if (isFeedbackEditModalVisible)
+    return (
       <FeedbackEditModal
         visible={isFeedbackEditModalVisible}
         setVisible={setFeedbackEditModalVisible}
         review={editedReview}
       />
-      {!isFeedbackEditModalVisible && (
-        <Modal
-          visible={visible}
-          onClose={() => setVisible(false)}
-          onEnterPress={() => setVisible(false)}
-        >
-          <Formik
-            innerRef={formik}
-            initialValues={initialValues}
-            onSubmit={addReview}
-            validationSchema={feedbackFormSchema}
-          >
-            {({ errors, touched }) => (
-              <Form autoComplete='off'>
-                <Ratings
-                  name='rating'
-                  errorMessage={t(errors.rating)}
-                  isError={errors.rating && touched.rating}
-                />
-                <Textarea
-                  name='comment'
-                  style={{ marginTop: 24 }}
-                  label={t('Review')}
-                  placeholder={t('Enter text')}
-                  errorMessage={t(errors.comment)}
-                  isError={errors.comment && touched.comment}
-                />
-                <Button
-                  fullWidth
-                  style={{ marginTop: 24, borderRadius: 8 }}
-                  type='submit'
-                  title={t('Save')}
-                  isLoading={isLoading}
-                />
-              </Form>
-            )}
-          </Formik>
+    )
 
-          {!!reviews.length && (
-            <FeedbackWrapper>
-              <FeedbackList>
-                {reviews.map((review) => (
-                  <Review
-                    {...review}
-                    key={review.id}
-                    style={{ border: 'none', padding: 0 }}
-                    showEdit
-                    editOnClick={() => handleEditFeedbackClick(review.id)}
-                    deleteOnClick={() => deleteReview(review.id)}
-                  />
-                ))}
-              </FeedbackList>
-            </FeedbackWrapper>
-          )}
-        </Modal>
+  if (isDeleteModalVisible)
+    return (
+      <DeleteModal
+        text={t('Are you really want to delete this review?')}
+        title={t('Delete Review')}
+        visible={isDeleteModalVisible}
+        setVisible={setDeleteModalVisible}
+        onDelete={() => deleteReview(deletedReviewId)}
+        showWithoutModalNextTime={withoutDeleteModal}
+        onWithoutModalNextTimeChange={setWithoutDeleteModal}
+        isLoading={isDeleteModalLoading}
+      />
+    )
+
+  return (
+    <Modal
+      visible={visible}
+      onClose={() => setVisible(false)}
+      onEnterPress={() => setVisible(false)}
+    >
+      <Formik
+        innerRef={formik}
+        initialValues={initialValues}
+        onSubmit={addReview}
+        validationSchema={feedbackFormSchema}
+      >
+        {({ errors, touched }) => (
+          <Form autoComplete='off'>
+            <Ratings
+              name='rating'
+              errorMessage={t(errors.rating)}
+              isError={errors.rating && touched.rating}
+            />
+            <Textarea
+              name='comment'
+              style={{ marginTop: 24 }}
+              label={t('Review')}
+              placeholder={t('Enter text')}
+              errorMessage={t(errors.comment)}
+              isError={errors.comment && touched.comment}
+            />
+            <Button
+              fullWidth
+              style={{ marginTop: 24, borderRadius: 8 }}
+              type='submit'
+              title={t('Save')}
+              isLoading={isLoading}
+            />
+          </Form>
+        )}
+      </Formik>
+
+      {!!reviews.length && (
+        <FeedbackWrapper>
+          <FeedbackList>
+            {reviews.map((review) => (
+              <>
+                <Review
+                  {...review}
+                  key={review.id}
+                  style={{ border: 'none', padding: 0 }}
+                  showEdit
+                  editOnClick={() => handleEditFeedbackClick(review.id)}
+                  deleteOnClick={() => {
+                    if (withoutDeleteModal) deleteReview(review.id)
+                    else {
+                      setDeletedReviewId(review.id)
+                      setDeleteModalVisible(true)
+                    }
+                  }}
+                />
+              </>
+            ))}
+          </FeedbackList>
+        </FeedbackWrapper>
       )}
-    </>
+    </Modal>
   )
 }
 

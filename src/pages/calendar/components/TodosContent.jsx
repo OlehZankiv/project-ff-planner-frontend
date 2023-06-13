@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../../styles/breakpoints'
 import { useTasks } from '../../../hooks/query'
@@ -15,10 +15,18 @@ export const TodosContent = ({ selectedDate }) => {
     [tasks],
   )
 
+  const [showWithoutModalNextTime, setShowWithoutModalNextTime] = useState(false)
+
   return (
     <Wrapper>
       {todoCategories.map((category) => (
-        <TodoCategory key={category.type} selectedDate={selectedDate} {...category} />
+        <TodoCategory
+          showWithoutModalNextTime={showWithoutModalNextTime}
+          setShowWithoutModalNextTime={setShowWithoutModalNextTime}
+          key={category.type}
+          selectedDate={selectedDate}
+          {...category}
+        />
       ))}
     </Wrapper>
   )
