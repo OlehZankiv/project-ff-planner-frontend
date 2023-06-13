@@ -19,6 +19,7 @@ import {
 } from '../../assets/images'
 import { ContentItem } from './components/ContentItem'
 import { ReviewsSlider } from './components/ReviewsSlider'
+import { LanguagePicker } from '../../components/LanguagePicker'
 
 const LandingPage = () => {
   const { t } = useTranslation()
@@ -79,6 +80,11 @@ const LandingPage = () => {
   return (
     <Container>
       <Hero>
+        <LanguagePicker
+          color={colors.white}
+          fontSize={18}
+          style={{ position: 'absolute', right: 15, top: 15 }}
+        />
         <AppLogo />
         <LinkBox>
           <Button

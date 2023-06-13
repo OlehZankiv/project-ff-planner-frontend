@@ -23,6 +23,7 @@ export const useUpdateUser = (onSuccess) => {
 
   return {
     updateTheme: (theme) => mutate({ theme }),
+    updateLanguage: (language) => mutate({ language }),
     updateUser: (user) => mutate(toUserDTO(user)),
     isLoading,
   }
