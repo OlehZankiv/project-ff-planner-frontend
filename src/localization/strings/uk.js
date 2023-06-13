@@ -2,7 +2,7 @@ export const uk = {
   "Add task": "Придумай справу",
   "Add": "Додай",
   "All in": "Все і одразу",
-  "Are you really want to delete this task?": "Гусь не рекомендує видаляти справу, яку не виконано! Точно цього хочеш?",
+  "Are you really want to delete this task?": "Не відкладай справи на завтра. Те що ти видалиш її нічого не змінить. Ти дійсно цього хочеш?",
   "Are you really want to delete this review?": "Ти що відмовляєшся від свого прокльону? Це вже 100%?",
   "Birthday": "Світоявлення",
   "Calendar": "Всезнайка",
