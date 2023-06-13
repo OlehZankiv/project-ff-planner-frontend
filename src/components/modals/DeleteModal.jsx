@@ -16,7 +16,12 @@ export const DeleteModal = ({ visible, setVisible, setDeleteVisible, title, revi
     }
 
     return (
-    <Modal visible={visible} onClose={() => setVisible(false)}>
+    <Modal
+        visible={visible}
+        onEnterPress={() => setVisible(false)}
+        onClose={() => setVisible(false)}
+        title="delete modal"
+        description="remove component">
         <Text type='h5' style={{ textAlign: "center" }}>
             {title}
         </Text>

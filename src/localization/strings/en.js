@@ -7,6 +7,7 @@ export const en = {
   "Cancel": "Cancel",
   "Comment is a required field": "Comment is a required field",
   "Comment must be at least 3 characters": "Comment must be at least 3 characters",
+  "Confirm the deletion": "Confirm the deletion",
   "Day": "Day",
   "Default": "Default",
   "Done": "Done",

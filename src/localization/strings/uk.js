@@ -7,6 +7,7 @@ export const uk = {
   "Cancel": "Ні-ні-ні",
   "Comment is a required field": "Твоя думка обов'язкова",
   "Comment must be at least 3 characters": "Не жалій. Мінімум 3 символи",
+  "Confirm the deletion": "Ти дійсно цього хочеш?",
   "Day": "Деньочки",
   "Default": "Як гусь каже",
   "Done": "Дошка шани",
