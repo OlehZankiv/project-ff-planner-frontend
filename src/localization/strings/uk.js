@@ -10,6 +10,7 @@ export const uk = {
   "Confirm the deletion": "Ти дійсно цього хочеш?",
   "Day": "Деньочки",
   "Default": "Як гусь каже",
+  "Delete": "Забирайся!",
   "Done": "Дошка шани",
   "Edit": "Переписати",
   "Email is a required field": "Гусь-mail - обов'язковий",

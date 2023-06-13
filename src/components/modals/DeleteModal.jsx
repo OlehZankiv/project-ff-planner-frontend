@@ -9,38 +9,43 @@ export const DeleteModal = ({ visible, setVisible, setDeleteVisible, title, revi
     const { t } = useTranslation()
     const { deleteReview } = useDeleteReview()
 
-    const handleDeleteReview = () => {
+    const handleDelete = () => {
         deleteReview(review.id)
         setDeleteVisible(false)
         setVisible(true)
+  }
+  
+   const handleCancel = () => {
+     setDeleteVisible(false)
+     setVisible(true)
     }
 
     return (
     <Modal
         visible={visible}
-        onEnterPress={() => setVisible(false)}
-        onClose={() => setVisible(false)}
+        onEnterPress={() => setDeleteVisible(false)}
+        onClose={() => setDeleteVisible(false)}
         title="delete modal"
         description="remove component">
         <Text type='h5' style={{ textAlign: "center" }}>
             {title}
         </Text>
-            <ButtonsWrapper>
-              <Button
-                style={{ marginRight: 8, borderRadius: 8 }}
-                fullWidth
-                type='submit'
-                title={t('Delete')}
-                onClick={handleDeleteReview}
-              />
-              <Button
-                variant='secondary'
-                fullWidth
-                style={{ borderRadius: 8 }}
-                title={t('Cancel')}
-                onClick={() => {setDeleteVisible(false), setVisible(true)}}
-              />
-            </ButtonsWrapper>
+        <ButtonsWrapper>
+           <Button
+              style={{ marginRight: 8, borderRadius: 8 }}
+              fullWidth
+              type='submit'
+              title={t('Delete')}
+              onClick={handleDelete}
+            />
+            <Button
+              variant='secondary'
+              fullWidth
+              style={{ borderRadius: 8 }}
+              title={t('Cancel')}
+              onClick={handleCancel}
+            />
+        </ButtonsWrapper>
     </Modal>
     )
 }

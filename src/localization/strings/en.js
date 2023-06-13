@@ -10,6 +10,7 @@ export const en = {
   "Confirm the deletion": "Confirm the deletion",
   "Day": "Day",
   "Default": "Default",
+  "Delete": "Delete",
   "Done": "Done",
   "Edit": "Edit",
   "Email is a required field": "Email is a required field",

@@ -120,15 +120,6 @@ export const FeedbackModal = ({ visible, setVisible }) => {
           )}
         </Modal>
       )}
-
-            {/* {(!isDeleteModalVisible && isFeedbackEditModalVisible) && (
-        <Modal
-          visible={visible}
-          onClose={() => setVisible(false)}
-          onEnterPress={() => setVisible(false)}
-        >
-        </Modal> */}
-      {/* )} */}
     </>
   )
 }
