@@ -12,7 +12,9 @@ export const uk = {
   "Day": "Деньочки",
   "Default": "Як гусь каже",
   "Done": "Дошка шани",
-  "Delete": "Відмовитись",
+  "Delete Review": "Видалити прокльон",
+  "Delete Task": "Видалити справу",
+  "Don't show it again?": "То може не показувати це знову?",
   "Edit": "Переписати",
   "Email is a required field": "Гусь-mail - обов'язковий",
   "Email must be a valid email": "Гусь-mail повинен бути дійсним",
@@ -88,6 +90,8 @@ export const uk = {
   "We send a verify letter to your email!": "Ми відправили гуся для перевірки на вашу електронну пошту!",
   "Well done": "Красавчик",
   "of the past and focus on the present!": "Плануй тут і зараз",
+  "Yes": "Так",
+  "No": "Ні",
 
   // Week days
   "Mon": "Пн",

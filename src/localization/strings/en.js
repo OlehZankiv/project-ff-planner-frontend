@@ -12,7 +12,9 @@ export const en = {
   "Day": "Day",
   "Default": "Default",
   "Done": "Done",
-  "Delete": "Delete",
+  "Delete Review": "Delete Review",
+  "Delete Task": "Delete Task",
+  "Don't show it again?": "Don't show it again?",
   "Edit": "Edit",
   "Email is a required field": "Email is a required field",
   "Email must be a valid email": "Email must be a valid email",
@@ -88,6 +90,8 @@ export const en = {
   "We send a verify letter to your email!": "We send a verify letter to your email!",
   "Well done": "Well done",
   "of the past and focus on the present!": "of the past and focus on the present!",
+  "Yes": "Yes",
+  "No": "No",
 
   // Week days
   "Mon": "Mon",

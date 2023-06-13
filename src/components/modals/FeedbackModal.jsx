@@ -25,6 +25,8 @@ export const FeedbackModal = ({ visible, setVisible }) => {
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
   const [editedReview, setEditedReview] = useState('')
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [isAskingAgain, setIsAskingAgain] = useState(true)
+  const [deletedReviewId, setDeletedReviewId] = useState('')
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
@@ -37,7 +39,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   useEffect(() => {
     if (!visible) formik.current?.resetForm()
-  }, [visible])
+  }, [visible, isDeleteModalOpen])
 
   return (
     <>
@@ -46,7 +48,15 @@ export const FeedbackModal = ({ visible, setVisible }) => {
         setVisible={setFeedbackEditModalVisible}
         review={editedReview}
       />
-      {!isFeedbackEditModalVisible && (
+      <DeleteModal
+        visible={isDeleteModalOpen}
+        setVisible={setIsDeleteModalOpen}
+        deleteFn={() => deleteReview(deletedReviewId)}
+        text={t('Are you really want to delete this review?')}
+        setIsAskingAgain={setIsAskingAgain}
+        title={t('Delete Review')}
+      />
+      {(!isDeleteModalOpen || isFeedbackEditModalVisible) && (
         <Modal
           visible={visible}
           onClose={() => setVisible(false)}
@@ -95,13 +105,14 @@ export const FeedbackModal = ({ visible, setVisible }) => {
                       style={{ border: 'none', padding: 0 }}
                       showEdit
                       editOnClick={() => handleEditFeedbackClick(review.id)}
-                      deleteOnClick={() => setIsDeleteModalOpen(true)}
-                    />
-                    <DeleteModal
-                      visible={isDeleteModalOpen}
-                      setVisible={setIsDeleteModalOpen}
-                      deleteFn={() => deleteReview(review.id)}
-                      text={t('Are you really want to delete this review?')}
+                      deleteOnClick={
+                        isAskingAgain
+                          ? () => {
+                              setDeletedReviewId(review.id)
+                              setIsDeleteModalOpen(true)
+                            }
+                          : () => deleteReview(review.id)
+                      }
                     />
                   </>
                 ))}

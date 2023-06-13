@@ -27,6 +27,7 @@ const TodoItemStatus = ({ priority }) => {
 export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
   const [isEditVisible, setEditVisible] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [isAskingAgain, setIsAskingAgain] = useState(true)
   const { updateCategory } = useUpdateTask(id)
   const { deleteTask } = useDeleteTask()
   const { t } = useTranslation()
@@ -84,7 +85,9 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
             <OpacityButton onClick={() => setEditVisible(true)}>
               <PencilIcon color={colors.text} />
             </OpacityButton>
-            <OpacityButton onClick={() => setIsDeleteModalOpen(true)}>
+            <OpacityButton
+              onClick={isAskingAgain ? () => setIsDeleteModalOpen(true) : () => deleteTask(id)}
+            >
               <TrashIcon color={colors.text} />
             </OpacityButton>
           </Actions>
@@ -102,6 +105,8 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
         setVisible={setIsDeleteModalOpen}
         deleteFn={() => deleteTask(id)}
         text={t('Are you really want to delete this task?')}
+        setIsAskingAgain={setIsAskingAgain}
+        title={t('Delete Task')}
       />
     </>
   )
