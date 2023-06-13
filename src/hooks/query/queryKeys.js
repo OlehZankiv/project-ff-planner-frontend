@@ -1,6 +1,7 @@
 export const queryKeys = Object.freeze({
   login: 'login',
   register: 'register',
+  verify: 'verify',
   logout: 'logout',
   getReviews: 'getReviews',
   addReview: 'addReview',

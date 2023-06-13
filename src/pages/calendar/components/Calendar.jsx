@@ -33,6 +33,7 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
       })),
     [tasks, theme],
   )
+
   const onDateClick = (date) => {
     if (!dayjs(date).isBefore(new Date(), 'day')) {
       setCalendarType('day')

@@ -54,6 +54,7 @@ export const en = {
   "Sign up": "Sign up",
   "Skype": "Skype",
   "Start": "Start",
+  "The user was verified": "The user was verified",
   "This is a CORRECT birthday": "This is a CORRECT birthday",
   "This is a CORRECT email": "This is a CORRECT email",
   "This is a CORRECT name": "This is a CORRECT name",

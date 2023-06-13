@@ -7,8 +7,9 @@ import { Button, Input, OpacityButton, Text } from '../../../components'
 import styled, { css, useTheme } from 'styled-components'
 import { CloseIcon, LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
-import { useLogin } from '../../../hooks/query'
+import { useLogin, useVerify } from '../../../hooks/query'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const initialValues = {
   email: '',
@@ -17,10 +18,17 @@ const initialValues = {
 
 export const LogInForm = () => {
   const { t } = useTranslation()
-  const { login, isLoading } = useLogin()
+  const { login, isLoading: isLoginLoading } = useLogin()
+  const { verify, isLoading: isVerifyLoading } = useVerify()
   const { colors } = useTheme()
 
+  const isLoading = isLoginLoading || isVerifyLoading
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    verify()
+  }, [])
 
   return (
     <Formik initialValues={initialValues} onSubmit={login} validationSchema={loginFormSchema}>

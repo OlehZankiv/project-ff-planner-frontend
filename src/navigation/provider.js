@@ -9,7 +9,7 @@ const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
-const NotFoundPage = lazy(() => import('../pages/notFoundPage/NotFoundPage'))
+const NotFoundPage = lazy(() => import('../pages/404/NotFoundPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
