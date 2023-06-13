@@ -41,13 +41,16 @@ export const FeedbackModal = ({ visible, setVisible }) => {
     if (!visible) formik.current?.resetForm()
   }, [visible, isDeleteModalOpen])
 
-  return (
-    <>
+  if (isFeedbackEditModalVisible) {
+    return (
       <FeedbackEditModal
         visible={isFeedbackEditModalVisible}
         setVisible={setFeedbackEditModalVisible}
         review={editedReview}
       />
+    )
+  } else if (isDeleteModalOpen) {
+    return (
       <DeleteModal
         visible={isDeleteModalOpen}
         setVisible={setIsDeleteModalOpen}
@@ -56,73 +59,74 @@ export const FeedbackModal = ({ visible, setVisible }) => {
         setIsAskingAgain={setIsAskingAgain}
         title={t('Delete Review')}
       />
-      {(!isDeleteModalOpen || isFeedbackEditModalVisible) && (
-        <Modal
-          visible={visible}
-          onClose={() => setVisible(false)}
-          onEnterPress={() => setVisible(false)}
+    )
+  } else {
+    return (
+      <Modal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        onEnterPress={() => setVisible(false)}
+      >
+        <Formik
+          innerRef={formik}
+          initialValues={initialValues}
+          onSubmit={addReview}
+          validationSchema={feedbackFormSchema}
         >
-          <Formik
-            innerRef={formik}
-            initialValues={initialValues}
-            onSubmit={addReview}
-            validationSchema={feedbackFormSchema}
-          >
-            {({ errors, touched }) => (
-              <Form autoComplete='off'>
-                <Ratings
-                  name='rating'
-                  errorMessage={t(errors.rating)}
-                  isError={errors.rating && touched.rating}
-                />
-                <Textarea
-                  name='comment'
-                  style={{ marginTop: 24 }}
-                  label={t('Review')}
-                  placeholder={t('Enter text')}
-                  errorMessage={t(errors.comment)}
-                  isError={errors.comment && touched.comment}
-                />
-                <Button
-                  fullWidth
-                  style={{ marginTop: 24, borderRadius: 8 }}
-                  type='submit'
-                  title={t('Save')}
-                  isLoading={isLoading}
-                />
-              </Form>
-            )}
-          </Formik>
-
-          {!!reviews.length && (
-            <FeedbackWrapper>
-              <FeedbackList>
-                {reviews.map((review) => (
-                  <>
-                    <Review
-                      {...review}
-                      key={review.id}
-                      style={{ border: 'none', padding: 0 }}
-                      showEdit
-                      editOnClick={() => handleEditFeedbackClick(review.id)}
-                      deleteOnClick={
-                        isAskingAgain
-                          ? () => {
-                              setDeletedReviewId(review.id)
-                              setIsDeleteModalOpen(true)
-                            }
-                          : () => deleteReview(review.id)
-                      }
-                    />
-                  </>
-                ))}
-              </FeedbackList>
-            </FeedbackWrapper>
+          {({ errors, touched }) => (
+            <Form autoComplete='off'>
+              <Ratings
+                name='rating'
+                errorMessage={t(errors.rating)}
+                isError={errors.rating && touched.rating}
+              />
+              <Textarea
+                name='comment'
+                style={{ marginTop: 24 }}
+                label={t('Review')}
+                placeholder={t('Enter text')}
+                errorMessage={t(errors.comment)}
+                isError={errors.comment && touched.comment}
+              />
+              <Button
+                fullWidth
+                style={{ marginTop: 24, borderRadius: 8 }}
+                type='submit'
+                title={t('Save')}
+                isLoading={isLoading}
+              />
+            </Form>
           )}
-        </Modal>
-      )}
-    </>
-  )
+        </Formik>
+
+        {!!reviews.length && (
+          <FeedbackWrapper>
+            <FeedbackList>
+              {reviews.map((review) => (
+                <>
+                  <Review
+                    {...review}
+                    key={review.id}
+                    style={{ border: 'none', padding: 0 }}
+                    showEdit
+                    editOnClick={() => handleEditFeedbackClick(review.id)}
+                    deleteOnClick={
+                      isAskingAgain
+                        ? () => {
+                            setDeletedReviewId(review.id)
+                            setIsDeleteModalOpen(true)
+                          }
+                        : () => deleteReview(review.id)
+                    }
+                  />
+                </>
+              ))}
+            </FeedbackList>
+          </FeedbackWrapper>
+        )}
+      </Modal>
+    )
+  }
 }
 
 const FeedbackWrapper = styled.div`
