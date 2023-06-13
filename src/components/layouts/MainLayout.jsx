@@ -196,7 +196,7 @@ const TabWrap = styled.div`
 const InfoWrap = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 `
 
 const BurgerWrap = styled.div`
