@@ -2,11 +2,12 @@ import styled, { css } from 'styled-components'
 import { Button, Modal, Ratings, Review, Textarea } from '../index'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAddReview, useDeleteReview, useReviews } from '../../hooks/query'
+import { useAddReview, useReviews } from '../../hooks/query'
 import { getMobileStyles } from '../../styles/breakpoints'
 import { Form, Formik } from 'formik'
 import { feedbackFormSchema } from '../../utils/schemas'
 import { FeedbackEditModal } from './FeedbackEditModal'
+import { DeleteModal } from './DeleteModal'
 
 const initialValues = {
   rating: 0,
@@ -19,18 +20,29 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   const { reviews } = useReviews('owner')
   const { addReview, isLoading } = useAddReview(formik.current?.resetForm)
-  const { deleteReview } = useDeleteReview()
 
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
   const [editedReview, setEditedReview] = useState('')
+  const [deletedReview, setDeleteReview] = useState('')
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
 
     if (!review) return alert('review not found')
-
+    setDeleteModalVisible(false)
     setEditedReview(review)
     setFeedbackEditModalVisible(true)
+    setVisible(false)
+  }
+
+  const handleDeleteFeedbackClick = (id) => {
+    const review = reviews.find((r) => r.id === id)
+
+    if (!review) return alert('review not found')
+    setDeleteModalVisible(true);
+    setVisible(false)
+    setDeleteReview(review)
   }
 
   useEffect(() => {
@@ -44,6 +56,14 @@ export const FeedbackModal = ({ visible, setVisible }) => {
         setVisible={setFeedbackEditModalVisible}
         review={editedReview}
       />
+      <DeleteModal
+        title={t('Confirm the deletion')}
+        visible={isDeleteModalVisible}
+        setDeleteVisible={setDeleteModalVisible}
+        setVisible={setVisible}
+        review={deletedReview}
+      />
+      
       {!isFeedbackEditModalVisible && (
         <Modal
           visible={visible}
@@ -92,12 +112,21 @@ export const FeedbackModal = ({ visible, setVisible }) => {
                     style={{ border: 'none', padding: 0 }}
                     showEdit
                     editOnClick={() => handleEditFeedbackClick(review.id)}
-                    deleteOnClick={() => deleteReview(review.id)}
+                    deleteOnClick={() => handleDeleteFeedbackClick(review.id)}
                   />
                 ))}
               </FeedbackList>
             </FeedbackWrapper>
           )}
+        </Modal>
+      )}
+
+            {(!isDeleteModalVisible && isFeedbackEditModalVisible) && (
+        <Modal
+          visible={visible}
+          onClose={() => setVisible(false)}
+          onEnterPress={() => setVisible(false)}
+        >
         </Modal>
       )}
     </>
