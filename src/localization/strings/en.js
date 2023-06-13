@@ -2,6 +2,7 @@ export const en = {
   "Add task": "Add task",
   "Add": "Add",
   "All in": "All in",
+  "Are you really want to delete this task?": "Are you really want to delete this task?",
   "Birthday": "Birthday",
   "Calendar": "Calendar",
   "Cancel": "Cancel",

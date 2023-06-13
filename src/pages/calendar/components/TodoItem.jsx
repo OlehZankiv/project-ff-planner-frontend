@@ -4,6 +4,7 @@ import { ArrowCircleIcon, PencilIcon, TrashIcon } from '../../../assets/icons'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { useDeleteTask, useUpdateTask } from '../../../hooks/query'
+import { DeleteModal } from '../../../components/DeleteModal'
 
 const TodoItemStatus = ({ priority }) => {
   const { t } = useTranslation()
@@ -25,6 +26,7 @@ const TodoItemStatus = ({ priority }) => {
 
 export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
   const [isEditVisible, setEditVisible] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { updateCategory } = useUpdateTask(id)
   const { deleteTask } = useDeleteTask()
   const { t } = useTranslation()
@@ -82,7 +84,7 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
             <OpacityButton onClick={() => setEditVisible(true)}>
               <PencilIcon color={colors.text} />
             </OpacityButton>
-            <OpacityButton onClick={() => deleteTask(id)}>
+            <OpacityButton onClick={() => setIsDeleteModalOpen(true)}>
               <TrashIcon color={colors.text} />
             </OpacityButton>
           </Actions>
@@ -94,6 +96,12 @@ export const TodoItem = ({ title, priority, assignedUser, id, ...rest }) => {
         updateValues={{ ...rest, title, id, priority }}
         visible={isEditVisible}
         setVisible={setEditVisible}
+      />
+      <DeleteModal
+        visible={isDeleteModalOpen}
+        setVisible={setIsDeleteModalOpen}
+        deleteFn={() => deleteTask(id)}
+        text={t('Are you really want to delete this task?')}
       />
     </>
   )

@@ -2,6 +2,7 @@ export const uk = {
   "Add task": "Придумай справу",
   "Add": "Додай",
   "All in": "Все і одразу",
+  "Are you really want to delete this task?": "Гусь не рекомендує видаляти справу, яку не виконано! Точно цього хочеш?",
   "Birthday": "Світоявлення",
   "Calendar": "Всезнайка",
   "Cancel": "Ні-ні-ні",

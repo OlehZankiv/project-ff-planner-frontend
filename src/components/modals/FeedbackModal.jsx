@@ -7,6 +7,7 @@ import { getMobileStyles } from '../../styles/breakpoints'
 import { Form, Formik } from 'formik'
 import { feedbackFormSchema } from '../../utils/schemas'
 import { FeedbackEditModal } from './FeedbackEditModal'
+import { DeleteModal } from '../DeleteModal'
 
 const initialValues = {
   rating: 0,
@@ -23,6 +24,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   const [isFeedbackEditModalVisible, setFeedbackEditModalVisible] = useState(false)
   const [editedReview, setEditedReview] = useState('')
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   const handleEditFeedbackClick = (id) => {
     const review = reviews.find((r) => r.id === id)
@@ -86,14 +88,22 @@ export const FeedbackModal = ({ visible, setVisible }) => {
             <FeedbackWrapper>
               <FeedbackList>
                 {reviews.map((review) => (
-                  <Review
-                    {...review}
-                    key={review.id}
-                    style={{ border: 'none', padding: 0 }}
-                    showEdit
-                    editOnClick={() => handleEditFeedbackClick(review.id)}
-                    deleteOnClick={() => deleteReview(review.id)}
-                  />
+                  <>
+                    <Review
+                      {...review}
+                      key={review.id}
+                      style={{ border: 'none', padding: 0 }}
+                      showEdit
+                      editOnClick={() => handleEditFeedbackClick(review.id)}
+                      deleteOnClick={() => setIsDeleteModalOpen(true)}
+                    />
+                    <DeleteModal
+                      visible={isDeleteModalOpen}
+                      setVisible={setIsDeleteModalOpen}
+                      deleteFn={() => deleteReview(review.id)}
+                      text={t('Are you really want to delete this review?')}
+                    />
+                  </>
                 ))}
               </FeedbackList>
             </FeedbackWrapper>

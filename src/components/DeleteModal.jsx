@@ -4,7 +4,7 @@ import { Text } from './Text'
 import { useTranslation } from 'react-i18next'
 import { Button } from './buttons/Button'
 
-export const DeleteModal = ({ visible, setVisible, deleteFn }) => {
+export const DeleteModal = ({ visible, setVisible, deleteFn, text }) => {
   const { t } = useTranslation()
   return (
     <Modal
@@ -12,7 +12,9 @@ export const DeleteModal = ({ visible, setVisible, deleteFn }) => {
       onClose={() => setVisible(false)}
       onEnterPress={() => setVisible(false)}
     >
-      <Text>{t('You really want to delete it?')}</Text>
+      <Text type='h6' style={{ textAlign: 'center', padding: '10px' }}>
+        {text}
+      </Text>
       <ButtonsWrapper>
         <Button
           style={{ borderRadius: 8 }}
