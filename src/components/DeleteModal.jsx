@@ -13,7 +13,6 @@ export const DeleteModal = ({ visible, setVisible, deleteFn, text, title, setIsA
       visible={visible}
       onClose={() => setVisible(false)}
       onEnterPress={() => setVisible(false)}
-      style={{ zIndex: 1000 }}
     >
       <DeleteModalWrap>
         <Text type='h3' fontSize={28} style={{ marginBottom: '30px' }}>

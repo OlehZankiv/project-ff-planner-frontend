@@ -39,7 +39,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
 
   useEffect(() => {
     if (!visible) formik.current?.resetForm()
-  }, [visible, isDeleteModalOpen])
+  }, [visible])
 
   if (isFeedbackEditModalVisible) {
     return (
