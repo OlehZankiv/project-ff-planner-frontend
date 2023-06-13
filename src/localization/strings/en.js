@@ -87,11 +87,11 @@ export const en = {
   "Title is a required field": "Title is a required field",
 
   // Week days
-  "Monday": "Monday",
-  "Tuesday": "Tuesday",
-  "Wednesday": "Wednesday",
-  "Thursday": "Thursday",
-  "Friday": "Friday",
-  "Saturday": "Saturday",
-  "Sunday": "Sunday",
+  "Monday": "Mon",
+  "Tuesday": "Tue",
+  "Wednesday": "Wed",
+  "Thursday": "Thu",
+  "Friday": "Fri",
+  "Saturday": "Sat",
+  "Sunday": "Sun",
 }

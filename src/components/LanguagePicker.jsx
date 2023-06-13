@@ -4,6 +4,7 @@ import { useAuthContext } from '../contexts/auth'
 import { useUpdateUser } from '../hooks/query'
 import { OpacityButton } from './buttons/OpacityButton'
 import { Text } from './Text'
+import { setStorageItem } from '../utils/storage'
 
 export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false }) => {
   const { i18n } = useTranslation()
@@ -21,7 +22,7 @@ export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false })
     const newLanguage = currentLanguage === 'en' ? 'uk' : 'en'
     i18n.changeLanguage(newLanguage)
     isUserLogged ?? updateLanguage(newLanguage)
-    localStorage.setItem('language', newLanguage)
+    setStorageItem('language', newLanguage)
   }
   return (
     <OpacityButton onClick={handleLanguageChange} style={style}>

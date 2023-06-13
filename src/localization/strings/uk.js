@@ -88,11 +88,11 @@ export const uk = {
   "Title is a required field": "Назва - обов'язкове поле",
 
   // Week days
-  "Monday": "Понеділок",
-  "Tuesday": "Вівторок",
-  "Wednesday": "Середа",
-  "Thursday": "Четвер",
-  "Friday": "П'ятниця",
-  "Saturday": "Субота",
-  "Sunday": "Неділя",
+  "Monday": "Пн",
+  "Tuesday": "Вт",
+  "Wednesday": "Ср",
+  "Thursday": "Чт",
+  "Friday": "Пт",
+  "Saturday": "Сб",
+  "Sunday": "Нд",
 }

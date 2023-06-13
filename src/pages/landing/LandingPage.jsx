@@ -83,7 +83,7 @@ const LandingPage = () => {
         <LanguagePicker
           color={colors.white}
           fontSize={18}
-          style={{ position: 'absolute', right: '15px', top: '15px' }}
+          style={{ position: 'absolute', right: 15, top: 15 }}
         />
         <AppLogo />
         <LinkBox>
