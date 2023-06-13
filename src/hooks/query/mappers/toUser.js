@@ -1,4 +1,14 @@
-export const toUser = ({ id, phone, birthday, skype, name, avatarURL, email, theme }) => ({
+export const toUser = ({
+  id,
+  phone,
+  birthday,
+  skype,
+  name,
+  avatarURL,
+  email,
+  theme,
+  language,
+}) => ({
   id: id ?? '',
   email: email ?? '',
   name: name ?? '',
@@ -7,6 +17,7 @@ export const toUser = ({ id, phone, birthday, skype, name, avatarURL, email, the
   phone: phone ?? '',
   birthday: birthday ? new Date(birthday) : '',
   skype: skype ?? '',
+  language: language ?? 'en',
 })
 
 export const toUserDTO = ({ birthday, ...instance }) => ({

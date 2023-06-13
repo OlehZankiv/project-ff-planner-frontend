@@ -3,7 +3,9 @@ import { uk } from './strings/uk'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
-const DEFAULT_LANGUAGE = 'en'
+const savedLanguage = localStorage.getItem('language')
+
+const DEFAULT_LANGUAGE = savedLanguage ? savedLanguage : 'en'
 
 i18n.use(initReactI18next).init({
   resources: {
