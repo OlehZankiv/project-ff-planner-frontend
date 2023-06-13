@@ -116,7 +116,7 @@ export const MainLayout = () => {
                   </>
                 )}
                 <InfoWrap>
-                  <LanguagePicker color={colors.icon} fontSize={18} isUserLogged />
+                  <LanguagePicker color={colors.icon} fontSize={18} />
                   <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
                       <MoonIcon size={iconSize} color={colors.primary} />

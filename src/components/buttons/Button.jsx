@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 import { Text } from '../Text'
-import { Spinner } from '../../pages/auth/components/Spinner'
+import { Spinner } from '../Spinner'
 import { useTranslation } from 'react-i18next'
 
 export const Button = ({

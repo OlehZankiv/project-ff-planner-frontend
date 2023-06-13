@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ROUTES } from './routes'
-import { Loader, MainLayout } from '../components'
+import { MainLayout, SuspenseLoader } from '../components'
 import { lazy, Suspense } from 'react'
 import { useAuthContext } from '../contexts/auth'
 
@@ -13,7 +13,7 @@ const NotFoundPage = lazy(() => import('../pages/404/NotFoundPage'))
 
 export const AppRouterProvider = () => (
   <BrowserRouter>
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Routes>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />

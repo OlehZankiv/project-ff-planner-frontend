@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components'
 
 const LoginPage = () => {
   const { colors } = useTheme()
+
   return (
     <AuthWrapper>
       <LanguagePicker
