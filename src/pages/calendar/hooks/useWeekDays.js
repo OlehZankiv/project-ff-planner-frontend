@@ -7,39 +7,39 @@ export const useWeekDays = (selectedDate) => {
   const { t } = useTranslation()
 
   const Monday = useBreakpointValue({
-    desktopValue: t('Monday').slice(0, 3),
-    tabletValue: t('Monday').slice(0, 3),
-    mobileValue: t('Monday').slice(0, 1),
+    desktopValue: t('Mon'),
+    tabletValue: t('Mon'),
+    mobileValue: t('Mon').slice(0, 1),
   })
   const Tuesday = useBreakpointValue({
-    desktopValue: t('Tuesday').slice(0, 3),
-    tabletValue: t('Tuesday').slice(0, 3),
-    mobileValue: t('Tuesday').slice(0, 1),
+    desktopValue: t('Tue'),
+    tabletValue: t('Tue'),
+    mobileValue: t('Tue').slice(0, 1),
   })
   const Wednesday = useBreakpointValue({
-    desktopValue: t('Wednesday').slice(0, 3),
-    tabletValue: t('Wednesday').slice(0, 3),
-    mobileValue: t('Wednesday').slice(0, 1),
+    desktopValue: t('Wed'),
+    tabletValue: t('Wed'),
+    mobileValue: t('Wed').slice(0, 1),
   })
   const Thursday = useBreakpointValue({
-    desktopValue: t('Thursday').slice(0, 3),
-    tabletValue: t('Thursday').slice(0, 3),
-    mobileValue: t('Thursday').slice(0, 1),
+    desktopValue: t('Thu'),
+    tabletValue: t('Thu'),
+    mobileValue: t('Thu').slice(0, 1),
   })
   const Friday = useBreakpointValue({
-    desktopValue: t('Friday').slice(0, 3),
-    tabletValue: t('Friday').slice(0, 3),
-    mobileValue: t('Friday').slice(0, 1),
+    desktopValue: t('Fri'),
+    tabletValue: t('Fri'),
+    mobileValue: t('Fri').slice(0, 1),
   })
   const Saturday = useBreakpointValue({
-    desktopValue: t('Saturday').slice(0, 3),
-    tabletValue: t('Saturday').slice(0, 3),
-    mobileValue: t('Saturday').slice(0, 1),
+    desktopValue: t('Sat'),
+    tabletValue: t('Sat'),
+    mobileValue: t('Sat').slice(0, 1),
   })
   const Sunday = useBreakpointValue({
-    desktopValue: t('Sunday').slice(0, 3),
-    tabletValue: t('Sunday').slice(0, 3),
-    mobileValue: t('Sunday').slice(0, 1),
+    desktopValue: t('Sun'),
+    tabletValue: t('Sun'),
+    mobileValue: t('Sun').slice(0, 1),
   })
 
   const daysText = useMemo(
