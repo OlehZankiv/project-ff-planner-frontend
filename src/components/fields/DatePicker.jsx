@@ -124,11 +124,11 @@ const PickerWrapper = styled.div`
   ${({ visible }) => css`
     position: absolute;
     z-index: 10000000;
-    bottom: 0;
+    top: 0;
     left: 50%;
     transition: 0.15s transform;
     transform-origin: top;
-    transform: translate(-50%, 100%) scale(${visible ? 1 : 0});
+    transform: translate(-50%, -50%) scale(${visible ? 1 : 0});
   `}
 `
 

@@ -134,6 +134,7 @@ const CalendarWrapper = styled.section`
       height: 0;
 
       .fc-daygrid-day-events {
+        min-height: 2px;
         max-height: calc(100% - 54px);
       }
     }

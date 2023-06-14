@@ -26,6 +26,7 @@ export const ReviewsSlider = () => {
     })
     if (!behavior) document.body.scrollIntoView()
   }
+
   useEffect(updateListPosition, [width])
 
   useEffect(() => {
@@ -34,7 +35,8 @@ export const ReviewsSlider = () => {
 
   const next = () => {
     const prev = currentIndex.current
-    currentIndex.current = prev === reviews.length - 1 ? 0 : prev + 1
+    currentIndex.current = prev === reviews.length - 2 ? 0 : prev + 1
+
     updateListPosition('smooth')
   }
 
@@ -45,17 +47,18 @@ export const ReviewsSlider = () => {
     updateListPosition('smooth')
   }
 
+  useEffect(() => {
+    const interval = setInterval(next, 10000)
+
+    return () => clearInterval(interval)
+  }, [reviews])
+
   return (
     <Wrapper>
       <Text type='h2' color='primary'>
         {t('Reviews')}
       </Text>
-      <ReviewList
-        ref={container}
-        onScroll={(e) => {
-          e.preventDefault()
-        }}
-      >
+      <ReviewList ref={container} onScroll={(e) => e.preventDefault()}>
         {reviews.map((review, index) => (
           <div key={review.id} ref={(ref) => (itemsRef.current[index] = ref)}>
             <Review style={{ height: '100%' }} {...review} />
