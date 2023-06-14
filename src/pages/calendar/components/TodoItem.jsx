@@ -44,8 +44,6 @@ export const TodoItem = ({
     setDeleteModalVisible(false),
   )
 
-  console.log(assignedUser)
-
   return (
     <>
       <Wrapper>
