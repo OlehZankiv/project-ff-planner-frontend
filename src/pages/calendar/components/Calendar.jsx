@@ -130,11 +130,11 @@ const CalendarWrapper = styled.section`
       }
     }
 
-    .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+    .fc-daygrid-day-frame {
+      min-height: 150px;
       height: 0;
 
       .fc-daygrid-day-events {
-        min-height: 2px;
         max-height: calc(100% - 54px);
       }
     }
