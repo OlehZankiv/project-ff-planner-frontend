@@ -34,7 +34,7 @@ export const DeleteModal = ({
           <input
             type='checkbox'
             checked={showWithoutModalNextTime}
-            onClick={() => onWithoutModalNextTimeChange((prev) => !prev)}
+            onChange={() => onWithoutModalNextTimeChange((prev) => !prev)}
           />
           <Text type='p' fontSize={12}>
             {t("Don't show it again?")}
