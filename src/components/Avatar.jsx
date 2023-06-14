@@ -14,10 +14,10 @@ export const Avatar = ({
   onAvatarPick,
 }) => {
   const initials =
-    (name + ' Zankiv')
+    name
       ?.split(' ')
       .slice(0, 2)
-      .map((word) => word[0].toUpperCase())
+      .map((word) => word[0]?.toUpperCase())
       .join('') ?? ''
 
   const plusIconSize = useBreakpointValue({ desktopValue: 18, tabletValue: 18, mobileValue: 12 })

@@ -5,7 +5,7 @@ import { ROUTES } from '../../../navigation/routes'
 import { loginFormSchema } from '../../../utils/schemas'
 import { Button, Input, OpacityButton, Text } from '../../../components'
 import styled, { css, useTheme } from 'styled-components'
-import { CloseIcon, LoginIcon } from '../../../assets/icons'
+import { ArrowLeft, LoginIcon } from '../../../assets/icons'
 import { AuthFormStyled } from '../shared.styled'
 import { useLogin, useVerify } from '../../../hooks/query'
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +35,7 @@ export const LogInForm = () => {
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
           <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
-            <CloseIcon color={colors.text} />
+            <ArrowLeft color={colors.text} />
           </CloseIconWrapper>
           <Text
             style={{ marginBottom: '40px' }}
@@ -90,5 +90,5 @@ export const LogInForm = () => {
 const CloseIconWrapper = styled(OpacityButton)`
   position: absolute;
   top: 24px;
-  right: 24px;
+  right: 36px;
 `

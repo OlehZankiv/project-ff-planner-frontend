@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ROUTES } from '../../../navigation/routes'
 import { registerFormSchema } from '../../../utils/schemas'
 import { Button, Input, OpacityButton, Text } from '../../../components'
-import { CloseIcon, LoginIcon } from '../../../assets/icons'
+import { ArrowLeft, LoginIcon } from '../../../assets/icons'
 import styled, { css, useTheme } from 'styled-components'
 import { AuthFormStyled } from '../shared.styled'
 import { useRegister } from '../../../hooks/query'
@@ -38,7 +38,7 @@ export const RegisterForm = () => {
       {({ errors, touched }) => (
         <AuthFormStyled autoComplete='off'>
           <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
-            <CloseIcon color={colors.text} />
+            <ArrowLeft color={colors.text} />
           </CloseIconWrapper>
           <Text
             style={{ marginBottom: '40px' }}
@@ -102,5 +102,5 @@ export const RegisterForm = () => {
 const CloseIconWrapper = styled(OpacityButton)`
   position: absolute;
   top: 24px;
-  right: 24px;
+  right: 36px;
 `
