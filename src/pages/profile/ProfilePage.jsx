@@ -115,7 +115,10 @@ const ProfilePage = () => {
               buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
               type='submit'
               fullWidth
-              disabled={Object.entries(values).every(([key, value]) => value === logger?.[key])}
+              disabled={
+                Object.entries(values).every(([key, value]) => value === logger?.[key]) &&
+                !selectedAvatar
+              }
               title={t('Save changes')}
               variant='primary'
               isLoading={isLoading}

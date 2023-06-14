@@ -44,6 +44,8 @@ export const TodoItem = ({
     setDeleteModalVisible(false),
   )
 
+  console.log(assignedUser)
+
   return (
     <>
       <Wrapper>
@@ -59,7 +61,7 @@ export const TodoItem = ({
         </Text>
         <BottomSide>
           <AvatarWrapper>
-            <Avatar size={32} image={assignedUser.avatar} name={assignedUser.name} />
+            <Avatar size={32} image={assignedUser.avatarURL} name={assignedUser.name} />
             <TodoItemStatus priority={priority} />
           </AvatarWrapper>
           <Actions>
