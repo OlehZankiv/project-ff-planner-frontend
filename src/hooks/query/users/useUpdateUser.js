@@ -12,8 +12,7 @@ export const useUpdateUser = (onSuccess) => {
   const queryClient = useQueryClient()
 
   const { mutate, isLoading } = useMutation((data) => updateUser(id, data), {
-    mutationKey: [queryKeys.updateUser, id],
-    enabled: !!id,
+    mutationKey: [queryKeys.updateUser],
     onError: handleRequestError,
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.getUsers])
@@ -22,9 +21,9 @@ export const useUpdateUser = (onSuccess) => {
   })
 
   return {
-    updateTheme: (theme) => mutate({ theme }),
-    updateLanguage: (language) => mutate({ language }),
-    updateUser: (user) => mutate(toUserDTO(user)),
+    updateTheme: (theme) => id && mutate({ theme }),
+    updateLanguage: (language) => id && mutate({ language }),
+    updateUser: (user) => id && mutate(toUserDTO(user)),
     isLoading,
   }
 }

@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 import 'dayjs/locale/uk'
 
-export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false }) => {
+export const LanguagePicker = ({ style, color, fontSize }) => {
   const { i18n } = useTranslation()
   const { updateLanguage } = useUpdateUser()
   const { logger } = useAuthContext()
@@ -18,14 +18,14 @@ export const LanguagePicker = ({ style, color, fontSize, isUserLogged = false })
   dayjs.locale(currentLanguage)
 
   useEffect(() => {
-    if (logger?.language) i18n.changeLanguage(logger.language)
-  }, [logger?.language])
+    updateLanguage(currentLanguage)
+  }, [])
 
   const handleLanguageChange = () => {
     const newLanguage = currentLanguage === 'en' ? 'uk' : 'en'
 
     i18n.changeLanguage(newLanguage)
-    isUserLogged && updateLanguage(newLanguage)
+    logger?.language && updateLanguage(newLanguage)
     setStorageItem(STORAGE_KEYS.LANGUAGE, newLanguage)
   }
 

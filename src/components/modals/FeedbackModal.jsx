@@ -109,22 +109,20 @@ export const FeedbackModal = ({ visible, setVisible }) => {
         <FeedbackWrapper>
           <FeedbackList>
             {reviews.map((review) => (
-              <>
-                <Review
-                  {...review}
-                  key={review.id}
-                  style={{ border: 'none', padding: 0 }}
-                  showEdit
-                  editOnClick={() => handleEditFeedbackClick(review.id)}
-                  deleteOnClick={() => {
-                    if (withoutDeleteModal) deleteReview(review.id)
-                    else {
-                      setDeletedReviewId(review.id)
-                      setDeleteModalVisible(true)
-                    }
-                  }}
-                />
-              </>
+              <Review
+                {...review}
+                key={review.id}
+                style={{ border: 'none', padding: 0 }}
+                showEdit
+                editOnClick={() => handleEditFeedbackClick(review.id)}
+                deleteOnClick={() => {
+                  if (withoutDeleteModal) deleteReview(review.id)
+                  else {
+                    setDeletedReviewId(review.id)
+                    setDeleteModalVisible(true)
+                  }
+                }}
+              />
             ))}
           </FeedbackList>
         </FeedbackWrapper>
