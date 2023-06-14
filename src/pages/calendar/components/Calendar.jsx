@@ -130,6 +130,14 @@ const CalendarWrapper = styled.section`
       }
     }
 
+    .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+      height: 0;
+
+      .fc-daygrid-day-events {
+        max-height: calc(100% - 54px);
+      }
+    }
+
     td.fc-day-today .fc-daygrid-day-number div {
       color: ${colors.primary};
     }

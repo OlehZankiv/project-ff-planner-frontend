@@ -23,11 +23,7 @@ export const useUpdateUser = (onSuccess) => {
   return {
     updateTheme: (theme) => id && mutate({ theme }),
     updateLanguage: (language) => id && mutate({ language }),
-    updateUser: (user) => {
-      if (JSON.stringify(user) === JSON.stringify(logger)) return
-
-      mutate(toUserDTO(user))
-    },
+    updateUser: (user) => id && mutate(toUserDTO(user)),
     isLoading,
   }
 }

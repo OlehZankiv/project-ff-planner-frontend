@@ -13,6 +13,7 @@ export const Button = ({
   onClick,
   leftIcon,
   rightIcon,
+  disabled,
   style,
   buttonTextProps,
   isLoading = false,
@@ -22,6 +23,7 @@ export const Button = ({
   return (
     <Wrapper
       style={style}
+      disabled={disabled}
       onClick={onClick}
       isDefaultShadow={isDefaultShadow}
       fullWidth={fullWidth}
@@ -46,9 +48,8 @@ export const Button = ({
 }
 
 const Wrapper = styled.button`
-  ${({ theme: { colors, shadows }, isDefaultShadow, variant, fullWidth }) => css`
+  ${({ theme: { colors, shadows }, disabled, isDefaultShadow, variant, fullWidth }) => css`
     width: ${fullWidth ? '100%' : 'auto'};
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,19 +66,29 @@ const Wrapper = styled.button`
     color: ${colors.white};
     transition: background-color 0.2s;
 
-    &:hover,
-    &:focus {
-      background-color: ${variant === 'primary'
-        ? colors.primaryButtonHover
-        : colors.secondaryButtonHover};
-      box-shadow: ${variant === 'primary' ? shadows.buttonShadow : shadows.secondButtonShadow};
-    }
+    ${disabled
+      ? css`
+          opacity: 0.75;
+        `
+      : css`
+          cursor: pointer;
 
-    &:active {
-      background-color: ${variant === 'primary'
-        ? colors.primaryButtonActive
-        : colors.secondaryButtonActive};
-    }
+          &:hover,
+          &:focus {
+            background-color: ${variant === 'primary'
+              ? colors.primaryButtonHover
+              : colors.secondaryButtonHover};
+            box-shadow: ${variant === 'primary'
+              ? shadows.buttonShadow
+              : shadows.secondButtonShadow};
+          }
+
+          &:active {
+            background-color: ${variant === 'primary'
+              ? colors.primaryButtonActive
+              : colors.secondaryButtonActive};
+          }
+        `}
 
     ${getBreakpointsStyles({
       tablet: css`

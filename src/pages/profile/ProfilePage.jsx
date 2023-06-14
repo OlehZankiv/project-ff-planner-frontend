@@ -7,12 +7,14 @@ import { useTranslation } from 'react-i18next'
 import { useAuthContext } from '../../contexts/auth'
 import { getBreakpointsStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { handleRequestSuccess } from '../../utils/notifications'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useUpdateUserAvatar } from '../../hooks/query/users/useUpdateUserAvatar'
 
 const ProfilePage = () => {
   const { t } = useTranslation()
   const { updateUser, isLoading: isUpdateUserLoading } = useUpdateUser()
+
+  const formik = useRef(null)
 
   const [selectedAvatar, setSelectedAvatar] = useState(null)
 
@@ -26,6 +28,11 @@ const ProfilePage = () => {
   const isLoading = isUpdateUserLoading || isUpdateUserAvatarLoading
 
   const { logger } = useAuthContext()
+
+  useEffect(() => {
+    if (!logger) return
+    formik.current?.resetForm({ values: logger })
+  }, [logger])
 
   const avatarSize = useBreakpointValue({ desktopValue: 124, tabletValue: 124, mobileValue: 72 })
 
@@ -51,70 +58,70 @@ const ProfilePage = () => {
         {t('User')}
       </Text>
       <Formik
+        innerRef={formik}
         initialValues={logger}
         onSubmit={onUserUpdate}
         validationSchema={profileUpdateValidationFormSchema}
       >
-        {({ errors, touched }) => {
-          return (
-            <ProfileForm autoComplete='off'>
-              <FormFields>
-                <Input
-                  type='name'
-                  name='name'
-                  title={t('User Name')}
-                  placeholder={t('Enter your user name')}
-                  errorMessage={t(errors.name)}
-                  successMessage={t('This is a CORRECT name')}
-                  isError={errors.name && touched.name}
-                />
-                <Input
-                  type='phone'
-                  name='phone'
-                  title={t('Phone')}
-                  placeholder={t('Enter your phone')}
-                  errorMessage={t(errors.phone)}
-                  successMessage={t('This is a CORRECT phone')}
-                  isError={errors.phone && touched.phone}
-                />
-                <DatePicker
-                  name='birthday'
-                  title={t('Birthday')}
-                  placeholder={t('Enter your birthday')}
-                  errorMessage={t(errors.birthday)}
-                  successMessage={t('This is a CORRECT birthday')}
-                  isError={errors.birthday && touched.birthday}
-                />
-                <Input
-                  name='skype'
-                  title={t('Skype')}
-                  placeholder={t('Enter your skype')}
-                  errorMessage={t(errors.password)}
-                  successMessage={t('This is a CORRECT skype')}
-                  isError={errors.skype && touched.skype}
-                />
-                <Input
-                  type='email'
-                  name='email'
-                  title={t('Email')}
-                  placeholder={t('Enter your email')}
-                  errorMessage={t(errors.email)}
-                  successMessage={t('This is a CORRECT email')}
-                  isError={errors.email && touched.email}
-                />
-              </FormFields>
-
-              <Button
-                buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
-                type='submit'
-                fullWidth
-                title={t('Save changes')}
-                variant='primary'
-                isLoading={isLoading}
+        {({ errors, touched, values }) => (
+          <ProfileForm autoComplete='off'>
+            <FormFields>
+              <Input
+                type='name'
+                name='name'
+                title={t('User Name')}
+                placeholder={t('Enter your user name')}
+                errorMessage={t(errors.name)}
+                successMessage={t('This is a CORRECT name')}
+                isError={errors.name && touched.name}
               />
-            </ProfileForm>
-          )
-        }}
+              <Input
+                type='phone'
+                name='phone'
+                title={t('Phone')}
+                placeholder={t('Enter your phone')}
+                errorMessage={t(errors.phone)}
+                successMessage={t('This is a CORRECT phone')}
+                isError={errors.phone && touched.phone}
+              />
+              <DatePicker
+                name='birthday'
+                title={t('Birthday')}
+                placeholder={t('Enter your birthday')}
+                errorMessage={t(errors.birthday)}
+                successMessage={t('This is a CORRECT birthday')}
+                isError={errors.birthday && touched.birthday}
+              />
+              <Input
+                name='skype'
+                title={t('Skype')}
+                placeholder={t('Enter your skype')}
+                errorMessage={t(errors.password)}
+                successMessage={t('This is a CORRECT skype')}
+                isError={errors.skype && touched.skype}
+              />
+              <Input
+                type='email'
+                name='email'
+                title={t('Email')}
+                placeholder={t('Enter your email')}
+                errorMessage={t(errors.email)}
+                successMessage={t('This is a CORRECT email')}
+                isError={errors.email && touched.email}
+              />
+            </FormFields>
+
+            <Button
+              buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
+              type='submit'
+              fullWidth
+              disabled={Object.entries(values).every(([key, value]) => value === logger?.[key])}
+              title={t('Save changes')}
+              variant='primary'
+              isLoading={isLoading}
+            />
+          </ProfileForm>
+        )}
       </Formik>
     </Wrapper>
   )
