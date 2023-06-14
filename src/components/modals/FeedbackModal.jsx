@@ -68,11 +68,7 @@ export const FeedbackModal = ({ visible, setVisible }) => {
     )
 
   return (
-    <Modal
-      visible={visible}
-      onClose={() => setVisible(false)}
-      onEnterPress={() => setVisible(false)}
-    >
+    <Modal visible={visible} onClose={() => setVisible(false)}>
       <Formik
         innerRef={formik}
         initialValues={initialValues}
