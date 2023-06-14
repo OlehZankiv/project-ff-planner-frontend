@@ -31,6 +31,8 @@ export const MainLayout = () => {
 
   const location = useLocation()
   const [selectedRoute, setSelectedRoute] = useState(location.pathname || ROUTES.CALENDAR)
+  useEffect(() => setSelectedRoute(location.pathname || ROUTES.CALENDAR), [location.pathname])
+
   const [searchParams] = useSearchParams()
   const showTitleGooseLogo =
     width >= 1024 &&
