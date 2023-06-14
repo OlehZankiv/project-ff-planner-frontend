@@ -3,8 +3,11 @@ import { createTask } from '../../../api'
 import { queryKeys } from '../queryKeys'
 import { toTaskDTO } from '../mappers'
 import { handleRequestError } from '../../../utils/notifications'
+import { useTranslation } from 'react-i18next'
 
 export const useCreateTask = (onSuccess) => {
+  const { t } = useTranslation()
+
   const queryClient = useQueryClient()
 
   const { mutate, isLoading } = useMutation(createTask, {
@@ -17,7 +20,14 @@ export const useCreateTask = (onSuccess) => {
   })
 
   return {
-    createTask: (task) => mutate(toTaskDTO(task)),
+    createTask: (task) => {
+      if (task.startAt >= task.endAt) {
+        handleRequestError({ message: t('End time should be later than start time') })
+        return
+      }
+
+      mutate(toTaskDTO(task))
+    },
     isLoading,
   }
 }

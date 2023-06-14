@@ -19,6 +19,7 @@ export const en = {
   "Email is a required field": "Email is a required field",
   "Email must be a valid email": "Email must be a valid email",
   "Email": "Email",
+  "End time should be later than start time": "End time should be later than start time",
   "End": "End",
   "Enter email": "Enter email",
   "Enter password": "Enter password",
