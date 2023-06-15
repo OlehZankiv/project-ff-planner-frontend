@@ -53,6 +53,8 @@ export const ReviewsSlider = () => {
     return () => clearInterval(interval)
   }, [reviews])
 
+  if (!reviews.length) return null
+
   return (
     <Wrapper>
       <Text type='h2' color='primary'>
