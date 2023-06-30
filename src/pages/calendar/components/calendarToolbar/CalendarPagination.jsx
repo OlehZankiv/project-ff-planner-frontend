@@ -9,8 +9,6 @@ export const CalendarPagination = ({ selectedDate, setSelectedDate, calendarType
 
   const isMonthSelected = calendarType === 'month'
 
-  const isPrevDisabled = dayjs(selectedDate).isSame(new Date(), 'day')
-
   const handleNext = () =>
     setSelectedDate(
       dayjs(selectedDate)
@@ -19,10 +17,11 @@ export const CalendarPagination = ({ selectedDate, setSelectedDate, calendarType
     )
 
   const handlePrev = () => {
-    if (isPrevDisabled) return
-
-    const newSelectedDate = dayjs(selectedDate).subtract(1, isMonthSelected ? 'month' : 'week')
-    setSelectedDate(newSelectedDate.isBefore(new Date()) ? new Date() : newSelectedDate.toDate())
+    setSelectedDate(
+      dayjs(selectedDate)
+        .subtract(1, isMonthSelected ? 'month' : 'week')
+        .toDate(),
+    )
   }
 
   return (
@@ -39,9 +38,8 @@ export const CalendarPagination = ({ selectedDate, setSelectedDate, calendarType
             borderTop: `1px solid ${colors.calendarBorder}`,
           }}
           onClick={handlePrev}
-          disabled={isPrevDisabled}
         >
-          <ChevronDownIcon color={isPrevDisabled ? colors.placeholderColor : colors.icon} />
+          <ChevronDownIcon color={colors.icon} />
         </ArrowIcon>
         <ArrowIcon style={{ transform: 'rotate(-90deg)' }} onClick={handleNext}>
           <ChevronDownIcon color={colors.icon} />

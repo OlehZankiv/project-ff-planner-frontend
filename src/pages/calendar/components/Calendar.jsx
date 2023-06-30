@@ -3,7 +3,6 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { useDimensions } from '../../../hooks'
 import styled, { css, useTheme } from 'styled-components'
-import dayjs from 'dayjs'
 import { useMemo } from 'react'
 import { getBreakpointsStyles, getMobileStyles } from '../../../styles/breakpoints'
 import { useTasks } from '../../../hooks/query'
@@ -35,10 +34,8 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
   )
 
   const onDateClick = (date) => {
-    if (!dayjs(date).isBefore(new Date(), 'day')) {
-      setCalendarType('day')
-      setSelectedDate(date)
-    }
+    setCalendarType('day')
+    setSelectedDate(date)
   }
 
   return (
@@ -54,7 +51,6 @@ export const Calendar = ({ selectedDate, setSelectedDate, setCalendarType }) => 
         initialView='dayGridMonth'
         dayCellContent={(props) => (
           <DayCell
-            disabled={dayjs(props.date).isBefore(new Date(), 'day')}
             className={
               props.date.toDateString() === selectedDate.toDateString() ? 'selected' : undefined
             }
@@ -90,7 +86,7 @@ const DayCell = styled.div`
 
     &.selected {
       background-color: ${colors.primary};
-      color: ${colors.white} !important ;
+      color: ${colors.white} !important;
     }
 
     ${getMobileStyles(css`

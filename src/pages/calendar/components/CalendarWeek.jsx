@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { getMobileStyles } from '../../../styles/breakpoints'
 import { OpacityButton, Text } from '../../../components'
 import { useWeekDays } from '../hooks/useWeekDays'
-import dayjs from 'dayjs'
 
 export const CalendarWeek = ({ selectedDate, setSelectedDate, calendarType }) => {
   const week = useWeekDays(selectedDate)
@@ -13,16 +12,10 @@ export const CalendarWeek = ({ selectedDate, setSelectedDate, calendarType }) =>
     <WeekList>
       {week.map(({ text, date }, index) => {
         const isSelected = date.getDay() === selectedDate?.getDay()
-        const isDisabled = !isDayView || dayjs(date).isBefore(new Date(), 'day')
         const isWeekend = [6, 0].includes(date.getDay())
 
         return (
-          <WeekDay
-            key={index}
-            isDayView={isDayView}
-            disabled={isDisabled}
-            onClick={isDisabled ? undefined : () => setSelectedDate(date)}
-          >
+          <WeekDay key={index} isDayView={isDayView} onClick={() => setSelectedDate(date)}>
             <Text
               style={{ textTransform: 'uppercase' }}
               type='h4'
