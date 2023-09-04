@@ -9,6 +9,12 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 import 'dayjs/locale/uk'
 
+export const Languages = {
+  FunnyUkraine: 'funUk',
+  Ukraine: 'uk',
+  English: 'en',
+}
+
 export const LanguagePicker = ({ style, color, fontSize }) => {
   const { i18n } = useTranslation()
   const { updateLanguage } = useUpdateUser()
@@ -22,7 +28,7 @@ export const LanguagePicker = ({ style, color, fontSize }) => {
   }, [])
 
   const handleLanguageChange = () => {
-    const newLanguage = currentLanguage === 'en' ? 'uk' : 'en'
+    const newLanguage = currentLanguage === Languages.English ? Languages.Ukraine : Languages.English
 
     i18n.changeLanguage(newLanguage)
     logger?.language && updateLanguage(newLanguage)
@@ -32,7 +38,7 @@ export const LanguagePicker = ({ style, color, fontSize }) => {
   return (
     <OpacityButton onClick={handleLanguageChange} style={style}>
       <Text type='p' color={color} fontWeight={700} fontSize={fontSize}>
-        {currentLanguage === 'en' ? 'uk' : 'en'}
+        {currentLanguage === Languages.English ? Languages.Ukraine : Languages.English}
       </Text>
     </OpacityButton>
   )

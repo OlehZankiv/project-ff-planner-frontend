@@ -1,3 +1,5 @@
+import {Languages} from "../../../components/LanguagePicker";
+
 export const toUser = ({
   id,
   phone,
@@ -17,7 +19,7 @@ export const toUser = ({
   phone: phone ?? '',
   birthday: birthday ? new Date(birthday) : '',
   skype: skype ?? '',
-  language: language ?? 'en',
+  language: language ?? Languages.English,
 })
 
 export const toUserDTO = ({ birthday, ...instance }) => ({

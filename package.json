@@ -2,6 +2,16 @@
   "name": "project-aaa4bbb8",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
+    "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
+    "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
+  },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
@@ -34,16 +44,6 @@
     "styled-components": "^5.3.11",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "eslint src//**/*.{js,jsx,ts,tsx,css,md,json}",
-    "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,css,md,json}",
-    "format": "prettier --write src//**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
-    "predeploy": "npm run build",
-    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
