@@ -1,6 +1,6 @@
 import styled, { css, useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { ROUTES } from '../navigation/routes'
 
 import {
@@ -9,7 +9,13 @@ import {
   getTabletStyles,
   useBreakpointValue,
 } from '../styles/breakpoints'
-import { CalendarCheckOutIcon, CloseIcon, LogOutIcon, UserCheckIcon } from '../assets/icons'
+import {
+  CalendarCheckOutIcon,
+  CloseIcon,
+  LogOutIcon,
+  SunIcon,
+  UserCheckIcon,
+} from '../assets/icons'
 import { AppLogo } from './AppLogo'
 import { OpacityButton } from './buttons/OpacityButton'
 import { Button } from './buttons/Button'
@@ -21,6 +27,11 @@ const tabs = [
     text: 'My Account',
     Icon: UserCheckIcon,
     route: ROUTES.PROFILE,
+  },
+  {
+    text: 'Productivity',
+    Icon: SunIcon,
+    route: ROUTES.PRODUCTIVITY,
   },
   {
     text: 'Calendar',
@@ -203,6 +214,8 @@ const CloseIconWrap = styled.div`
 const NavButton = styled(OpacityButton)`
   ${({ selected, theme: { colors, animation } }) => css`
     display: flex;
+    align-items: center;
+    column-gap: 4px;
     padding: 20px 16px;
     border-radius: 8px;
     background-color: ${selected ? colors.tabButtonActive : 'transparent'};

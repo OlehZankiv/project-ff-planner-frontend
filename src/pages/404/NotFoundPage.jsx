@@ -44,6 +44,8 @@ const NotFoundPage = () => {
   )
 }
 
+export default NotFoundPage
+
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
     height: 100vh;
@@ -78,5 +80,3 @@ const IconWrapper = styled.div`
   transform: rotate(180deg);
   margin-right: 8px;
 `
-
-export default NotFoundPage

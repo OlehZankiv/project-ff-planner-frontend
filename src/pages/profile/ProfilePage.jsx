@@ -130,6 +130,8 @@ const ProfilePage = () => {
   )
 }
 
+export default ProfilePage
+
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
     display: flex;
@@ -179,5 +181,3 @@ const FormFields = styled.div`
     })}
   }
 `
-
-export default ProfilePage

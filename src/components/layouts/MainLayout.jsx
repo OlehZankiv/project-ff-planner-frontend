@@ -49,6 +49,7 @@ export const MainLayout = () => {
   const routeTitles = {
     [ROUTES.PROFILE]: t('User Profile'),
     [ROUTES.CALENDAR]: t('Calendar'),
+    [ROUTES.PRODUCTIVITY]: t('Productivity'),
   }
 
   const userName = logger?.name || t('Default')
@@ -72,7 +73,7 @@ export const MainLayout = () => {
               </BurgerWrap>
               <DesktopTitleWrap>
                 {showTitleGooseLogo && (
-                  <img src={gooseCalendar} style={{ width: '60px' }} alt='Goose calendar logo' />
+                  <img src={gooseCalendar} style={{ width: 60 }} alt='Goose calendar logo' />
                 )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Text

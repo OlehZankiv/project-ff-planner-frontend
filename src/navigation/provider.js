@@ -9,6 +9,7 @@ const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
 const CalendarPage = lazy(() => import('../pages/calendar/CalendarPage'))
+const ProductivityPage = lazy(() => import('../pages/productivity/ProductivityPage'))
 const NotFoundPage = lazy(() => import('../pages/404/NotFoundPage'))
 
 export const AppRouterProvider = () => (
@@ -19,23 +20,16 @@ export const AppRouterProvider = () => (
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
         <Route path={ROUTES.LANDING} element={<LandingPage />} />
 
-        <Route element={<MainLayout />}>
-          <Route
-            path={ROUTES.PROFILE}
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={ROUTES.CALENDAR}
-            element={
-              <ProtectedRoute>
-                <CalendarPage />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+          <Route path={ROUTES.PRODUCTIVITY} element={<ProductivityPage />} />
+          <Route path={ROUTES.CALENDAR} element={<CalendarPage />} />
         </Route>
 
         <Route path='*' element={<NotFoundPage />} />
