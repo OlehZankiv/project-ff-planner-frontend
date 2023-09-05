@@ -80,11 +80,7 @@ const LandingPage = () => {
   return (
     <Container>
       <Hero>
-        <LanguagePicker
-          color={colors.white}
-          fontSize={18}
-          style={{ position: 'absolute', right: 15, top: 15 }}
-        />
+        <LanguagePicker color={colors.white} style={{ position: 'absolute', right: 15, top: 15 }} />
         <AppLogo />
         <LinkBox>
           <Button

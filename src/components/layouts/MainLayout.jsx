@@ -35,18 +35,14 @@ export const MainLayout = () => {
 
   const [searchParams] = useSearchParams()
   const showTitleGooseLogo =
-    width >= 1024 &&
+    width >= 1114 &&
     window.location.pathname.includes(ROUTES.CALENDAR) &&
     searchParams.get('calendar-type') === 'day'
 
   useEffect(() => navigate(selectedRoute), [selectedRoute])
 
   const iconSize = useBreakpointValue({ mobileValue: 24, tabletValue: 32, desktopValue: 32 })
-  const nameFontSize = useBreakpointValue({
-    mobileValue: 14,
-    tabletValue: 18,
-    desktopValue: 18,
-  })
+  const nameFontSize = useBreakpointValue({ mobileValue: 14, tabletValue: 18, desktopValue: 18 })
 
   const handleThemeChange = () => setThemeType(themeType === 'light' ? 'dark' : 'light')
 
@@ -118,7 +114,7 @@ export const MainLayout = () => {
                   </>
                 )}
                 <InfoWrap>
-                  <LanguagePicker color={colors.icon} fontSize={18} />
+                  <LanguagePicker color={colors.icon} />
                   <OpacityButton onClick={handleThemeChange}>
                     {themeType === 'light' ? (
                       <MoonIcon size={iconSize} color={colors.primary} />

@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
-import { useAuthContext } from '../contexts/auth'
 import { useUpdateUser } from '../hooks/query'
-import { OpacityButton } from './buttons/OpacityButton'
-import { Text } from './Text'
-import { setStorageItem, STORAGE_KEYS } from '../utils/storage'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 import 'dayjs/locale/uk'
+import { Select } from './fields/Select'
+import { setStorageItem, STORAGE_KEYS } from '../utils/storage'
+import { useAuthContext } from '../contexts/auth'
 
 export const Languages = {
   FunnyUkraine: 'funUk',
@@ -15,7 +14,13 @@ export const Languages = {
   English: 'en',
 }
 
-export const LanguagePicker = ({ style, color, fontSize }) => {
+const languageOption = [
+  { value: 'en', label: 'English' },
+  { value: 'uk', label: 'Українська' },
+  { value: 'funUk', label: 'Файна Українська' },
+]
+
+export const LanguagePicker = ({ style, color }) => {
   const { i18n } = useTranslation()
   const { updateLanguage } = useUpdateUser()
   const { logger } = useAuthContext()
@@ -27,19 +32,19 @@ export const LanguagePicker = ({ style, color, fontSize }) => {
     updateLanguage(currentLanguage)
   }, [])
 
-  const handleLanguageChange = () => {
-    const newLanguage = currentLanguage === Languages.English ? Languages.Ukraine : Languages.English
-
+  const handleLanguageChange = (newLanguage) => {
     i18n.changeLanguage(newLanguage)
     logger?.language && updateLanguage(newLanguage)
     setStorageItem(STORAGE_KEYS.LANGUAGE, newLanguage)
   }
 
   return (
-    <OpacityButton onClick={handleLanguageChange} style={style}>
-      <Text type='p' color={color} fontWeight={700} fontSize={fontSize}>
-        {currentLanguage === Languages.English ? Languages.Ukraine : Languages.English}
-      </Text>
-    </OpacityButton>
+    <Select
+      value={currentLanguage}
+      onChange={handleLanguageChange}
+      style={{ ...style, color, border: `1px solid ${color}`, width: 'auto' }}
+      name='language'
+      options={languageOption}
+    />
   )
 }

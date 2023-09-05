@@ -18,11 +18,7 @@ const RegisterPage = () => {
       <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
         <ArrowLeft color={colors.text} />
       </CloseIconWrapper>
-      <LanguagePicker
-        color={colors.white}
-        fontSize={18}
-        style={{ position: 'absolute', right: 15, top: 15 }}
-      />
+      <LanguagePicker color={colors.primary} style={{ position: 'absolute', right: 15, top: 15 }} />
       <GooseImage image={gooseRegister} alt='image of goose' right={0} />
       <RegisterForm />
     </AuthWrapper>

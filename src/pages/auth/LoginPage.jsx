@@ -19,11 +19,7 @@ const LoginPage = () => {
       <CloseIconWrapper onClick={() => navigate(ROUTES.LANDING)}>
         <ArrowLeft color={colors.text} />
       </CloseIconWrapper>
-      <LanguagePicker
-        color={colors.white}
-        fontSize={18}
-        style={{ position: 'absolute', right: 15, top: 15 }}
-      />
+      <LanguagePicker color={colors.primary} style={{ position: 'absolute', right: 15, top: 15 }} />
       <GooseImage image={gooseLogin} alt='image of goose in a rocket' left={0} />
       <LogInForm />
     </AuthWrapper>
