@@ -15,6 +15,17 @@ export const profileUpdateValidationFormSchema = yup.object().shape({
   birthday: yup.date(),
 })
 
+export const productivityValidationFormSchema = yup.object().shape({
+  startDate: yup.date().required(en['Start date is a required field']),
+  endDate: yup
+    .date()
+    .required(en['End date is a required field'])
+    .when(
+      'startDate',
+      (startDate, schema) => startDate && schema.min(startDate, "End date can't before start date"),
+    ),
+})
+
 export const loginFormSchema = yup.object().shape({
   email: yup
     .string()

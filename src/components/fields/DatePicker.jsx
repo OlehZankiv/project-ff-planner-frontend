@@ -97,6 +97,7 @@ export const DatePicker = (inputProps) => {
       <div onClick={() => setVisible(true)}>
         <Input
           {...inputProps}
+          isError={!!inputProps.errorMessage}
           rightIcon={
             <InputIconWrapper visible={isVisible}>
               <ChevronDownIcon color={colors.text} />

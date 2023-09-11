@@ -13,13 +13,12 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(getStorageItem(STORAGE_KEYS.TOKEN, null))
   const [logger, setLogger] = useState(getStorageItem(STORAGE_KEYS.LOGGER, null, false))
 
-  const { user: dbUser } = useUser(logger?.id)
+  const { user: dbUser, isLoading } = useUser(logger?.id)
 
   useEffect(() => {
     if (!dbUser) return
-
     if (JSON.stringify(dbUser) !== JSON.stringify(logger)) setLogger(dbUser)
-  }, [dbUser, logger])
+  }, [isLoading])
 
   useEffect(() => {
     token ? setStorageItem(STORAGE_KEYS.TOKEN, token) : removeStorageItem(STORAGE_KEYS.TOKEN)

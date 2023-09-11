@@ -39,6 +39,7 @@ export const Input = ({
     colors.success,
   )
   const hintMessage = getInputStageValue(null, errorMessage, successMessage)
+
   const inputIcon =
     rightIcon ??
     getInputStageValue(
