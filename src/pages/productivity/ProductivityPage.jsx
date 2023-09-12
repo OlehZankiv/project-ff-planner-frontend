@@ -38,7 +38,7 @@ export const ProductivityPage = () => {
         onSubmit={updateUser}
         validationSchema={productivityValidationFormSchema}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, values }) => (
           <ProductivityForm autoComplete='off'>
             <FormFields>
               <DatePicker
@@ -65,7 +65,11 @@ export const ProductivityPage = () => {
               fullWidth
               title={t('Save changes')}
               variant='primary'
-              disabled={isLoading || !formik.current?.isValid}
+              disabled={
+                Object.values(errors).length ||
+                Object.entries(values).every(([key, value]) => value === logger?.[key]) ||
+                isLoading
+              }
               isLoading={isLoading}
             />
           </ProductivityForm>

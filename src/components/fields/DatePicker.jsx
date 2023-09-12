@@ -91,7 +91,7 @@ export const DatePicker = (inputProps) => {
             setVisible(false)
             setSelectedDay(date)
           }}
-          selected={selectedDay}
+          selected={new Date(selectedDay)}
         />
       </PickerWrapper>
       <div onClick={() => setVisible(true)}>
@@ -137,12 +137,26 @@ const Wrapper = styled.div`
   position: relative;
   ${({ theme: { colors } }) => css`
     .rdp-day {
+      h4 {
+        color: ${colors.white};
+      }
+
       &.rdp-day_today {
         -webkit-text-stroke-width: medium;
       }
 
       &.rdp-day_selected {
-        background-color: ${colors.white};
+        background-color: ${colors.calendarPickerBorder};
+        h4 {
+          color: ${colors.white} !important;
+        }
+
+        :hover {
+          opacity: 0.8;
+        }
+        :active {
+          opacity: 0.6;
+        }
       }
 
       &:hover {

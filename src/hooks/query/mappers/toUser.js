@@ -13,12 +13,21 @@ export const toUser = ({
   language,
   rest,
 }) => {
-  let json
+  const initialStartDate = dayjs(new Date()).subtract(1, 'month').toDate()
+  const initialEndDate = new Date()
+
+  let json = { startDate: initialStartDate, endDate: initialEndDate }
 
   try {
-    json = JSON.parse(rest)
-  } catch (_) {
-    json = { startDate: dayjs(new Date()).subtract(1, 'month'), endDate: new Date() }
+    if (rest) {
+      const { startDate, endDate } = JSON.parse(rest)
+      json = {
+        startDate: startDate ? new Date(startDate) : initialStartDate,
+        endDate: endDate ? new Date(endDate) : initialEndDate,
+      }
+    }
+  } catch (e) {
+    console.error(e)
   }
 
   return {
@@ -35,8 +44,13 @@ export const toUser = ({
   }
 }
 
-export const toUserDTO = ({ birthday, startDate, endDate, ...instance }) => ({
-  birthday: birthday ? new Date(birthday).getTime() : undefined,
-  rest: JSON.stringify({ startDate: startDate.toDateString(), endDate: endDate.toDateString() }),
-  ...instance,
-})
+export const toUserDTO = ({ birthday, startDate, endDate, ...instance }) => {
+  return {
+    birthday: birthday ? new Date(birthday).getTime() : undefined,
+    rest: JSON.stringify({
+      startDate: new Date(startDate).getTime(),
+      endDate: new Date(endDate).getTime(),
+    }),
+    ...instance,
+  }
+}
