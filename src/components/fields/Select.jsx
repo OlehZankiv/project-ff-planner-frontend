@@ -1,8 +1,14 @@
 import styled, { css } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
 
-export const Select = ({ style, options, value, onChange, name }) => (
-  <SelectWrapper style={style} name={name} value={value} onChange={(e) => onChange(e.target.value)}>
+export const Select = ({ style, color, options, value, onChange, name }) => (
+  <SelectWrapper
+    style={style}
+    name={name}
+    color={color}
+    value={value}
+    onChange={(e) => onChange(e.target.value)}
+  >
     {options.map((option) => (
       <Option key={option.value} value={option.value}>
         {option.label}
@@ -24,7 +30,7 @@ const smallSelectStyles = css`
 `
 
 const SelectWrapper = styled.select`
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors }, color }) => css`
     background-color: transparent;
     width: 100%;
     padding: 18px 28px 18px 18px;
@@ -56,6 +62,22 @@ const SelectWrapper = styled.select`
         linear-gradient(135deg, transparent 50%, ${colors.text} 50%);
       background-position: calc(100% - 15px) 1.5em, calc(100% - 20px) 1.5em, 100% 0;
     }
+
+    ${color &&
+    css`
+      color: ${color};
+      border: 1px solid ${color};
+
+      background-image: linear-gradient(45deg, transparent 50%, ${color} 50%),
+        linear-gradient(135deg, ${color} 50%, transparent 50%),
+        linear-gradient(to right, transparent, transparent);
+
+      &:focus {
+        background-image: linear-gradient(45deg, ${color} 50%, transparent 50%),
+          linear-gradient(135deg, transparent 50%, ${color} 50%);
+        background-position: calc(100% - 15px) 1.5em, calc(100% - 20px) 1.5em, 100% 0;
+      }
+    `}
 
     ${getBreakpointsStyles({
       tablet: smallSelectStyles,

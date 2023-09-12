@@ -42,7 +42,8 @@ export const LanguagePicker = ({ style, color }) => {
     <Select
       value={currentLanguage}
       onChange={handleLanguageChange}
-      style={{ ...style, color, border: `1px solid ${color}`, width: 'auto' }}
+      color={color}
+      style={{ ...style, width: 'auto' }}
       name='language'
       options={languageOption}
     />
