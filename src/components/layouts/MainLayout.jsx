@@ -108,7 +108,9 @@ export const MainLayout = () => {
               </DesktopTitleWrap>
               <TabWrap>
                 <InvisibleButton onClick={() => setMagicModalVisible(true)}>
-                  <Text type='p'>{t('Magic')}</Text>
+                  <Text color='white' type='p'>
+                    {t('Magic')}
+                  </Text>
                 </InvisibleButton>
                 {selectedRoute === ROUTES.CALENDAR && (
                   <>
@@ -238,7 +240,6 @@ const InvisibleButton = styled(OpacityButton)`
     border: none;
     cursor: pointer;
     background-color: ${colors.primary};
-    color: ${colors.white};
 
     ${getTabletStyles(css`
       display: none;
