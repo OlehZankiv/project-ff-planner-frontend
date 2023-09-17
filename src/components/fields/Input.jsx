@@ -11,6 +11,7 @@ export const Input = ({
   name,
   type,
   value,
+  disabled,
   placeholder,
   title,
   errorMessage,
@@ -42,11 +43,13 @@ export const Input = ({
 
   const inputIcon =
     rightIcon ??
-    getInputStageValue(
-      null,
-      <ErrorIcon color={colors[inputColor]} />,
-      <SuccessIcon color={colors[inputColor]} />,
-    )
+    (type === 'number'
+      ? null
+      : getInputStageValue(
+          null,
+          <ErrorIcon color={colors[inputColor]} />,
+          <SuccessIcon color={colors[inputColor]} />,
+        ))
 
   useEffect(() => {
     if (resetState) setWasError(false)
@@ -83,6 +86,7 @@ export const Input = ({
           />
         ) : (
           <InputStyled
+            disabled={disabled}
             readOnly={readonly}
             style={{ borderColor: inputBorderColor }}
             type={type}

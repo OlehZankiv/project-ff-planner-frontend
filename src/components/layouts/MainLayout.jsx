@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { BurgerMenuIcon, MoonIcon, SunIcon } from '../../assets/icons'
 import { useAppThemeContext } from '../../styles/theme/provider'
 import { SideBar } from '../SideBar'
-import { getDesktopStyles, useBreakpointValue } from '../../styles/breakpoints'
+import { getDesktopStyles, getTabletStyles, useBreakpointValue } from '../../styles/breakpoints'
 import { Text } from '../Text'
 import { OpacityButton } from '../buttons/OpacityButton'
 import { Button } from '../buttons/Button'
@@ -17,6 +17,7 @@ import { gooseCalendar } from '../../assets/images'
 import { useDimensions } from '../../hooks'
 import { Avatar } from '../Avatar'
 import { LanguagePicker } from '../LanguagePicker'
+import { FindNumberModal } from '../modals/FindNumberModal'
 
 export const MainLayout = () => {
   const { colors, shadows } = useTheme()
@@ -26,6 +27,7 @@ export const MainLayout = () => {
   const { logger } = useAuthContext()
   const { t } = useTranslation()
 
+  const [isMagicModalVisible, setMagicModalVisible] = useState(false)
   const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
 
@@ -105,6 +107,9 @@ export const MainLayout = () => {
                 </div>
               </DesktopTitleWrap>
               <TabWrap>
+                <InvisibleButton onClick={() => setMagicModalVisible(true)}>
+                  <Text type='p'>{t('Magic')}</Text>
+                </InvisibleButton>
                 {selectedRoute === ROUTES.CALENDAR && (
                   <>
                     <Button title={t('Feedback')} onClick={() => setFeedbackModalVisible(true)} />
@@ -144,6 +149,7 @@ export const MainLayout = () => {
         </Header>
         <OutletWrapper>
           <Outlet />
+          <FindNumberModal visible={isMagicModalVisible} setVisible={setMagicModalVisible} />
         </OutletWrapper>
       </ContentWrap>
     </MainWrap>
@@ -223,4 +229,19 @@ const OutletWrapper = styled.div`
   ${getDesktopStyles(css`
     margin-top: 32px;
   `)}
+`
+
+const InvisibleButton = styled(OpacityButton)`
+  ${({ theme: { colors } }) => css`
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: ${colors.primary};
+    color: ${colors.white};
+
+    ${getTabletStyles(css`
+      display: none;
+    `)}
+  `}
 `

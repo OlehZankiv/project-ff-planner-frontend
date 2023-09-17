@@ -26,6 +26,10 @@ export const productivityValidationFormSchema = yup.object().shape({
     ),
 })
 
+export const findNumberSchema = yup.object().shape({
+  number: yup.number().required(en['Number is a required field']),
+})
+
 export const loginFormSchema = yup.object().shape({
   email: yup
     .string()
