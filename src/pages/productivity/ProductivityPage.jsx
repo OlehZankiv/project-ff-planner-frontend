@@ -1,44 +1,30 @@
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { getBreakpointsStyles } from '../../styles/breakpoints'
-import { Button, DatePicker, Text } from '../../components'
+import { Button, DatePicker, Spinner, Text } from '../../components'
 import { Form, Formik } from 'formik'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { productivityValidationFormSchema } from '../../utils/schemas'
 import { useAuthContext } from '../../contexts/auth'
-import { useUpdateUser } from '../../hooks/query'
-import * as tf from '@tensorflow/tfjs'
-import { handleRequestSuccess } from '../../utils/notifications'
+import { useProductivityRequest } from '../../hooks'
 
 export const ProductivityPage = () => {
+  const { colors } = useTheme()
   const { t } = useTranslation()
-  const { logger } = useAuthContext()
-  const { updateUser, isLoading } = useUpdateUser(() =>
-    handleRequestSuccess(t('Data was updated successfully')),
-  )
+  const { logger, isLoading: isLoggerLoading } = useAuthContext()
+
+  const { isLoading: isProductivityCalculating, calculateProductivity } = useProductivityRequest()
+
   const formik = useRef(null)
-
-  useEffect(() => {
-    // Створення моделі лінійної регресії
-    const model = tf.sequential()
-    model.add(tf.layers.dense({ units: 1, inputShape: [1] }))
-    model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' })
-
-    // Навчання моделі на даних
-    const xs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [10, 1])
-    const ys = tf.tensor2d([2, 4, 6, 8, 10, 12, 14, 16, 18, 20], [10, 1])
-
-    model.fit(xs, ys, { epochs: 500 }).then(() => {
-      // Використання навченої моделі для передбачення
-      const result = model.predict(tf.tensor2d([10, 20, 30], [3, 1]))
-      result.print()
-    })
-  }, [])
 
   useEffect(() => {
     if (!logger) return
     formik.current?.resetForm({ values: logger })
   }, [logger])
+
+  useEffect(() => {
+    calculateProductivity(logger)
+  }, [])
 
   if (!logger) return null
 
@@ -56,7 +42,7 @@ export const ProductivityPage = () => {
       <Formik
         innerRef={formik}
         initialValues={{ startDate: logger.startDate, endDate: logger.endDate }}
-        onSubmit={updateUser}
+        onSubmit={calculateProductivity}
         validationSchema={productivityValidationFormSchema}
       >
         {({ errors, touched, values }) => (
@@ -80,6 +66,21 @@ export const ProductivityPage = () => {
               />
             </FormFields>
 
+            <div>
+              <Text style={{ textAlign: 'center' }} type='h2' fontSize={32}>
+                {t('Coefficient of Productivity')}
+              </Text>
+              <ProductivityNumberWrapper>
+                {isLoggerLoading ? (
+                  <Spinner size={64} color={colors.linkHover} />
+                ) : (
+                  <Text type='h1' fontSize={82} lineHeight={64} color='linkHover'>
+                    {logger.productivity}
+                  </Text>
+                )}
+              </ProductivityNumberWrapper>
+            </div>
+
             <Button
               buttonTextProps={{ lineHeight: 18, fontSize: 14 }}
               type='submit'
@@ -89,9 +90,9 @@ export const ProductivityPage = () => {
               disabled={
                 Object.values(errors).length ||
                 Object.entries(values).every(([key, value]) => value === logger?.[key]) ||
-                isLoading
+                isProductivityCalculating
               }
-              isLoading={isLoading}
+              isLoading={isProductivityCalculating}
             />
           </ProductivityForm>
         )}
@@ -129,6 +130,13 @@ const ProductivityForm = styled(Form)`
   width: 100%;
   flex: 1;
   justify-content: space-between;
+`
+const ProductivityNumberWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24px;
 `
 
 const FormFields = styled.div`

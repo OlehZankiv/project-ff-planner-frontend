@@ -15,15 +15,17 @@ export const toUser = ({
 }) => {
   const initialStartDate = dayjs(new Date()).subtract(1, 'month').toDate()
   const initialEndDate = new Date()
+  const initialProductivity = 0
 
-  let json = { startDate: initialStartDate, endDate: initialEndDate }
+  let json = { productivity: 0, startDate: initialStartDate, endDate: initialEndDate }
 
   try {
     if (rest) {
-      const { startDate, endDate } = JSON.parse(rest)
+      const { startDate, endDate, productivity } = JSON.parse(rest)
       json = {
         startDate: startDate ? new Date(startDate) : initialStartDate,
         endDate: endDate ? new Date(endDate) : initialEndDate,
+        productivity: productivity ?? initialProductivity,
       }
     }
   } catch (e) {
@@ -44,12 +46,13 @@ export const toUser = ({
   }
 }
 
-export const toUserDTO = ({ birthday, startDate, endDate, ...instance }) => {
+export const toUserDTO = ({ birthday, startDate, endDate, productivity, ...instance }) => {
   return {
     birthday: birthday ? new Date(birthday).getTime() : undefined,
     rest: JSON.stringify({
       startDate: new Date(startDate).getTime(),
       endDate: new Date(endDate).getTime(),
+      productivity: productivity,
     }),
     ...instance,
   }

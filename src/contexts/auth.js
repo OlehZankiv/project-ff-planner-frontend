@@ -5,6 +5,7 @@ import { useUser } from '../hooks/query'
 const AuthContext = createContext({
   logger: null,
   token: null,
+  isLoading: false,
   setLogger: () => {},
   setToken: () => {},
 })
@@ -33,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isLoading,
         logger,
         token,
         setToken,
