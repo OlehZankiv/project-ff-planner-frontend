@@ -7,12 +7,33 @@ import { useTranslation } from 'react-i18next'
 import { productivityValidationFormSchema } from '../../utils/schemas'
 import { useAuthContext } from '../../contexts/auth'
 import { useUpdateUser } from '../../hooks/query'
+import * as tf from '@tensorflow/tfjs'
+import { handleRequestSuccess } from '../../utils/notifications'
 
 export const ProductivityPage = () => {
   const { t } = useTranslation()
   const { logger } = useAuthContext()
-  const { updateUser, isLoading } = useUpdateUser()
+  const { updateUser, isLoading } = useUpdateUser(() =>
+    handleRequestSuccess(t('Data was updated successfully')),
+  )
   const formik = useRef(null)
+
+  useEffect(() => {
+    // Створення моделі лінійної регресії
+    const model = tf.sequential()
+    model.add(tf.layers.dense({ units: 1, inputShape: [1] }))
+    model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' })
+
+    // Навчання моделі на даних
+    const xs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [10, 1])
+    const ys = tf.tensor2d([2, 4, 6, 8, 10, 12, 14, 16, 18, 20], [10, 1])
+
+    model.fit(xs, ys, { epochs: 500 }).then(() => {
+      // Використання навченої моделі для передбачення
+      const result = model.predict(tf.tensor2d([10, 20, 30], [3, 1]))
+      result.print()
+    })
+  }, [])
 
   useEffect(() => {
     if (!logger) return

@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import { Text } from '../Text'
 import { ChevronDownIcon } from '../../assets/icons/'
 import { useField } from 'formik'
+import { capitalize } from '../../utils/string'
 
 export const DatePicker = (inputProps) => {
   const { colors } = useTheme()
@@ -54,6 +55,11 @@ export const DatePicker = (inputProps) => {
                 </Text>
               )
             },
+            formatCaption: (date) => (
+              <Text type='h4' fontSize={20} color='white'>
+                {capitalize(dayjs(date).format('MMMM YYYY'))}
+              </Text>
+            ),
             formatWeekdayName: (date) => (
               <Text type='h4' fontSize={18} lineHeight={24} color='white'>
                 {dayjs(date).format('dd').slice(0, 1)}
@@ -91,6 +97,7 @@ export const DatePicker = (inputProps) => {
             setVisible(false)
             setSelectedDay(date)
           }}
+          defaultMonth={new Date(selectedDay)}
           selected={new Date(selectedDay)}
         />
       </PickerWrapper>

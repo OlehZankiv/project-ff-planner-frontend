@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Input } from '../fields/Input'
 import { findNumberSchema } from '../../utils/schemas'
 import { Form, Formik } from 'formik'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '../buttons/Button'
 import { Spinner } from '../Spinner'
 
@@ -31,6 +31,10 @@ export const FindNumberModal = ({ visible, setVisible }) => {
     setButtonProps({ title: t('Start') })
     setVisible(false)
   }
+
+  useEffect(() => {
+    if (!visible) close()
+  }, [visible])
 
   const submit = async () => {
     if (buttonProps.rightIcon) return

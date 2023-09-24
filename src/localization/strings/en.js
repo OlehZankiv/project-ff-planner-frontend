@@ -12,6 +12,7 @@ export const en = {
   "Cancel": "Cancel",
   "Comment is a required field": "Comment is a required field",
   "Comment must be at least 3 characters": "Comment must be at least 3 characters",
+  "Data was updated successfully": "Data was updated successfully",
   "Day": "Day",
   "Default": "Default",
   "Delete Review": "Delete Review",
