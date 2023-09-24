@@ -10,6 +10,7 @@ export const uk = {
   "Birthday": "День народження",
   "Calendar": "Календар",
   "Cancel": "Відмінити",
+  "Coefficient of Productivity": "Коефіцієнт Продуктивності",
   "Comment is a required field": "Коментар є обов'язковим",
   "Comment must be at least 3 characters": "Коментар має містити як мінімум 3 символа",
   "Data was updated successfully": "Дані було успішно оновлено",

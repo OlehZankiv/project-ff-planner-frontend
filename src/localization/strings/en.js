@@ -10,6 +10,7 @@ export const en = {
   "Birthday": "Birthday",
   "Calendar": "Calendar",
   "Cancel": "Cancel",
+  "Coefficient of Productivity": "Coefficient of Productivity",
   "Comment is a required field": "Comment is a required field",
   "Comment must be at least 3 characters": "Comment must be at least 3 characters",
   "Data was updated successfully": "Data was updated successfully",

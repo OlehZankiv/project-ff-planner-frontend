@@ -10,6 +10,7 @@ export const funUk = {
   "Birthday": "Світоявлення",
   "Calendar": "Всезнайка",
   "Cancel": "Ні-ні-ні",
+  "Coefficient of Productivity": "Коефіцієнт Дужості",
   "Comment is a required field": "Твоя думка обов'язкова",
   "Comment must be at least 3 characters": "Не жалій. Мінімум 3 символи",
   "Day": "Деньочки",
