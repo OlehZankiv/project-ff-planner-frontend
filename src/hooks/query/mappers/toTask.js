@@ -1,5 +1,4 @@
 import { toUser } from './toUser'
-import dayjs from 'dayjs'
 
 export const toTask = ({
   _id,
@@ -16,14 +15,14 @@ export const toTask = ({
   createdAt: new Date(createdAt ?? new Date()),
   startAt: new Date(startAt ?? new Date()),
   finishedAt: finishedAt ? new Date(finishedAt) : null,
+  // finishedInDeadline: !!finishedAt && !!endAt && new Date(finishedAt) <= new Date(endAt),
+  finishedInDeadline: Math.random() > 0.5,
   endAt: new Date(endAt ?? new Date()),
   title: title ?? '',
   assignedUser: toUser(assignedUser ?? {}),
   priority: priority ?? 'low',
   category: category ?? 'in-progress',
-  deadline: dayjs(new Date(startAt ?? new Date()))
-    .endOf('day')
-    .toDate(),
+  deadline: new Date(endAt ?? new Date()),
 })
 
 export const toTaskDTO = ({ id, startAt, endAt, ...instance }) => ({
