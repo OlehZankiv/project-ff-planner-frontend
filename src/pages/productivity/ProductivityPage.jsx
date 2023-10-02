@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { productivityValidationFormSchema } from '../../utils/schemas'
 import { useAuthContext } from '../../contexts/auth'
 import { useProductivityRequest } from '../../hooks'
+import dayjs from 'dayjs'
 
 export const ProductivityPage = () => {
   const { colors } = useTheme()
@@ -24,6 +25,91 @@ export const ProductivityPage = () => {
 
   useEffect(() => {
     calculateProductivity(logger)
+  }, [])
+
+  useEffect(() => {
+    const a = [
+      {
+        startAt: 1677360000000,
+        deadline: 1677370800000,
+        finishedAt: 1677381600000,
+        title: 'Website redesign',
+        priority: 'high',
+        category: 'done',
+      },
+      {
+        startAt: 1677446400000,
+        deadline: 1677457200000,
+        finishedAt: 1677468000000,
+        title: 'Client follow-up call',
+        priority: 'medium',
+        category: 'done',
+      },
+      {
+        startAt: 1677532800000,
+        deadline: 1677543600000,
+        finishedAt: 1677554400000,
+        title: 'Project documentation',
+        priority: 'high',
+        category: 'done',
+      },
+      {
+        startAt: 1677619200000,
+        deadline: 1677630000000,
+        finishedAt: 1677640800000,
+        title: 'Product launch event',
+        priority: 'high',
+        category: 'done',
+      },
+      {
+        startAt: 1677705600000,
+        deadline: 1677716400000,
+        finishedAt: 1677727200000,
+        title: 'Client satisfaction survey',
+        priority: 'medium',
+        category: 'done',
+      },
+    ]
+
+    console.log(
+      a
+        .map(({ deadline, ...task }) => {
+          let endAt = new Date(
+            dayjs(new Date(task.startAt)).get('days') < dayjs(new Date(deadline)).get('days')
+              ? dayjs(new Date(task.startAt)).endOf('day').toDate().getTime()
+              : deadline,
+          )
+          endAt.setMonth(9)
+          endAt.setFullYear(2023)
+
+          endAt = endAt.getTime()
+
+          let startAt = new Date(task.startAt)
+          startAt.setMonth(9)
+          startAt.setFullYear(2023)
+
+          startAt = startAt.getTime()
+
+          let finishedAt = new Date(task.finishedAt)
+          finishedAt.setMonth(9)
+          finishedAt.setFullYear(2023)
+
+          finishedAt = finishedAt.getTime()
+
+          if (new Date(endAt).getHours() <= 3) endAt += 1000 * 60 * 60 * 5
+          if (new Date(startAt).getHours() <= 3) startAt += 1000 * 60 * 60 * 3
+
+          return {
+            ...task,
+            startAt,
+            endAt,
+            finishedAt,
+            category: task.finishedAt ? 'done' : task.category === 'done' ? 'to-do' : task.category,
+            assignedUserId: '6480e95ec57b875c6fbb0f65',
+          }
+        })
+        .map(JSON.stringify),
+    )
   }, [])
 
   if (!logger) return null

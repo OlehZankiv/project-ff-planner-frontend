@@ -22,9 +22,11 @@ export const useAnalyzePerformance = () => {
 
   useEffect(() => {
     setLoading(true)
+
     getTasks({
-      filterBy: 'month',
-      date: new Date(logger.startDate).getTime(),
+      filterBy: 'range',
+      startDate: new Date(logger.startDate).getTime(),
+      endDate: new Date(logger.endDate).getTime(),
     })
       .then(({ data }) => data.map(toTask).map(toTaskData))
       .then((tasks) =>
@@ -34,16 +36,18 @@ export const useAnalyzePerformance = () => {
         }),
       )
       .finally(() => setLoading(false))
-  }, [logger.startDate])
+  }, [logger.startDate, logger.endDate])
 
   const handleAnalyze = async (task) => {
+    if (!tasksForAnalyze?.tasksData?.length) return
+
     setLoading(true)
 
     const model = tf.sequential()
     model.add(tf.layers.dense({ units: 64, inputShape: [3], activation: 'relu' }))
     model.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }))
     model.compile({ optimizer: 'adam', loss: 'binaryCrossentropy', metrics: ['accuracy'] })
-    const epochs = 100
+    const epochs = 200
 
     await model.fit(
       tf.tensor2d(tasksForAnalyze.tasksData),

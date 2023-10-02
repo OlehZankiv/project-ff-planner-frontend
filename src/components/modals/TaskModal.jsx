@@ -111,7 +111,7 @@ export const TaskModal = ({ selectedDate, category, updateValues, visible, setVi
 
             {analyzeInfo !== null && <AnalyzedInfoView analyzeInfo={analyzeInfo} />}
 
-            {category !== 'done' && (
+            {category !== 'done' && !analyzeInfo && (
               <Button
                 style={{ borderRadius: 8, marginTop: 48 }}
                 fullWidth
