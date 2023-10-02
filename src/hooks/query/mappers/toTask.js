@@ -4,7 +4,6 @@ export const toTask = ({
   _id,
   startAt,
   finishedAt,
-  createdAt,
   endAt,
   title,
   assignedUser,
@@ -24,7 +23,7 @@ export const toTask = ({
   deadline: new Date(endAt ?? new Date()),
 })
 
-export const toTaskDTO = ({ id, startAt, endAt, finishedAt, ...instance }) => ({
+export const toTaskDTO = ({ id, startAt, endAt, finishedAt: _, ...instance }) => ({
   _id: id,
   startAt: startAt.getTime(),
   endAt: endAt.getTime(),
